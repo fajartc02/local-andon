@@ -2,6 +2,20 @@
 node_modules
 /dist
 
+.env
+.env.production
+.firebaserc
+firebase.json
+
+.storage.rules
+md.sql
+MtMember.csv
+sandbox.sql
+buktiTf.jpeg
+Daily Kesehatan New.xls
+notes.md
+state.md
+
 
 # local env files
 .env.local
