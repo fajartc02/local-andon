@@ -33,52 +33,52 @@ const STATE_GROUP = {
     container: [{
             type: 'SE Activity',
             group: 'Preventive',
-            bgCol: '#ff009d'
+            bgCol: '#C8FFDB'
         },
         {
             type: 'Critical M/C C/M',
             group: 'Preventive',
-            bgCol: '#d000ff'
+            bgCol: '#C8FFDB'
         },
         {
             type: 'Yokoten',
             group: 'Preventive',
-            bgCol: '#5d00ff'
+            bgCol: '#C8FFDB'
         },
         {
             type: 'Improvement',
             group: 'Preventive',
-            bgCol: '#0083ff'
+            bgCol: '#C8FFDB'
 
         },
         {
             type: 'TPM',
             group: 'Preventive',
-            bgCol: '#00f6ff'
+            bgCol: '#fff600'
         },
         {
             type: 'RED TAG',
-            group: 'Preventive',
-            bgCol: '#00ffd0'
+            group: 'Others',
+            bgCol: '#c2eae3'
         },
         {
             type: 'C/M Temuan TPM',
             group: 'Preventive',
-            bgCol: '#00ff7f'
+            bgCol: '#fff600'
         },
         {
             type: 'C/M Potensi B/down',
             group: 'Preventive',
-            bgCol: '#bbff00'
+            bgCol: '#C8FFDB'
         },
         {
             type: 'Trainer OM',
             group: 'Preventive',
-            bgCol: '#fff200'
+            bgCol: '#C8FFDB'
         },
-        { type: 'Training', group: 'Training', bgCol: '#ff7f00' },
-        { type: 'Repair', group: 'Repair', bgCol: '#f97a7a' },
-        { type: 'Safety', group: 'Safety', bgCol: '#1dff00' },
+        { type: 'Training', group: 'Training', bgCol: '#C8FFDB' },
+        { type: 'Repair', group: 'Repair', bgCol: '#FC3232' },
+        { type: 'Safety', group: 'Safety', bgCol: '#44A239' },
         { type: 'Project', group: 'Project', bgCol: '#96ffeb' },
         { type: '4S', group: 'Others', bgCol: '#c2eae3' },
         { type: 'Admin', group: 'Others', bgCol: '#c2eae3' },
@@ -92,9 +92,9 @@ const STATE_GROUP_FIX = {
             group: 'Preventive',
             bgCol: '#0fdb04'
         },
-        { type: 'Repair', group: 'Repair', bgCol: '#fc3232' },
-        // { type: 'Training', group: 'Training', bgCol: '#ff7f00' },
-        { type: 'Safety', group: 'Safety', bgCol: '#1dff00' },
+        { type: 'Repair', group: 'Repair', bgCol: '#FC3232' },
+        // { type: 'Training', group: 'Training', bgCol: '#C8FFDB' },
+        { type: 'Safety', group: 'Safety', bgCol: '#44A239' },
         { type: 'Project', group: 'Project', bgCol: '#96ffeb' },
         { type: 'Others', group: 'Others', bgCol: '#c2eae3' },
     ]

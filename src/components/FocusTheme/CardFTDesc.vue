@@ -1,9 +1,5 @@
 <template>
-  <div>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio eaque,
-    recusandae magni beatae, nisi, error maxime accusamus at fugiat facilis
-    distinctio cumque nam debitis quae modi ut. Officiis, expedita explicabo!
-  </div>
+  <div></div>
 </template>
 
 <script>

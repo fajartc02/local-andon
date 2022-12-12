@@ -842,7 +842,7 @@ import {
 // import { ModelSelect } from "vue-search-select";
 
 export default {
-  name: "DashboardJob",
+  name: "DashboardJobA",
   data() {
     return {
       containerLines: STATE_LINES.containers,
@@ -941,146 +941,34 @@ export default {
       this.setDetaiJob = data;
     },
     async getActiveProblem() {
-      for (let i = 0; i < this.containerLines.length; i++) {
-        const element = this.containerLines[i];
-        let uri = `${process.env.VUE_APP_HOST}/activeProblem?fline=${element.name}`;
-        await axios
-          .get(uri)
-          .then(async (result) => {
-            // console.log(result.data.data);
-            this.containerActiveProblem.push(result.data.data[0]);
-
-            let mapRes = result.data.data.map((item) => {
-              item.startPx = getPxPosOfStrTime(item.fstart_time);
-              return item;
-            });
-            this.containerLines[i].dataProblem = mapRes;
-          })
-          .catch((err) => {
-            console.log(err);
-            // this.getActiveProblem()
-          });
-      }
+      // for (let i = 0; i < this.containerLines.length; i++) {
+      //   const element = this.containerLines[i];
+      //   let uri = `${process.env.VUE_APP_HOST}/activeProblem?fline=${element.name}`;
+      //   await axios
+      //     .get(uri)
+      //     .then(async (result) => {
+      //       // console.log(result.data.data);
+      //       this.containerActiveProblem.push(result.data.data[0]);
+      //       let mapRes = result.data.data.map((item) => {
+      //         item.startPx = getPxPosOfStrTime(item.fstart_time);
+      //         return item;
+      //       });
+      //       this.containerLines[i].dataProblem = mapRes;
+      //     })
+      //     .catch((err) => {
+      //       console.log(err);
+      //       // this.getActiveProblem()
+      //     });
+      // }
       // console.log(this.containerActiveProblem);
     },
     async getJobData(shift, onlyFirst = false) {
-      this.containerTempJobs = STATE_BLANK_JOB.containers;
-      if (onlyFirst) {
-        this.isLoading = true;
-      }
-      let filterQuery = ``;
-      // console.log(new Date(this.fstart_time.join(" ")));
-      if (shift == "day") {
-        await axios
-          .get(
-            `${process.env.VUE_APP_HOST}/getJobData?filterQuery=WHERE fstart_time between '${this.fstart_time[0]} 07:00:00' and '${this.fend_time[0]} 18:00:00' AND fend_time IS NOT NULL`
-          )
-          .then((result) => {
-            // console.log(result);
-            result.data.data.forEach((jobDesk) => {
-              let idx = this.containerLines.findIndex(function (line) {
-                return line.name.toLowerCase() === jobDesk.fline.toLowerCase();
-              });
-              let idxBgCol = this.defineGroup.findIndex(function (group) {
-                return jobDesk.fjob_type === group.type;
-              });
-              jobDesk.startPx = getPxPosOfStrTime(jobDesk.fstart_time);
-              jobDesk.bgCol = this.defineGroup[idxBgCol].bgCol;
-              if (idx != -1) {
-                if (jobDesk.frole != "LH") {
-                  let idxJobAvail = this.containerLines[
-                    idx
-                  ].dataProblem[0].findIndex(function (item) {
-                    return (
-                      item.fid == jobDesk.fid &&
-                      item.foperator == jobDesk.foperator
-                    );
-                  });
-                  if (idxJobAvail == -1) {
-                    this.containerLines[idx].dataProblem[0].push(jobDesk);
-                  }
-                }
-              }
-            });
-          })
-          .catch((err) => {
-            console.log(err);
-            if (onlyFirst) {
-              this.isLoading = false;
-            }
-          });
-      } else {
-        let month = new Date(this.fstart_time[0]).getMonth() + 1;
-        let year = new Date(this.fstart_time[0]).getFullYear();
-        let day =
-          new Date(this.fstart_time[0]).getDate() - 1 == 0
-            ? new Date(year, month, 0).getDate()
-            : new Date(this.fstart_time[0]).getDate();
-
-        let yesterday = day - 1;
-        let tommorow = day + 1;
-        // console.log(month);
-        if (month < 10) month = "0" + month;
-        if (day < 10) day = "0" + day;
-        if (yesterday < 10) yesterday = "0" + yesterday;
-        if (tommorow < 10) tommorow = "0" + tommorow;
-        console.log(new Date().getHours());
-        if (new Date().getHours() >= 0 && new Date().getHours() <= 6) {
-          // yesterday(date-1) - today(date)
-          filterQuery = `WHERE fstart_time between '${year}-${month}-${yesterday} 19:00:00' and '${year}-${month}-${day} 06:00:00'`;
-        } else {
-          // today(date) - tommorow(date+1)
-          filterQuery = `WHERE fstart_time between '${year}-${month}-${day} 06:00:00' and '${year}-${month}-${tommorow} 06:00:00'`;
-        }
-        console.log(new Date().getHours() >= 0, new Date().getHours() <= 6);
-        console.log(filterQuery);
-        await axios
-          .get(
-            `${process.env.VUE_APP_HOST}/getJobData?filterQuery=${filterQuery}`
-          )
-          .then((result) => {
-            // console.log(result);
-            this.containerLines.forEach((line, i) => {
-              this.containerLines[i].dataProblem[1] = [];
-            });
-            result.data.data.forEach((jobDesk) => {
-              let idx = this.containerLines.findIndex(function (line) {
-                return line.name.toLowerCase() === jobDesk.fline.toLowerCase();
-              });
-              let idxBgCol = this.defineGroup.findIndex(function (group) {
-                return jobDesk.fjob_type === group.type;
-              });
-              // console.log(idx);
-
-              jobDesk.startPx = getPxPosOfStrTime(jobDesk.fstart_time);
-              jobDesk.bgCol = this.defineGroup[idxBgCol].bgCol;
-              if (idx != -1) {
-                if (jobDesk.frole != "LH") {
-                  let idxJobAvail = this.containerLines[
-                    idx
-                  ].dataProblem[0].findIndex(function (item) {
-                    return (
-                      item.fid == jobDesk.fid &&
-                      item.foperator == jobDesk.foperator
-                    );
-                  });
-                  if (idxJobAvail == -1) {
-                    this.containerLines[idx].dataProblem[1].push(jobDesk);
-                  }
-                }
-              }
-            });
-            if (onlyFirst) {
-              this.isLoading = false;
-            }
-          })
-          .catch((err) => {
-            console.log(err);
-            if (onlyFirst) {
-              this.isLoading = false;
-            }
-          });
-      }
+      this.containerLines = STATE_BLANK_JOB.containers;
+      // if (onlyFirst) {
+      //   this.isLoading = true;
+      // }
+      console.log(onlyFirst);
+      console.log(this.containerLines);
     },
     calculatePx(start_time, duration) {
       getPxPosOfStrTime(start_time, duration);

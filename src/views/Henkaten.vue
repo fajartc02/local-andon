@@ -48,7 +48,7 @@
                     :options="optionsLines"
                     v-model="lineSelected"
                     placeholder="select line"
-                    style="width: 60%; font-size: 10px; color: black"
+                    style="width: 70%; font-size: 10px; color: black"
                   >
                   </model-select>
                 </div>
@@ -64,16 +64,16 @@
                     :options="machines"
                     v-model="machineSelected"
                     placeholder="select line"
-                    style="width: 50%; font-size: 10px; color: black"
+                    style="width: 55%; font-size: 10px; color: black"
                   >
                   </model-select>
                 </div>
               </div>
             </div>
             <div class="row m-0">
-              <div class="col-12 p-0 d-flex justify-content-end">
+              <div class="col-12 p-0">
                 <div
-                  class="card bg-primary shadow"
+                  class="card bg-primary shadow w-100"
                   @click="getHenkaten()"
                   style="width: 20%"
                 >
@@ -91,15 +91,15 @@
       </div>
     </div>
     <div class="row m-0 p-0">
-      <div class="col d-flex justify-content-end p-0">
+      <div class="col p-0">
         <button
-          class="btn btn-outline-warning"
+          class="btn btn-success w-100"
           data-toggle="modal"
           data-target="#addModalHenkaten"
           @click="getMachines()"
         >
-          Add
-          <i class="fa fa-book"></i>
+          Buat Item Temporary
+          <i class="fa fa-plus"></i>
         </button>
 
         <div
@@ -207,11 +207,19 @@
                   <div class="row m-0 p-0">
                     <div class="col-12 p-0 text-left">
                       <label>Lokasi</label>
-                      <textarea
+                      <model-select
+                        :options="machines"
+                        v-model="postData.fmc"
+                        placeholder="select machine"
+                        style="width: 100%"
+                        class="form-control-sm"
+                      >
+                      </model-select>
+                      <!-- <textarea
                         class="form-control form-control-sm"
                         placeholder="dimana yang temporary?"
                         v-model="postData.fmc"
-                      />
+                      /> -->
                     </div>
                   </div>
                   <div class="row m-0 p-0">
@@ -288,10 +296,13 @@
         </div>
       </div>
     </div>
-    <div class="row m-0 p-0">
+    <div class="row m-0 p-0 mt-2">
       <div class="col p-0 m-0">
         <table
-          class="table table-sm table-dark table-bordered table-responsive text-light"
+          class="
+            table table-sm table-dark table-bordered table-responsive
+            text-light
+          "
         >
           <thead>
             <tr>
@@ -709,6 +720,7 @@ export default {
     if (localStorage.getItem("name")) {
       this.postData.fpic = localStorage.getItem("name");
     }
+    this.getMachines();
   },
 };
 </script>

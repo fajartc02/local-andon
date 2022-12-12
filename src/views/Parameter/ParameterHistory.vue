@@ -57,9 +57,11 @@
               <tr>
                 <th>No</th>
                 <th>Date</th>
+                <th>Time</th>
                 <th>Line</th>
                 <th>Machine</th>
                 <th>Parameter</th>
+                <th>Status Logger</th>
                 <th>Upper Limit</th>
                 <th>Lower Limit</th>
                 <th>Value</th>
@@ -73,9 +75,11 @@
               <tr v-for="(item, i) in containerAlarmData" :key="i">
                 <td>{{ i + 1 }}</td>
                 <td>{{ item.clock.split("T")[0] }}</td>
+                <td>{{ item.clock.split("T")[1].split(".")[0] }}</td>
                 <td>{{ item.fline }}</td>
                 <td>{{ item.fmc_name }}</td>
                 <td>{{ item.param_name }}</td>
+                <td>{{ item.is_auto == 0 ? "Manual" : "Automatic" }}</td>
                 <td>{{ item.upper_limit ? item.upper_limit : "tidak ada" }}</td>
                 <td>{{ item.lower_limit ? item.lower_limit : "tidak ada" }}</td>
                 <td>
@@ -95,14 +99,14 @@
                 <td>
                   {{ item.units }}
                 </td>
-                <td>Ganti Bearing</td>
+                <td>{{ item.desc_action }}</td>
                 <td>
-                  <button
-                    class="btn btn-primary btn-sm"
-                    @click="detailGraph(item.fmc_name, item.param_name)"
+                  <router-link
+                    class="btn btn-primary btn-sm text-light"
+                    :to="`details?machine=${item.fmc_name}&param=${item.param_name}`"
                   >
                     See Details
-                  </button>
+                  </router-link>
                 </td>
               </tr>
             </tbody>
@@ -121,7 +125,7 @@
             <div class="col">
               <line-chart
                 v-if="containerDataChart.length > 0"
-                :propsCharData="containerDataChart"
+                :propsChartData="containerDataChart"
               ></line-chart>
             </div>
           </div>
@@ -153,10 +157,14 @@ export default {
   name: "ParameterHistory",
   data() {
     return {
-      selectedStartDate: formatDate.YYYYMMDD(
-        new Date(new Date().getFullYear() - 1, 0, 1)
-      ),
-      selectedEndDate: formatDate.YYYYMMDD(new Date()),
+      selectedStartDate: "2021-04-01",
+      //   formatDate.YYYYMMDD(
+      //   new Date(new Date().getFullYear() - 1, 0, 1)
+      // ),
+      selectedEndDate: "2021-06-30",
+      //   formatDate.YYYYMMDD(
+      //   new Date(Date.now() + 3600 * 1000 * 24)
+      // ),
       containerAlarmData: [],
       isLoading: false,
       isShowDialog: false,
@@ -179,12 +187,12 @@ export default {
           console.error(err);
         });
     },
-    getDataGraph(machine = null, parameter = null) {
+    getDataGraph(machine = null, parameter = null, startDate, endDate) {
       this.isLoading = true;
       this.containerDataChart = [];
       let url = `${process.env.VUE_APP_HOST}/paramHistory`;
       if (machine && parameter) {
-        url += `?filterQuery=WHERE fmc_name = '${machine}' AND param_name = '${parameter}'`;
+        url += `?filterQuery=WHERE fmc_name = '${machine}' AND param_name = '${parameter}' AND clock between '${startDate} 00:00:00' AND '${endDate} 23:59:59'`;
       }
       axios
         .get(url)
@@ -201,8 +209,14 @@ export default {
           console.log(err);
         });
     },
-    detailGraph(machine, parameter) {
-      this.getDataGraph(machine, parameter);
+    detailGraph(machine, parameter, startDate) {
+      let clockStart = formatDate.getFirstDate(new Date(startDate));
+      let clockEnd = formatDate.getLastDate(new Date(startDate));
+      let formatStartDate = formatDate.YYYYMMDD(new Date(clockStart));
+      let formatEndDate = formatDate.YYYYMMDD(new Date(clockEnd));
+      console.log(formatStartDate);
+      console.log(formatEndDate);
+      this.getDataGraph(machine, parameter, formatStartDate, formatEndDate);
     },
     closeDialog() {
       this.isShowDialog = false;

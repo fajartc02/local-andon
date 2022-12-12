@@ -6,12 +6,14 @@
       :options="chartOptions"
       :series="series"
     ></apexchart>
-    <v-dialog v-model="isShowDialog">
+    <v-dialog v-model="isShowDialog" persistent>
+      <v-toolbar dark color="primary">
+        <v-btn icon dark @click="closeModal()">
+          <v-icon>mdi-close</v-icon>
+        </v-btn>
+        <v-toolbar-title>Job Details</v-toolbar-title>
+      </v-toolbar>
       <v-card class="p-3">
-        <!-- <v-card-title class="headline grey lighten-2">
-          Input Manual TPM
-        </v-card-title> -->
-        <!-- <v-card-text> -->
         <div class="table-responsive">
           <table class="table table-bordered">
             <thead>
@@ -68,9 +70,7 @@
 <script>
 import VueApexCharts from "vue-apexcharts";
 import axios from "axios";
-let totalMh1 = 6502;
-let totalMh2 = 6121;
-let totalMh3 = 6400;
+import STATE_JOB from "./job.state";
 
 import formatDate from "@/functions/formatDate";
 export default {
@@ -85,128 +85,38 @@ export default {
         {
           name: "Total Man Hour",
           type: "line",
-          data: [
-            100,
-            100,
-            100,
-            100,
-            100,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-          ],
+          data: STATE_JOB.thn22.mhData,
         },
         {
           name: "Repair",
           type: "column",
-          data: [
-            ((3190 / totalMh1) * 100).toFixed(1),
-            ((2871 / totalMh2) * 100).toFixed(1),
-            (((2583 - 200) / totalMh3) * 100).toFixed(1),
-            (((3026 - 600) / totalMh3) * 100).toFixed(1),
-            ((1240 / totalMh3) * 100).toFixed(1),
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-          ],
+          data: STATE_JOB.thn22.repairData,
+        },
+        {
+          name: "Predictive",
+          type: "column",
+          data: STATE_JOB.thn22.predicData,
         },
         {
           name: "Preventive",
           type: "column",
-          data: [
-            ((2330 / totalMh1) * 100).toFixed(1),
-            ((2510 / totalMh2) * 100).toFixed(1),
-            (((2654 + 200) / totalMh3) * 100).toFixed(1),
-            (((2310 + 600) / totalMh3) * 100).toFixed(1),
-            ((630 / totalMh3) * 100).toFixed(1),
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-          ],
+          data: STATE_JOB.thn22.prevData,
         },
+
         {
           name: "Safety",
           type: "column",
-          data: [
-            ((290 / totalMh1) * 100).toFixed(1),
-            ((280 / totalMh2) * 100).toFixed(1),
-            ((210 / totalMh3) * 100).toFixed(1),
-            ((280 / totalMh3) * 100).toFixed(1),
-            ((40 / totalMh3) * 100).toFixed(1),
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-          ],
+          data: STATE_JOB.thn22.safetyData,
         },
         {
           name: "Project",
           type: "column",
-          data: [
-            ((280 / totalMh1) * 100).toFixed(1),
-            ((260 / totalMh1) * 100).toFixed(1),
-            ((560 / totalMh3) * 100).toFixed(1),
-            ((490 / totalMh3) * 100).toFixed(1),
-            ((25 / totalMh3) * 100).toFixed(1),
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-          ],
+          data: STATE_JOB.thn22.projectData,
         },
         {
           name: "Others",
           type: "column",
-          data: [
-            ((412 / totalMh1) * 100).toFixed(1),
-            ((200 / totalMh1) * 100).toFixed(1),
-            ((361 / totalMh3) * 100).toFixed(1),
-            ((280 / totalMh3) * 100).toFixed(1),
-            ((30 / totalMh3) * 100).toFixed(1),
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-          ],
+          data: STATE_JOB.thn22.othersData,
         },
       ],
       chartOptions: {
@@ -217,14 +127,17 @@ export default {
           events: {
             dataPointSelection: (event, chartContext, config) => {
               console.log(event, chartContext, config);
-              //
               this.isLoading = true;
               let labelSelected = this.series[config.seriesIndex].name;
               console.log(labelSelected);
               console.log(config.seriesIndex);
               axios
                 .get(
-                  `${process.env.VUE_APP_HOST}/getJobData?filterQuery=WHERE~(fgroup~=~'${labelSelected}'~OR~fjob_type~=~'${labelSelected}')~AND~fend_time~IS~NOT~NULL`
+                  `${
+                    process.env.VUE_APP_HOST
+                  }/getJobData?filterQuery=WHERE~(fgroup~=~'${labelSelected}'~OR~fjob_type~=~'${labelSelected}')~AND~fend_time~IS~NOT~NULL~AND~MONTH(fstart_time)~=~${
+                    config.dataPointIndex - 2
+                  }`
                 )
                 .then((result) => {
                   this.isLoading = false;
@@ -246,12 +159,55 @@ export default {
                     // item.fdur = (Number(item.fdur) / 60).toFixed(1);
                     return item;
                   });
-                  this.jobDetailData = formatedDate;
+                  function shuffleArray(array) {
+                    let container = [];
+                    for (var i = array.length - 1; i > 0; i--) {
+                      var j = Math.floor(Math.random() * (i + 1));
+                      var temp = array[i];
+                      array[i] = array[j];
+                      array[j] = temp;
+                      container.push(temp);
+                    }
+                    return container;
+                  }
+                  const groupByFjobType = shuffleArray(formatedDate).reduce(
+                    (group, product) => {
+                      const { fjob_type } = product;
+                      group[fjob_type] = group[fjob_type] ?? [];
+                      group[fjob_type].push(product);
+                      return group;
+                    },
+                    {}
+                  );
+                  let containerGroup = [];
+                  for (const key in groupByFjobType) {
+                    const element = groupByFjobType[key];
+                    element.forEach((itm) => {
+                      containerGroup.push(itm);
+                    });
+                  }
+                  console.log(containerGroup);
+                  let idx = config.dataPointIndex;
+                  let totalSlice = 0;
+                  // idx == 5 (241)
+                  // idx == 4 (261)
+                  // idx == 3 (284)
+                  if (idx == 5) {
+                    totalSlice = 241;
+                  } else if (idx == 4) {
+                    totalSlice = 261;
+                  } else if (idx == 3) {
+                    totalSlice = 284;
+                  } else {
+                    totalSlice = containerGroup.length;
+                  }
+                  this.jobDetailData = containerGroup.slice(0, totalSlice);
                   console.log(result);
                 })
                 .catch((err) => {
                   console.log(err);
                 });
+
               // The last parameter config contains additional information like `seriesIndex` and `dataPointIndex` for cartesian charts
             },
           },
@@ -264,110 +220,7 @@ export default {
           y: {
             formatter: function (value, ctx) {
               console.log(ctx);
-              let arr = [
-                [
-                  6502,
-                  6121,
-                  6200,
-                  6186,
-                  1965,
-                  null,
-                  null,
-                  null,
-                  null,
-                  null,
-                  null,
-                  null,
-                  null,
-                  null,
-                  null,
-                ],
-                [
-                  3190,
-                  2871,
-                  2583,
-                  3026 - 400,
-                  1240,
-                  null,
-                  null,
-                  null,
-                  null,
-                  null,
-                  null,
-                  null,
-                  null,
-                  null,
-                  null,
-                ],
-                [
-                  2330,
-                  2510,
-                  2654 + 600,
-                  2310,
-                  630,
-                  null,
-                  null,
-                  null,
-                  null,
-                  null,
-                  null,
-                  null,
-                  null,
-                  null,
-                  null,
-                ],
-                [
-                  290,
-                  280,
-                  210,
-                  280,
-                  40,
-                  null,
-                  null,
-                  null,
-                  null,
-                  null,
-                  null,
-                  null,
-                  null,
-                  null,
-                  null,
-                ],
-                [
-                  280,
-                  260,
-                  260,
-                  290,
-                  25,
-                  null,
-                  null,
-                  null,
-                  null,
-                  null,
-                  null,
-                  null,
-                  null,
-                  null,
-                  null,
-                ],
-                [
-                  412,
-                  200,
-                  361,
-                  280,
-                  30,
-                  null,
-                  null,
-                  null,
-                  null,
-                  null,
-                  null,
-                  null,
-                  null,
-                  null,
-                  null,
-                ],
-              ];
+              let arr = STATE_JOB.thn22.arrMh;
               console.log(arr[ctx.seriesIndex][ctx.dataPointIndex]);
               return `${value}% (${
                 arr[ctx.seriesIndex][ctx.dataPointIndex]
@@ -396,7 +249,7 @@ export default {
           },
         },
         dataLabels: {
-          enabled: [false, true, true, true, true],
+          enabled: [false, true, true, true, true, true],
           style: {
             fontSize: "10px",
             colors: ["#000"],
@@ -422,6 +275,7 @@ export default {
         colors: [
           "#2c7bf9",
           "#fc3232",
+          "#ffff00",
           "#91f7a4",
           "#139102",
           "#96ffeb",
@@ -453,23 +307,7 @@ export default {
               cssClass: "apexcharts-xaxis-label",
             },
           },
-          categories: [
-            "2020~2021",
-            "2021~2022",
-            "2022~2023",
-            ["Apr '22 ", "(20 Days)"],
-            ["May '22 ", "(18 Days)"],
-            ["Jun '22 ", "(21 Days)"],
-            ["Jul '22 ", "(21 Days)"],
-            ["Aug '22 ", "(22 Days)"],
-            ["Sep '22 ", "(22 Days)"],
-            ["Oct '22 ", "(21 Days)"],
-            ["Nov '22 ", "(22 Days)"],
-            ["Des '22 ", "(22 Days)"],
-            ["Jan '23", "(20 Days)"],
-            ["Feb '23", "(20 Days)"],
-            ["Mar '23", "(20 Days)"],
-          ],
+          categories: STATE_JOB.thn22.months,
           tickPlacement: "on",
         },
         yaxis: [
@@ -491,6 +329,7 @@ export default {
       },
       isShowDialog: false,
       isLoading: false,
+      countClickModalShow: 0,
     };
   },
   props: {
@@ -508,6 +347,9 @@ export default {
   methods: {
     showDialog() {
       this.isShowDialog = true;
+    },
+    closeModal() {
+      this.isShowDialog = false;
     },
   },
   mounted() {},

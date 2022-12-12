@@ -115,9 +115,15 @@
                     <b-form-radio
                       v-model="selectCategory"
                       name="some-radios"
+                      value="FT"
+                      >Focus Thema Member</b-form-radio
+                    >
+                    <!-- <b-form-radio
+                      v-model="selectCategory"
+                      name="some-radios"
                       value="[FULLCAP]"
                       >FULLCAP</b-form-radio
-                    >
+                    > -->
                     <!-- <input type="checkbox" v-model="isTaskforce" />Taskforce -->
                   </b-dd-form>
                 </b-dropdown>
@@ -360,6 +366,7 @@
           </v-card>
         </v-dialog>
       </div>
+      <Loading :propsLoading="isLoading" />
     </div>
   </div>
 </template>
@@ -439,6 +446,7 @@ export default {
     ModelSelect,
     LegendStatusCm,
     downloadExcel: JsonExcel,
+    Loading: () => import("@/components/Loading"),
   },
   watch: {
     lineSelected: function () {
@@ -471,6 +479,8 @@ export default {
       } else if (this.selectCategory == "[TASKFORCE]") {
         this.problemSelected += this.selectCategory;
         localStorage.setItem("keepCategory", "[TASKFORCE]");
+      } else if (this.selectCategory == "FT") {
+        localStorage.setItem("keepCategory", "FT");
       } else {
         this.problemSelected = this.problemSelected.split("[")[0];
         this.selectCategory = null;
@@ -481,6 +491,7 @@ export default {
   methods: {
     getAllCm() {
       this.containerCm = [];
+      this.isLoading = true;
       this.containerColorStatus = [];
       let url = `${process.env.VUE_APP_HOST}/cmFollowup?startDate=${this.selectedStartDate}&endDate=${this.selectedEndDate}`;
       if (this.lineSelected != "") {
@@ -494,6 +505,9 @@ export default {
       }
       if (this.selectShift != "") {
         url += `&shift=${this.selectShift}`;
+      }
+      if (this.selectCategory == "FT") {
+        url += `&isFocusTheme=${true}`;
       }
 
       axios
@@ -724,9 +738,11 @@ export default {
           });
           this.json_data = mapCmJson;
           console.log(this.containerCm);
+          this.isLoading = false;
         })
         .catch((err) => {
           console.log(err);
+          this.isLoading = false;
         });
     },
     getLines() {
@@ -863,7 +879,6 @@ export default {
     if (!this.isTaskforce) {
       this.getAllCm();
     }
-    this.genereate();
     this.getLines();
     this.permissionCheck();
   },

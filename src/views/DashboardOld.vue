@@ -45,11 +45,12 @@
               </center>
               <center class="card-title">Realtime<br />Pareto</center>
             </div>
-            <!-- <div
+            <div
               class="col-3 hover-menu p-1"
               @click="goTo('/parameter/dashboard')"
-            > -->
-            <div class="col-3 hover-menu p-1" @click="goTo('/symptompDesktop')">
+            >
+              <!--  @click="goTo('/parameter/dashboard')" -->
+              <!-- <div class="col-3 hover-menu p-1" @click="goTo('/symptompDesktop')"> -->
               <center>
                 <img
                   src="https://cdn0.iconfinder.com/data/icons/Utilize/512/Activity_Monitor.png"
@@ -66,7 +67,7 @@
             >
               <center>
                 <img
-                  src="https://www.wortis.fr/wp-content/uploads/2018/06/ORDER-512.png"
+                  src="https://cdn-icons-png.flaticon.com/512/2271/2271166.png"
                   width="30%"
                 />
               </center>
@@ -74,14 +75,20 @@
             </a>
           </div>
           <div class="row m-0 p-0 mt-2 flex-row flex-nowrap overflow-auto">
-            <div class="col-3 hover-menu p-1" @click="goTo('/job')">
+            <div
+              class="col-3 hover-menu p-1"
+              @click="goTo('/focus-theme/taskforce')"
+            >
               <center>
                 <img
-                  src="https://iconbug.com/data/75/256/59dd83353b8e6ade996ff4cdd8f99ad0.png"
+                  src="https://cdn.iconscout.com/icon/free/png-256/focus-1512706-1282214.png"
                   width="30%"
                 />
               </center>
-              <center class="card-title">Heijunka<br />Job</center>
+              <center class="card-title">
+                Task <br />
+                Force
+              </center>
             </div>
             <!-- <div class="col-3 hover-menu p-1" @click="goTo('/quality')">
               <center>
@@ -101,10 +108,13 @@
                 Problem
               </center>
             </div>
-            <div class="col-3 hover-menu p-1" @click="goTo('/focus-theme')">
+            <div
+              class="col-3 hover-menu p-1"
+              @click="goTo('/focus-theme/member')"
+            >
               <center>
                 <img
-                  src="https://icon-library.com/images/summary-icon/summary-icon-15.jpg"
+                  src="https://cdn-icons-png.flaticon.com/512/1879/1879426.png"
                   width="30%"
                 />
               </center>
@@ -134,6 +144,15 @@
                 />
               </center>
               <center class="card-title">CM<br />Followup</center>
+            </div>
+            <div class="col-3 hover-menu p-1" @click="goTo('/job')">
+              <center>
+                <img
+                  src="https://cdn-icons-png.flaticon.com/512/5189/5189017.png"
+                  width="30%"
+                />
+              </center>
+              <center class="card-title">Heijunka<br />Job</center>
             </div>
             <div class="col-3 hover-menu p-1" @click="goTo('/summaryWeekly')">
               <center>
@@ -174,7 +193,7 @@
             <div class="col-3 hover-menu p-1" @click="goTo('/henkaten')">
               <center>
                 <img
-                  src="https://iconbug.com/data/75/256/59dd83353b8e6ade996ff4cdd8f99ad0.png"
+                  src="https://cdn-icons-png.flaticon.com/512/6214/6214240.png"
                   width="30%"
                 />
               </center>

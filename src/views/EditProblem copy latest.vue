@@ -47,7 +47,7 @@
       </div>
       <!-- Prob & OP -->
       <div class="row m-0 p-0">
-        <div class="col-12 px-1 text-left">
+        <div class="col px-1 text-left">
           <span class="input-lable">Problem</span>
           <div class="input-group">
             <input
@@ -56,113 +56,106 @@
               placeholder="nama problem"
               v-model="ferror_name"
             />
+            <div class="input-group-append">
+              <button
+                v-if="!is_ft_selected"
+                class="btn btn-sm btn-outline-secondary"
+                @click="showModalFt()"
+              >
+                <i class="fa fa-cheklist"></i>Pilih Focus theme
+              </button>
+              <button v-else class="btn btn-sm btn-primary" disabled>
+                <i class="fa fa-cheklist"></i>Focus thema <b>{{ memberFT }}</b>
+              </button>
+              <v-dialog v-model="modalShow" width="500">
+                <v-card>
+                  <v-card-title class="text-h5 grey lighten-2">
+                    Submit Focus Thema
+                  </v-card-title>
+
+                  <v-card-text class="p-4">
+                    <div class="row">
+                      <div class="col-6">
+                        <v-text-field
+                          v-model="fmc_name"
+                          label="Mesin"
+                          required
+                          disabled
+                        ></v-text-field>
+                      </div>
+                      <div class="col-6">
+                        <v-text-field
+                          v-model="ferror_name"
+                          label="Problem"
+                          required
+                          disabled
+                        ></v-text-field>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col text-left">
+                        <label class="typo__label text-bold">PIC</label>
+                        <multiselect
+                          v-model="ft_pic"
+                          :options="optOperators"
+                          placeholder="Pilih Member"
+                          style="font-size: 10px"
+                        ></multiselect>
+                      </div>
+                    </div>
+                  </v-card-text>
+
+                  <v-divider class="m-0"></v-divider>
+
+                  <v-card-actions>
+                    <v-btn
+                      color="primary"
+                      text
+                      :loading="loadingBtn"
+                      @click="submitFT()"
+                    >
+                      Submit
+                    </v-btn>
+                    <v-btn color="warning" text @click="modalShow = false">
+                      Cancel
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="row m-0 p-0">
-        <div class="col-6 px-1 py-0">
-          <button
-            v-if="!is_ft_selected"
-            class="btn btn-sm btn-outline-secondary w-100"
-            @click="showModalFt()"
-          >
-            <i class="fa fa-cheklist"></i>Pilih Focus thema Member
-          </button>
-          <button v-else class="btn btn-sm btn-primary w-100" disabled>
-            <i class="fa fa-cheklist"></i>Focus thema <b>{{ memberFT }}</b>
-          </button>
-          <v-dialog v-model="modalShow" width="500">
-            <v-card>
-              <v-card-title class="text-h5 grey lighten-2">
-                Submit Focus Thema
-              </v-card-title>
-
-              <v-card-text class="p-4">
-                <div class="row">
-                  <div class="col-6">
-                    <v-text-field
-                      v-model="fmc_name"
-                      label="Mesin"
-                      required
-                      disabled
-                    ></v-text-field>
-                  </div>
-                  <div class="col-6">
-                    <v-text-field
-                      v-model="ferror_name"
-                      label="Problem"
-                      required
-                      disabled
-                    ></v-text-field>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col text-left">
-                    <label class="typo__label text-bold">PIC</label>
-                    <multiselect
-                      v-model="ft_pic"
-                      :options="optOperators"
-                      placeholder="Pilih Member"
-                      style="font-size: 10px"
-                    ></multiselect>
-                  </div>
-                </div>
-              </v-card-text>
-
-              <v-divider class="m-0"></v-divider>
-
-              <v-card-actions>
-                <v-btn
-                  color="primary"
-                  text
-                  :loading="loadingBtn"
-                  @click="submitFT()"
-                >
-                  Submit
-                </v-btn>
-                <v-btn color="warning" text @click="modalShow = false">
-                  Cancel
-                </v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-dialog>
-        </div>
-        <div class="col-6 px-1 py-0">
-          <!-- TASKFORCE CHECKBOX -->
-          <!-- <input type="checkbox" style="height: 20px" v-model="isTaskforce" /> -->
-          <b-form-checkbox
-            v-model="isTaskforce"
-            name="check-button"
-            button
-            :button-variant="isTaskforce ? 'outline-danger' : 'primary'"
-          >
-            {{ isTaskforce ? "Batalkan Taskforce" : "Pilih Taskforce" }}
-          </b-form-checkbox>
-          <!-- <span style="font-size: 9px; font-weight: 800">Taskforce</span> -->
+        <div class="col px-1 text-left">
+          <span class="input-lable">Operator</span>
+          <input
+            class="form-control"
+            type="text"
+            disabled
+            v-model="foperator"
+          />
+          <multiselect
+            v-model="foperator"
+            :options="optOperators"
+            :multiple="true"
+            style="font-size: 10px"
+          ></multiselect>
         </div>
       </div>
-      <div class="row">
-        <div class="col-12">
+      <div class="row" v-if="setRole == 'Staff'">
+        <div class="col-6">
           <div class="row">
-            <div class="col px-1 text-left">
-              <span class="input-lable">Operator</span>
+            <div class="col">
               <input
-                class="form-control"
-                type="text"
-                disabled
-                v-model="foperator"
+                type="checkbox"
+                style="height: 20px"
+                v-model="isTaskforce"
               />
-              <multiselect
-                v-model="foperator"
-                :options="optOperators"
-                :multiple="true"
-                style="font-size: 10px"
-              ></multiselect>
+              <span style="font-size: 9px; font-weight: 800">Taskforce</span>
             </div>
-            <!-- <div class="col">
+            <div class="col">
               <input type="checkbox" style="height: 20px" v-model="isFullcap" />
               <span style="font-size: 9px; font-weight: 800">FULLCAP</span>
-            </div> -->
+            </div>
           </div>
         </div>
       </div>
@@ -449,9 +442,6 @@
               </button>
             </div>
           </div>
-          <div class="row m-0 p-0">
-            <TreeListAnalisys />
-          </div>
         </div>
       </div>
       <!-- Step Repair -->
@@ -618,7 +608,7 @@
                   <th>No</th>
                   <th style="max-width: 100px">Countermeasure</th>
                   <th style="max-width: 50px">Plan Date</th>
-                  <th>PIC</th>
+                  <th style="max-width: 50px">PIC</th>
                   <th style="max-width: 50px">Judg</th>
                   <th style="min-width: 100px">Result Notes</th>
                   <th colspan="2">actions</th>
@@ -657,20 +647,17 @@
                   </td>
                   <td
                     class="text-left border"
+                    style="min-width: 50px"
                     v-if="!isEditCmTerjadi || idxCmTerjadiSelected != i"
                   >
                     {{ cmTerjadi.pic }}
                   </td>
                   <td
                     class="text-left border"
+                    style="min-width: 50px"
                     v-else-if="isEditCmTerjadi || idxCmTerjadiSelected == i"
                   >
-                    <multiselect
-                      v-model="cmTerjadi.pic"
-                      :options="optOperators"
-                      :multiple="false"
-                      style="font-size: 10px"
-                    ></multiselect>
+                    <input type="text" v-model="cmTerjadi.pic" />
                   </td>
                   <td
                     v-if="
@@ -815,13 +802,12 @@
                   <div class="input-group-prepend">
                     <div class="input-group-text">Pic</div>
                   </div>
-                  <multiselect
+                  <input
+                    class="form-control mt-1"
+                    type="text"
+                    placeholder="Pic"
                     v-model="cmField.pic"
-                    :options="optOperators"
-                    :multiple="false"
-                    class="w-80"
-                    style="font-size: 10px"
-                  ></multiselect>
+                  />
                 </div>
               </div>
             </div>
@@ -2127,8 +2113,6 @@ import LegendStatus from "@/components/LegendStatus";
 // import moment from "moment";
 import formatDate from "@/functions/formatDate";
 
-import TreeListAnalisys from "@/components/TreeListAnalisys.vue";
-
 export default {
   name: "EditProblem",
   data() {
@@ -2319,13 +2303,11 @@ export default {
     },
     isTaskforce: function () {
       if (this.isTaskforce == true) {
-        alert("Taskforce di pilih");
         if (!this.ferror_name.includes("[TASKFORCE]")) {
           this.ferror_name += "[TASKFORCE]";
         }
       } else {
         this.ferror_name = this.ferror_name.split("[")[0];
-        alert("Taskforce tidak di pilih");
       }
     },
     isFullcap: function () {
@@ -2579,7 +2561,7 @@ export default {
     },
   },
   computed: {
-    ...mapState(["storeTheme", "newAnalisys"]),
+    ...mapState(["storeTheme"]),
   },
   methods: {
     checkFocusTheme() {
@@ -2908,20 +2890,6 @@ export default {
       this[`${editDesc}`] = { cmDesc: "", datePlan: "", pic: "", judg: false };
     },
     async submitEdit(approveStatus) {
-      console.log(this.newAnalisys);
-      if (this.newAnalisys) {
-        axios
-          .post(
-            `${process.env.VUE_APP_HOST}/why_analisys/add/${this.$route.query.v_}`,
-            this.newAnalisys
-          )
-          .then((result) => {
-            console.log(result);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      }
       if (this.picThema) {
         this.addMemberTheme();
       }
@@ -3056,7 +3024,7 @@ https://smartandonsys.web.app/editProblem?v_=${this.$route.query.v_}`
         this.temporaryAction != "" &&
         `${this.temporaryAction}`.toLowerCase() != "null"
       ) {
-        // await this.postHenkaten();
+        await this.postHenkaten();
       }
       if (this.fav_categoty != null) {
         if (this.fshift != null) {
@@ -3239,20 +3207,6 @@ https://smartandonsys.web.app/editProblem?v_=${this.$route.query.v_}`
       }
     },
     updateEdit() {
-      console.log(this.newAnalisys);
-      if (this.newAnalisys) {
-        axios
-          .post(
-            `${process.env.VUE_APP_HOST}/why_analisys/add/${this.$route.query.v_}`,
-            this.newAnalisys
-          )
-          .then((result) => {
-            console.log(result);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      }
       this.isLoading = true;
       let dataPrev = {
         ferror_name: this.ferror_name,
@@ -3718,8 +3672,7 @@ https://smartandonsys.web.app/editProblem?v_=${this.$route.query.v_}`
     },
     async getAllMtMemberThema() {
       await axios
-        // .get(`${process.env.VUE_APP_HOST}/getAllMtMember?isMember=TRUE`)
-        .get(`${process.env.VUE_APP_HOST}/getAllMtMember`)
+        .get(`${process.env.VUE_APP_HOST}/getAllMtMember?isMember=TRUE`)
         .then((result) => {
           console.log(result);
           let mapMembers = result.data.data.map((member) => {
@@ -3736,7 +3689,6 @@ https://smartandonsys.web.app/editProblem?v_=${this.$route.query.v_}`
   components: {
     ScrollableContainer,
     LegendStatus,
-    TreeListAnalisys,
   },
   async mounted() {
     this.isLoading = true;

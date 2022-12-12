@@ -13,35 +13,41 @@
               <th scope="col">Units</th>
               <th scope="col">Upper Limit</th>
               <th scope="col">Lower Limit</th>
+              <th scope="col">Periodic</th>
               <th scope="col">Created By</th>
+              <th scope="col">Created At</th>
               <th scope="col" colspan="2">Actions</th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(item, i) in paramList" :key="item.fid">
-              <th scope="row">{{ i + 1 }}</th>
-              <td>{{ item.name }}</td>
-              <td>{{ item.methode_check }}</td>
-              <td>{{ item.total_mp }}</td>
-              <td>{{ item.std_duration }}</td>
-              <td>{{ item.units }}</td>
-              <td>{{ item.upper_limit }}</td>
-              <td>{{ item.lower_limit }}</td>
-              <td>{{ item.created_by }}</td>
-              <td>
-                <button
-                  class="btn btn-sm btn-danger"
-                  @click="deleteParam(item.fid)"
-                >
-                  <i class="fa fa-trash"></i>
-                </button>
-              </td>
-              <td>
-                <button class="btn btn-sm btn-warning">
-                  <i class="fa fa-pencil"></i>
-                </button>
-              </td>
-            </tr>
+            <template v-for="(item, i) in paramList">
+              <tr v-if="item.is_auto == 0" :key="item.fid">
+                <th scope="row">{{ i + 1 }}</th>
+                <td>{{ item.name }}</td>
+                <td>{{ item.methode_check }}</td>
+                <td>{{ item.total_mp }}</td>
+                <td>{{ item.std_duration }}</td>
+                <td>{{ item.units }}</td>
+                <td>{{ item.upper_limit ? item.upper_limit : "-" }}</td>
+                <td>{{ item.lower_limit ? item.lower_limit : "-" }}</td>
+                <td>{{ item.periodic }}</td>
+                <td>{{ item.created_by }}</td>
+                <td>{{ item.created_at.split("T")[0] }}</td>
+                <td>
+                  <button
+                    class="btn btn-sm btn-danger"
+                    @click="deleteParam(item.fid)"
+                  >
+                    <i class="fa fa-trash"></i>
+                  </button>
+                </td>
+                <td>
+                  <button class="btn btn-sm btn-warning">
+                    <i class="fa fa-pencil"></i>
+                  </button>
+                </td>
+              </tr>
+            </template>
           </tbody>
         </table>
       </div>
@@ -64,35 +70,37 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(param, i) in parameters" :key="i">
-              <th scope="row">{{ i + 1 }}</th>
-              <td>
-                <tr v-for="(mc, j) in param.machines" :key="j">
-                  <td>{{ param.line }}</td>
-                </tr>
-              </td>
-              <td>
-                <tr v-for="(mc, j) in param.machines" :key="j">
-                  <td>{{ mc.mc_name }}</td>
-                </tr>
-              </td>
-              <td>{{ param.param_name }}</td>
-              <td>{{ param.methode_check }}</td>
-              <td>{{ param.units }}</td>
-              <td>{{ param.upper_limit }}</td>
-              <td>{{ param.lower_limit }}</td>
-              <td>{{ param.created_by }}</td>
-              <td>
-                <button class="btn btn-sm btn-danger">
-                  <i class="fa fa-trash"></i>
-                </button>
-              </td>
-              <td>
-                <button class="btn btn-sm btn-warning">
-                  <i class="fa fa-pencil"></i>
-                </button>
-              </td>
-            </tr>
+            <template v-for="(param, i) in parameters">
+              <tr v-if="param.is_auto == 0" :key="i">
+                <th scope="row">{{ i + 1 }}</th>
+                <td>
+                  <tr v-for="(mc, j) in param.machines" :key="j">
+                    <td>{{ param.line }}</td>
+                  </tr>
+                </td>
+                <td>
+                  <tr v-for="(mc, j) in param.machines" :key="j">
+                    <td>{{ mc.mc_name }}</td>
+                  </tr>
+                </td>
+                <td>{{ param.param_name }}</td>
+                <td>{{ param.methode_check }}</td>
+                <td>{{ param.units }}</td>
+                <td>{{ param.upper_limit }}</td>
+                <td>{{ param.lower_limit }}</td>
+                <td>{{ param.created_by }}</td>
+                <td>
+                  <button class="btn btn-sm btn-danger">
+                    <i class="fa fa-trash"></i>
+                  </button>
+                </td>
+                <td>
+                  <button class="btn btn-sm btn-warning">
+                    <i class="fa fa-pencil"></i>
+                  </button>
+                </td>
+              </tr>
+            </template>
           </tbody>
         </table>
         <!-- <div class="row align-items-center">
@@ -144,7 +152,17 @@ export default {
         .get(`${process.env.VUE_APP_HOST}/admin/parameter`)
         .then((result) => {
           console.log(result);
-          this.paramList = result.data.data;
+          let sortByDate = result.data.data.sort((a, b) =>
+            a.created_at > b.created_at
+              ? 1
+              : b.created_at > a.created_at
+              ? -1
+              : 0
+          );
+          let filterSortData = sortByDate.filter((item) => item.fid < 8);
+          // console.log(sortByDate);
+          // console.log(filterSortData);
+          this.paramList = filterSortData;
         })
         .catch((err) => {
           console.log(err);

@@ -24,7 +24,7 @@ export default {
   methods: {
     getAlarmHistory() {
       axios
-        .get(`${process.env.VUE_APP_HOST}/parameterAlertHistory`)
+        .get(`${process.env.VUE_APP_HOST}/countAlertHistory`)
         .then((result) => {
           console.log(result);
           this.containerHeader = [
@@ -37,16 +37,19 @@ export default {
             },
             {
               name: "Parameters Monitored",
-              num: 5,
+              num: 116,
               icon: "fa fa-tachometer",
               color: "text-primary",
-              menu: [
-                "Vibration Spindle",
-                "Torque Spindle Clamp",
-                "Thermo Treassure",
-                "Torque Sensor",
-                "Centering Jig Conroad",
-              ],
+              menu: false,
+              // menu: [
+              //   "",
+              //   // "Torque Spindle Clamp (manual)",
+              //   // "Thermo Treassure (manual)",
+              //   // "Torque Sensor (manual)",
+              //   // "Centering Jig Conroad (manual)",
+              //   // "Vibration Motor (auto)",
+              //   // "Temperature Motor (auto)"
+              // ],
             },
             {
               name: "Alarm Active",
@@ -57,7 +60,8 @@ export default {
             },
             {
               name: "Alarm/Warning History",
-              num: result.data.data.length,
+              // num: result.data.data.length,
+              num: result.data.data.length - 1,
               icon: "fa fa-history",
               color: "text-danger",
               menu: true,
@@ -68,6 +72,7 @@ export default {
           console.error(err);
         });
     },
+    getParameter() {},
   },
   mounted() {
     this.getAlarmHistory();

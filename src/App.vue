@@ -9,7 +9,7 @@
 <script>
 // import ContainerMenu from "@/components/ContainerMenu";
 import { mapActions } from "vuex";
-import PWABadge from "pwa-badge";
+// import PWABadge from "pwa-badge";
 import axios from "axios";
 
 export default {
@@ -139,73 +139,92 @@ export default {
       this.mousePos = event.clientX;
       // console.log(event.clientX, event.clientY);
     },
+    // swaggerTest() {
+    //   axios
+    //     .get(
+    //       "https://app.swaggerhub.com/apis/tioazis/noval_hendra_azis_bersatu_dalam_perprojekan_duniawi/0.0.1/dieType",
+    //       {
+    //         headers: {
+    //           // Authorization: "Bearer blabla",
+    //           "Content-Type": "application/json",
+    //           // Accept: "application/json",
+    //         },
+    //       }
+    //     )
+    //     .then((result) => {
+    //       console.log(result.data);
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //     });
+    // },
   },
   mounted() {
-    this.permissionCheck();
-    // this.idle = true;
-    this.$nextTick(() => {
-      window.addEventListener("resize", this.onResize);
-    });
-    this.onResize();
-    console.log(this.$route.path);
-    // if (!this.isMobile) {
-    //   setInterval(() => {
-    //     if (
-    //       this.$route.path == "/dashboard" ||
-    //       this.$route.path == "/job/dashboard"
-    //     ) {
-    //       this.idle = false;
-    //       axios
-    //         .put(`${process.env.VUE_APP_HOST}/updateScreen`, {
-    //           path: this.currentRoute,
-    //           status: 1,
-    //         })
-    //         .then((msgUpdate) => {
-    //           // this.$router.push(path);
-    //           console.log(msgUpdate);
-    //         })
-    //         .catch((err) => {
-    //           console.log(err);
-    //         });
-    //     }
-    //   }, 5000);
-    //   setInterval(() => {
-    //     axios
-    //       .put(`${process.env.VUE_APP_HOST}/updateScreen`, {
-    //         path: "/dashboard",
-    //         status: 0,
-    //       })
-    //       .then((msgUpdate) => {
-    //         // this.$router.push(path);
-    //         console.log(msgUpdate);
-    //       })
-    //       .catch((err) => {
-    //         console.log(err);
-    //       });
-    //     axios
-    //       .put(`${process.env.VUE_APP_HOST}/updateScreen`, {
-    //         path: "/job/dashboard",
-    //         status: 0,
-    //       })
-    //       .then((msgUpdate) => {
-    //         // this.$router.push(path);
-    //         console.log(msgUpdate);
-    //       })
-    //       .catch((err) => {
-    //         console.log(err);
-    //       });
-    //   }, 70000);
-    // }
-    const badge = new PWABadge();
-    badge
-      .asyncSetBadge(1)
-      .then(() => {
-        // Badge count has shown as well
-      })
-      .catch((e) => {
-        // The Browser not supporting the Badge feature or something went wrong
-        console.log(e);
-      });
+    // this.permissionCheck();
+    // this.$nextTick(() => {
+    //   window.addEventListener("resize", this.onResize);
+    // });
+    // this.onResize();
+    // console.log(this.$route.path);
+    // // if (!this.isMobile) {
+    // //   setInterval(() => {
+    // //     if (
+    // //       this.$route.path == "/dashboard" ||
+    // //       this.$route.path == "/job/dashboard"
+    // //     ) {
+    // //       this.idle = false;
+    // //       axios
+    // //         .put(`${process.env.VUE_APP_HOST}/updateScreen`, {
+    // //           path: this.currentRoute,
+    // //           status: 1,
+    // //         })
+    // //         .then((msgUpdate) => {
+    // //           // this.$router.push(path);
+    // //           console.log(msgUpdate);
+    // //         })
+    // //         .catch((err) => {
+    // //           console.log(err);
+    // //         });
+    // //     }
+    // //   }, 5000);
+    // //   setInterval(() => {
+    // //     axios
+    // //       .put(`${process.env.VUE_APP_HOST}/updateScreen`, {
+    // //         path: "/dashboard",
+    // //         status: 0,
+    // //       })
+    // //       .then((msgUpdate) => {
+    // //         // this.$router.push(path);
+    // //         console.log(msgUpdate);
+    // //       })
+    // //       .catch((err) => {
+    // //         console.log(err);
+    // //       });
+    // //     axios
+    // //       .put(`${process.env.VUE_APP_HOST}/updateScreen`, {
+    // //         path: "/job/dashboard",
+    // //         status: 0,
+    // //       })
+    // //       .then((msgUpdate) => {
+    // //         // this.$router.push(path);
+    // //         console.log(msgUpdate);
+    // //       })
+    // //       .catch((err) => {
+    // //         console.log(err);
+    // //       });
+    // //   }, 70000);
+    // // }
+    // const badge = new PWABadge();
+    // badge
+    //   .asyncSetBadge(1)
+    //   .then(() => {
+    //     // Badge count has shown as well
+    //   })
+    //   .catch((e) => {
+    //     // The Browser not supporting the Badge feature or something went wrong
+    //     console.log(e);
+    //   });
+    // this.swaggerTest();
   },
 };
 </script>

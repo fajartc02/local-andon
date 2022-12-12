@@ -9,7 +9,7 @@
           class="d-inline-block align-top"
         />
         Maintenance Systems
-        <span style="font-size: 9px">V2.3.85</span>
+        <span style="font-size: 9px">{{ versionApp }}</span>
       </router-link>
 
       <router-link class="navbar-brand nav-item mr-0" to="/dashboard">
@@ -76,6 +76,7 @@ export default {
       isHomeBtn: false,
       ex11: false,
       isShow: false,
+      versionApp: process.env.VUE_APP_VERSION,
     };
   },
   components: {

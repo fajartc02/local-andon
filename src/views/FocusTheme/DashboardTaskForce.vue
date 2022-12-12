@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid">
-    <HeaderPage title="Dashboard Focus Thema Member" />
+    <HeaderPage title="Dashboard Taskforce Thema" />
     <!-- SEARCH -->
     <div class="row m-0 p-0">
       <div class="col-12 px-0" style="z-index: 1">
@@ -151,7 +151,7 @@
             <b style="font-size: 30px" @click="getFocusTheme()">{{
               countStatusFinished
             }}</b>
-            orang
+            Problem
           </div>
         </div>
       </div>
@@ -162,7 +162,7 @@
             <b @click="statusMemberNotyet()" style="font-size: 30px">{{
               countStatusNotyet
             }}</b>
-            orang
+            Problem
           </div>
         </div>
       </div>
@@ -203,7 +203,6 @@
             <thead>
               <tr>
                 <th>No</th>
-                <th>Member</th>
                 <th>Line</th>
                 <th>Machine</th>
                 <th>Problem</th>
@@ -211,19 +210,17 @@
               </tr>
             </thead>
             <tbody>
-              <template v-for="(item, idx) in containerFTData">
+              <template v-for="(item, idx) in containerTFData">
                 <tr :key="item.id">
                   <td>{{ idx + 1 }}</td>
                   <td>
-                    {{ item.member_name ? item.member_name : item.fname }}
+                    {{ item.fline }}
                   </td>
-                  <td>{{ item.problem_line }}</td>
-                  <td>{{ item.problem_machine }}</td>
-                  <td>{{ item.problem_name }}</td>
+                  <td>{{ item.fmc_name }}</td>
+                  <td>{{ item.ferror_name }}</td>
                   <td>
                     <router-link
-                      v-if="item.member_name"
-                      :to="`/editProblem?v_=${item.id_m_problem}`"
+                      :to="`/editProblem?v_=${item.fid}`"
                       class="btn btn-sm btn-primary text-light"
                     >
                       <i class="fa fa-eye"></i>
@@ -255,7 +252,7 @@ import BarGraphPareto from "@/components/ApexChart/BarGraphPareto";
 
 import axios from "axios";
 export default {
-  name: "DashboardFocusTheme",
+  name: "DashboardTaskForce",
   data() {
     return {
       selectedStartDate: formatDate.YYYYMMDD(
@@ -290,7 +287,7 @@ export default {
         // { value: "OTHER", text: "OTHER" },
       ],
       selectedCategory: null,
-      isOrderFreq: true,
+      isOrderFreq: false,
       isFilterMachine: true,
       containerParetoData: [],
       lineLabel: [],
@@ -298,7 +295,7 @@ export default {
       countStatusFinished: null,
       countStatusNotyet: null,
       modalShow: false,
-      containerFTData: null,
+      containerTFData: null,
       containerExMember: [],
       labelCard: "",
     };
@@ -368,7 +365,6 @@ export default {
         console.log(idx);
         this.getParetoLineMc(line, idx);
       });
-      this.countMemberStatus();
     },
     formatDate(date) {
       var d = new Date(date),
@@ -381,10 +377,10 @@ export default {
 
       return [year, month, day].join("-");
     },
-    countMemberStatus() {
+    countTaskForce() {
       axios
         .get(
-          `${process.env.VUE_APP_HOST}/focus-theme/countMemberStatus?start_time=${this.selectedStartDate}&end_time=${this.selectedEndDate}`
+          `${process.env.VUE_APP_HOST}/focus-theme/countTaskForce?start_time=${this.selectedStartDate}&end_time=${this.selectedEndDate}`
         )
         .then((result) => {
           console.log(result);
@@ -397,15 +393,15 @@ export default {
     },
     getFocusTheme() {
       this.isLoading = true;
-      this.labelCard = "Member Yang sudah ambil Thema";
+      this.labelCard = "Problem Taskforce";
       axios
         .get(
-          `${process.env.VUE_APP_HOST}/focus-theme?start_time=${this.selectedStartDate}&end_time=${this.selectedEndDate}`
+          `${process.env.VUE_APP_HOST}/focus-theme/detailTaskforce?start_time=${this.selectedStartDate}&end_time=${this.selectedEndDate}`
         )
         .then((result) => {
           this.isLoading = false;
           this.modalShow = true;
-          this.containerFTData = result.data.data;
+          this.containerTFData = result.data.data;
           this.containerExMember = result.data.data.map((item) => {
             return item.id_m_member;
           });
@@ -417,16 +413,16 @@ export default {
     },
     statusMemberNotyet() {
       this.isLoading = true;
-      this.labelCard = "Member Yang Belum ambil Thema";
+      this.labelCard = "Problem Belum Taskforce";
       axios
         .get(
-          `${process.env.VUE_APP_HOST}/focus-theme/member_notyet?start_time=${this.selectedStartDate}&end_time=${this.selectedEndDate}`
+          `${process.env.VUE_APP_HOST}/focus-theme/notyetTaskforce?start_time=${this.selectedStartDate}&end_time=${this.selectedEndDate}`
         )
         .then((result) => {
           console.log(result);
           this.isLoading = false;
           this.modalShow = true;
-          this.containerFTData = result.data.data;
+          this.containerTFData = result.data.data;
         })
         .catch((err) => {
           this.isLoading = false;
@@ -440,7 +436,7 @@ export default {
       console.log(idx);
       this.getParetoLineMc(line, idx);
     });
-    this.countMemberStatus();
+    this.countTaskForce();
   },
 };
 </script>

@@ -49,11 +49,26 @@
             :width="80"
             :percentage="`${propsLine.oee}`"
             status="success"
+            v-if="!propsLine.fline.includes('LP')"
           >
             <strong class="text-center title-text" style="font-size: 20px"
               >OEE <br />
-              <!-- {{ propsLine.fline.includes("DC") ? 97.3 : propsLine.oee }}% -->
+              <!-- {{ propsLine.fline.includes("LP") ? 97.3 : propsLine.oee }}% -->
               {{ propsLine.oee + "%" }}
+              <b-skeleton v-if="skeletonLoading"></b-skeleton>
+            </strong>
+          </vm-progress>
+          <vm-progress
+            type="circle"
+            :width="80"
+            :percentage="`${95.3}`"
+            status="success"
+            v-else
+          >
+            <strong class="text-center title-text" style="font-size: 20px"
+              >OEE <br />
+              {{ 95.3 }}%
+              <!-- {{ propsLine.oee + "%" }} -->
               <b-skeleton v-if="skeletonLoading"></b-skeleton>
             </strong>
           </vm-progress>

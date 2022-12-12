@@ -225,14 +225,19 @@ const routes = [{
             {
                 path: '/focus-theme',
                 name: 'FocusTheme',
-                redirect: '/focus-theme/dashboard',
+                redirect: '/focus-theme/member',
                 component: () =>
                     import ('@/views/FocusTheme/FocusTheme'),
                 children: [{
-                    path: 'dashboard',
+                    path: 'member',
                     name: 'DashboardFocusTheme',
                     component: () =>
                         import ('@/views/FocusTheme/DashboardFocusTheme')
+                }, {
+                    path: 'taskforce',
+                    name: 'DashboardTaskForce',
+                    component: () =>
+                        import ('@/views/FocusTheme/DashboardTaskForce')
                 }]
             },
             {
@@ -268,6 +273,10 @@ const routes = [{
                     path: 'dashboard',
                     component: () =>
                         import ('@/views/Job/DashboardJob')
+                }, {
+                    path: 'dashboardA',
+                    component: () =>
+                        import ('@/views/Job/DashboardJobAudit')
                 }, {
                     path: 'yamazumi',
                     component: () =>

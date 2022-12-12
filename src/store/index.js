@@ -18,9 +18,16 @@ export default new Vuex.Store({
         stateMcCt: '',
         castingAlarmData: null,
         machiningAlarmData: null,
-        successAddData: null
+        successAddData: null,
+        newAnalisys: null
     },
     mutations: {
+        GET_NEW_ANLISYS(state, payload) {
+            state.newAnalisys = payload
+        },
+        UPDATE_NEW_ANALISYS(state, payload) {
+            state.newAnalisys = payload
+        },
         GET_PROD(state, payload) {
             state.stateProdAchievements = payload
         },
@@ -154,6 +161,9 @@ export default new Vuex.Store({
                 });
             console.log(url);
             console.log(commit);
+        },
+        actionUpdateAnalisys({ commit }, newAnalisys) {
+            commit('UPDATE_NEW_ANALISYS', newAnalisys)
         },
         successToRegister({ commit }, data) {
             commit('ADD_DATA', data)

@@ -176,20 +176,14 @@ export default {
       }
       if (!endDate) {
         let d = new Date(this.selectedEndDate);
-        // console.log(d);
         let offsetTimeEndDate = d.setDate(d.getDate() + 1);
-        // console.log(offsetTimeEndDate);
         let offsetEndDate = formatDate.YYYYMMDD(new Date(offsetTimeEndDate));
-        // console.log(offsetEndDate);
         endDate = offsetEndDate + " 06:59:59";
       }
-      let url = `${process.env.VUE_APP_HOST}/data/pareto?fline=${this.propsLine}&fstart_date=${startDate}&fend_date=${endDate}&fmc_name=${this.selectedMc}&isOrderFreq=true&isNoLimit=true`;
+      let url = `${process.env.VUE_APP_HOST}/focus-theme/data/pareto?fline=${this.propsLine}&fstart_date=${startDate}&fend_date=${endDate}&fmc_name=${this.selectedMc}&isNoLimit=true`;
       if (this.isOrderFreq) {
         url += `&isOrderFreq=true`;
       }
-      // if (this.isFilterMachine) {
-      //   url += `&isMachine=true`;
-      // }
       axios
         .get(url)
         .then((result) => {
@@ -204,142 +198,181 @@ export default {
           });
           var themaMemberName;
           themaMemberName = result.data.data.map((item) => {
-            if (item.id_m_problem_member) {
-              return {
-                x: item.ferror_name,
-                seriesIndex: 0,
-                y: +item.fdur,
-                marker: {
-                  // size: 8,
-                  // radius: 2,
-                  cssClass: "apexcharts-custom-class",
-                },
-                label: {
-                  borderColor: "black",
-                  offsetY: 0,
-                  style: {
-                    color: "#000000",
-                  },
-
-                  text: `Thema ${item.fname_theme_member}`,
-                  // item.fname_theme_member
-                },
-              };
-            } else {
-              return null;
-            }
-          });
-          // if (mapDurProblem.length <= 5) {
-          //   let difLength = (mapDurProblem.length - 5) * -1;
-          //   for (let i = 0; i < difLength; i++) {
-          //     mapDurProblem.push(0);
-          //     mapNameProblem.push("");
-          //   }
-          // }
-          this.seriesProblem = [
-            {
-              name: this.isOrderFreq ? "Freq" : "Frequency",
-              data: mapDurProblem,
-            },
-          ];
-          this.chartOptionsProblem = {
-            chart: {
-              height: 350,
-              type: "bar",
-              events: {
-                dataPointSelection: (event, chartContext, config) => {
-                  console.log(event);
-                  console.log(chartContext);
-                  console.log(config.dataPointIndex);
-                  console.log(result.data.data[config.dataPointIndex]);
-                  this.stateData = config.dataPointIndex;
-                  // this.visibleColapse = true;
-                  let idProblem = result.data.data[config.dataPointIndex].fid;
-                  this.$router.push(`/editProblem?v_=${idProblem}`);
-                  // if (!this.timeOutActive) {
-                  //   this.timeOutActive = true;
-                  //   setTimeout(() => {
-                  //     this.visibleColapse = false;
-                  //     this.timeOutActive = false;
-                  //   }, 60000);
-                  // }
-                },
-              },
-            },
-            annotations: {
-              points: themaMemberName,
-            },
-            dataLabels: {
-              formatter: function (val, opts) {
-                console.log(opts);
-                if (val > 0) {
-                  return val;
+            return axios
+              .get(`${process.env.VUE_APP_HOST}/focus-theme/check/${item.fid}`)
+              .then((result) => {
+                console.log(result);
+                let data = result.data.data[0];
+                if (data) {
+                  console.log(data);
+                  return {
+                    x: data.problem_name,
+                    seriesIndex: 0,
+                    y: 0,
+                    marker: {
+                      // size: 8,
+                      // radius: 2,
+                      cssClass: "apexcharts-custom-class",
+                    },
+                    label: {
+                      borderColor: "black",
+                      offsetY: 0,
+                      style: {
+                        color: "#000000",
+                      },
+                      text: `${
+                        data.problem_name.includes("[TASKFORCE]")
+                          ? `${data.member_name} [${data.member_shift}] [TASKFORCE]`
+                          : `${data.member_name} [${data.member_shift}]`
+                      }`,
+                      // item.fname_theme_member
+                    },
+                  };
                 } else {
-                  return "";
+                  if (data.problem_name.includes("[TASKFORCE]")) {
+                    return {
+                      x: data.problem_name,
+                      seriesIndex: 0,
+                      y: 0,
+                      marker: {
+                        // size: 8,
+                        // radius: 2,
+                        cssClass: "apexcharts-custom-class",
+                      },
+                      label: {
+                        borderColor: "black",
+                        offsetY: 0,
+                        style: {
+                          color: "#000000",
+                        },
+                        text: `[TASKFORCE]`,
+                        // item.fname_theme_member
+                      },
+                    };
+                  }
+                  return null;
                 }
+              })
+              .catch((err) => {
+                console.log(err);
+                if (item.ferror_name.includes("[TASKFORCE]")) {
+                  return {
+                    x: item.ferror_name,
+                    seriesIndex: 0,
+                    y: 0,
+                    marker: {
+                      // size: 8,
+                      // radius: 2,
+                      cssClass: "apexcharts-custom-class",
+                    },
+                    label: {
+                      borderColor: "black",
+                      offsetY: 0,
+                      style: {
+                        color: "#000000",
+                      },
+                      text: `THEMA TASKFORCE`,
+                      // item.fname_theme_member
+                    },
+                  };
+                }
+              });
+          });
+
+          Promise.all(themaMemberName).then((resPromise) => {
+            console.log(resPromise);
+            this.seriesProblem = [
+              {
+                name: this.isOrderFreq ? "Freq" : "Frequency",
+                data: mapDurProblem,
               },
-              background: {
-                enabled: true,
-                foreColor: "#000",
-                padding: 4,
-                borderRadius: 2,
-                borderWidth: 1,
-                borderColor: "#fff",
-                opacity: 0.9,
-                dropShadow: {
-                  enabled: false,
-                  top: 1,
-                  left: 1,
-                  blur: 1,
-                  color: "#000",
-                  opacity: 0.45,
+            ];
+            this.chartOptionsProblem = {
+              chart: {
+                height: 350,
+                type: "bar",
+                events: {
+                  dataPointSelection: (event, chartContext, config) => {
+                    console.log(event);
+                    console.log(chartContext);
+                    console.log(config.dataPointIndex);
+                    console.log(result.data.data[config.dataPointIndex]);
+                    this.stateData = config.dataPointIndex;
+                    // this.visibleColapse = true;
+                    let idProblem = result.data.data[config.dataPointIndex].fid;
+                    this.$router.push(`/editProblem?v_=${idProblem}`);
+                    // if (!this.timeOutActive) {
+                    //   this.timeOutActive = true;
+                    //   setTimeout(() => {
+                    //     this.visibleColapse = false;
+                    //     this.timeOutActive = false;
+                    //   }, 60000);
+                    // }
+                  },
                 },
               },
-            },
-            colors: [
-              "#ff2828",
-              "#6b6767",
-              "#6b6767",
-              "#6b6767",
-              "#6b6767",
-              "#6b6767",
-            ],
-            plotOptions: {
-              bar: {
-                distributed: true,
+              annotations: {
+                points: resPromise,
               },
-            },
-            legend: {
-              show: false,
-            },
-            xaxis: {
-              categories: mapNameProblem,
-              labels: {
-                formatter: function (value) {
-                  return value;
+              dataLabels: {
+                formatter: function (val, opts) {
+                  console.log(opts);
+                  if (val > 0) {
+                    return val;
+                  } else {
+                    return "";
+                  }
+                },
+                background: {
+                  enabled: true,
+                  foreColor: "#000",
+                  padding: 4,
+                  borderRadius: 2,
+                  borderWidth: 1,
+                  borderColor: "#fff",
+                  opacity: 0.9,
+                  dropShadow: {
+                    enabled: false,
+                    top: 1,
+                    left: 1,
+                    blur: 1,
+                    color: "#000",
+                    opacity: 0.45,
+                  },
                 },
               },
-              tickPlacement: "on",
-            },
-            yaxis: {
-              title: {
-                text: "Freq (x)",
+              colors: [
+                "#ff2828",
+                "#6b6767",
+                "#6b6767",
+                "#6b6767",
+                "#6b6767",
+                "#6b6767",
+              ],
+              plotOptions: {
+                bar: {
+                  distributed: true,
+                },
               },
-            },
-          };
-          // this.chartOptionsProblem.annotations = {
-          //   points: themaMemberName,
-          // };
-          console.log(themaMemberName);
-          // let idxLine = this.lines.indexOf(line);
-          // if (idxLine) {
-          // console.log(idx);
-          // this.containerParetoData.splice(idx, 0, result.data.data);
-          // this.lineLabel.splice(idx, 0, line);
-          // if (this.containerParetoData.length == 7) {
-          //   this.tempContainer = this.containerParetoData;
-          // }
-          // }
+              legend: {
+                show: false,
+              },
+              xaxis: {
+                categories: mapNameProblem,
+                labels: {
+                  formatter: function (value) {
+                    return value;
+                  },
+                },
+                tickPlacement: "on",
+              },
+              yaxis: {
+                title: {
+                  text: this.isOrderFreq ? "Freq (x)" : "Duration (min)",
+                },
+              },
+            };
+          });
         })
         .catch((err) => {
           console.log(err);
@@ -485,7 +518,7 @@ export default {
       },
       yaxis: {
         title: {
-          text: "Freq (x)",
+          text: this.isOrderFreq ? "Freq (x)" : "Duration (min)",
         },
       },
     };

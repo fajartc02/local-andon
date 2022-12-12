@@ -5,7 +5,8 @@
     "scripts": {
         "serve": "vue-cli-service serve",
         "build": "vue-cli-service build",
-        "lint": "vue-cli-service lint"
+        "lint": "vue-cli-service lint",
+        "build-deploy": "yarn build && cp ./dist/index.html ./dist/404.html && firebase deploy --only hosting"
     },
     "dependencies": {
         "@uublue/vue-excel-viewer": "^0.1.17",
@@ -24,7 +25,9 @@
         "pdfjs": "^2.4.6",
         "pwa-badge": "^1.1.1",
         "register-service-worker": "^1.7.1",
+        "simple-vue-tree": "^2.0.4",
         "sweetalert2": "^10.13.3",
+        "v-treeview": "^0.2.1",
         "vue": "^2.6.11",
         "vue-apexcharts": "^1.6.2",
         "vue-chartjs": "^3.5.1",
@@ -43,6 +46,7 @@
         "vue-scrollable-container": "^1.8.2",
         "vue-search-select": "^2.9.3",
         "vue-select": "^3.11.2",
+        "vue-tree-list-new": "^1.6.8",
         "vuetify": "^2.4.0",
         "vuex": "^3.4.0"
     },

@@ -133,23 +133,7 @@ export default {
         },
       },
       labels: ["Sudah", "Belum"],
-      // responsive: [
-      //   {
-      //     breakpoint: 480,
-      //     options: {
-      //     //   chart: {
-      //     //     width: 200,
-      //     //   },
-      //     //   legend: {
-      //     //     position: "bottom",
-      //     //   },
-      //     },
-      //   },
-      // ],
       colors: ["#3aaf47", "#f45353"],
-      // legend: {
-      //   show: false,
-      // },
     };
   },
 };

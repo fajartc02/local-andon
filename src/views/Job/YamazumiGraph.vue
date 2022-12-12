@@ -102,7 +102,6 @@
         <select class="form-control" v-model="year">
           <option value="2022">2022</option>
           <option value="2021">2021</option>
-          <option value="2020">2020</option>
         </select>
         <div class="input-group-append">
           <span class="input-group-text" id="basic-addon2">YEAR</span>
@@ -111,7 +110,7 @@
       <div v-if="year == 2022">
         <BarGraphAudit :mapBgCol="bgCol" />
       </div>
-      <div v-else>
+      <div v-else-if="2021">
         <BarGraphAudit2 :mapBgCol="bgCol" />
       </div>
       <div class="card">
@@ -127,12 +126,18 @@
             </td>
           </tr>
           <tr>
+            <td style="background-color: #ffff00">Periodical Quantitatif</td>
+            <td class="text-left pl-3">
+              <b>1.TPM, 2.C/M Temuan TPM,</b>
+            </td>
+          </tr>
+          <tr>
             <td style="background-color: #c8ffdb">Preventive</td>
             <td class="text-left pl-3">
               <b
                 >1.SE Activity, 2.Critical Machine C/M, 3.Yokoten,
-                4.Improvement, 5.TPM, 6.RED TAG, 7.C/M Temuan TPM, 8.C/M
-                Potencial Breakdown, 9.Trainer OM</b
+                4.Improvement, 5.C/M Potencial Breakdown, 6.Trainer OM,
+                7.Investigasi Problem</b
               >
             </td>
           </tr>
@@ -151,7 +156,15 @@
           <tr>
             <td style="background-color: #c2eae3">Others</td>
             <td class="text-left pl-3">
-              <b>1.4S, 2.Admin, 3.Meeting, 4.Investigasi Problem</b>
+              <b>1.4S, 2.Admin, 3.Meeting, 4.RED TAG</b>
+            </td>
+          </tr>
+          <tr>
+            <td style="color: #4c90fa; font-size: 15px; font-weight: bold">
+              - - - - -
+            </td>
+            <td class="text-left pl-3">
+              <b>Total Man Hour (1 Bulan)</b>
             </td>
           </tr>
         </table>

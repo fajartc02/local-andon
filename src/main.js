@@ -16,6 +16,15 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import Multiselect from 'vue-multiselect'
 // import Skeleton from 'vue-loading-skeleton';
 
+// VUE TREE VIEW IMPORT
+// import 'simple-vue-tree'
+// import 'simple-vue-tree/dist/lib/simple-tree.css'
+
+import VueTreeList from 'vue-tree-list-new'
+
+Vue.use(VueTreeList)
+
+
 
 // register globally
 Vue.component('multiselect', Multiselect)
@@ -38,9 +47,14 @@ import VueExcelViewer from '@uublue/vue-excel-viewer'
 import '@uublue/vue-excel-viewer/lib/vue-excel-viewer.css'
 
 // import VuePdfReader from 'vue-pdf-reader';
-// import 'vue-pdf-reader/vue-pdf-reader.css';
+// import 'vue-pdf-reader/vue-pdf-reader.css';ss
 
 // Vue.use(VuePdfReader);
+
+// import VTreeview from "v-treeview"
+
+// Vue.use(VTreeview)
+
 
 Vue.use(VueExcelViewer)
     // # Vue.component('vm-progress', Progress) # 可以指定组件名称
