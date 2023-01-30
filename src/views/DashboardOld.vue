@@ -21,7 +21,21 @@
               </center>
               <center class="card-title">TPM<br />Monitoring</center>
             </a> -->
-            <div
+            <a
+              class="col-3 hover-menu p-1"
+              href="https://tclass-dev.toyota.co.id/"
+              target="_blank"
+              style="text-decoration: none; color: black"
+            >
+              <center>
+                <img
+                  src="https://cdn-icons-png.flaticon.com/512/201/201614.png"
+                  width="30%"
+                />
+              </center>
+              <center class="card-title">T-Class</center>
+            </a>
+            <!-- <div
               class="col-3 hover-menu p-1"
               @click="goTo('/oee/dashboard')"
               target="_blank"
@@ -35,7 +49,7 @@
                 />
               </center>
               <center class="card-title">OEE<br />Summary</center>
-            </div>
+            </div> -->
             <div class="col-3 hover-menu p-1" @click="goTo('/realtimePareto')">
               <center>
                 <img
@@ -99,7 +113,21 @@
                 Monitoring
               </center>
             </div> -->
-            <div class="col-3 hover-menu p-1" @click="goTo('/totalProblem')">
+            <a
+              class="col-3 hover-menu p-1"
+              href="http://hem-dev.toyota.co.id/"
+              target="_blank"
+              style="text-decoration: none; color: black"
+            >
+              <center>
+                <img
+                  src="https://cdn-icons-png.flaticon.com/512/3010/3010599.png"
+                  width="30%"
+                />
+              </center>
+              <center class="card-title">Henkaten<br />Mgmt</center>
+            </a>
+            <!-- <div class="col-3 hover-menu p-1" @click="goTo('/totalProblem')">
               <center>
                 <img src="@/assets/totalProblem.png" width="30%" />
               </center>
@@ -107,7 +135,8 @@
                 Total <br />
                 Problem
               </center>
-            </div>
+            </div> -->
+
             <div
               class="col-3 hover-menu p-1"
               @click="goTo('/focus-theme/member')"
@@ -166,12 +195,18 @@
                 Status
               </center>
             </div>
-            <div class="col-3 hover-menu p-1" @click="goTo('/manualBook')">
+            <a
+              class="col-3 hover-menu p-1"
+              href="https://tmmin.sharepoint.com/sites/MaintenancePlant3/Dokumen%20Berbagi/Forms/AllItems.aspx"
+              target="_blank"
+              style="text-decoration: none; color: black"
+            >
+              <!-- <div class="col-3 hover-menu p-1" @click="goTo('/manualBook')"> -->
               <center>
                 <img src="@/assets/icons/manualBook.png" width="42%" />
               </center>
               <center class="card-title">Manual<br />Book</center>
-            </div>
+            </a>
             <div class="col-3 hover-menu p-1" @click="goTo('/problemHistory')">
               <center>
                 <img

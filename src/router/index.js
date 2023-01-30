@@ -28,7 +28,7 @@ import QcMonitoringDetails from "../views/QcMonitoringDetails"
 import SummaryWeekly from "../views/SummaryWeekly"
 import MappingLine from "../views/Mapping/MappingLine"
 import ManualBook from "../views/ManualInstruction/DashboardMI"
-// import FocusTheme from "../views/FocusTheme/FocusTheme"
+import DashboardMc from "../views/Machines/DashboardMc"
 
 
 Vue.use(VueRouter)
@@ -61,6 +61,11 @@ const routes = [{
                 path: '/dashboard',
                 name: 'DashboarNew',
                 component: DashboardNew
+            },
+            {
+                path: '/monitoring',
+                name: 'DashboarMc',
+                component: DashboardMc
             },
             {
                 path: '/MappingLine',
@@ -194,6 +199,11 @@ const routes = [{
                     name: 'ParameterHistory',
                     component: () =>
                         import ('@/views/Parameter/ParameterHistory.vue'),
+                }, {
+                    path: 'realtime',
+                    name: 'RealtimeParameter',
+                    component: () =>
+                        import ('@/views/Parameter/RealtimeParameter.vue'),
                 }]
             },
             {

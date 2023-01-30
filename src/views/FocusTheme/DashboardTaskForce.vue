@@ -144,25 +144,31 @@
       </div>
     </div>
     <div class="row m-0 p-0">
-      <div class="col-6">
-        <div class="card bg-success">
-          <div class="card-header p-1">Sudah Ambil Thema</div>
+      <div class="col-xs-12 col-md-6 p-0">
+        <div class="card bg-light">
+          <div class="card-header p-1">
+            <b>Taskforce By Lines</b>
+          </div>
           <div class="card-body p-1 text-dark">
-            <b style="font-size: 30px" @click="getFocusTheme()">{{
+            <GraphTheme v-if="graphTheme" :graphTheme="graphTheme" />
+            <!-- <b style="font-size: 30px" @click="getFocusTheme()">{{
               countStatusFinished
             }}</b>
-            Problem
+            Problem -->
           </div>
         </div>
       </div>
-      <div class="col-6">
-        <div class="card bg-warning">
-          <div class="card-header p-1">Belum Ambil Thema</div>
+      <div class="col-xs-12 col-md-6 p-0">
+        <div class="card bg-light">
+          <div class="card-header p-1">
+            <b>Status Countermeasure</b>
+          </div>
           <div class="card-body p-1 text-dark">
-            <b @click="statusMemberNotyet()" style="font-size: 30px">{{
+            <GraphCm v-if="graphCm" :graphCm="graphCm" />
+            <!-- <b @click="statusMemberNotyet()" style="font-size: 30px">{{
               countStatusNotyet
             }}</b>
-            Problem
+            Problem -->
           </div>
         </div>
       </div>
@@ -171,7 +177,7 @@
       <div
         v-for="(data, i) in containerParetoData"
         :key="i"
-        class="col-md-6 col-xs-12 p-0 mt-2 pl-1"
+        class="col-md-12 col-xs-12 p-0 mt-2 pl-1"
       >
         <div class="card">
           <div class="card-header p-0 m-0">{{ lineLabel[i] }}</div>
@@ -298,6 +304,8 @@ export default {
       containerTFData: null,
       containerExMember: [],
       labelCard: "",
+      graphTheme: null,
+      graphCm: null,
     };
   },
   components: {
@@ -305,6 +313,8 @@ export default {
     // ModelSelect,
     BarGraphPareto,
     Loading: () => import("@/components/Loading"),
+    GraphTheme: () => import("@/components/ApexChart/Taskforce/GraphTheme"),
+    GraphCm: () => import("@/components/ApexChart/Taskforce/GraphCm"),
     // CardSummary: () => import("@/components/FocusTheme/CardSummary"),
   },
   methods: {
@@ -339,7 +349,7 @@ export default {
         // console.log(offsetEndDate);
         endDate = offsetEndDate + " 06:59:59";
       }
-      let url = `${process.env.VUE_APP_HOST}/focus-theme/data/pareto?fline=${line}&fstart_date=${startDate}&fend_date=${endDate}`;
+      let url = `${process.env.VUE_APP_HOST}/focus-theme/data/pareto?fline=${line}&fstart_date=${startDate}&fend_date=${endDate}&isNoLimit=true`;
       if (this.isOrderFreq) {
         url += `&isOrderFreq=true`;
       }
@@ -365,6 +375,8 @@ export default {
         console.log(idx);
         this.getParetoLineMc(line, idx);
       });
+      this.graphCountTF();
+      this.graphCountCm();
     },
     formatDate(date) {
       var d = new Date(date),
@@ -429,6 +441,32 @@ export default {
           console.log(err);
         });
     },
+    graphCountTF() {
+      axios
+        .get(
+          `${process.env.VUE_APP_HOST}/focus-theme/graph/taskforce?start_time=${this.selectedStartDate}&end_time=${this.selectedEndDate}`
+        )
+        .then((result) => {
+          console.log(result);
+          this.graphTheme = result.data.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    graphCountCm() {
+      axios
+        .get(
+          `${process.env.VUE_APP_HOST}/focus-theme/graph/taskforce/countermeasure?start_time=${this.selectedStartDate}&end_time=${this.selectedEndDate}`
+        )
+        .then((result) => {
+          console.log(result);
+          this.graphCm = result.data.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
   },
   mounted() {
     this.getLastMonth();
@@ -436,7 +474,8 @@ export default {
       console.log(idx);
       this.getParetoLineMc(line, idx);
     });
-    this.countTaskForce();
+    this.graphCountTF();
+    this.graphCountCm();
   },
 };
 </script>

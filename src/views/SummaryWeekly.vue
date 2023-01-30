@@ -183,27 +183,27 @@ export default {
         {
           line: "CYLINDER BLOCK",
           shift: "w",
-          name: "ADISTYA",
+          name: "M. BAGUS",
         },
         {
           line: "CRANK SHAFT",
           shift: "w",
-          name: "ADISTYA",
+          name: "M. BAGUS",
         },
         {
           line: "CAM SHAFT",
           shift: "w",
-          name: "M. BAGUS",
+          name: "SUPRIYANTO",
         },
         {
           line: "CYLINDER HEAD",
           shift: "w",
-          name: "M. BAGUS",
+          name: "SUPRIYANTO",
         },
         {
           line: "HPDC",
           shift: "w",
-          name: "MUGIYONO",
+          name: "Mugiyono",
         },
         {
           line: "LPDC",
@@ -213,7 +213,7 @@ export default {
         {
           line: "ASSY LINE",
           shift: "w",
-          name: "SUPRIYANTO",
+          name: "ADISTYA",
         },
         {
           line: "CYLINDER BLOCK",
@@ -223,22 +223,22 @@ export default {
         {
           line: "CRANK SHAFT",
           shift: "r",
-          name: "DIDI",
+          name: "ERWIN",
         },
         {
           line: "CAM SHAFT",
           shift: "r",
-          name: "DIDI",
+          name: "MAULANA",
         },
         {
           line: "CYLINDER HEAD",
           shift: "r",
-          name: "ERWIN",
+          name: "MAULANA",
         },
         {
           line: "HPDC",
           shift: "r",
-          name: "MAULANA",
+          name: "DIDI I",
         },
         {
           line: "LPDC",
@@ -255,109 +255,109 @@ export default {
         {
           line: "CYLINDER BLOCK",
           shift: "w",
-          name: "HERMAN",
+          name: "Vaip JH",
         },
         {
           line: "CRANK SHAFT",
           shift: "w",
-          name: "HERMAN",
+          name: "Vaip JH",
         },
         {
           line: "CAM SHAFT",
           shift: "w",
-          name: "HERMAN",
+          name: "Vaip JH",
         },
         {
           line: "CYLINDER HEAD",
           shift: "w",
-          name: "HERMAN",
+          name: "Vaip JH",
         },
         {
           line: "HPDC",
           shift: "w",
-          name: "HARTANTO",
+          name: "Triyanto",
         },
         {
           line: "LPDC",
           shift: "w",
-          name: "HARTANTO",
+          name: "Triyanto",
         },
         {
           line: "ASSY LINE",
           shift: "w",
-          name: "HERMAN",
+          name: "Vaip JH",
         },
         {
           line: "CYLINDER BLOCK",
           shift: "r",
-          name: "WAHYU S",
+          name: "Fandy JD",
         },
         {
           line: "CRANK SHAFT",
           shift: "r",
-          name: "WAHYU S",
+          name: "Fandy JD",
         },
         {
           line: "CAM SHAFT",
           shift: "r",
-          name: "WAHYU S",
+          name: "Fandy JD",
         },
         {
           line: "CYLINDER HEAD",
           shift: "r",
-          name: "WAHYU S",
+          name: "Fandy JD",
         },
         {
           line: "HPDC",
           shift: "r",
-          name: "TRIYANTO",
+          name: "Supriyadi",
         },
         {
           line: "LPDC",
           shift: "r",
-          name: "TRIYANTO",
+          name: "Supriyadi",
         },
         {
           line: "ASSY LINE",
           shift: "r",
-          name: "WAHYU S",
+          name: "Fandy JD",
         },
       ],
       containerSh: [
         {
           line: "CYLINDER BLOCK",
           shift: "w",
-          name: "DAROJAT",
+          name: "ABIDIN",
         },
         {
           line: "CRANK SHAFT",
           shift: "w",
-          name: "DAROJAT",
+          name: "ABIDIN",
         },
         {
           line: "CAM SHAFT",
           shift: "w",
-          name: "DAROJAT",
+          name: "ABIDIN",
         },
         {
           line: "CYLINDER HEAD",
           shift: "w",
-          name: "DAROJAT",
+          name: "ABIDIN",
         },
         {
           line: "HPDC",
           shift: "w",
-          name: "DEDE S",
+          name: "ARIS B",
         },
         {
           line: "LPDC",
           shift: "w",
-          name: "DEDE S",
+          name: "ARIS B",
         },
         {
           line: "ASSY LINE",
           shift: "w",
-          name: "DAROJAT",
+          name: "ABIDIN",
         },
         {
           line: "CYLINDER BLOCK",
@@ -382,12 +382,12 @@ export default {
         {
           line: "HPDC",
           shift: "r",
-          name: "ABIDIN",
+          name: "DEDE S",
         },
         {
           line: "LPDC",
           shift: "r",
-          name: "ABIDIN",
+          name: "DEDE S",
         },
         {
           line: "ASSY LINE",
@@ -612,7 +612,7 @@ export default {
         this.containerProblemFup = mapProblemFup;
         this.tableProblemFup = mapProblemFup;
         this.datacollection = {
-          labels: ["HERMAN", "HARTANTO", "WAHYU", "TRIYANTO"],
+          labels: ["TRIYANTO", "SUPRIYADI", "FANDY JD", "HARTANTO"],
           datasets: [
             {
               label: "Blm Close",

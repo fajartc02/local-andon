@@ -1,18 +1,11 @@
 <template>
   <div id="chart">
-    <!-- <h6 class="mt-2 mb-0">Pareto Machines</h6>
+    <h6 class="mt-2 mb-0">Pareto Machines</h6>
     <apexchart
       type="bar"
       height="190"
       :options="chartOptions"
       :series="series"
-    ></apexchart> -->
-    <h6 class="my-2">Pareto Problems</h6>
-    <apexchart
-      type="bar"
-      height="190"
-      :options="chartOptionsProblem"
-      :series="seriesProblem"
     ></apexchart>
     <b-button
       variant="secondary"
@@ -20,8 +13,16 @@
       @click="visibleColapse = false"
       >Close Detail</b-button
     >
-    <b-collapse class="mt-2">
-      <div class="card"></div>
+    <b-collapse v-model="visibleColapse" class="mt-2">
+      <div class="card">
+        <h6 class="my-2">Pareto Problems</h6>
+        <apexchart
+          type="bar"
+          height="190"
+          :options="chartOptionsProblem"
+          :series="seriesProblem"
+        ></apexchart>
+      </div>
     </b-collapse>
   </div>
 </template>
@@ -47,6 +48,7 @@ export default {
         new Date(new Date().getFullYear(), new Date().getMonth(), 1)
       ),
       selectedEndDate: formatDate.YYYYMMDD(new Date()),
+      isOrderFreq: false,
       clickedProblem: null,
     };
   },
@@ -57,9 +59,9 @@ export default {
     propsEndDate: function () {
       this.selectedEndDate = this.propsEndDate;
     },
-    // propsIsOrderFreq: function () {
-    //   this.propsIsOrderFreq = this.propsIsOrderFreq;
-    // },
+    propsIsOrderFreq: function () {
+      this.isOrderFreq = this.propsIsOrderFreq;
+    },
     propsData: function () {
       var durProblemData = [0];
       var mcProblemData = ["tidak ada problem"];
@@ -92,7 +94,7 @@ export default {
       }
       console.log(durProblemData);
       this.series.push({
-        name: this.propsIsOrderFreq ? "Freq" : "Frequency",
+        name: this.isOrderFreq ? "Freq" : "Frequency",
         data: durProblemData,
       });
       this.chartOptions = {
@@ -107,7 +109,7 @@ export default {
               this.stateData = config.dataPointIndex;
               this.selectedMc = this.mcPareto[this.stateData];
               this.visibleColapse = true;
-              // this.getParetoData();
+              this.getParetoData();
               if (!this.timeOutActive) {
                 this.timeOutActive = true;
                 setTimeout(() => {
@@ -158,7 +160,7 @@ export default {
         },
         yaxis: {
           title: {
-            text: this.propsIsOrderFreq ? "Total (x)" : "Min",
+            text: this.isOrderFreq ? "Total (x)" : "Min",
           },
         },
       };
@@ -178,8 +180,8 @@ export default {
         let offsetEndDate = formatDate.YYYYMMDD(new Date(offsetTimeEndDate));
         endDate = offsetEndDate + " 06:59:59";
       }
-      let url = `${process.env.VUE_APP_HOST}/focus-theme/data/pareto?fline=${this.propsLine}&fstart_date=${startDate}&fend_date=${endDate}`;
-      if (this.propsIsOrderFreq) {
+      let url = `${process.env.VUE_APP_HOST}/focus-theme/data/pareto?fline=${this.propsLine}&fstart_date=${startDate}&fend_date=${endDate}&fmc_name=${this.selectedMc}&isNoLimit=true`;
+      if (this.isOrderFreq) {
         url += `&isOrderFreq=true`;
       }
       axios
@@ -281,7 +283,7 @@ export default {
             console.log(resPromise);
             this.seriesProblem = [
               {
-                name: this.propsIsOrderFreq ? "Freq" : "Frequency",
+                name: this.isOrderFreq ? "Freq" : "Frequency",
                 data: mapDurProblem,
               },
             ];
@@ -298,7 +300,6 @@ export default {
                     this.stateData = config.dataPointIndex;
                     // this.visibleColapse = true;
                     let idProblem = result.data.data[config.dataPointIndex].fid;
-                    console.log(result);
                     this.$router.push(`/editProblem?v_=${idProblem}`);
                     // if (!this.timeOutActive) {
                     //   this.timeOutActive = true;
@@ -367,7 +368,7 @@ export default {
               },
               yaxis: {
                 title: {
-                  text: this.propsIsOrderFreq ? "Freq (x)" : "Duration (min)",
+                  text: this.isOrderFreq ? "Freq (x)" : "Duration (min)",
                 },
               },
             };
@@ -496,7 +497,7 @@ export default {
         },
       },
       colors: [
-        "#28a9ff",
+        "#ff2828",
         "#28a9ff",
         "#28a9ff",
         "#28a9ff",
@@ -517,14 +518,13 @@ export default {
       },
       yaxis: {
         title: {
-          text: this.propsIsOrderFreq ? "Freq (x)" : "Duration (min)",
+          text: this.isOrderFreq ? "Freq (x)" : "Duration (min)",
         },
       },
     };
     this.chartOptions.annotations = {
       points: idProbMember,
     };
-    this.getParetoData();
   },
 };
 </script>

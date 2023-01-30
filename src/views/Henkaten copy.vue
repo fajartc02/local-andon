@@ -296,6 +296,103 @@
         </div>
       </div>
     </div>
+    <div class="row m-0 p-0 mt-2">
+      <div class="col p-0 m-0">
+        <table
+          class="
+            table table-sm table-dark table-bordered table-responsive
+            text-light
+          "
+        >
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Tanggal</th>
+              <!-- <th>Line</th> -->
+              <th style="min-width: 90px">Lokasi</th>
+              <!-- <th style="min-width: 200px">Problem</th> -->
+              <th style="min-width: 200px">Item Temporary</th>
+              <!-- <th>Type Part</th> -->
+              <th>PIC</th>
+              <!-- <th>No Work</th> -->
+              <th>Keterangan</th>
+              <th colspan="2">Actions</th>
+            </tr>
+          </thead>
+          <tbody v-if="containerHenkaten.length !== 0 && isLoading === false">
+            <tr
+              v-for="(henkaten, i) in containerHenkaten"
+              :key="henkaten.fid"
+              :style="`background-color: ${
+                henkaten.fstatus == 0 ? 'yellow' : ''
+              };color: ${henkaten.fstatus == 0 ? 'black' : 'white'}`"
+            >
+              <td>{{ i + 1 }}</td>
+              <td>{{ henkaten.fdate.split("T")[0] }}</td>
+              <!-- <td>{{ henkaten.fline }}</td> -->
+              <td>{{ henkaten.fmc }}</td>
+              <!-- <td>{{ henkaten.fproblem }}</td> -->
+              <td>{{ henkaten.fchanges_item }}</td>
+              <!-- <td>{{ henkaten.fpart_type }}</td> -->
+              <td>{{ henkaten.fpic }}</td>
+              <!-- <td>{{ henkaten.fwork_no }}</td> -->
+              <td style="min-width: 100px">{{ henkaten.fnote }}</td>
+              <td>
+                <v-btn
+                  color="info"
+                  small
+                  class="btn btn-outline-warning"
+                  data-toggle="modal"
+                  data-target="#addModalHenkaten"
+                  @click="editHenkaten(henkaten.fid, henkaten)"
+                >
+                  <i class="fa fa-edit"></i> Edit
+                </v-btn>
+              </td>
+              <td style="min-width: 70px">
+                <v-btn
+                  elevation="2"
+                  data-toggle="modal"
+                  :data-target="`#modal${henkaten.fid}`"
+                  small
+                  color="error"
+                  ><i class="fa fa-trash"></i> Delete</v-btn
+                >
+              </td>
+            </tr>
+          </tbody>
+          <tbody v-else-if="containerHenkaten.length === 0 && !isLoading">
+            <tr>
+              <td colspan="9">Tidak ada henkaten</td>
+            </tr>
+          </tbody>
+          <tbody v-else>
+            <tr>
+              <td colspan="9">
+                <i
+                  v-if="isLoading"
+                  class="fa fa-refresh fa-spin"
+                  style="font-size: 20px"
+                ></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- DIALOG LOADER -->
+      <v-dialog v-model="isDialogLoading" hide-overlay persistent width="300">
+        <v-card color="primary" dark>
+          <v-card-text>
+            Please stand by
+            <v-progress-linear
+              indeterminate
+              color="white"
+              class="mb-0"
+            ></v-progress-linear>
+          </v-card-text>
+        </v-card>
+      </v-dialog>
+    </div>
     <div
       class="
         d-flex
@@ -310,7 +407,7 @@
     >
       <template v-for="henkaten in containerHenkaten">
         <div class="mt-3" :key="henkaten.fid">
-          <span :class="`badge ${henkaten.fstatus ? 'badge-success' : 'badge-warning'}  justify-content-start`">{{
+          <span class="badge badge-warning justify-content-start">{{
             henkaten.fstatus ? "FIX" : "TEMPORARY"
           }}</span>
           <!-- <CardInquiry :henkatenData="henkaten" :delHenkaten="deleteHenkaten(henkaten.fid)" :editHenkaten="editHenkaten(henkaten.fid, henkaten)" /> -->
@@ -353,11 +450,7 @@
               </div>
               <div class="justify-content-center align-items-end row p-1">
                 <div class="col py-0">
-                  <button
-                    class="btn btn-sm btn-pill btn-danger"
-                    data-toggle="modal"
-                    :data-target="`#modal${henkaten.fid}`"
-                  >
+                  <button class="btn btn-sm btn-pill btn-danger">
                     <i class="fa fa-trash"></i>
                   </button>
                 </div>
@@ -425,23 +518,10 @@
           </div>
         </div>
       </template>
-      <!-- DIALOG LOADER -->
-      <v-dialog v-model="isDialogLoading" hide-overlay persistent width="300">
-        <v-card color="primary" dark>
-          <v-card-text>
-            Please stand by
-            <v-progress-linear
-              indeterminate
-              color="white"
-              class="mb-0"
-            ></v-progress-linear>
-          </v-card-text>
-        </v-card>
-      </v-dialog>
     </div>
     <div class="row" v-else>
-      <div class="col-12">
-        <b class="badge badge-info">Tidak Ada Temporary Action</b>
+      <div class="col-12 badge badge-info">
+        <b>Tidak Ada Temporary Action</b>
       </div>
     </div>
   </div>
@@ -479,7 +559,7 @@ export default {
       lineSelected: null,
       selectedStartDate: new Date(
         new Date().getFullYear(),
-        new Date().getMonth() - 3,
+        new Date().getMonth(),
         1
       ),
       selectedEndDate: new Date(),

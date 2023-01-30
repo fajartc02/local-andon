@@ -203,9 +203,9 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-12 p-0">
+      <div class="col-6 p-0">
         <download-excel
-          class="btn btn-primary"
+          class="btn btn-primary w-80"
           :data="json_data"
           :fields="json_fields"
           worksheet="My Worksheet"
@@ -213,6 +213,11 @@
         >
           Download Countermeasure
         </download-excel>
+      </div>
+      <div class="col-6 p-0">
+        <button class="btn btn-primary w-80" @click="sendReminder()">
+          Send Reminder
+        </button>
       </div>
     </div>
     <div class="row">
@@ -489,6 +494,16 @@ export default {
     },
   },
   methods: {
+    sendReminder() {
+      axios
+        .post(`${process.env.VUE_APP_HOST}/notifCmWa`)
+        .then(() => {
+          alert("notifikasi berhasil di jalankan");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
     getAllCm() {
       this.containerCm = [];
       this.isLoading = true;
@@ -877,6 +892,9 @@ export default {
     this.fileNameDownload = `Countermeasure Data - ${this.selectedStartDate} to ${this.selectedEndDate}`;
     this.isTaskforce = localStorage.getItem("keepTf") ? true : false;
     if (!this.isTaskforce) {
+      this.$route.query.problem
+        ? (this.problemSelected = this.$route.query.problem)
+        : null;
       this.getAllCm();
     }
     this.getLines();

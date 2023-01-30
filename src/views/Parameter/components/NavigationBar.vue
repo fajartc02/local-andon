@@ -48,6 +48,11 @@ export default {
           isActive: true,
         },
         {
+          name: "Realtime",
+          routes: "/parameter/realtime",
+          isActive: false,
+        },
+        {
           name: "Administration",
           routes: "/parameter/administration",
           isActive: false,

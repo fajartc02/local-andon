@@ -171,7 +171,7 @@
       <div
         v-for="(data, i) in containerParetoData"
         :key="i"
-        class="col-md-6 col-xs-12 p-0 mt-2 pl-1"
+        class="col-md-12 col-xs-12 p-0 mt-2 pl-1"
       >
         <div class="card">
           <div class="card-header p-0 m-0">{{ lineLabel[i] }}</div>
