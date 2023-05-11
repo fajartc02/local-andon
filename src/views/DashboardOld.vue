@@ -6,7 +6,7 @@
       </p>
       <div class="col-12 p-0">
         <div class="card container-menu bg-light">
-          <div class="row m-0 p-0">
+          <div class="row m-0 p-0 flex-row flex-nowrap overflow-auto">
             <!-- <a
               class="col-3 hover-menu p-1"
               href="http://lproms.prd.toyota.co.id/HomeMTPM"
@@ -21,17 +21,10 @@
               </center>
               <center class="card-title">TPM<br />Monitoring</center>
             </a> -->
-            <a
-              class="col-3 hover-menu p-1"
-              href="https://tclass-dev.toyota.co.id/"
-              target="_blank"
-              style="text-decoration: none; color: black"
-            >
+            <a class="col-3 hover-menu p-1" href="https://tclass-dev.toyota.co.id/" target="_blank"
+              style="text-decoration: none; color: black">
               <center>
-                <img
-                  src="https://cdn-icons-png.flaticon.com/512/201/201614.png"
-                  width="30%"
-                />
+                <img src="https://cdn-icons-png.flaticon.com/512/201/201614.png" width="30%" />
               </center>
               <center class="card-title">T-Class</center>
             </a>
@@ -52,52 +45,39 @@
             </div> -->
             <div class="col-3 hover-menu p-1" @click="goTo('/realtimePareto')">
               <center>
-                <img
-                  src="https://cdn0.iconfinder.com/data/icons/accounting-and-tax/48/17-512.png"
-                  width="30%"
-                />
+                <img src="https://cdn0.iconfinder.com/data/icons/accounting-and-tax/48/17-512.png" width="30%" />
               </center>
               <center class="card-title">Realtime<br />Pareto</center>
             </div>
-            <div
-              class="col-3 hover-menu p-1"
-              @click="goTo('/parameter/dashboard')"
-            >
+            <div class="col-3 hover-menu p-1" @click="goTo('/parameter/dashboard')">
               <!--  @click="goTo('/parameter/dashboard')" -->
               <!-- <div class="col-3 hover-menu p-1" @click="goTo('/symptompDesktop')"> -->
               <center>
-                <img
-                  src="https://cdn0.iconfinder.com/data/icons/Utilize/512/Activity_Monitor.png"
-                  width="30%"
-                />
+                <img src="https://cdn0.iconfinder.com/data/icons/Utilize/512/Activity_Monitor.png" width="30%" />
               </center>
-              <center class="card-title">Symptom<br />Mgmt.</center>
+              <center class="card-title">Symptom<br />Desktop.</center>
             </div>
-            <a
-              class="col-3 hover-menu p-1"
-              href="https://iwms.toyota.co.id/StorageInquiry"
-              target="_blank"
-              style="text-decoration: none; color: black"
-            >
+            <a class="col-3 hover-menu p-1" href="https://iwms.toyota.co.id/StorageInquiry" target="_blank"
+              style="text-decoration: none; color: black">
               <center>
-                <img
-                  src="https://cdn-icons-png.flaticon.com/512/2271/2271166.png"
-                  width="30%"
-                />
+                <img src="https://cdn-icons-png.flaticon.com/512/2271/2271166.png" width="30%" />
               </center>
               <center class="card-title">Order<br />Spareparts</center>
             </a>
+            <div class="col-3 hover-menu p-1" @click="goTo('/symptom')">
+              <!--  @click="goTo('/parameter/dashboard')" -->
+              <!-- <div class="col-3 hover-menu p-1" @click="goTo('/symptompDesktop')"> -->
+              <center>
+                <img src="https://cdn0.iconfinder.com/data/icons/Utilize/512/Activity_Monitor.png" width="30%" />
+              </center>
+              <center class="card-title">Symptom<br />Mgmt.</center>
+            </div>
+
           </div>
           <div class="row m-0 p-0 mt-2 flex-row flex-nowrap overflow-auto">
-            <div
-              class="col-3 hover-menu p-1"
-              @click="goTo('/focus-theme/taskforce')"
-            >
+            <div class="col-3 hover-menu p-1" @click="goTo('/focus-theme/taskforce')">
               <center>
-                <img
-                  src="https://cdn.iconscout.com/icon/free/png-256/focus-1512706-1282214.png"
-                  width="30%"
-                />
+                <img src="https://cdn.iconscout.com/icon/free/png-256/focus-1512706-1282214.png" width="30%" />
               </center>
               <center class="card-title">
                 Task <br />
@@ -113,39 +93,17 @@
                 Monitoring
               </center>
             </div> -->
-            <a
-              class="col-3 hover-menu p-1"
-              href="http://hem-dev.toyota.co.id/"
-              target="_blank"
-              style="text-decoration: none; color: black"
-            >
+            <a class="col-3 hover-menu p-1" href="http://hem-dev.toyota.co.id/" target="_blank"
+              style="text-decoration: none; color: black">
               <center>
-                <img
-                  src="https://cdn-icons-png.flaticon.com/512/3010/3010599.png"
-                  width="30%"
-                />
+                <img src="https://cdn-icons-png.flaticon.com/512/3010/3010599.png" width="30%" />
               </center>
               <center class="card-title">Henkaten<br />Mgmt</center>
             </a>
-            <!-- <div class="col-3 hover-menu p-1" @click="goTo('/totalProblem')">
-              <center>
-                <img src="@/assets/totalProblem.png" width="30%" />
-              </center>
-              <center class="card-title">
-                Total <br />
-                Problem
-              </center>
-            </div> -->
 
-            <div
-              class="col-3 hover-menu p-1"
-              @click="goTo('/focus-theme/member')"
-            >
+            <div class="col-3 hover-menu p-1" @click="goTo('/focus-theme/member')">
               <center>
-                <img
-                  src="https://cdn-icons-png.flaticon.com/512/1879/1879426.png"
-                  width="30%"
-                />
+                <img src="https://cdn-icons-png.flaticon.com/512/1879/1879426.png" width="30%" />
               </center>
               <center class="card-title">
                 Focus <br />
@@ -169,38 +127,37 @@
               <center>
                 <img
                   src="https://images.assetsdelivery.com/compings_v2/ahasoft2000/ahasoft20001601/ahasoft2000160101030.jpg"
-                  width="30%"
-                />
+                  width="30%" />
               </center>
               <center class="card-title">CM<br />Followup</center>
             </div>
+            <div class="col-3 hover-menu p-1" @click="goTo('/totalProblem')">
+              <center>
+                <img src="@/assets/totalProblem.png" width="30%" />
+              </center>
+              <center class="card-title">
+                Total <br />
+                Problem
+              </center>
+            </div>
             <div class="col-3 hover-menu p-1" @click="goTo('/job')">
               <center>
-                <img
-                  src="https://cdn-icons-png.flaticon.com/512/5189/5189017.png"
-                  width="30%"
-                />
+                <img src="https://cdn-icons-png.flaticon.com/512/5189/5189017.png" width="30%" />
               </center>
               <center class="card-title">Heijunka<br />Job</center>
             </div>
             <div class="col-3 hover-menu p-1" @click="goTo('/summaryWeekly')">
               <center>
-                <img
-                  src="https://icon-library.com/images/summary-icon/summary-icon-15.jpg"
-                  width="30%"
-                />
+                <img src="https://icon-library.com/images/summary-icon/summary-icon-15.jpg" width="30%" />
               </center>
               <center class="card-title">
                 Report <br />
                 Status
               </center>
             </div>
-            <a
-              class="col-3 hover-menu p-1"
+            <a class="col-3 hover-menu p-1"
               href="https://tmmin.sharepoint.com/sites/MaintenancePlant3/Dokumen%20Berbagi/Forms/AllItems.aspx"
-              target="_blank"
-              style="text-decoration: none; color: black"
-            >
+              target="_blank" style="text-decoration: none; color: black">
               <!-- <div class="col-3 hover-menu p-1" @click="goTo('/manualBook')"> -->
               <center>
                 <img src="@/assets/icons/manualBook.png" width="42%" />
@@ -209,17 +166,12 @@
             </a>
             <div class="col-3 hover-menu p-1" @click="goTo('/problemHistory')">
               <center>
-                <img
-                  src="https://cdn2.iconfinder.com/data/icons/plump-by-zerode_/256/Folder-URL-History-icon.png"
-                  width="30%"
-                />
+                <img src="https://cdn2.iconfinder.com/data/icons/plump-by-zerode_/256/Folder-URL-History-icon.png"
+                  width="30%" />
               </center>
               <center class="card-title">Problem<br />History</center>
             </div>
-            <div
-              class="col-3 hover-menu p-1"
-              @click="goTo('/cycleTimeMachine')"
-            >
+            <div class="col-3 hover-menu p-1" @click="goTo('/cycleTimeMachine')">
               <center>
                 <img src="@/assets/cycleTime.png" width="30%" />
               </center>
@@ -227,18 +179,12 @@
             </div>
             <div class="col-3 hover-menu p-1" @click="goTo('/henkaten')">
               <center>
-                <img
-                  src="https://cdn-icons-png.flaticon.com/512/6214/6214240.png"
-                  width="30%"
-                />
+                <img src="https://cdn-icons-png.flaticon.com/512/6214/6214240.png" width="30%" />
               </center>
               <center class="card-title">Temporary<br />Action List</center>
             </div>
 
-            <div
-              class="col-3 hover-menu p-1"
-              @click="goTo('/registerNewMachine')"
-            >
+            <div class="col-3 hover-menu p-1" @click="goTo('/registerNewMachine')">
               <center>
                 <img src="@/assets/fanuc.png" width="20%" />
               </center>
@@ -252,17 +198,9 @@
       <div :class="`${isProd ? 'col-12 p-0' : 'col-6 p-0'}`">
         <div style="width: 100%; display: none" id="reader"></div>
         <div class="card">
-          <div
-            class="btn btn-info"
-            data-toggle="modal"
-            data-target="#exampleModal"
-            @click="getMachines()"
-            style="height: 50px"
-          >
-            <h1
-              class="title-text"
-              :style="`color: black; font-size: ${isMobile ? '18px' : '25px'}`"
-            >
+          <div class="btn btn-info" data-toggle="modal" data-target="#exampleModal" @click="getMachines()"
+            style="height: 50px">
+            <h1 class="title-text" :style="`color: black; font-size: ${isMobile ? '18px' : '25px'}`">
               <i class="fa fa-bell"></i>
               MACHINE STOP INPUT
               <i class="fa fa-bell"></i>
@@ -284,12 +222,8 @@
                         <span class="input-group-text">Machine</span>
                       </div>
                       <!-- <v-select :options="machines" style="width: 75%"></v-select> -->
-                      <model-select
-                        :options="machines"
-                        v-model="machineSelected"
-                        placeholder="select machine"
-                        style="width: 75%"
-                      >
+                      <model-select :options="machines" v-model="machineSelected" placeholder="select machine"
+                        style="width: 75%">
                       </model-select>
                     </div>
                   </div>
@@ -298,18 +232,10 @@
                   <div class="col p-0">
                     <div class="input-group mb-3">
                       <div class="input-group-prepend">
-                        <span class="input-group-text" style="min-width: 63px"
-                          >Line</span
-                        >
+                        <span class="input-group-text" style="min-width: 63px">Line</span>
                       </div>
-                      <input
-                        type="text"
-                        id="line"
-                        v-model="selectedLine"
-                        class="form-control pl-2"
-                        disabled
-                        aria-label="Amount (to the nearest dollar)"
-                      />
+                      <input type="text" id="line" v-model="selectedLine" class="form-control pl-2" disabled
+                        aria-label="Amount (to the nearest dollar)" />
                     </div>
                   </div>
                 </div>
@@ -319,13 +245,8 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text">Operator</span>
                       </div>
-                      <input
-                        type="text"
-                        id="operator"
-                        v-model="operator"
-                        class="form-control"
-                        aria-label="Amount (to the nearest dollar)"
-                      />
+                      <input type="text" id="operator" v-model="operator" class="form-control"
+                        aria-label="Amount (to the nearest dollar)" />
                     </div>
                   </div>
                 </div>
@@ -335,12 +256,8 @@
                       <div class="input-group-prepend">
                         <span>Operator MT</span>
                       </div>
-                      <multiselect
-                        v-model="mtMember"
-                        :options="optOperators"
-                        :multiple="true"
-                        style="font-size: 10px"
-                      ></multiselect>
+                      <multiselect v-model="mtMember" :options="optOperators" :multiple="true" style="font-size: 10px">
+                      </multiselect>
                     </div>
                   </div>
                 </div>
@@ -350,22 +267,13 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text">Problem</span>
                       </div>
-                      <input
-                        type="text"
-                        id="problem"
-                        v-model="problem"
-                        class="form-control"
-                        aria-label="Amount (to the nearest dollar)"
-                      />
+                      <input type="text" id="problem" v-model="problem" class="form-control"
+                        aria-label="Amount (to the nearest dollar)" />
                     </div>
                   </div>
                 </div>
                 <div v-if="setRole == 'Staff'">
-                  <input
-                    type="checkbox"
-                    style="height: 20px"
-                    v-model="categoryProblem"
-                  />
+                  <input type="checkbox" style="height: 20px" v-model="categoryProblem" />
                   Fullcap
                 </div>
               </div>
@@ -375,19 +283,10 @@
 
             <v-card-actions>
               <v-spacer></v-spacer>
-              <button
-                type="button"
-                @click="problemInput()"
-                class="btn btn-success"
-              >
+              <button type="button" @click="problemInput()" class="btn btn-success">
                 Submit
               </button>
-              <button
-                type="button"
-                class="btn btn-secondary"
-                data-dismiss="modal"
-                @click="clearSubmit()"
-              >
+              <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="clearSubmit()">
                 Close
               </button>
             </v-card-actions>
@@ -397,16 +296,8 @@
       <div v-if="!isProd" class="col-6 p-0" @click="modalShow = !modalShow">
         <div style="width: 100%; display: none" id="reader"></div>
         <div class="card">
-          <div
-            class="btn btn-success"
-            data-toggle="modal"
-            data-target="#exampleModal"
-            style="height: 50px"
-          >
-            <h1
-              class="title-text"
-              :style="`color: black; font-size: ${isMobile ? '18px' : '25px'}`"
-            >
+          <div class="btn btn-success" data-toggle="modal" data-target="#exampleModal" style="height: 50px">
+            <h1 class="title-text" :style="`color: black; font-size: ${isMobile ? '18px' : '25px'}`">
               <i class="fa fa-book"></i>
               JOB INPUT MAINTENANCE
               <i class="fa fa-book"></i>
@@ -433,15 +324,9 @@
                   <div class="col p-0">
                     <div class="input-group mb-3">
                       <div class="input-group-prepend">
-                        <span class="input-group-text" style="min-width: 20%"
-                          >Job Type</span
-                        >
+                        <span class="input-group-text" style="min-width: 20%">Job Type</span>
                       </div>
-                      <b-form-select
-                        size="sm"
-                        v-model="fjob_type"
-                        :options="jobTypes"
-                      ></b-form-select>
+                      <b-form-select size="sm" v-model="fjob_type" :options="jobTypes"></b-form-select>
                     </div>
                   </div>
                 </div>
@@ -449,17 +334,10 @@
                   <div class="col p-0">
                     <div class="input-group mb-3">
                       <div class="input-group-prepend">
-                        <span class="input-group-text" style="min-width: 100px"
-                          >Area / Mesin</span
-                        >
+                        <span class="input-group-text" style="min-width: 100px">Area / Mesin</span>
                       </div>
-                      <input
-                        type="text"
-                        id="line"
-                        v-model="farea"
-                        class="form-control pl-2"
-                        aria-label="Amount (to the nearest dollar)"
-                      />
+                      <input type="text" id="line" v-model="farea" class="form-control pl-2"
+                        aria-label="Amount (to the nearest dollar)" />
                     </div>
                   </div>
                 </div>
@@ -467,16 +345,10 @@
                   <div class="col p-0">
                     <div class="input-group mb-3">
                       <div class="input-group-prepend">
-                        <span class="input-group-text" style="min-width: 20%"
-                          >Kamu Kerja di line mana?</span
-                        >
+                        <span class="input-group-text" style="min-width: 20%">Kamu Kerja di line mana?</span>
                       </div>
                       <select class="form-control" v-model="fline">
-                        <option
-                          v-for="(line, i) in optsLine"
-                          :key="i"
-                          :value="line"
-                        >
+                        <option v-for="(line, i) in optsLine" :key="i" :value="line">
                           {{ line }}
                         </option>
                       </select>
@@ -489,13 +361,8 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text">Operator</span>
                       </div>
-                      <input
-                        type="text"
-                        id="operator"
-                        v-model="foperator"
-                        class="form-control"
-                        aria-label="Amount (to the nearest dollar)"
-                      />
+                      <input type="text" id="operator" v-model="foperator" class="form-control"
+                        aria-label="Amount (to the nearest dollar)" />
                     </div>
                   </div>
                 </div>
@@ -505,12 +372,8 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text">Description</span>
                       </div>
-                      <input
-                        type="text"
-                        v-model="fdesc"
-                        class="form-control"
-                        aria-label="Amount (to the nearest dollar)"
-                      />
+                      <input type="text" v-model="fdesc" class="form-control"
+                        aria-label="Amount (to the nearest dollar)" />
                     </div>
                   </div>
                 </div>
@@ -522,20 +385,11 @@
                       </div>
                       <div class="row m-0 p-0">
                         <div class="col-7 p-0">
-                          <input
-                            style="font-size: 10px"
-                            class="form-control"
-                            type="date"
-                            v-model="fstart_time[0]"
-                          />
+                          <input style="font-size: 10px" class="form-control" type="date" v-model="fstart_time[0]" />
                         </div>
                         <div class="col-5 p-0">
-                          <input
-                            class="form-control"
-                            type="time"
-                            v-model="fstart_time[1]"
-                            pattern="([1]?[0-9]|2[0-3]):[0-5][0-9]"
-                          />
+                          <input class="form-control" type="time" v-model="fstart_time[1]"
+                            pattern="([1]?[0-9]|2[0-3]):[0-5][0-9]" />
                         </div>
                       </div>
                     </div>
@@ -549,20 +403,11 @@
                       </div>
                       <div class="row m-0 p-0">
                         <div class="col-7 p-0">
-                          <input
-                            style="font-size: 10px"
-                            class="form-control"
-                            type="date"
-                            v-model="fend_time[0]"
-                          />
+                          <input style="font-size: 10px" class="form-control" type="date" v-model="fend_time[0]" />
                         </div>
                         <div class="col-5 p-0">
-                          <input
-                            class="form-control"
-                            type="time"
-                            v-model="fend_time[1]"
-                            pattern="([1]?[0-9]|2[0-3]):[0-5][0-9]"
-                          />
+                          <input class="form-control" type="time" v-model="fend_time[1]"
+                            pattern="([1]?[0-9]|2[0-3]):[0-5][0-9]" />
                         </div>
                       </div>
                     </div>
@@ -576,15 +421,9 @@
                   <div class="col p-0">
                     <div class="input-group mb-3">
                       <div class="input-group-prepend">
-                        <span class="input-group-text" style="min-width: 20%"
-                          >Job Type</span
-                        >
+                        <span class="input-group-text" style="min-width: 20%">Job Type</span>
                       </div>
-                      <b-form-select
-                        size="sm"
-                        v-model="fjob_type"
-                        :options="jobTypes"
-                      ></b-form-select>
+                      <b-form-select size="sm" v-model="fjob_type" :options="jobTypes"></b-form-select>
                     </div>
                   </div>
                 </div>
@@ -592,17 +431,10 @@
                   <div class="col p-0">
                     <div class="input-group mb-3">
                       <div class="input-group-prepend">
-                        <span class="input-group-text" style="min-width: 100px"
-                          >Area / Mesin</span
-                        >
+                        <span class="input-group-text" style="min-width: 100px">Area / Mesin</span>
                       </div>
-                      <input
-                        type="text"
-                        id="line"
-                        v-model="farea"
-                        class="form-control pl-2"
-                        aria-label="Amount (to the nearest dollar)"
-                      />
+                      <input type="text" id="line" v-model="farea" class="form-control pl-2"
+                        aria-label="Amount (to the nearest dollar)" />
                     </div>
                   </div>
                 </div>
@@ -610,16 +442,10 @@
                   <div class="col p-0">
                     <div class="input-group mb-3">
                       <div class="input-group-prepend">
-                        <span class="input-group-text" style="min-width: 20%"
-                          >Kamu Kerja di line mana?</span
-                        >
+                        <span class="input-group-text" style="min-width: 20%">Kamu Kerja di line mana?</span>
                       </div>
                       <select class="form-control" v-model="fline">
-                        <option
-                          v-for="(line, i) in optsLine"
-                          :key="i"
-                          :value="line"
-                        >
+                        <option v-for="(line, i) in optsLine" :key="i" :value="line">
                           {{ line }}
                         </option>
                       </select>
@@ -632,13 +458,8 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text">Operator</span>
                       </div>
-                      <input
-                        type="text"
-                        id="operator"
-                        v-model="foperator"
-                        class="form-control"
-                        aria-label="Amount (to the nearest dollar)"
-                      />
+                      <input type="text" id="operator" v-model="foperator" class="form-control"
+                        aria-label="Amount (to the nearest dollar)" />
                     </div>
                   </div>
                 </div>
@@ -648,12 +469,8 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text">Description</span>
                       </div>
-                      <input
-                        type="text"
-                        v-model="fdesc"
-                        class="form-control"
-                        aria-label="Amount (to the nearest dollar)"
-                      />
+                      <input type="text" v-model="fdesc" class="form-control"
+                        aria-label="Amount (to the nearest dollar)" />
                     </div>
                   </div>
                 </div>
@@ -665,19 +482,10 @@
                       </div>
                       <div class="row m-0 p-0">
                         <div class="col-7 p-0">
-                          <input
-                            style="font-size: 10px"
-                            class="form-control"
-                            type="date"
-                            v-model="fstart_time[0]"
-                          />
+                          <input style="font-size: 10px" class="form-control" type="date" v-model="fstart_time[0]" />
                         </div>
                         <div class="col-5 p-0">
-                          <input
-                            class="form-control"
-                            type="time"
-                            v-model="fstart_time[1]"
-                          />
+                          <input class="form-control" type="time" v-model="fstart_time[1]" />
                         </div>
                       </div>
                     </div>
@@ -689,20 +497,10 @@
                     <div class="input-group mb-3">
                       <div class="input-group-prepend">
                         <span class="input-group-text">Interval</span>
-                        <b-form-radio
-                          v-model="intervalDays"
-                          class="ml-2"
-                          name="some-radios"
-                          :value="30"
-                          >1 Month</b-form-radio
-                        >
-                        <b-form-radio
-                          v-model="intervalDays"
-                          class="ml-2"
-                          name="some-radios"
-                          :value="7"
-                          >1 Week</b-form-radio
-                        >
+                        <b-form-radio v-model="intervalDays" class="ml-2" name="some-radios" :value="30">1
+                          Month</b-form-radio>
+                        <b-form-radio v-model="intervalDays" class="ml-2" name="some-radios" :value="7">1
+                          Week</b-form-radio>
                       </div>
                     </div>
                   </div>
@@ -715,20 +513,11 @@
                       </div>
                       <div class="row m-0 p-0">
                         <div class="col-7 p-0">
-                          <input
-                            style="font-size: 10px"
-                            class="form-control"
-                            disabled
-                            type="date"
-                            v-model="fend_time[0]"
-                          />
+                          <input style="font-size: 10px" class="form-control" disabled type="date"
+                            v-model="fend_time[0]" />
                         </div>
                         <div class="col-5 p-0">
-                          <input
-                            class="form-control"
-                            type="time"
-                            v-model="fend_time[1]"
-                          />
+                          <input class="form-control" type="time" v-model="fend_time[1]" />
                         </div>
                       </div>
                     </div>
@@ -737,20 +526,8 @@
               </div>
             </b-tab>
           </b-tabs>
-          <b-button
-            class="mx-2"
-            size="sm"
-            variant="success"
-            @click="submitJob()"
-            >Submit</b-button
-          >
-          <b-button
-            class="mx-2"
-            size="sm"
-            variant="danger"
-            @click="modalShow = false"
-            >Cancel</b-button
-          >
+          <b-button class="mx-2" size="sm" variant="success" @click="submitJob()">Submit</b-button>
+          <b-button class="mx-2" size="sm" variant="danger" @click="modalShow = false">Cancel</b-button>
         </v-card>
       </v-dialog>
     </div>
@@ -759,11 +536,7 @@
       <v-card color="primary" dark>
         <v-card-text>
           Loading...
-          <v-progress-linear
-            indeterminate
-            color="white"
-            class="mb-0"
-          ></v-progress-linear>
+          <v-progress-linear indeterminate color="white" class="mb-0"></v-progress-linear>
         </v-card-text>
       </v-card>
     </v-dialog>
@@ -774,18 +547,9 @@
     </div>
     <!-- Card PRod -->
     <div class="row m-0 p-0">
-      <CardProd
-        v-for="line in lineAchivements"
-        :key="line.name"
-        :propsLine="line"
-        :propsLoading="skeletonLoading"
-      />
+      <CardProd v-for="line in lineAchivements" :key="line.name" :propsLine="line" :propsLoading="skeletonLoading" />
       <div class="col-6 mt-2 px-1 py-0">
-        <div
-          id="cardProd"
-          class="`card shadow bg-dark w-100"
-          style="height: 100%"
-        >
+        <div id="cardProd" class="`card shadow bg-dark w-100" style="height: 100%">
           <div class="row m-0">
             <div class="col text-left text-light title-text px-1 py-1">
               <h6>Legend</h6>
@@ -796,30 +560,21 @@
               <table>
                 <thead>
                   <tr class="w-100">
-                    <td
-                      class="bg-success bordered"
-                      style="height: 10px; width: 10px"
-                    ></td>
+                    <td class="bg-success bordered" style="height: 10px; width: 10px"></td>
                     <td></td>
                     <td>
                       <h6 class="m-0">RUNNING</h6>
                     </td>
                   </tr>
                   <tr>
-                    <td
-                      class="bg-warning bordered"
-                      style="height: 10px; width: 10px"
-                    ></td>
+                    <td class="bg-warning bordered" style="height: 10px; width: 10px"></td>
                     <td style="width: 10px"></td>
                     <td>
                       <h6 class="m-0">STOP ( Under 30 Min)</h6>
                     </td>
                   </tr>
                   <tr>
-                    <td
-                      class="bg-danger bordered"
-                      style="height: 10px; width: 10px"
-                    ></td>
+                    <td class="bg-danger bordered" style="height: 10px; width: 10px"></td>
                     <td style="width: 10px"></td>
                     <td>
                       <h6 class="m-0">STOP (Over 30 Min)</h6>
@@ -833,22 +588,15 @@
       </div>
     </div>
     <div>
-      <a
-        class="btn btn-success p-2 text-light"
-        style="
+      <a class="btn btn-success p-2 text-light" style="
           position: fixed;
           z-index: 100;
           bottom: 10px;
           right: 10px;
           font-size: 20px;
           opacity: 0.7;
-        "
-        target="_blank"
-        href="https://wa.me/6282211511213"
-      >
-        <span style="font-size: 12px"
-          ><b>Ada Masukan?</b><i class="fa fa-whatsapp"></i
-        ></span>
+        " target="_blank" href="https://wa.me/6282211511213">
+        <span style="font-size: 12px"><b>Ada Masukan?</b><i class="fa fa-whatsapp"></i></span>
       </a>
     </div>
   </div>
@@ -1180,12 +928,10 @@ export default {
       this.isLoading = false;
     },
     intervalTime() {
-      let dateConvert = `${moment().format("L").split("/")[1]}/${
-        moment().format("L").split("/")[0]
-      }/${moment().format("L").split("/")[2]}`;
-      this.timeNow = `${dateConvert} ${
-        moment().format("MMMM Do YYYY, h:mm:ss a").split(", ")[1]
-      }`;
+      let dateConvert = `${moment().format("L").split("/")[1]}/${moment().format("L").split("/")[0]
+        }/${moment().format("L").split("/")[2]}`;
+      this.timeNow = `${dateConvert} ${moment().format("MMMM Do YYYY, h:mm:ss a").split(", ")[1]
+        }`;
     },
     permissionCheck() {
       if (localStorage.getItem("area") == "null") {
@@ -1350,12 +1096,10 @@ export default {
     // console.log(intervalColDash);
     await this.getMachines(false);
     await this.getAllMtMember();
-    let dateConvert = `${moment().format("L").split("/")[1]}/${
-      moment().format("L").split("/")[0]
-    }/${moment().format("L").split("/")[2]}`;
-    this.timeNow = `${dateConvert} ${
-      moment().format("MMMM Do YYYY, h:mm:ss a").split(", ")[1]
-    }`;
+    let dateConvert = `${moment().format("L").split("/")[1]}/${moment().format("L").split("/")[0]
+      }/${moment().format("L").split("/")[2]}`;
+    this.timeNow = `${dateConvert} ${moment().format("MMMM Do YYYY, h:mm:ss a").split(", ")[1]
+      }`;
     let intervalStart = setInterval(this.intervalTime, 1000);
     console.log(intervalStart);
   },
@@ -1369,33 +1113,40 @@ export default {
 .container-menu {
   /* height: 100%; */
 }
+
 .card-title {
   /* font-family: "Bebas Neue", cursive; */
   font-size: 13px;
   margin-bottom: 0px;
   font-weight: 800;
 }
+
 .nav-title {
   font-family: "Bebas Neue", cursive;
   font-size: 23px;
   letter-spacing: 3px;
 }
+
 #vs1__combobox {
   max-height: 29px;
 }
+
 h2 {
   font-family: "Bebas Neue", cursive;
   margin: 0px;
   color: #006b38ff;
 }
+
 .title-text {
   font-family: "Bebas Neue", cursive;
   font-size: 16px;
 }
+
 .vm-progress__text {
   display: flex !important;
   justify-content: center !important;
 }
+
 .vm-progress--circle .vm-progress__text {
   position: flex !important;
   justify-content: center;
@@ -1405,12 +1156,15 @@ h2 {
   text-align: center;
   transform: translate(0, -50%);
 }
+
 strong {
   font-size: 12px;
 }
+
 .input-group-text {
   font-size: 10px;
 }
+
 .form-control,
 .search {
   font-size: 0.6rem;
@@ -1418,18 +1172,22 @@ strong {
   padding-right: 0px;
   max-height: 29px;
 }
+
 .swal2-content {
   padding: 0px;
 }
+
 td h6 {
   font-size: 10px;
   color: white;
   text-align: left;
 }
+
 .hover-menu:active {
   background-color: rgba(125, 242, 228, 0.7);
   border-radius: 10px;
 }
+
 .hover-menu {
   border-radius: 10px;
 }

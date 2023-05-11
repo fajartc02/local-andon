@@ -57,8 +57,39 @@
               v-model="ferror_name"
             />
           </div>
+          <form
+            method="post"
+            @submit.prevent="
+              onSubmitUploadFlex(
+                `${urlUpload}?folder=problem&nameFile=${fileName}`,
+                'file_problem'
+              )
+            "
+          >
+            <div class="row m-0 p-0">
+              <div class="col-8 p-0">
+                <input
+                  class="form-control"
+                  name="sampleFile"
+                  ref="file_problem"
+                  type="file"
+                  @change="onSelectFlex('file_problem')"
+                  placeholder="masukan ilustrasi problem"
+                />
+              </div>
+              <div class="col-2 p-0">
+                <button class="btn btn-secondary btn-sm" type="submit">
+                  Upload
+                </button>
+              </div>
+              <!-- <div class="col-2 p-0">
+                <button class="btn btn-success btn-sm">View</button>
+              </div> -->
+            </div>
+          </form>
         </div>
       </div>
+
       <div class="row m-0 p-0">
         <div class="col-6 px-1 py-0">
           <button
@@ -450,7 +481,7 @@
             </div>
           </div>
           <div class="row m-0 p-0">
-            <TreeListAnalisys />
+            <TreeListAnalisys :hide="false" />
           </div>
         </div>
       </div>
@@ -2707,6 +2738,54 @@ export default {
         this.isLoading = false;
       }
     },
+    onSelectFlex(ref) {
+      const file = this.$refs[ref].files[0];
+      console.log(this.$refs[ref].files[0]);
+
+      if (file.size > 1000000) {
+        alert(
+          "Size file anda terlalu besar (melebihi 1 MB), mohon di kecilkan"
+        );
+        this.$refs[ref].files[0].name = "";
+      } else {
+        // this.selectedFile = file;
+      }
+    },
+    async onSubmitUploadFlex(url, ref) {
+      this.isLoading = true;
+      if (this.$refs[ref].files[0]) {
+        const formData = new FormData();
+
+        formData.append("file", this.$refs[ref].files[0]);
+        for (var key of formData.entries()) {
+          console.log(key[1]);
+        }
+        // console.log(this.selectedFile);
+        // console.log(formData);
+        await axios
+          .post(url, formData)
+          .then((result) => {
+            console.log(result);
+            if (result.status == 201) {
+              this.fimage = result.data.path;
+              // localStorage.setItem("image", result.data.path);
+              this.displayImg = `${process.env.VUE_APP_HOST}/image?path=${result.data.path}`;
+              alert(
+                "success to upload, silahkan tekan tombol finished kalau sudah slesai input semua data"
+              );
+            }
+            this.isLoading = false;
+          })
+          .catch((err) => {
+            console.log(err);
+            this.isLoading = false;
+            alert(JSON.stringify(err));
+          });
+      } else {
+        this.isLoading = false;
+        alert(`Pastikan File tidak lebih dari 1 MB dan file sudah di pilih`);
+      }
+    },
     onSelect() {
       const file = this.$refs.file.files[0];
       console.log(this.$refs.file.files[0]);
@@ -2724,6 +2803,7 @@ export default {
       const attachFile = this.$refs.attachFile.files[0];
       this.selectedAttachFile = attachFile;
     },
+
     async onSubmitUpload(url) {
       this.isLoading = true;
       if (this.selectedFile) {

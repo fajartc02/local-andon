@@ -8,19 +8,17 @@
     <div class="row">
       <div class="col p-0 pl-1">
         <select class="form-control" v-model="selectedYear">
-          <option selected value="2023">2023</option>
-          <option value="2022">2022</option>
-          <!-- <option value="2021">2021</option>
-          <option value="2020">2020</option> -->
+          <option selected value="2022">2022</option>
+          <option value="2021">2021</option>
+          <option value="2020">2020</option>
         </select>
       </div>
     </div>
     <div class="row">
       <div class="col p-0 pl-1">
-        <bar-total-problem v-if="selectedYear == 2023 && isDelayShow" :dataGraph="containerData23"></bar-total-problem>
-        <bar-total-problem v-if="selectedYear == 2022 && isDelayShow" :dataGraph="containerData22"></bar-total-problem>
-        <!-- <bar-total-problem v-if="selectedYear == 2021 && isDelayShow" :dataGraph="containerData2021"></bar-total-problem>
-        <bar-total-problem v-if="selectedYear == 2020 && isDelayShow" :dataGraph="containerData2020"></bar-total-problem> -->
+        <bar-total-problem v-if="selectedYear == 2022 && isDelayShow" :dataGraph="containerData"></bar-total-problem>
+        <bar-total-problem v-if="selectedYear == 2021 && isDelayShow" :dataGraph="containerData2021"></bar-total-problem>
+        <bar-total-problem v-if="selectedYear == 2020 && isDelayShow" :dataGraph="containerData2020"></bar-total-problem>
       </div>
     </div>
     <div class="row">
@@ -74,135 +72,14 @@
 
 <script>
 import BarTotalProblem from "../../components/ApexChart/BarTotalProblem.vue";
-// const arr21Ltb = [4, 3, 4, 4, 5, 3, 3, 3, 0, 3, 2, 3];
+const arr21Ltb = [4, 3, 4, 4, 5, 3, 3, 3, 0, 3, 2, 3];
 
 export default {
   name: "DashboardTotalProblem",
   data() {
     return {
-      selectedYear: 2023,
-      containerData23: {
-        categories: [
-          // "FY 2020/2021",
-          "FY 2021/2022",
-          "FY 2022/2023",
-          "Apr '23",
-          "May '23'",
-          "Jun '23",
-          "Jul '23",
-          "Aug '23",
-          "Sept '23",
-          "Oct '23",
-          "Nov '23",
-          "Dec '23",
-          "Jan '24",
-          "Feb '24",
-          "Mar '24",
-        ],
-        containerProbProd: [
-          3,
-          2.5,
-          // 8,
-          0,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-        ],
-        containerProbEmergency: [
-          329,
-          290,
-          // 142,
-          217,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-        ],
-        containerProbLtb: [
-          3,
-          4,
-          // 7,
-          3,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-        ],
-        containerProbTpm: [
-          0,
-          0,
-          // 0,
-          0,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-        ],
-        containerNproblem: [
-          28.51,
-          26.45,
-          // 32.7,
-          20.77,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-        ],
-        containerProbTrend: [
-          0,
-          0,
-          // 0,
-          0,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-        ],
-      },
-      containerData22: {
+      selectedYear: 2022,
+      containerData: {
         categories: [
           "FY 2020/2021",
           "FY 2021/2022",
@@ -249,14 +126,16 @@ export default {
           359,
           356,
           372,
-          312,
-          289,
-          276,
-          245,
+          null,
+          null,
+          null,
+          null,
         ],
         containerProbLtb: [
-          3,
-          7.2,
+          86,
+          arr21Ltb.reduce((total, num) => {
+            return total + num;
+          }, 1),
           // 7,
           4,
           3,
@@ -266,10 +145,10 @@ export default {
           5,
           5,
           3,
-          0,
-          3,
-          2,
-          1,
+          null,
+          null,
+          null,
+          null,
         ],
         containerProbTpm: [
           0,
@@ -283,10 +162,10 @@ export default {
           0,
           0,
           0,
-          0,
-          0,
-          0,
-          0,
+          null,
+          null,
+          null,
+          null,
         ],
         containerNproblem: [
           34.3,
@@ -300,10 +179,10 @@ export default {
           19.8,
           19.1,
           18.4,
-          18.2,
-          17.8,
-          17.9,
-          16.6,
+          null,
+          null,
+          null,
+          null,
         ],
         containerProbTrend: [
           0,
@@ -317,10 +196,10 @@ export default {
           0,
           0,
           0,
-          0,
-          0,
-          0,
-          0,
+          null,
+          null,
+          null,
+          null,
         ],
       },
       containerData2021: {

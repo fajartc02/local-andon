@@ -1,6 +1,8 @@
 <template>
   <div>
-    <button class="btn btn-primary" @click="addNode">Buat Analisis Baru</button>
+    <button v-if="!hide" class="btn btn-primary" @click="addNode">
+      Buat Analisis Baru
+    </button>
     <vue-tree-list
       @click="onClick"
       @change-name="onChangeName"
@@ -17,24 +19,12 @@
           <span class="muted">#{{ slotProps.model.id }}</span>
         </span>
       </template> -->
-      <button class="btn btn-sm btn-primary">
-        <i slot="addTreeNodeIcon" class="fa fa-window-restore"></i>
-      </button>
-      <button class="btn btn-sm btn-primary">
-        <i slot="addLeafNodeIcon" class="fa fa-plus"></i>
-      </button>
-      <button class="btn btn-sm btn-primary">
-        <i slot="editNodeIcon" class="fa fa-pencil"></i>
-      </button>
-      <button class="btn btn-sm btn-primary">
-        <i slot="delNodeIcon" class="fa fa-trash"></i>
-      </button>
-      <button class="btn btn-sm btn-primary">
-        <i slot="leafNodeIcon" class="fa fa-window-restore"></i>
-      </button>
-      <button class="btn btn-sm btn-primary">
-        <i slot="treeNodeIcon" class="fa fa-arrow"></i>
-      </button>
+      <span class="icon" slot="addTreeNodeIcon">🌲</span>
+      <span class="icon" slot="addLeafNodeIcon">🍃</span>
+      <span class="icon" slot="editNodeIcon">✏️</span>
+      <span class="icon" slot="delNodeIcon">🗑️</span>
+      <span class="icon" slot="leafNodeIcon">🍃</span>
+      <span class="icon" slot="treeNodeIcon">🌲</span>
     </vue-tree-list>
     <!-- <button @click="getNewTree">Get new tree</button>
     <pre>
@@ -47,6 +37,7 @@
 import axios from "axios";
 import { VueTreeList, Tree, TreeNode } from "vue-tree-list-new";
 import { mapActions, mapState } from "vuex";
+
 export default {
   components: {
     VueTreeList,
@@ -59,6 +50,9 @@ export default {
   },
   computed: {
     ...mapState(["newAnalisys"]),
+  },
+  props: {
+    hide: Boolean,
   },
   watch: {
     data: {
@@ -92,10 +86,17 @@ export default {
     },
 
     addNode() {
-      var node = new TreeNode({ name: "Analisys Baru", isLeaf: false });
+      var nodeMan = new TreeNode({ name: "MAN", isLeaf: false });
+      var nodeMc = new TreeNode({ name: "MACHINE", isLeaf: false });
+      var nodeMat = new TreeNode({ name: "MATERIAL", isLeaf: false });
+      var nodeMet = new TreeNode({ name: "METHODE", isLeaf: false });
+      var nodeEnv = new TreeNode({ name: "ENVIRONTMENT", isLeaf: false });
       if (!this.data.children) this.data.children = [];
-      this.data.addChildren(node);
-
+      this.data.addChildren(nodeMan);
+      this.data.addChildren(nodeMc);
+      this.data.addChildren(nodeMat);
+      this.data.addChildren(nodeMet);
+      this.data.addChildren(nodeEnv);
       this.actionUpdateAnalisys(this.newTree);
     },
 

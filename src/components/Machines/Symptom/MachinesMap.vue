@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Loading :propsLoading="isLoading" />
     <h3 class="text-light">
       {{ clock }}
     </h3>
@@ -11,17 +12,6 @@
               <h4 class="font-bungee text-light" style="font-size: 30px">
                 {{ line.line_nm }}
               </h4>
-              <div class="row mt-3">
-                <div class="col-6">
-                  <HeadProbActive />
-                </div>
-                <div class="col-6">
-                  <HeadMtCall :valMtCall="stateProdAchievements[1].durMtCall" />
-                </div>
-                <div class="col-4">
-                  <!-- <HeadProbActive /> -->
-                </div>
-              </div>
               <div class="row py-1 mt-3 mb-3">
                 <div
                   v-for="(area, idxArea) in lines[model].areas"
@@ -72,12 +62,17 @@
                 </div>
                 <div class="col-1 border">
                   <button class="card-mc-stop mx-auto">
-                    <h2>Machine Stop</h2>
+                    <h2>Parameter Breakdown</h2>
+                  </button>
+                </div>
+                <div class="col-1 border">
+                  <button class="card-mc-warn mx-auto">
+                    <h2>Parameter Warning</h2>
                   </button>
                 </div>
                 <div class="col-1 border">
                   <button class="card-mc mx-auto">
-                    <h2>Machine Running</h2>
+                    <h2>Parameter Normal</h2>
                   </button>
                 </div>
               </div>
@@ -91,60 +86,67 @@
 
 
 <script>
-import Machine from "@/components/Machines/Machine";
-import HeadProbActive from "./HeadProbActive.vue";
-import HeadMtCall from "./HeadMtCall.vue";
+import Machine from "@/components/Machines/Symptom/Machine";
 import axios from "axios";
-import formatDate from "@/functions/formatDate";
 import { mapState, mapActions } from "vuex";
+import formatDate from "@/functions/formatDate";
+import Loading from "@/components/Loading";
 export default {
   name: "ContainerMachines",
   data() {
     return {
       model: 0,
-      clock: new Date().toLocaleString(),
+      clock: formatDate.YYYYMMDD_HHMMSS(new Date()),
+      lines: [],
       startDate: formatDate.YYYYMMDD_HHMM(
         new Date(new Date().getTime() - 1000 * 60 * 3)
       ),
       endDate: formatDate.YYYYMMDD_HHMM(new Date()),
-      lines: [],
+      isLoading: false,
     };
   },
   computed: {
     ...mapState(["stateProdAchievements"]),
   },
+  props: {
+    propsLineIdSelected: Number,
+  },
+  watch: {
+    propsLineIdSelected: function () {
+      this.getMachinesStatus();
+    },
+  },
   methods: {
     ...mapActions(["storeProdAchievments"]),
     updateTime() {
-      this.clock = new Date().toLocaleString();
+      this.clock = formatDate.YYYYMMDD_HHMMSS(new Date());
     },
     async getMachinesStatus() {
-      await this.storeProdAchievments();
+      this.isLoading = true;
       await axios
-        .get(`${process.env.VUE_APP_HOST}/monitoring/machines`)
+        .get(
+          `${process.env.VUE_APP_HOST}/symptom/parameters/machinesStatus?line_id=${this.propsLineIdSelected}&start=${this.startDate}&end=${this.endDate}`
+        )
         .then((result) => {
           this.lines = result.data.data;
+          this.isLoading = false;
         })
         .catch((err) => {
           // alert(err);
           console.log(err);
+          this.isLoading = false;
         });
     },
   },
   components: {
     Machine,
-    HeadProbActive,
-    HeadMtCall,
+    Loading,
   },
   async mounted() {
     this.getMachinesStatus();
     setInterval(() => {
       this.updateTime();
     }, 1000);
-    setInterval(() => {
-      this.getMachinesStatus();
-      console.log(this.stateProdAchievements);
-    }, 3000);
   },
 };
 </script>
@@ -243,6 +245,58 @@ export default {
 }
 
 .card-mc-stop::after {
+  content: "";
+  position: absolute;
+  background: #07182e;
+  inset: 4px;
+  border-radius: 10px;
+}
+
+.card-mc-warn {
+  width: 80px;
+  height: 80px;
+  background: #07182e;
+  position: relative;
+  display: flex;
+  place-content: center;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.card-mc-warn h2 {
+  z-index: 1;
+  color: whitesmoke;
+  /* background-color: aliceblue; */
+  opacity: 0.8;
+  font-size: 20px;
+}
+
+.card-mc-warn::before {
+  content: "";
+  position: absolute;
+  width: 80px;
+  background-image: linear-gradient(
+    180deg,
+    rgb(255, 145, 0),
+    rgb(255, 234, 48)
+  );
+  height: 80px;
+  /* animation: rotBGimg 3s linear infinite; */
+  transition: all 0.2s linear;
+}
+
+@keyframes rotBGimg {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.card-mc-warn::after {
   content: "";
   position: absolute;
   background: #07182e;

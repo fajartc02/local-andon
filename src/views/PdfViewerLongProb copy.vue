@@ -3,7 +3,7 @@
     class="container-fluid p-0 text-dark"
     style="margin-bottom: 130px; font-weight: bold"
   >
-    <div class="row m-0 p-0" ref="content">
+    <div class="row m-0 p-0" id="content-pdf" ref="content">
       <div class="col-12 p-0">
         <div class="container-fluid p-0 m-0">
           <!-- HEADER TITLE -->
@@ -133,95 +133,67 @@
                     </td>
                   </tr>
                   <tr>
-                    <td style="height: 400px"></td>
-                    <td style="height: 400px"></td>
+                    <td style="height: 300px; width: 200px">
+                      <h3>{{ ferror_name }}</h3>
+                    </td>
+                    <td style="height: 300px; width: 200px">
+                      <!-- <h3>{{ ferror_name }}</h3> -->
+                      <img
+                        crossorigin="*"
+                        :src="displayImage"
+                        alt=""
+                        height="300"
+                      />
+                    </td>
                     <td class="p-0" style="vertical-align: baseline !important">
                       <!-- ACTUAL -->
                       <table class="table table-bordered">
                         <thead>
                           <tr class="text-center">
                             <td rowspan="2" style="width: 10px">No</td>
-                            <td rowspan="2">Step Repair (Actual)</td>
-                            <td rowspan="2" style="width: 20px">Work Time</td>
-                            <td colspan="5">Menit</td>
-                            <td rowspan="2" style="width: 20px">Q 6</td>
-                            <td rowspan="9" style="width: 120px"></td>
+                            <td rowspan="2" style="width: 300px">
+                              Step Repair
+                            </td>
+                            <td colspan="2" style="width: 20px">Work Time</td>
+                            <!-- <td rowspan="2" colspan="5">Menit</td> -->
+                            <td rowspan="2" style="width: 30px">Q6</td>
+                            <td
+                              :rowspan="containerStepRepair.length + 2"
+                              style="width: 120px; color: grey; opacity: 0.1"
+                            >
+                              GRAFIK_STD_ACTUAL
+                            </td>
                           </tr>
-                          <!-- MENIT -->
                           <tr>
-                            <td style="width: 15px; height: 15px"></td>
-                            <td style="width: 15px; height: 15px"></td>
-                            <td style="width: 15px; height: 15px"></td>
-                            <td style="width: 15px; height: 15px"></td>
-                            <td style="width: 15px; height: 15px"></td>
+                            <td style="width: 60px">Std</td>
+                            <td style="width: 60px">Actual</td>
                           </tr>
                           <!-- STEP -->
                           <tr
                             v-for="(stepRepair, i) in containerStepRepair"
                             :key="stepRepair"
                           >
-                            <td class="text-center" v-if="i < 7">
+                            <td class="text-center" v-if="i < 12">
                               {{ i + 1 }}
                             </td>
-                            <td
-                              style="width: 200px"
-                              v-if="i < 7"
-                              class="text-left"
-                            >
+                            <td v-if="i < 12" class="text-left">
                               {{ stepRepair }}
                             </td>
+                            <!-- Std -->
+                            <td v-if="i < 12"></td>
+                            <!-- Act -->
+                            <td v-if="i < 12"></td>
+                            <!-- Q6 -->
+                            <td v-if="i < 12"></td>
+                            <!-- <td v-if="i < 7"></td>
                             <td v-if="i < 7"></td>
                             <td v-if="i < 7"></td>
-                            <td v-if="i < 7"></td>
-                            <td v-if="i < 7"></td>
-                            <td v-if="i < 7"></td>
-                            <td v-if="i < 7"></td>
-                            <td v-if="i < 7"></td>
+                            <td v-if="i < 7"></td> -->
                           </tr>
-                          <tr>
+                          <!-- <tr>
                             <td colspan="2">Total Time</td>
                             <td></td>
-                          </tr>
-                        </thead>
-                      </table>
-                      <!-- IDEAL -->
-                      <table class="table table-bordered">
-                        <thead>
-                          <tr class="text-center">
-                            <td rowspan="2" style="width: 10px">No</td>
-                            <td rowspan="2">Step Repair (Ideal)</td>
-                            <td rowspan="2" style="width: 20px">Work Time</td>
-                            <td colspan="5">Menit</td>
-                            <td rowspan="2" style="width: 20px">Q 6</td>
-                            <td rowspan="9" style="width: 120px"></td>
-                          </tr>
-                          <!-- MENIT -->
-                          <tr>
-                            <td style="width: 15px; height: 15px"></td>
-                            <td style="width: 15px; height: 15px"></td>
-                            <td style="width: 15px; height: 15px"></td>
-                            <td style="width: 15px; height: 15px"></td>
-                            <td style="width: 15px; height: 15px"></td>
-                          </tr>
-                          <!-- STEP -->
-                          <tr
-                            v-for="(stepRepair, i) in containerStepRepair"
-                            :key="stepRepair"
-                          >
-                            <td class="text-center">{{ i + 1 }}</td>
-                            <td class="text-left" style="width: 200px"></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <td colspan="2">Total Time</td>
-                            <td></td>
-                          </tr>
+                          </tr> -->
                         </thead>
                       </table>
                     </td>
@@ -292,6 +264,12 @@
                           </td>
                         </tr>
                       </div>
+                      <img
+                        :src="displayImage"
+                        alt=""
+                        height="200"
+                        style="position: absolute; top: 100px"
+                      />
                     </td>
                     <td
                       class="text-danger"
@@ -341,7 +319,7 @@
                   </tr>
                   <tr>
                     <td class="bg-success">7. COUNTER MEASURE</td>
-                    <td class="bg-success">8. YOKOTEN COUNTERMEASURE 1</td>
+                    <td class="bg-success">8. YOKOTEN COUNTERMEASURE</td>
                   </tr>
                   <tr>
                     <!-- TABLE CM -->
@@ -452,7 +430,7 @@
 </template>
 
 <script>
-// import html2pdf from "html2pdf.js";
+import html2pdf from "html2pdf.js";
 import axios from "axios";
 export default {
   name: "PdfViewerSmallProb",
@@ -484,19 +462,22 @@ export default {
       containerYokoten: [],
       fid: "",
       dialogLoading: false,
+      displayImage: null,
     };
   },
   methods: {
     exportToPDF(nameFile) {
+      console.log(nameFile);
       html2pdf(this.$refs.content, {
         margin: 1,
         filename: nameFile,
         image: { type: "jpeg", quality: 0.98 },
         html2canvas: { dpi: 192, letterRendering: true },
         jsPDF: { unit: "pt", format: "a3", orientation: "l" },
+        allowTaint: true,
       }).then((pdf) => {
         console.log(pdf);
-        this.$router.go(-1);
+        // this.$router.go(-1);
         this.dialogLoading = false;
       });
     },
@@ -511,6 +492,8 @@ export default {
       )
       .then((result) => {
         this.isLoading = false;
+        console.log(result);
+        this.displayImage = `${process.env.VUE_APP_HOST}/image?path=${result.data.data[0].fimage}`;
         this.fid = result.data.data[0].fid;
         this.fmc_name = result.data.data[0].fmc_name;
         this.fline = result.data.data[0].fline;

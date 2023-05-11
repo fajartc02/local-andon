@@ -61,7 +61,7 @@ export default {
             {
               name: "Alarm/Warning History",
               // num: result.data.data.length,
-              num: result.data.data.length - 1,
+              num: result.data.data.length - 2,
               icon: "fa fa-history",
               color: "text-danger",
               menu: true,
@@ -72,7 +72,7 @@ export default {
           console.error(err);
         });
     },
-    getParameter() {},
+    getParameter() { },
   },
   mounted() {
     this.getAlarmHistory();
