@@ -553,7 +553,7 @@ export default {
           for (let i = 0; i < cmData.length; i++) {
             // console.log(cmItem.fpermanet_cm.indexOf("[{"));
             const cmItem = cmData[i];
-            if (cmItem.fpermanet_cm.indexOf("[{") !== -1) {
+            if (`${cmItem.fpermanet_cm}`.includes("[{")) {
               let cmObj = {};
               cmObj.fid = cmItem.fid;
               cmObj.fline = cmItem.fline;
@@ -611,7 +611,7 @@ export default {
                 });
               }
             }
-            if (cmItem.fpermanet_cm_lama.indexOf("[{") !== -1) {
+            if (`${cmItem.fpermanet_cm_lama}`.includes("[{")) {
               let cmObj = {};
               cmObj.fid = cmItem.fid;
               cmObj.fline = cmItem.fline;
@@ -672,7 +672,7 @@ export default {
                 });
               }
             }
-            if (cmItem.fyokoten.indexOf("[{") !== -1) {
+            if (`${cmItem.fyokoten}`.includes("[{")) {
               let cmObj = {};
               cmObj.fid = cmItem.fid;
               cmObj.fline = cmItem.fline;
