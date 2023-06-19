@@ -1,6 +1,6 @@
 <template>
   <div>
-    <bar-chart :chart-data="datacollection" :options="options"></bar-chart>
+    <bar-chart style="height: 300px" :chart-data="datacollection" :options="options"></bar-chart>
     <v-expansion-panels :v-model="propsPanel" multiple>
       <v-expansion-panel>
         <v-expansion-panel-header @click="resetTable()">{{
@@ -699,7 +699,7 @@ td {
   padding: 0px !important;
 }
 
-#bar-chart {
+/* #bar-chart {
   height: 350px !important;
-}
+} */
 </style>

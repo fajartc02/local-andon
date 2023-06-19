@@ -19,12 +19,12 @@
           <span class="muted">#{{ slotProps.model.id }}</span>
         </span>
       </template> -->
-      <span class="icon" slot="addTreeNodeIcon">🌲</span>
-      <span class="icon" slot="addLeafNodeIcon">🍃</span>
-      <span class="icon" slot="editNodeIcon">✏️</span>
-      <span class="icon" slot="delNodeIcon">🗑️</span>
-      <span class="icon" slot="leafNodeIcon">🍃</span>
-      <span class="icon" slot="treeNodeIcon">🌲</span>
+      <span class="icon mdi mdi-plus-thick" slot="addTreeNodeIcon"> </span>
+      <span class="icon mdi mdi-playlist-plus" slot="addLeafNodeIcon"> </span>
+      <span class="icon mdi mdi-pencil" slot="editNodeIcon"> </span>
+      <span class="icon mdi mdi-delete" slot="delNodeIcon"> </span>
+      <span class="icon mdi mdi-arrow-right-bottom-bold" slot="leafNodeIcon"> </span>
+      <span class="icon mdi mdi-layers" slot="treeNodeIcon"> </span>
     </vue-tree-list>
     <!-- <button @click="getNewTree">Get new tree</button>
     <pre>
@@ -46,13 +46,15 @@ export default {
     return {
       data: new Tree([]),
       newTree: null,
+      
     };
   },
   computed: {
-    ...mapState(["newAnalisys"]),
+    ...mapState(["newAnalisys","newAnalisys2"]),
   },
   props: {
     hide: Boolean,
+    whyCategory: String,
   },
   watch: {
     data: {
@@ -61,13 +63,18 @@ export default {
         console.log(this.data.children);
         console.log(JSON.parse(this.data));
         this.getNewTree();
-        this.actionUpdateAnalisys(this.newTree.children);
+        if(this.whyCategory == "TERJADI"){
+          this.actionUpdateAnalisys(this.newTree.children);
+        }
+        if(this.whyCategory == "LAMA"){
+          this.actionUpdateAnalisys2(this.newTree.children);
+        }
       },
       deep: true,
     },
   },
   methods: {
-    ...mapActions(["actionUpdateAnalisys"]),
+    ...mapActions(["actionUpdateAnalisys","actionUpdateAnalisys2"]),
     onDel(node) {
       console.log(node);
       node.remove();
@@ -97,7 +104,12 @@ export default {
       this.data.addChildren(nodeMat);
       this.data.addChildren(nodeMet);
       this.data.addChildren(nodeEnv);
-      this.actionUpdateAnalisys(this.newTree);
+      if(this.whyCategory == "TERJADI"){
+        this.actionUpdateAnalisys(this.newTree);
+      }
+      if(this.whyCategory == "LAMA"){
+        this.actionUpdateAnalisys2(this.newTree);
+      }
     },
 
     getNewTree() {
@@ -123,10 +135,13 @@ export default {
       vm.newTree = _dfs(vm.data);
     },
     getAnalisys() {
+
+      console.log(this.whyCategory);
+      // console.log(this.category);
       console.log(this.$route.query.v_);
       axios
         .get(
-          `${process.env.VUE_APP_HOST}/why_analisys/get/${this.$route.query.v_}`
+          `${process.env.VUE_APP_HOST}/why_analisys/get/${this.$route.query.v_}?analisys_category=${this.whyCategory}`
         )
         .then((result) => {
           console.log(result);

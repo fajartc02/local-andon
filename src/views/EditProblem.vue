@@ -47,22 +47,34 @@
       </div>
       <!-- Prob & OP -->
       <div class="row m-0 p-0">
-        <div class="col-12 px-1 text-left">
+        <div class="col px-1 text-left">
           <span class="input-lable">Problem</span>
-          <div class="input-group">
-            <input
-              type="text"
-              class="form-control"
-              placeholder="nama problem"
-              v-model="ferror_name"
-            />
-          </div>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="nama problem"
+            v-model="ferror_name"
+          />
+        </div>
+      </div>
+      <div class="row m-0 p-0">
+        <div class="col-8 px-1 text-left">
+          <span class="input-lable">Uraian Kejadian</span>
+          <input
+            class="form-control"
+            type="text"
+            placeholder="Uraian Problem"
+            v-model="furaian_kejadian"
+          />
+        </div>
+        <div class="col-4 px-1 text-left">
+          <span class="input-lable">Upload Image</span>
           <form
             method="post"
             @submit.prevent="
               onSubmitUploadFlex(
                 `${urlUpload}?folder=problem&nameFile=${fileName}`,
-                'file_problem'
+                'file_problem', 'fimage_problem', 'displayImg_problem'
               )
             "
           >
@@ -89,8 +101,86 @@
           </form>
         </div>
       </div>
-
       <div class="row m-0 p-0">
+        <div class="col px-1 text-left">
+          <span class="input-lable">Ilustrasi Standart</span>
+          <input
+            class="form-control"
+            type="text"
+            placeholder="Standart Condition"
+            v-model="filustrasi_standart"/>
+        </div>
+        <div class="col px-1 text-left">
+          <span class="input-lable">Ilustrasi Actual</span>
+          <input
+            class="form-control"
+            type="text"
+            placeholder="Actual Condition"
+            v-model="filustrasi_actual"/>
+        </div>
+      </div>
+      <div class="row m-0 p-0">
+        <div class="col px-1 text-left">
+          <span class="input-lable">Standart Image</span>
+          <form
+            method="post"
+            @submit.prevent="
+              onSubmitUploadFlex(
+                `${urlUpload}?folder=ilustration&nameFile=${fileName}`,
+                'std_file', 'std_img', 'displayStd_img'
+              )
+            "
+          >
+            <div class="row m-0 p-0">
+              <div class="col-10 p-0">
+                <input
+                  class="form-control"
+                  name="sampleFilestd"
+                  ref="std_file"
+                  type="file"
+                  @change="onSelectFlex('std_file')"
+                />
+              </div>
+              <div class="col-2 p-0">
+                <button class="btn btn-secondary btn-sm" type="submit">
+                  Upload
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="col px-1 text-left">
+          <span class="input-lable">Actual Image</span>
+          <form
+            method="post"
+            @submit.prevent="
+              onSubmitUploadFlex(
+                `${urlUpload}?folder=ilustration&nameFile=${fileName}`,
+                'act_file', 'act_img', 'displayAct_img'
+              )
+            "
+          >
+            <div class="row m-0 p-0">
+              <div class="col-10 p-0">
+                <input
+                  class="form-control"
+                  name="sampleFilestd"
+                  ref="act_file"
+                  type="file"
+                  @change="onSelectFlex('act_file')"
+                />
+              </div>
+              <div class="col-2 p-0">
+                <button class="btn btn-secondary btn-sm" type="submit">
+                  Upload
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="row mx-0 my-4 p-0">
         <div class="col-6 px-1 py-0">
           <button
             v-if="!is_ft_selected"
@@ -281,46 +371,6 @@
           <span class="input-lable">Duration (min)</span>
           <input class="form-control" type="text" v-model="fdur" disabled />
         </div>
-        <div class="col px-1 text-left">
-          <span class="input-lable">Upload Image</span>
-
-          <!-- :action="" -->
-          <form
-            method="post"
-            @submit.prevent="
-              onSubmitUpload(
-                `${urlUpload}?folder=ilustration&nameFile=${fileName}`
-              )
-            "
-          >
-            <div class="row m-0 p-0">
-              <div class="col-8 p-0">
-                <input
-                  class="form-control"
-                  name="sampleFile"
-                  ref="file"
-                  type="file"
-                  @change="onSelect"
-                />
-              </div>
-              <div class="col-2 p-0">
-                <button class="btn btn-secondary btn-sm" type="submit">
-                  Upload
-                </button>
-              </div>
-              <!-- <div class="col-2 p-0">
-                <button class="btn btn-success btn-sm">View</button>
-              </div> -->
-            </div>
-          </form>
-          <!-- <input
-            class="form-control"
-            id="img"
-            name="sampleFile"
-            type="file"
-            @change="onFileChange"
-          /> -->
-        </div>
       </div>
       <!-- Ilustration (DISABLED)-->
       <div class="row m-0 p-0" style="display: none">
@@ -481,8 +531,39 @@
             </div>
           </div>
           <div class="row m-0 p-0">
-            <TreeListAnalisys :hide="false" />
+            <TreeListAnalisys :hide="false" whyCategory="TERJADI" />
           </div>
+        </div>
+      </div>
+      <div class="row m-0 p-0">
+        <div class="col px-1 text-left">
+          <span class="input-lable">5 Why Analysis Image</span>
+          <form
+            method="post"
+            @submit.prevent="
+              onSubmitUploadFlex(
+                `${urlUpload}?folder=ilustration&nameFile=${fileName}`,
+                '5whyterjadi_file', 'why1_img', 'displayWhy1_img'
+              )
+            "
+          >
+            <div class="row m-0 p-0">
+              <div class="col-8 p-0">
+                <input
+                  class="form-control"
+                  name="sampleFile5why"
+                  ref="5whyterjadi_file"
+                  type="file"
+                  @change="onSelectFlex('5whyterjadi_file')"
+                />
+              </div>
+              <div class="col-2 p-0">
+                <button class="btn btn-secondary btn-sm" type="submit">
+                  Upload
+                </button>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
       <!-- Step Repair -->
@@ -507,6 +588,9 @@
                 <tr>
                   <th>No</th>
                   <th style="max-width: 100px">Description</th>
+                  <th style="max-width: 100px">Actual Time (Min)</th>
+                  <th style="max-width: 80px">Ideal Time (Min)</th>
+                  <th style="max-width: 100px">Q6</th>
                   <th colspan="2">actions</th>
                 </tr>
               </thead>
@@ -521,22 +605,76 @@
                     style="min-width: 220px"
                     v-if="!isEditStepRepair || idxStepRepairSelected != i"
                   >
-                    {{ stepRepair }}
+                    {{ stepRepair.stepDesc }}
                   </td>
                   <td
                     class="text-left border"
                     style="min-width: 220px"
                     v-else-if="isEditStepRepair || idxStepRepairSelected != i"
                   >
-                    <input type="text" v-model="descStepRepair" />
+                    <input type="text" v-model="stepRepair.stepDesc" />
+                  </td>
+                  <td
+                    class="text-left border"
+                    style="min-width: 50px"
+                    v-if="!isEditStepRepair || idxStepRepairSelected != i"
+                  >
+                    {{stepRepair.actualTime}}
+                  </td>
+                  <td
+                    class="text-left border"
+                    style="min-width: 50px"
+                    v-else-if="isEditStepRepair || idxStepRepairSelected != i"
+                  >
+                    <input v-model.number="stepRepair.actualTime" />
+                  </td>
+                  <td
+                    class="text-left border"
+                    style="min-width: 50px"
+                    v-if="!isEditStepRepair || idxStepRepairSelected != i"
+                  >
+                    {{stepRepair.idealTime}}
+                  </td>
+                  <td
+                    class="text-left border"
+                    style="min-width: 50px"
+                    v-else-if="isEditStepRepair || idxStepRepairSelected != i"
+                  >
+                    <input v-model.number="stepRepair.idealTime" />
+                  </td>
+                  <td
+                    class="text-left border"
+                    style="min-width: 50px"
+                    v-if="!isEditStepRepair || idxStepRepairSelected != i"
+                  >
+                    {{stepRepair.quick6}}
+                  </td>
+                  <td
+                    class="text-left border"
+                    style="min-width: 50px"
+                    v-else-if="isEditStepRepair || idxStepRepairSelected != i"
+                  >
+                    <select
+                      class="text-center border"
+                      style="min-width: 50px"
+                      v-model="stepRepair.quick6"
+                    >
+                      <option disabled value="">Quick 6</option>
+                      <option value="Q1">Q1</option>
+                      <option value="Q2">Q2</option>
+                      <option value="Q3">Q3</option>
+                      <option value="Q4">Q4</option>
+                      <option value="Q5">Q5</option>
+                      <option value="Q6">Q6</option>
+                    </select>
                   </td>
                   <td class="border">
                     <button
                       class="btn btn-primary py-1 input-lable"
                       @click="
-                        onToogleEdit(
+                        onToogleEditStep(
                           'isEditStepRepair',
-                          'descStepRepair',
+                          'stepField',
                           stepRepair,
                           i
                         )
@@ -552,11 +690,12 @@
                     <button
                       class="btn btn-primary py-1 input-lable"
                       @click="
-                        editContainerSingle(
+                        editContainerObjStep(
                           i,
                           'containerStepRepair',
-                          'descStepRepair',
-                          'isEditStepRepair'
+                          'stepField',
+                          'isEditStepRepair',
+                          stepRepair
                         )
                       "
                       v-else-if="isEditStepRepair || idxStepRepairSelected != i"
@@ -582,39 +721,72 @@
               </tbody>
             </table>
           </div>
-          <div
-            class="
-              row
-              m-0
-              p-0
-              d-flex
-              justify-content-around
-              align-content-center
-            "
-            v-if="isStepRepair"
-          >
-            <div class="col-7 p-0">
-              <input
-                class="form-control mt-1"
-                type="text"
-                v-model="descStepRepair"
-              />
+          <div v-if="isStepRepair" >
+            <div
+              class="
+                row
+                m-0
+                p-0
+                d-flex
+                justify-content-around
+                align-content-center
+              "
+            >
+              <div class="col-6 p-0">
+                <input
+                  class="form-control mt-1"
+                  type="text"
+                  placeholder="Description"
+                  v-model="stepField.stepDesc"
+                />
+              </div>
+              <div class="col p-0">
+                <select
+                  class="form-control mt-1"
+                  v-model="stepField.quick6"
+                >
+                  <option disabled value="">Quick 6</option>
+                  <option value="Q1">Q1</option>
+                  <option value="Q2">Q2</option>
+                  <option value="Q3">Q3</option>
+                  <option value="Q4">Q4</option>
+                  <option value="Q5">Q5</option>
+                  <option value="Q6">Q6</option>
+                </select>
+              </div>
+              <div class="col p-0">
+                <input
+                  class="form-control mt-1"
+                  placeholder="Actual Time"
+                  v-model.number="stepField.actualTime"
+                />
+              </div>
+              <div class="col p-0">
+                <input
+                  class="form-control mt-1"
+                  placeholder="Ideal Time"
+                  v-model.number="stepField.idealTime"
+                />
+              </div>
+              
             </div>
-            <div class="col-2 p-0">
-              <button
-                class="btn btn-info py-1 input-lable"
-                @click="onAddStepRepair()"
-              >
-                Submit
-              </button>
-            </div>
-            <div class="col-2 p-0 ml-2">
-              <button
-                class="btn btn-danger py-1 input-lable"
-                @click="onCancel('isStepRepair')"
-              >
-                Cancel
-              </button>
+            <div class="row m-0 p-0 text-right justify-content-end">
+              <div class="col-2 p-0">
+                <button
+                  class="btn btn-info py-1 input-lable"
+                  @click="onAddStepRepair()"
+                >
+                  Submit
+                </button>
+              </div>
+              <div class="col-1 p-0 ml-2">
+                <button
+                  class="btn btn-danger py-1 input-lable"
+                  @click="onCancel('isStepRepair')"
+                >
+                  Cancel
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -650,6 +822,7 @@
                   <th style="max-width: 100px">Countermeasure</th>
                   <th style="max-width: 50px">Plan Date</th>
                   <th>PIC</th>
+                  <th style="max-width: 60px">C/M Category</th>
                   <th style="max-width: 50px">Judg</th>
                   <th style="min-width: 100px">Result Notes</th>
                   <th colspan="2">actions</th>
@@ -702,6 +875,29 @@
                       :multiple="false"
                       style="font-size: 10px"
                     ></multiselect>
+                  </td>
+                  <td
+                    class="text-left border"
+                    style="min-width: 50px"
+                    v-if="!isEditCmTerjadi || idxCmTerjadiSelected != i"
+                  >
+                    {{cmTerjadi.cmCategory}}
+                  </td>
+                  <td
+                    class="text-left border"
+                    style="min-width: 50px"
+                    v-else-if="isEditCmTerjadi || idxCmTerjadiSelected == i"
+                  >
+                    <select
+                      class="form-control mt-1"
+                      v-model="cmTerjadi.cmCategory"
+                    >
+                      <option value="">C/M Category</option>
+                      <option value="Improvement">Improvement</option>
+                      <option value="Training">Training</option>
+                      <option value="Revice TPM">Revisi TPM</option>
+                      <option value="Sparepart">Sparepart</option>
+                    </select>
                   </td>
                   <td
                     v-if="
@@ -828,7 +1024,7 @@
                   />
                 </div>
               </div>
-              <div class="col-12 col-md-4 p-0">
+              <div class="col-12 col-md-2 p-0">
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <div class="input-group-text">Plan Date</div>
@@ -839,6 +1035,23 @@
                     placeholder="date"
                     v-model="cmField.datePlan"
                   />
+                </div>
+              </div>
+              <div class="col-12 col-md-2 p-0">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">C/M Category</div>
+                  </div>
+                  <select
+                    class="form-control mt-1"
+                    v-model="cmField.cmCategory"
+                  >
+                    <option value="">C/M Category</option>
+                    <option value="Improvement">Improvement</option>
+                    <option value="Training">Training</option>
+                    <option value="Revice TPM">Revisi TPM</option>
+                    <option value="Sparepart">Sparepart</option>
+                  </select>
                 </div>
               </div>
               <div class="col-12 col-md-4 p-0">
@@ -856,8 +1069,8 @@
                 </div>
               </div>
             </div>
-            <div class="row m-0 p-0">
-              <div class="col col-md-4 p-0">
+            <div class="row m-0 p-0 text-right justify-content-end">
+              <div class="col-2 p-0">
                 <button
                   class="btn btn-info py-1 input-lable"
                   @click="onAddCmTerjadi()"
@@ -865,7 +1078,7 @@
                   Submit
                 </button>
               </div>
-              <div class="col p-0 ml-2">
+              <div class="col-1 p-0 ml-2">
                 <button
                   class="btn btn-danger py-1 input-lable"
                   @click="onCancel('isCmTerjadi')"
@@ -1214,6 +1427,7 @@
               </button>
             </div>
           </div>
+          <TreeListAnalisys :hide="false" whyCategory="LAMA"/>
         </div>
       </div>
       <!-- CM LAMA -->
@@ -1240,6 +1454,7 @@
                   <th style="max-width: 100px">Countermeasure</th>
                   <th style="max-width: 50px">Plan Date</th>
                   <th style="max-width: 50px">PIC</th>
+                  <th style="max-width: 60px">C/M Category</th>
                   <th style="max-width: 50px">Judg</th>
                   <th style="min-width: 100px">Result Notes</th>
                   <th colspan="2">actions</th>
@@ -1289,6 +1504,29 @@
                     v-else-if="isEditCmLama || idxCmLamaSelected == i"
                   >
                     <input type="text" v-model="cmLama.pic" />
+                  </td>
+                  <td
+                    class="text-left border"
+                    style="min-width: 50px"
+                    v-if="!isEditCmLama || idxCmLamaSelected != i"
+                  >
+                    {{cmLama.cmCategory}}
+                  </td>
+                  <td
+                    class="text-left border"
+                    style="min-width: 50px"
+                    v-else-if="isEditCmLama || idxCmLamaSelected == i"
+                  >
+                    <select
+                      class="form-control mt-1"
+                      v-model="cmLama.cmCategory"
+                    >
+                      <option value="">C/M Category</option>
+                      <option value="Improvement">Improvement</option>
+                      <option value="Training">Training</option>
+                      <option value="Revice TPM">Revisi TPM</option>
+                      <option value="Sparepart">Sparepart</option>
+                    </select>
                   </td>
                   <td
                     v-if="
@@ -1415,9 +1653,21 @@
                   v-model="cmField.pic"
                 />
               </div>
-            </div>
-            <div class="row m-0 p-0">
               <div class="col p-0">
+                <select
+                  class="form-control mt-1"
+                  v-model="cmField.cmCategory"
+                >
+                  <option value="">C/M Category</option>
+                  <option value="Improvement">Improvement</option>
+                  <option value="Training">Training</option>
+                  <option value="Revice TPM">Revisi TPM</option>
+                  <option value="Sparepart">Sparepart</option>
+                </select>
+              </div>
+            </div>
+            <div class="row m-0 p-0 text-right justify-content-end">
+              <div class="col-2 p-0">
                 <button
                   class="btn btn-info py-1 input-lable"
                   @click="onAddCmLama()"
@@ -1425,7 +1675,7 @@
                   Submit
                 </button>
               </div>
-              <div class="col p-0 ml-2">
+              <div class="col-1 p-0 ml-2">
                 <button
                   class="btn btn-danger py-1 input-lable"
                   @click="onCancel('isCmLama')"
@@ -2084,7 +2334,7 @@
             >
           </div>
           <div class="col-12 col-md-10 col-xl-12 py-0">
-            <img :src="displayImg" :alt="fimage" height="300" width="300" />
+            <img :src="displayImg_problem" :alt="fimage" height="300" width="300" />
             <a
               class="btn btn-primary text-light justify-content-center"
               style="
@@ -2210,6 +2460,7 @@ export default {
       containerCmTerjadi: [],
       containerCmLama: [],
       containerYokoten: [],
+      
       descWhyTerjadi: "",
       descWhyLama: "",
       descStepRepair: "",
@@ -2219,10 +2470,17 @@ export default {
       cmlhCheck: "dot",
       cmshCheck: "dot",
       dhCheck: "dot",
+      stepField: {
+        stepDesc: "",
+        quick6: "",
+        idealTime: 0,
+        actualTime: 0,
+      },
       cmField: {
         cmDesc: "",
         datePlan: "",
         pic: "",
+        cmCategory: "",
         judg: false,
         result: null,
       },
@@ -2238,6 +2496,9 @@ export default {
       foperation_no: "",
       fmaker: "",
       ferror_name: "",
+      furaian_kejadian: "",
+      filustrasi_standart: "",
+      filustrasi_actual: "",
       foperator: "",
       isLoading: false,
       fshift: "",
@@ -2301,8 +2562,16 @@ export default {
       fileName: null,
       selectedFile: null,
       selectedAttachFile: null,
-      fimage: null,
-      displayImg: null,
+      fimage_problem: null,
+      displayImg_problem: null,
+      std_img: null,
+      displayStd_img: null,
+      act_img: null,
+      displayAct_img: null,
+      why1_img: null,
+      displayWhy1_img: null,
+      why2_img: null,
+      displayWhy2_img: null,
       fattachment: null,
       displayAttachment: null,
       optOperators: ["Loading ..."],
@@ -2448,6 +2717,7 @@ export default {
       let finish = new Date(strEndDate.replace(" ", "T"));
       let dura = (finish - start) / 1000 / 60;
       console.log(dura);
+      console.log(this.whyCategory);
       if (dura >= 120) {
         this.isLongBd = true;
       } else if (dura >= 30 && this.fline == "ASSY LINE") {
@@ -2610,7 +2880,7 @@ export default {
     },
   },
   computed: {
-    ...mapState(["storeTheme", "newAnalisys"]),
+    ...mapState(["storeTheme", "newAnalisys", "newAnalisys2"]),
   },
   methods: {
     checkFocusTheme() {
@@ -2749,17 +3019,18 @@ export default {
         this.$refs[ref].files[0].name = "";
       } else {
         // this.selectedFile = file;
+        this.fileName = `${ref}_${Date.now()}`;
       }
     },
-    async onSubmitUploadFlex(url, ref) {
+    async onSubmitUploadFlex(url, ref, fimage, displayImg) {
       this.isLoading = true;
       if (this.$refs[ref].files[0]) {
         const formData = new FormData();
-
+        
         formData.append("file", this.$refs[ref].files[0]);
-        for (var key of formData.entries()) {
-          console.log(key[1]);
-        }
+        // for (var key of formData.entries()) {
+        //   console.log(key[1]);
+        // }
         // console.log(this.selectedFile);
         // console.log(formData);
         await axios
@@ -2767,9 +3038,9 @@ export default {
           .then((result) => {
             console.log(result);
             if (result.status == 201) {
-              this.fimage = result.data.path;
+              this[fimage] = result.data.path;
               // localStorage.setItem("image", result.data.path);
-              this.displayImg = `${process.env.VUE_APP_HOST}/image?path=${result.data.path}`;
+              this[displayImg] = `${process.env.VUE_APP_HOST}/image?path=${result.data.path}`;
               alert(
                 "success to upload, silahkan tekan tombol finished kalau sudah slesai input semua data"
               );
@@ -2843,9 +3114,6 @@ export default {
       this.isLoading = true;
       const formData = new FormData();
       formData.append("file", this.selectedAttachFile);
-      for (var key of formData.entries()) {
-        console.log(key[1]);
-      }
       await axios
         .post(url, formData)
         .then((result) => {
@@ -2895,8 +3163,13 @@ export default {
       this.isWhyLama = false;
     },
     onAddStepRepair() {
-      this.containerStepRepair.push(this.descStepRepair);
-      this.descStepRepair = "";
+      this.containerStepRepair.push(this.stepField);
+      this.stepField = {
+        stepDesc: "",
+        quick6: "",
+        idealTime: 0, 
+        actualTime: 0
+      };
       this.isStepRepair = false;
     },
     onAddCmTerjadi() {
@@ -2905,6 +3178,7 @@ export default {
         cmDesc: "",
         datePlan: "",
         pic: "",
+        cmCategory: "",
         judg: false,
         result: null,
       };
@@ -2917,6 +3191,7 @@ export default {
         cmDesc: "",
         datePlan: "",
         pic: "",
+        cmCategory: "",
         judg: false,
         result: null,
       };
@@ -2942,6 +3217,18 @@ export default {
         this[`${editDesc}`] = beforeValue;
       }
     },
+    onToogleEditStep(condToogle, editDesc = null, beforeValue = null, idxSelected) {
+      this[`${condToogle}`] = true;
+      this.idxStepRepairSelected = idxSelected;
+      if(editDesc || beforeValue) {
+        this[`${editDesc}`] = {
+          stepDesc: beforeValue.stepDesc,
+          idealTime: beforeValue.idealTime,
+          actualTime: beforeValue.actualTime,
+          quick6: beforeValue.quick6,
+        };
+      }
+    },
     onToogleEditObj(
       condToogle,
       editDesc = null,
@@ -2959,7 +3246,8 @@ export default {
           pic: beforeValue.pic,
           judg: beforeValue.judg,
         };
-      } else {
+      }
+      else {
         this[`${editDesc}`] = {
           machine: beforeValue.machine,
           datePlan: beforeValue.datePlan,
@@ -2979,21 +3267,53 @@ export default {
       this[`${condToogle}`] = false;
       this[`${editDesc}`] = "";
     },
+    editContainerObjStep(idx, containerName, editDesc, condToogle, afterVal) {
+      console.log(this[`${containerName}`]);
+      console.log(this[`${editDesc}`]);
+      this[`${editDesc}`] = afterVal;
+      this[`${containerName}`].splice(idx, 1, this[`${editDesc}`]);
+      this[`${condToogle}`] = false;
+      this[`${editDesc}`] = { stepDesc: "", quick6: "", idealTime: 0, actualTime: 0 };
+    },
     editContainerObj(idx, containerName, editDesc, condToogle, afterVal) {
       console.log(this[`${containerName}`]);
       console.log(this[`${editDesc}`]);
       this[`${editDesc}`] = afterVal;
       this[`${containerName}`].splice(idx, 1, this[`${editDesc}`]);
       this[`${condToogle}`] = false;
-      this[`${editDesc}`] = { cmDesc: "", datePlan: "", pic: "", judg: false };
+      this[`${editDesc}`] = { cmDesc: "", datePlan: "", pic: "", cmCategory: "", judg: false };
     },
+    editCmCategory(idx, containerName, afterVal){
+      // if((this.containerName.length) != idx){
+      //   for (let index = 0; index < idx; index++) {
+      //     this.containerName.push("");
+      //   }
+      // }else{
+        this[`${containerName}`].splice(idx, 1, afterVal);
+      
+      afterVal = "";
+    },
+
     async submitEdit(approveStatus) {
       console.log(this.newAnalisys);
       if (this.newAnalisys) {
         axios
           .post(
-            `${process.env.VUE_APP_HOST}/why_analisys/add/${this.$route.query.v_}`,
+            `${process.env.VUE_APP_HOST}/why_analisys/add/${this.$route.query.v_}?analisys_category=TERJADI`,
             this.newAnalisys
+          )
+          .then((result) => {
+            console.log(result);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+      if (this.newAnalisys2) {
+        axios
+          .post(
+            `${process.env.VUE_APP_HOST}/why_analisys/add/${this.$route.query.v_}?analisys_category=LAMA`,
+            this.newAnalisys2
           )
           .then((result) => {
             console.log(result);
@@ -3098,6 +3418,10 @@ https://smartandonsys.web.app/editProblem?v_=${this.$route.query.v_}`
         this.containerWhyTerjadi.push("");
       }
       let dataPrev = {
+        fimageproblem: this.fimage_problem,
+        act_img: this.act_img,
+        ast_img: this.std_img,
+        why1_img: this.why1_img,
         ferror_name: this.ferror_name,
         foperator: this.foperator,
         fshift: this.fshift,
@@ -3106,7 +3430,8 @@ https://smartandonsys.web.app/editProblem?v_=${this.$route.query.v_}`
         fend_time: [this.endDate, this.endTime],
         fpart_change: this.fpart_change,
         fDescImage: this.fDescImage,
-        fstep_repair: this.containerStepRepair.join("\n"),
+        // fstep_repair: this.containerStepRepair.join("\n"),
+        fstep_repair: JSON.stringify(this.containerStepRepair),
         fiveWhyLhApprove: this.fiveWhyLhApprove,
         fiveWhyShApprove: this.fiveWhyShApprove,
         cmLhApprove: this.cmLhApprove,
@@ -3336,6 +3661,9 @@ https://smartandonsys.web.app/editProblem?v_=${this.$route.query.v_}`
       this.isLoading = true;
       let dataPrev = {
         ferror_name: this.ferror_name,
+        furaian_kejadian: this.furaian_kejadian,
+        filustrasi_standart: this.filustrasi_standart,
+        filustrasi_actual: this.filustrasi_actual,
         foperator: this.foperator,
         fav_categoty: this.fav_categoty,
         fstart_time: [this.startDate, this.startTime],
@@ -3349,7 +3677,8 @@ https://smartandonsys.web.app/editProblem?v_=${this.$route.query.v_}`
         fiveWhyShFeedback: this.fiveWhyShFeedback,
         cmLhFeedback: this.cmLhFeedback,
         cmShFeedback: this.cmShFeedback,
-        fstep_repair: this.containerStepRepair.join("\n"),
+        // fstep_repair: this.containerStepRepair.join("\n"),
+        fstep_repair: JSON.stringify(this.containerStepRepair),
         freal_prob: this.containerWhyTerjadi.join("\n"),
         froot_cause: this.containerWhyLama.join("\n"),
         fpermanet_cm: JSON.stringify(this.containerCmTerjadi),
@@ -3575,7 +3904,10 @@ https://smartandonsys.web.app/editProblem?v_=${this.$route.query.v_}`
           this.foperation_no = item.foperation_no;
           this.fmaker = item.fmaker;
           this.ferror_name = item.ferror_name;
-          this.fileName = `ilustration_${Date.now()}`;
+          this.furaian_kejadian = item.furaian_kejadian;
+          this.filustrasi_standart = item.filustrasi_standart;
+          this.filustrasi_actual = item.filustrasi_actual;
+          // this.fileName = `ilustration_${Date.now()}`;
           this.foperator = item.foperator.includes(",")
             ? item.foperator.split(",")
             : item.foperator;
@@ -3586,6 +3918,15 @@ https://smartandonsys.web.app/editProblem?v_=${this.$route.query.v_}`
           if (item.fimage) {
             this.fimage = item.fimage;
             this.displayImg = `${process.env.VUE_APP_HOST}/image?path=${item.fimage}`;
+            this.fimage_problem = item.fimage_problem;
+            this.displayImg_problem = `${process.env.VUE_APP_HOST}/image?path=${item.fimage_problem}`;
+            this.std_img = item.std_img;
+            this.displayStd_img = `${process.env.VUE_APP_HOST}/image?path=${item.std_img}`;
+            this.act_img = item.act_img;
+            this.displayAct_img = `${process.env.VUE_APP_HOST}/image?path=${item.act_img}`;
+            this.why1_img = item.why1_img;
+            this.displayWhy1_img = `${process.env.VUE_APP_HOST}/image?path=${item.why1_img}`;
+            
           }
           if (item.fattachment) {
             this.fattachment = item.fattachment;
@@ -3708,8 +4049,17 @@ https://smartandonsys.web.app/editProblem?v_=${this.$route.query.v_}`
           this.cmDhApprove = item.cmDhApprove;
           console.log(item);
           this.temporaryAction = item.temporaryAction;
-          if (item.fstep_repair.includes("\n")) {
-            this.containerStepRepair = item.fstep_repair.split("\n");
+          // if (item.fstep_repair.includes("\n")) {
+          //   this.containerStepRepair = item.fstep_repair.split("\n");
+          // }
+          if (String(item.fstep_repair).includes("[{")) {
+            this.containerStepRepair = JSON.parse(item.fstep_repair);
+            this.containerStepRepair = this.containerStepRepair.map((item) => {
+              if (!item.result) {
+                item.result = null;
+              }
+              return item;
+            });
           }
           if (String(item.fend_time) != null) {
             if (item.freal_prob.includes("\n")) {

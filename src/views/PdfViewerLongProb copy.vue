@@ -1,14 +1,14 @@
 <template>
   <div
     class="container-fluid p-0 text-dark"
-    style="margin-bottom: 130px; font-weight: bold"
+    style="margin-bottom: 130px; margin-right: 20px; margin-left: 20px font-weight: bold"
   >
     <div class="row m-0 p-0" id="content-pdf" ref="content">
       <div class="col-12 p-0">
         <div class="container-fluid p-0 m-0">
           <!-- HEADER TITLE -->
           <div class="row m-0 text-center">
-            <div class="col-3 p-0 border" style="padding-top: 30px !important">
+            <div class="col-3 p-0 border-black" style="padding-top: 30px !important">
               <h4 class="text-danger m-0">TMMIN</h4>
               <h4 style="font-size: 12px">
                 PLANT 3 ENGINE PRODUCTION KARAWANG DIVISION
@@ -21,7 +21,7 @@
               class="
                 col
                 p-0
-                border
+                border-black
                 d-flex
                 align-items-center
                 justify-content-center
@@ -32,8 +32,8 @@
                 Long Time Breakdown & Recurrence Prevention Report
               </h4>
             </div>
-            <div class="col p-0 border" style="max-height: 140px">
-              <table class="table table-bordered">
+            <div class="col p-0 border-black" style="max-height: 140px">
+              <table class="table table-bordered border-black">
                 <thead>
                   <tr>
                     <td style="width: 70px" rowspan="3">Action</td>
@@ -74,12 +74,12 @@
           <!-- 1. KEJADIAN &  2. PROBLEM -->
           <div class="row m-0">
             <div class="col-12 p-0">
-              <table class="table table-bordered">
+              <table class="table table-bordered border-black">
                 <thead class="text-center">
                   <tr>
                     <td class="bg-success" rowspan="3">1. Kejadian</td>
                     <td colspan="7">Breakdown Start</td>
-                    <td class="bg-success text-left px-2" rowspan="3">
+                    <td class="bg-success text-left px-2" style="font-weight: bold" rowspan="3">
                       2. Problem <br />
                       <b style="font-size: 20px">{{ ferror_name }}</b>
                     </td>
@@ -122,7 +122,7 @@
           </div>
           <div class="row m-0">
             <div class="col-12 p-0">
-              <table class="table table-bordered">
+              <table class="table table-bordered border-black">
                 <thead>
                   <tr style="height: 30px">
                     <td class="bg-success" colspan="2" style="width: 50%">
