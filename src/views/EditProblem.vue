@@ -582,7 +582,121 @@
               id="table-step-repair"
               class="table table-responsive text-center"
               style="font-size: 10px"
-              v-if="containerStepRepair.length > 0"
+            >
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th style="max-width: 100px">Description</th>
+                  <th colspan="2">actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  v-for="(stepRepair, i) in containerStepRepair"
+                  :key="stepRepair"
+                >
+                  <td class="border" style="min-width: 10px">{{ i + 1 }}</td>
+                  <td
+                    class="text-left border"
+                    style="min-width: 220px"
+                    v-if="!isEditStepRepair || idxStepRepairSelected != i"
+                  >
+                    {{ stepRepair }}
+                  </td>
+                  <td
+                    class="text-left border"
+                    style="min-width: 220px"
+                    v-else-if="isEditStepRepair || idxStepRepairSelected != i"
+                  >
+                    <input type="text" v-model="descStepRepair" />
+                  </td>
+                  <td class="border">
+                    <button class="btn btn-primary py-1 input-lable">
+                      <i
+                        class="fa fa-pencil"
+                        style="font-size: 10px"
+                        aria-hidden="true"
+                        @click="
+                          onToogleEdit(
+                            'isEditStepRepair',
+                            'descStepRepair',
+                            stepRepair,
+                            i
+                          )
+                        "
+                        v-if="!isEditStepRepair || idxStepRepairSelected != i"
+                      ></i>
+                      <i
+                        class="fa fa-send"
+                        style="font-size: 10px"
+                        aria-hidden="true"
+                        @click="
+                          editContainerSingle(
+                            i,
+                            'containerStepRepair',
+                            'descStepRepair',
+                            'isEditStepRepair'
+                          )
+                        "
+                        v-else-if="
+                          isEditStepRepair || idxStepRepairSelected != i
+                        "
+                      ></i>
+                    </button>
+                  </td>
+                  <td class="border">
+                    <button class="btn btn-danger py-1 input-lable">
+                      <i
+                        class="fa fa-trash"
+                        style="font-size: 10px"
+                        aria-hidden="true"
+                        @click="removeContainerSingle(i, 'containerStepRepair')"
+                      ></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div
+            class="
+              row
+              m-0
+              p-0
+              d-flex
+              justify-content-around
+              align-content-center
+            "
+            v-if="isStepRepair && containerStepRepair.length > 0"
+          >
+            <div class="col-7 p-0">
+              <input
+                class="form-control mt-1"
+                type="text"
+                v-model="descStepRepair"
+              />
+            </div>
+            <div class="col-2 p-0">
+              <button
+                class="btn btn-info py-1 input-lable"
+                @click="onAddStepRepair()"
+              >
+                Submit
+              </button>
+            </div>
+            <div class="col-2 p-0 ml-2">
+              <button
+                class="btn btn-danger py-1 input-lable"
+                @click="onCancel('isStepRepair')"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+            <table
+              id="table-step-repair"
+              class="table table-responsive text-center"
+              style="font-size: 10px"
+              v-if="containerStepRepairNew.length > 0"
             >
               <thead>
                 <tr>
@@ -596,7 +710,7 @@
               </thead>
               <tbody>
                 <tr
-                  v-for="(stepRepair, i) in containerStepRepair"
+                  v-for="(stepRepair, i) in containerStepRepairNew"
                   :key="stepRepair"
                 >
                   <td class="border" style="min-width: 10px">{{ i + 1 }}</td>
@@ -692,7 +806,7 @@
                       @click="
                         editContainerObjStep(
                           i,
-                          'containerStepRepair',
+                          'containerStepRepairNew',
                           'stepField',
                           'isEditStepRepair',
                           stepRepair
@@ -713,7 +827,7 @@
                         class="fa fa-trash"
                         style="font-size: 10px"
                         aria-hidden="true"
-                        @click="removeContainerSingle(i, 'containerStepRepair')"
+                        @click="removeContainerSingle(i, 'containerStepRepairNew')"
                       ></i>
                     </button>
                   </td>
@@ -721,7 +835,7 @@
               </tbody>
             </table>
           </div>
-          <div v-if="isStepRepair" >
+          <div v-if="isStepRepair && containerStepRepair.length == 0" >
             <div
               class="
                 row
@@ -2457,6 +2571,7 @@ export default {
       containerWhyTerjadi: [],
       containerWhyLama: [],
       containerStepRepair: [],
+      containerStepRepairNew: [],
       containerCmTerjadi: [],
       containerCmLama: [],
       containerYokoten: [],
@@ -3163,7 +3278,7 @@ export default {
       this.isWhyLama = false;
     },
     onAddStepRepair() {
-      this.containerStepRepair.push(this.stepField);
+      this.containerStepRepairNew.push(this.stepField);
       this.stepField = {
         stepDesc: "",
         quick6: "",
@@ -3430,8 +3545,8 @@ https://smartandonsys.web.app/editProblem?v_=${this.$route.query.v_}`
         fend_time: [this.endDate, this.endTime],
         fpart_change: this.fpart_change,
         fDescImage: this.fDescImage,
-        // fstep_repair: this.containerStepRepair.join("\n"),
-        fstep_repair: JSON.stringify(this.containerStepRepair),
+        fstep_repair: this.containerStepRepair.join("\n"),
+        uraian: JSON.stringify(this.containerStepRepairNew),
         fiveWhyLhApprove: this.fiveWhyLhApprove,
         fiveWhyShApprove: this.fiveWhyShApprove,
         cmLhApprove: this.cmLhApprove,
@@ -3677,8 +3792,8 @@ https://smartandonsys.web.app/editProblem?v_=${this.$route.query.v_}`
         fiveWhyShFeedback: this.fiveWhyShFeedback,
         cmLhFeedback: this.cmLhFeedback,
         cmShFeedback: this.cmShFeedback,
-        // fstep_repair: this.containerStepRepair.join("\n"),
-        fstep_repair: JSON.stringify(this.containerStepRepair),
+        fstep_repair: this.containerStepRepair.join("\n"),
+        uraian: JSON.stringify(this.containerStepRepairNew),
         freal_prob: this.containerWhyTerjadi.join("\n"),
         froot_cause: this.containerWhyLama.join("\n"),
         fpermanet_cm: JSON.stringify(this.containerCmTerjadi),
@@ -4049,12 +4164,12 @@ https://smartandonsys.web.app/editProblem?v_=${this.$route.query.v_}`
           this.cmDhApprove = item.cmDhApprove;
           console.log(item);
           this.temporaryAction = item.temporaryAction;
-          // if (item.fstep_repair.includes("\n")) {
-          //   this.containerStepRepair = item.fstep_repair.split("\n");
-          // }
-          if (String(item.fstep_repair).includes("[{")) {
-            this.containerStepRepair = JSON.parse(item.fstep_repair);
-            this.containerStepRepair = this.containerStepRepair.map((item) => {
+          if (item.fstep_repair.includes("\n")) {
+            this.containerStepRepair = item.fstep_repair.split("\n");
+          }
+          if (String(item.uraian).includes("[{")) {
+            this.containerStepRepairNew = JSON.parse(item.uraian);
+            this.containerStepRepairNew = this.containerStepRepairNew.map((item) => {
               if (!item.result) {
                 item.result = null;
               }
