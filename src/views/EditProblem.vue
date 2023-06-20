@@ -99,6 +99,7 @@
               </div> -->
             </div>
           </form>
+          <img :src="displayImg_problem" width="100">
         </div>
       </div>
       <div class="row m-0 p-0">
@@ -3981,7 +3982,30 @@ https://smartandonsys.web.app/editProblem?v_=${this.$route.query.v_}`
         .then((result) => {
           this.isLoading = false;
           let item = result.data.data[0];
-
+          console.log(item.uraian);
+          // AMJAD1
+          if(item.uraian.length > 0) {
+            for (let i = 0; i < item.uraian.length; i++) {
+              const element = item.uraian[i];
+              if(element.type_uraian == 'general') {
+                this.furaian_kejadian = element.desc_nm
+                this.fimage_problem = element.ilustration;
+                this.displayImg_problem = `${process.env.VUE_APP_HOST}/image?path=${this.fimage_problem}`;
+              }
+              if(element.type_uraian == 'standard') {
+                this.filustrasi_standart = element.desc_nm;
+                this.std_img = element.ilustration;
+                this.displayStd_img = `${process.env.VUE_APP_HOST}/image?path=${this.std_img}`;
+              }
+              if(element.type_uraian == 'actual') {
+                this.filustrasi_actual = element.desc_nm;
+                this.act_img = element.ilustration;
+                this.displayAct_img = `${process.env.VUE_APP_HOST}/image?path=${this.act_img}`;
+              }
+            }
+            
+            
+          }
           if (item.id_m_problem_member) {
             this.isMemberThema = true;
             this.id_m_problem_member = item.id_m_problem_member;
@@ -4019,9 +4043,7 @@ https://smartandonsys.web.app/editProblem?v_=${this.$route.query.v_}`
           this.foperation_no = item.foperation_no;
           this.fmaker = item.fmaker;
           this.ferror_name = item.ferror_name;
-          this.furaian_kejadian = item.furaian_kejadian;
-          this.filustrasi_standart = item.filustrasi_standart;
-          this.filustrasi_actual = item.filustrasi_actual;
+          
           // this.fileName = `ilustration_${Date.now()}`;
           this.foperator = item.foperator.includes(",")
             ? item.foperator.split(",")
@@ -4033,15 +4055,9 @@ https://smartandonsys.web.app/editProblem?v_=${this.$route.query.v_}`
           if (item.fimage) {
             this.fimage = item.fimage;
             this.displayImg = `${process.env.VUE_APP_HOST}/image?path=${item.fimage}`;
-            this.fimage_problem = item.fimage_problem;
-            this.displayImg_problem = `${process.env.VUE_APP_HOST}/image?path=${item.fimage_problem}`;
-            this.std_img = item.std_img;
-            this.displayStd_img = `${process.env.VUE_APP_HOST}/image?path=${item.std_img}`;
-            this.act_img = item.act_img;
-            this.displayAct_img = `${process.env.VUE_APP_HOST}/image?path=${item.act_img}`;
+            
             this.why1_img = item.why1_img;
             this.displayWhy1_img = `${process.env.VUE_APP_HOST}/image?path=${item.why1_img}`;
-            
           }
           if (item.fattachment) {
             this.fattachment = item.fattachment;
