@@ -587,6 +587,10 @@ export default {
       containerYokoten: [],
       fid: "",
       dialogLoading: false,
+      fimage_problem: null,
+      std_img: null,
+      act_img: null,
+      why1_img: null,
       displayImage: null,
       displayImageStd: null,
       displayImageAct: null,
@@ -605,7 +609,7 @@ export default {
         const filterSectionDOM = document.getElementById("filterSection");
         return filterSectionDOM ? filterSectionDOM.offsetHeight : 0;   
       },
-    ...mapState(['newAnalisys'])
+    ...mapState(["newAnalisys", "newAnalisys2"])
   },
   methods: {
     exportToPDF(nameFile) {
@@ -668,20 +672,43 @@ export default {
       .then(async (result) => {
         this.isLoading = false;
         console.log(result);
+        if(result.data.data[0].uraian.length > 0) {
+          for (let i = 0; i < result.data.data[0].uraian.length; i++) {
+            const element = result.data.data[0].uraian[i];
+            if(element.type_uraian == 'general') {
+              this.furaian_kejadian = element.desc_nm
+              this.fimage_problem = element.ilustration;
+            }
+            if(element.type_uraian == 'standard') {
+              this.filustrasi_standart = element.desc_nm;
+              this.std_img = element.ilustration;
+            }
+            if(element.type_uraian == 'actual') {
+              this.filustrasi_actual = element.desc_nm;
+              this.act_img = element.ilustration;
+            }
+          }
+        }
+
         // this.displayImage = `${process.env.VUE_APP_HOST}/image?path=${result.data.data[0].fimage}`;
-        this.displayImage = await this.convertImgToBase64("http://localhost:3101/image?path=./upload/problem/file_problem_1685001006311-2023-05-25.png")
-        this.displayImageStd = await this.convertImgToBase64("http://localhost:3101/image?path=./upload/ilustration/std_file_1685001021779-2023-05-25.jpg")
-        this.displayImageAct = await this.convertImgToBase64("http://localhost:3101/image?path=./upload/ilustration/act_file_1685001032692-2023-05-25.jpg")
-        this.displayImageWhy = await this.convertImgToBase64("http://localhost:3101/image?path=./upload/ilustration/5whyterjadi_file_1684813575691-2023-05-23.png")
+        // this.displayImage = await this.convertImgToBase64("http://localhost:3101/image?path=./upload/problem/file_problem_1685001006311-2023-05-25.png")
+        // this.displayImageStd = await this.convertImgToBase64("http://localhost:3101/image?path=./upload/ilustration/std_file_1685001021779-2023-05-25.jpg")
+        // this.displayImageAct = await this.convertImgToBase64("http://localhost:3101/image?path=./upload/ilustration/act_file_1685001032692-2023-05-25.jpg")
+        // this.displayImageWhy = await this.convertImgToBase64("http://localhost:3101/image?path=./upload/ilustration/5whyterjadi_file_1684813575691-2023-05-23.png")
+
+        this.displayImage = await this.convertImgToBase64(`"${process.env.VUE_APP_HOST}/image?path=${this.fimage_problem}"`)
+        this.displayImageStd = await this.convertImgToBase64(`"${process.env.VUE_APP_HOST}/image?path=${this.std_img}"`)
+        this.displayImageAct = await this.convertImgToBase64(`"${process.env.VUE_APP_HOST}/image?path=${this.act_img}"`)
+        this.displayImageWhy = await this.convertImgToBase64(`"${process.env.VUE_APP_HOST}/image?path=${this.why1_img}"`)
         this.fid = result.data.data[0].fid;
         this.fmc_name = result.data.data[0].fmc_name;
         this.fline = result.data.data[0].fline;
         this.foperation_no = result.data.data[0].foperation_no;
         this.fmaker = result.data.data[0].fmaker;
         this.ferror_name = result.data.data[0].ferror_name;
-        this.furaian_kejadian = result.data.data[0].furaian_kejadian;
-        this.filustrasi_standart = result.data.data[0].filustrasi_standart;
-        this.filustrasi_actual = result.data.data[0].filustrasi_actual;
+        // this.furaian_kejadian = result.data.data[0].furaian_kejadian;
+        // this.filustrasi_standart = result.data.data[0].filustrasi_standart;
+        // this.filustrasi_actual = result.data.data[0].filustrasi_actual;
         this.foperator = result.data.data[0].foperator;
         this.fshift = result.data.data[0].fshift;
         this.fav_categoty = result.data.data[0].fav_categoty;
@@ -699,9 +726,9 @@ export default {
         //   this.containerStepRepair =
         //     result.data.data[0].fstep_repair.split("\n");
         // }
-        if (result.data.data[0].fstep_repair.includes("[{")) {
+        if (result.data.data[0].fstep_new.includes("[{")) {
             this.containerStepRepair = JSON.parse(
-            result.data.data[0].fstep_repair
+            result.data.data[0].fstep_new
           );
           if (this.containerStepRepair){
             console.log(this.chartData);

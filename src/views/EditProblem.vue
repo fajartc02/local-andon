@@ -83,16 +83,16 @@
                 <input
                   class="form-control"
                   name="sampleFile"
-                  ref="file_problem"
+                  ref="fimage_problem"
                   type="file"
-                  @change="onSelectFlex('file_problem')"
+                  @change="uploadFile('fimage_problem')"
                   placeholder="masukan ilustrasi problem"
                 />
               </div>
               <div class="col-2 p-0">
-                <button class="btn btn-secondary btn-sm" type="submit">
+                <!-- <button class="btn btn-secondary btn-sm" type="submit">
                   Upload
-                </button>
+                </button> -->
               </div>
               <!-- <div class="col-2 p-0">
                 <button class="btn btn-success btn-sm">View</button>
@@ -102,7 +102,7 @@
           <img :src="displayImg_problem" width="100">
         </div>
       </div>
-      <div class="row m-0 p-0">
+      <div v-if="isLongBd" class="row m-0 p-0">
         <div class="col px-1 text-left">
           <span class="input-lable">Ilustrasi Standart</span>
           <input
@@ -120,7 +120,7 @@
             v-model="filustrasi_actual"/>
         </div>
       </div>
-      <div class="row m-0 p-0">
+      <div v-if="isLongBd" class="row m-0 p-0">
         <div class="col px-1 text-left">
           <span class="input-lable">Standart Image</span>
           <form
@@ -137,18 +137,19 @@
                 <input
                   class="form-control"
                   name="sampleFilestd"
-                  ref="std_file"
+                  ref="std_img"
                   type="file"
-                  @change="onSelectFlex('std_file')"
+                  @change="uploadFile('std_img')"
                 />
               </div>
               <div class="col-2 p-0">
-                <button class="btn btn-secondary btn-sm" type="submit">
+                <!-- <button class="btn btn-secondary btn-sm" type="submit">
                   Upload
-                </button>
+                </button> -->
               </div>
             </div>
           </form>
+          <img :src="displayStd_img" width="100">
         </div>
         <div class="col px-1 text-left">
           <span class="input-lable">Actual Image</span>
@@ -166,18 +167,19 @@
                 <input
                   class="form-control"
                   name="sampleFilestd"
-                  ref="act_file"
+                  ref="act_img"
                   type="file"
-                  @change="onSelectFlex('act_file')"
+                  @change="uploadFile('act_img')"
                 />
               </div>
               <div class="col-2 p-0">
-                <button class="btn btn-secondary btn-sm" type="submit">
+                <!-- <button class="btn btn-secondary btn-sm" type="submit">
                   Upload
-                </button>
+                </button> -->
               </div>
             </div>
           </form>
+          <img :src="displayAct_img" width="100">
         </div>
       </div>
 
@@ -553,9 +555,9 @@
                 <input
                   class="form-control"
                   name="sampleFile5why"
-                  ref="5whyterjadi_file"
+                  ref="why1_img"
                   type="file"
-                  @change="onSelectFlex('5whyterjadi_file')"
+                  @change="uploadFile('why1_img')"
                 />
               </div>
               <div class="col-2 p-0">
@@ -565,6 +567,7 @@
               </div>
             </div>
           </form>
+          <img :src="displayWhy1_img" width="100">
         </div>
       </div>
       <!-- Step Repair -->
@@ -658,7 +661,7 @@
                 </tr>
               </tbody>
             </table>
-            <div
+            <!-- <div
             class="
               row
               m-0
@@ -692,7 +695,7 @@
                 Cancel
               </button>
             </div>
-          </div>
+          </div> -->
             <table
               id="table-step-repair"
               class="table table-responsive text-center"
@@ -836,7 +839,7 @@
               </tbody>
             </table>
           </div>
-          <div v-if="isStepRepair && containerStepRepair.length == 0" >
+          <div v-if="isStepRepair" >
             <div
               class="
                 row
@@ -889,7 +892,7 @@
               <div class="col-2 p-0">
                 <button
                   class="btn btn-info py-1 input-lable"
-                  @click="onAddStepRepair()"
+                  @click="onAddStepRepairNew()"
                 >
                   Submit
                 </button>
@@ -3124,6 +3127,9 @@ export default {
         this.isLoading = false;
       }
     },
+    uploadFile(state) {
+      this[state] = this.$refs[state].files[0];
+    },
     onSelectFlex(ref) {
       const file = this.$refs[ref].files[0];
       console.log(this.$refs[ref].files[0]);
@@ -3279,6 +3285,11 @@ export default {
       this.isWhyLama = false;
     },
     onAddStepRepair() {
+      this.containerStepRepair.push(this.descStepRepair);
+      this.descStepRepair = "";
+      this.isStepRepair = false;
+    },
+    onAddStepRepairNew() {
       this.containerStepRepairNew.push(this.stepField);
       this.stepField = {
         stepDesc: "",
@@ -3533,21 +3544,25 @@ https://smartandonsys.web.app/editProblem?v_=${this.$route.query.v_}`
       if (this.containerWhyLama.length == 1) {
         this.containerWhyTerjadi.push("");
       }
+      let formData = new FormData();
+      formData.append('fimage_problem', this.fimage_problem)
+      formData.append('std_img', this.std_img)
+      formData.append('act_img', this.act_img)
+      formData.append('why1_img', this.why1_img)
       let dataPrev = {
-        fimageproblem: this.fimage_problem,
-        act_img: this.act_img,
-        ast_img: this.std_img,
-        why1_img: this.why1_img,
+        furaian_kejadian_general: this.furaian_kejadian,
+        furaian_kejadian_standard: this.filustrasi_standart,
+        furaian_kejadian_actual: this.filustrasi_actual,   
         ferror_name: this.ferror_name,
         foperator: this.foperator,
         fshift: this.fshift,
         fav_categoty: this.fav_categoty,
-        fstart_time: [this.startDate, this.startTime],
-        fend_time: [this.endDate, this.endTime],
+        fstart_time: `${this.startDate} ${this.startTime}`,
+        fend_time: `${this.endDate} ${this.endTime}`,
         fpart_change: this.fpart_change,
         fDescImage: this.fDescImage,
         fstep_repair: this.containerStepRepair.join("\n"),
-        uraian: JSON.stringify(this.containerStepRepairNew),
+        fstep_new: JSON.stringify(this.containerStepRepairNew),
         fiveWhyLhApprove: this.fiveWhyLhApprove,
         fiveWhyShApprove: this.fiveWhyShApprove,
         cmLhApprove: this.cmLhApprove,
@@ -3565,6 +3580,13 @@ https://smartandonsys.web.app/editProblem?v_=${this.$route.query.v_}`
         fpermanet_cm_lama: JSON.stringify(this.containerCmLama),
         temporaryAction: this.temporaryAction,
       };
+      
+      for (const key in dataPrev) {
+        let value = dataPrev[key]
+        
+        formData.append(key, value)
+      }
+      dataPrev = formData
       if (this.fimage) {
         dataPrev.fimage = this.fimage;
       }
@@ -3579,6 +3601,8 @@ https://smartandonsys.web.app/editProblem?v_=${this.$route.query.v_}`
       ) {
         // await this.postHenkaten();
       }
+      console.log();
+      console.log(dataPrev);
       if (this.fav_categoty != null) {
         if (this.fshift != null) {
           // let url' = `http://localhost:5001/smartandonsys/us-central1/app/editProblem/${this.$route.query.v_}`;
@@ -3774,15 +3798,34 @@ https://smartandonsys.web.app/editProblem?v_=${this.$route.query.v_}`
             console.log(err);
           });
       }
+      if (this.newAnalisys2) {
+        axios
+          .post(
+            `${process.env.VUE_APP_HOST}/why_analisys/add/${this.$route.query.v_}?analisys_category=LAMA`,
+            this.newAnalisys2
+          )
+          .then((result) => {
+            console.log(result);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
       this.isLoading = true;
+      let formData = new FormData();
+      formData.append('fimage_problem', this.fimage_problem)
+      formData.append('std_img', this.std_img)
+      formData.append('act_img', this.act_img)
+      formData.append('why1_img', this.why1_img)
       let dataPrev = {
+        furaian_kejadian_general: this.furaian_kejadian,
+        furaian_kejadian_standard: this.filustrasi_standart,
+        furaian_kejadian_actual: this.filustrasi_actual,   
         ferror_name: this.ferror_name,
-        furaian_kejadian: this.furaian_kejadian,
-        filustrasi_standart: this.filustrasi_standart,
-        filustrasi_actual: this.filustrasi_actual,
         foperator: this.foperator,
         fav_categoty: this.fav_categoty,
-        fstart_time: [this.startDate, this.startTime],
+        fstart_time: `${this.startDate} ${this.startTime}`,
+        fend_time: `${this.endDate} ${this.endTime}`,
         fpart_change: this.fpart_change,
         fDescImage: this.fDescImage,
         fiveWhyLhApprove: this.fiveWhyLhApprove,
@@ -3794,7 +3837,7 @@ https://smartandonsys.web.app/editProblem?v_=${this.$route.query.v_}`
         cmLhFeedback: this.cmLhFeedback,
         cmShFeedback: this.cmShFeedback,
         fstep_repair: this.containerStepRepair.join("\n"),
-        uraian: JSON.stringify(this.containerStepRepairNew),
+        fstep_new: JSON.stringify(this.containerStepRepairNew),
         freal_prob: this.containerWhyTerjadi.join("\n"),
         froot_cause: this.containerWhyLama.join("\n"),
         fpermanet_cm: JSON.stringify(this.containerCmTerjadi),
@@ -3802,6 +3845,13 @@ https://smartandonsys.web.app/editProblem?v_=${this.$route.query.v_}`
         fpermanet_cm_lama: JSON.stringify(this.containerCmLama),
         temporaryAction: this.temporaryAction,
       };
+      for (const key in dataPrev) {
+        let value = dataPrev[key]
+        
+        formData.append(key, value)
+      }
+      dataPrev = formData
+
       if (this.fshift) {
         dataPrev.fshift = this.fshift;
       }
@@ -4003,8 +4053,6 @@ https://smartandonsys.web.app/editProblem?v_=${this.$route.query.v_}`
                 this.displayAct_img = `${process.env.VUE_APP_HOST}/image?path=${this.act_img}`;
               }
             }
-            
-            
           }
           if (item.id_m_problem_member) {
             this.isMemberThema = true;
@@ -4056,6 +4104,9 @@ https://smartandonsys.web.app/editProblem?v_=${this.$route.query.v_}`
             this.fimage = item.fimage;
             this.displayImg = `${process.env.VUE_APP_HOST}/image?path=${item.fimage}`;
             
+            
+          }
+          if(item.why1_img){
             this.why1_img = item.why1_img;
             this.displayWhy1_img = `${process.env.VUE_APP_HOST}/image?path=${item.why1_img}`;
           }
@@ -4183,8 +4234,8 @@ https://smartandonsys.web.app/editProblem?v_=${this.$route.query.v_}`
           if (item.fstep_repair.includes("\n")) {
             this.containerStepRepair = item.fstep_repair.split("\n");
           }
-          if (String(item.uraian).includes("[{")) {
-            this.containerStepRepairNew = JSON.parse(item.uraian);
+          if (item.fstep_new.includes("[{")) {
+            this.containerStepRepairNew = JSON.parse(item.fstep_new);
             this.containerStepRepairNew = this.containerStepRepairNew.map((item) => {
               if (!item.result) {
                 item.result = null;
