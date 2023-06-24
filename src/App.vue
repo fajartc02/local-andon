@@ -31,7 +31,7 @@ export default {
   },
   watch: {
     $route(to) {
-      console.log(to);
+      // console.log(to);
       this.actionsPushRoute(to.params.line);
       // if (to.path == "/") {
       //   this.isHomeBtn = false;
@@ -71,13 +71,13 @@ export default {
     ...mapActions(["actionsPushRoute", "actionsChangeTheme"]),
     onResize() {
       this.windowWidth = window.innerWidth;
-      console.log(this.windowWidth);
+      // console.log(this.windowWidth);
       if (this.windowWidth < 650) {
         this.isMobile = true;
       } else {
         this.isMobile = false;
       }
-      console.log(this.isMobile);
+      // console.log(this.isMobile);
     },
     gotoHome() {
       this.$router.push("/");
@@ -114,7 +114,7 @@ export default {
       axios
         .get(`${process.env.VUE_APP_HOST}/checkScreen`)
         .then((result) => {
-          console.log(result);
+          // console.log(result);
           if (result.data.data.length > 0) {
             let path = result.data.data[0].path;
             axios
@@ -122,9 +122,9 @@ export default {
                 path,
                 status: 1,
               })
-              .then((msgUpdate) => {
+              .then(() => {
                 this.$router.push(path);
-                console.log(msgUpdate);
+                // console.log(msgUpdate);
               })
               .catch((err) => {
                 console.log(err);

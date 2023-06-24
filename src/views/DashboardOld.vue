@@ -75,7 +75,7 @@
 
           </div>
           <div class="row m-0 p-0 mt-2 flex-row flex-nowrap overflow-auto">
-            <div class="col-3 hover-menu p-1" @click="goTo('/focus-theme/taskforce')">
+            <!-- <div class="col-3 hover-menu p-1" @click="goTo('/focus-theme/taskforce')">
               <center>
                 <img src="https://cdn.iconscout.com/icon/free/png-256/focus-1512706-1282214.png" width="30%" />
               </center>
@@ -83,7 +83,7 @@
                 Task <br />
                 Force
               </center>
-            </div>
+            </div> -->
             <!-- <div class="col-3 hover-menu p-1" @click="goTo('/quality')">
               <center>
                 <img src="@/assets/quality.png" width="30%" />
@@ -93,6 +93,15 @@
                 Monitoring
               </center>
             </div> -->
+            <div class="col-3 hover-menu p-1" @click="goTo('/mtbf-mttr')">
+              <center>
+                <img src="https://www.pngmart.com/files/21/3D-Printer-PNG-Picture.png" width="30%" />
+              </center>
+              <center class="card-title">
+                Mtbf <br />
+                Mttr
+              </center>
+            </div>
             <a class="col-3 hover-menu p-1" href="http://hem-dev.toyota.co.id/" target="_blank"
               style="text-decoration: none; color: black">
               <center>

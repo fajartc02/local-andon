@@ -69,7 +69,7 @@ export default new Vuex.Store({
             axios.get(`${process.env.VUE_APP_HOST}/colordash`)
                 .then((result) => {
                     commit('GET_PROD', result.data.data)
-                    console.log(result.data.data);
+                        // console.log(result.data.data);
                 }).catch((err) => {
                     console.log(err)
                     let count = 0

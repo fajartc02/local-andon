@@ -127,6 +127,7 @@ export default {
           events: {
             dataPointSelection: (event, chartContext, config) => {
               console.log(event, chartContext, config);
+              
               this.isLoading = true;
               let labelSelected = this.series[config.seriesIndex].name;
               console.log(labelSelected);

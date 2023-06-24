@@ -14,7 +14,7 @@
                 <div class="col-6 p-0">
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                      <span class="input-group-text" id="basic-addon1"
+                      <span class="input-group-text"
                         >Start</span
                       >
                     </div>
@@ -29,7 +29,7 @@
                 <div class="col-6 p-0 pl-1">
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                      <span class="input-group-text" id="basic-addon1"
+                      <span class="input-group-text"
                         >Finish</span
                       >
                     </div>
@@ -46,7 +46,7 @@
                 <div class="col-8 p-0">
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                      <span class="input-group-text" id="basic-addon1"
+                      <span class="input-group-text"
                         >AV Category</span
                       >
                     </div>
@@ -283,7 +283,7 @@
                 <div class="col-6 p-0">
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                      <span class="input-group-text" id="basic-addon1"
+                      <span class="input-group-text"
                         >Start</span
                       >
                     </div>
@@ -298,7 +298,7 @@
                 <div class="col-6 p-0 pl-1">
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                      <span class="input-group-text" id="basic-addon1"
+                      <span class="input-group-text"
                         >Finish</span
                       >
                     </div>
@@ -315,7 +315,7 @@
                 <div class="col-8 p-0">
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                      <span class="input-group-text" id="basic-addon1"
+                      <span class="input-group-text"
                         >AV Category</span
                       >
                     </div>

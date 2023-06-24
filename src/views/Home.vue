@@ -85,7 +85,7 @@ export default {
   },
   watch: {
     $route(to) {
-      console.log(to);
+      // console.log(to);
       this.actionsPushRoute(to.params.line);
       this.storeProdAchievments();
       if (to.path == "/") {
@@ -137,9 +137,9 @@ export default {
       .then(() => {
         // Badge count has shown as well
       })
-      .catch((e) => {
+      .catch(() => {
         // The Browser not supporting the Badge feature or something went wrong
-        console.log(e);
+        // console.log(e);
       });
   },
 };
