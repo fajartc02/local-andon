@@ -224,6 +224,7 @@
                             <div class="col m-0 p-0 text-center justify-center" style="width: 150px; height: 350px">
                               <div class="row m-0 p-0" >
                             <bar-chart  
+                            v-if="chartData.datasets[0].data[0] !== 0"
                             style="height: 200px!important; width: 150px"
                             :chart-data="chartData"
                             :options="{
@@ -318,7 +319,7 @@
                         margin-top: 10px !important;
                       "
                       rowspan="3"
-                      v-if="containerWhyTerjadi.length !== 0"
+                      v-if="newAnalisys"
                     >
                       <div class= "m-0 p-0 text-center justify-center">
                         <TreeListAnalisys :hide="true" whyCategory="TERJADI"/>
@@ -369,7 +370,7 @@
                     <td
                       style="vertical-align: baseline !important"
                       colspan="2"
-                      v-if="containerWhyLama.length !== 0"
+                      v-if="newAnalisys2"
                     >
                       <div class= "content-center mx-10">
                         <TreeListAnalisys :hide="true" whyCategory="LAMA" />
@@ -597,7 +598,7 @@ export default {
       displayImageWhy: null,
       big: 0,
       bigQuick: "",
-      q6Desc: ["Diagnose/Cause Analysis", "SparePart", "Tools", "Maintenace Ability", "Machine Backup", "Machine Setting"],
+      q6Desc: ["Diagnose/Cause Analysis", "SparePart", "Tools", "Maintenace Skill", "Machine Backup", "Machine Setting"],
       bigDesc: "",
       jumlahIdeal: 0,
       jumlahActual: 0,
@@ -689,7 +690,7 @@ export default {
             }
           }
         }
-
+        console.log(this.std_img);
         // this.displayImage = `${process.env.VUE_APP_HOST}/image?path=${result.data.data[0].fimage}`;
         // this.displayImage = await this.convertImgToBase64("http://localhost:3101/image?path=./upload/problem/file_problem_1685001006311-2023-05-25.png")
         // this.displayImageStd = await this.convertImgToBase64("http://localhost:3101/image?path=./upload/ilustration/std_file_1685001021779-2023-05-25.jpg")
@@ -701,6 +702,8 @@ export default {
         this.displayImageAct = await this.convertImgToBase64(`"${process.env.VUE_APP_HOST}/image?path=${this.act_img}"`)
         this.displayImageWhy = await this.convertImgToBase64(`"${process.env.VUE_APP_HOST}/image?path=${this.why1_img}"`)
         this.fid = result.data.data[0].fid;
+        console.log(`${process.env.VUE_APP_HOST}/image?path=${this.fimage_problem}`);
+        console.log(this.displayImage);
         this.fmc_name = result.data.data[0].fmc_name;
         this.fline = result.data.data[0].fline;
         this.foperation_no = result.data.data[0].foperation_no;
