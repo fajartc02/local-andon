@@ -778,12 +778,12 @@
                       v-model="stepRepair.quick6"
                     >
                       <option disabled value="">Quick 6</option>
-                      <option value="Q1">Q1</option>
-                      <option value="Q2">Q2</option>
-                      <option value="Q3">Q3</option>
-                      <option value="Q4">Q4</option>
-                      <option value="Q5">Q5</option>
-                      <option value="Q6">Q6</option>
+                      <option value="Q1">Q1 (Diagnose/Cause Analysis)</option>
+                      <option value="Q2">Q2 (SparePart)</option>
+                      <option value="Q3">Q3 (Tools)</option>
+                      <option value="Q4">Q4 (Maintenace Skill)</option>
+                      <option value="Q5">Q5 (Machine Backup)</option>
+                      <option value="Q6">Q6 (Machine Setting)</option>
                     </select>
                   </td>
                   <td class="border">
@@ -864,12 +864,12 @@
                   v-model="stepField.quick6"
                 >
                   <option disabled value="">Quick 6</option>
-                  <option value="Q1">Q1</option>
-                  <option value="Q2">Q2</option>
-                  <option value="Q3">Q3</option>
-                  <option value="Q4">Q4</option>
-                  <option value="Q5">Q5</option>
-                  <option value="Q6">Q6</option>
+                  <option value="Q1">Q1 (Diagnose/Cause Analysis)</option>
+                  <option value="Q2">Q2 (SparePart)</option>
+                  <option value="Q3">Q3 (Tools)</option>
+                  <option value="Q4">Q4 (Maintenace Skill)</option>
+                  <option value="Q5">Q5 (Machine Backup)</option>
+                  <option value="Q6">Q6 (Machine Setting)</option>
                 </select>
               </div>
               <div class="col p-0">
@@ -917,7 +917,7 @@
         </div>
       </div>
       <!-- Countermeasure (terjadi) -->
-      <div v-if="containerWhyTerjadi.length > 0" class="row m-0 p-0">
+      <div  class="row m-0 p-0">
         <div class="col px-1 text-left">
           <span class="input-lable">Countermeasure (kenapa terjadi) </span>
           <button
@@ -3788,7 +3788,7 @@ https://smartandonsys.web.app/editProblem?v_=${this.$route.query.v_}`
       if (this.newAnalisys) {
         axios
           .post(
-            `${process.env.VUE_APP_HOST}/why_analisys/add/${this.$route.query.v_}`,
+            `${process.env.VUE_APP_HOST}/why_analisys/add/${this.$route.query.v_}?analisys_category=TERJADI`,
             this.newAnalisys
           )
           .then((result) => {
