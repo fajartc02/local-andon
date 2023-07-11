@@ -561,9 +561,9 @@
                 />
               </div>
               <div class="col-2 p-0">
-                <button class="btn btn-secondary btn-sm" type="submit">
+                <!-- <button class="btn btn-secondary btn-sm" type="submit">
                   Upload
-                </button>
+                </button> -->
               </div>
             </div>
           </form>
@@ -781,7 +781,7 @@
                       <option value="Q1">Q1 (Diagnose/Cause Analysis)</option>
                       <option value="Q2">Q2 (SparePart)</option>
                       <option value="Q3">Q3 (Tools)</option>
-                      <option value="Q4">Q4 (Maintenace Skill)</option>
+                      <option value="Q4">Q4 (Maintenance Ability)</option>
                       <option value="Q5">Q5 (Machine Backup)</option>
                       <option value="Q6">Q6 (Machine Setting)</option>
                     </select>
@@ -867,7 +867,7 @@
                   <option value="Q1">Q1 (Diagnose/Cause Analysis)</option>
                   <option value="Q2">Q2 (SparePart)</option>
                   <option value="Q3">Q3 (Tools)</option>
-                  <option value="Q4">Q4 (Maintenace Skill)</option>
+                  <option value="Q4">Q4 (Maintenance Ability)</option>
                   <option value="Q5">Q5 (Machine Backup)</option>
                   <option value="Q6">Q6 (Machine Setting)</option>
                 </select>
