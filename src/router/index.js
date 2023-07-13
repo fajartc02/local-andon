@@ -30,6 +30,7 @@ import MappingLine from "../views/Mapping/MappingLine"
 import ManualBook from "../views/ManualInstruction/DashboardMI"
 import DashboardMc from "../views/Machines/DashboardMc"
 import MtbfMttr from "../views/MtbfMttr/MtbfMttr"
+import JobAnalisys from "../views/jobAnalisys/JobAnalisys"
 
 
 Vue.use(VueRouter)
@@ -173,6 +174,11 @@ const routes = [{
                 path: '/manualBook',
                 name: 'DashboardMI',
                 component: ManualBook
+            },
+            {
+                path: '/job-analisys',
+                name: 'JobAnalisys',
+                component: JobAnalisys
             },
             {
                 path: '/symptom',
