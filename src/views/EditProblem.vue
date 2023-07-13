@@ -103,7 +103,7 @@
         </div>
       </div>
       <div v-if="isLongBd" class="row m-0 p-0">
-        <div class="col px-1 text-left">
+        <div class="col-8 px-1 text-left">
           <span class="input-lable">Ilustrasi Standart</span>
           <input
             class="form-control"
@@ -111,17 +111,7 @@
             placeholder="Standart Condition"
             v-model="filustrasi_standart"/>
         </div>
-        <div class="col px-1 text-left">
-          <span class="input-lable">Ilustrasi Actual</span>
-          <input
-            class="form-control"
-            type="text"
-            placeholder="Actual Condition"
-            v-model="filustrasi_actual"/>
-        </div>
-      </div>
-      <div v-if="isLongBd" class="row m-0 p-0">
-        <div class="col px-1 text-left">
+        <div class="col-4 px-1 text-left">
           <span class="input-lable">Standart Image</span>
           <form
             method="post"
@@ -151,7 +141,18 @@
           </form>
           <img :src="displayStd_img" width="100">
         </div>
-        <div class="col px-1 text-left">
+        
+      </div>
+      <div v-if="isLongBd" class="row m-0 p-0">
+        <div class="col-8 px-1 text-left">
+          <span class="input-lable">Ilustrasi Actual</span>
+          <input
+            class="form-control"
+            type="text"
+            placeholder="Actual Condition"
+            v-model="filustrasi_actual"/>
+        </div>
+        <div class="col-4 px-1 text-left">
           <span class="input-lable">Actual Image</span>
           <form
             method="post"
@@ -409,6 +410,7 @@
             class="btn btn-success py-1"
             @click="addToogle('isWhyTerjadi')"
             style="font-size: 10px"
+            v-if="!isLongBd"
           >
             +
           </button>
@@ -533,7 +535,7 @@
               </button>
             </div>
           </div>
-          <div class="row m-0 p-0">
+          <div class="m-0 p-0">
             <TreeListAnalisys :hide="false" whyCategory="TERJADI" />
           </div>
         </div>
@@ -1430,6 +1432,7 @@
             class="btn btn-success py-1"
             @click="addToogle('isWhyLama')"
             style="font-size: 10px"
+            v-if="!isLongBd"
           >
             +
           </button>
@@ -1544,8 +1547,10 @@
                 Cancel
               </button>
             </div>
+          </div >
+          <div v-if="isLongBd" class="m-0 p-0">
+            <TreeListAnalisys :hide="false" whyCategory="LAMA"/>
           </div>
-          <TreeListAnalisys :hide="false" whyCategory="LAMA"/>
         </div>
       </div>
       <!-- CM LAMA -->

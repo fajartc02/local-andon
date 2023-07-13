@@ -126,11 +126,11 @@
               <table class="table table-bordered-dark">
                 <thead>
                   <tr style="height: 30px">
-                    <td class="bg-success text-left px-2" colspan="2" style="width: 50%; font-weight: bolder">
+                    <td class="bg-success" colspan="2" style="width: 50%; font-weight: bolder">
                       3. PROBLEM DESCRIPTION
                     </td>
-                    <td class="bg-success text-left px-2" rowspan="2" colspan="2" style="width: 50%; font-weight: bolder">
-                      4. STEP REPAIR ( Micro Analysis )
+                    <td class="bg-success" rowspan="2" colspan="2" style="width: 50%; font-weight: bolder">
+                      5.STEP REPAIR ( Micro Analysis )
                     </td>
                   </tr>
                   <tr style="height: 25px">
@@ -146,17 +146,17 @@
                       <p class="text-left px-4">{{ furaian_kejadian }}</p>
                       <img
                         :src="`data:image/png;base64,${displayImage}`"
-                        width="80%" class="img-fluid rounded"
+                        width="90%" class="img-fluid rounded"
                       />
                     </td>
                     <td class="text-center" style="max-height: 300px; max-width: 200px">
-                      <p class="card text-center m-0" style="background-color: #008000; color: white; width: 60px">Standard</p>
+                      <p class="card bg-primary text-center m-0" style="width: 60px">Standart</p>
                       <p class="text-left m-0 px-2">{{ filustrasi_standart }}</p>
                       <img
                         :src="`data:image/png;base64,${displayImageStd}`"
                          width="50%" class="img-fluid rounded"
                       />
-                      <p class="card text-center m-0" style="background-color: #E51A05; color: white; width: 60px">Actual</p>
+                      <p class="card bg-danger text-center m-0" style="width: 60px">Actual</p>
                       <p class="text-left m-0 px-2">{{ filustrasi_actual }}</p>
                       <img
                         :src="`data:image/png;base64,${displayImageAct}`"
@@ -166,111 +166,110 @@
             
                       <!-- ACTUAL -->
                       
-                    <td class="m-0 p-0 border-0" style=" vertical-align: baseline !important">
-                      <table class="table table-bordered-dark">
-                        <thead>
-                          <tr class="text-center">
-                            
-                            <td rowspan="2" style="width: 10px">No</td>
-                            <td rowspan="2" style="width: 300px">
-                              Step Repair
-                            </td>
-                            <td colspan="2" style="width: 20px">Work Time (min)</td>
-                            <!-- <td rowspan="2" colspan="5">Menit</td> -->
-                            <td rowspan="2" style="width: 30px">Q6</td>
-                          </tr>
-                          <tr>
-                            <td style="width: 60px">Actual</td>
-                            <td style="width: 60px">Ideal</td>
-                          </tr>
-                          <!-- STEP -->
-                          <tr class="text-center" 
-                            v-for="(stepRepair, i) in containerStepRepair"
-                            :key="stepRepair"
-                            :style="`background-color: ${stepColor[i]}`"
-                          >
-                            <td class="text-center" v-if="i < 12">
-                              {{ i + 1 }}
-                            </td>
-                            <td v-if="i < 12" class="text-left">
-                              {{ stepRepair.stepDesc }}
-                            </td>
-                            <td v-if="i < 12">
-                              {{stepRepair.actualTime}}
-                            </td>
-                            <td v-if="i < 12">
-                              {{stepRepair.idealTime}}
-                            </td>
-                            <td v-if="i < 12">
-                              {{stepRepair.quick6}}
-                            </td>
-                            <!-- <td v-if="i < 7"></td>
-                            <td v-if="i < 7"></td>
-                            <td v-if="i < 7"></td>
-                            <td v-if="i < 7"></td> -->
-                          </tr>
-                          <tr class="text-center">
-                            <td colspan="2">Total Time</td>
-                            <td>{{jumlahActual}}</td>
-                            <td>{{jumlahIdeal}}</td>
-                            <td></td>
-                          </tr>
-                        </thead>
-                      </table>
-                      
-                    </td>
-                    <td 
-                        class="m-0 p-0 border-0 text-center justify-center" >
-                      <!-- <div style=" scale: 50%" class="m-0 p-0 content-top"> -->
-                        <div class="col m-0 p-0 text-center justify-center" style="width: 150px; height: 300px">
-                          <div class="row m-0 p-0" >
-                        <bar-chart  
-                        v-if="chartData.datasets[0].data[0] !== 0"
-                        style="height: 200px!important; width: 150px"
-                        :chart-data="chartData"
-                        :options="{
-                          responsive: true,
-                          maintainAspectRatio: false,
-                          plugins: {
-                            legend: { display: false },
-                            title: { display: true, },
-                          },
-                          scales: {
-                            yAxes: [{
-                              ticks: {
-                                min: 0,
+                        <td class="m-0 p-0 border-0" style=" vertical-align: baseline !important">
+                          <table class="table table-bordered-dark">
+                            <thead>
+                              <tr class="text-center">
                                 
-                                }
-                            }]
-                          }
-          
-                        }"
-                        />
-                          </div>
-                          <div class="card border-danger row m-0 p-0 text-center content-center" style="scale: 90%">
-                            <td class=" border-0 m-0 p-0" >
-                              <h2 style="color: #E51A05" >{{bigQuick}}</h2>
-                              <b>{{bigDesc}}</b>
-                            </td>
-                          </div>
-                          <!-- <div class="row m-0 p-0 conten-center alignment-center">
-                            <td class="card bg-danger text-center m-0" style="width: 50px; height: 30px">
-                              <p>{{jumlahActual}} min</p>
-                              <p>Current Step</p>
-                            </td>
-                            <td class="text-center" style=" width: 50px; border: none">
-                              <i class="fa fa-arrow-right p-0"></i>
-                              <p class="text-danger">{{jumlahActual - jumlahIdeal}} min</p>
-                            </td>
-                            <td class="card bg-success text-center m-0" style="width: 50px; height: 30px">
-                              <p>{{jumlahIdeal}} min</p>
-                              <p>Ideal Step</p>
-                            </td>
-                          </div> -->
-                        </div>
-                      
-                      <!-- </div> -->
-                    </td>
+                                <td rowspan="2" style="width: 10px">No</td>
+                                <td rowspan="2" style="width: 300px">
+                                  Step Repair
+                                </td>
+                                <td colspan="2" style="width: 20px">Work Time (min)</td>
+                                <!-- <td rowspan="2" colspan="5">Menit</td> -->
+                                <td rowspan="2" style="width: 30px">Q6</td>
+                              </tr>
+                              <tr>
+                                <td style="width: 60px">Actual</td>
+                                <td style="width: 60px">Ideal</td>
+                              </tr>
+                              <!-- STEP -->
+                              <tr class="text-center" 
+                                v-for="(stepRepair, i) in containerStepRepair"
+                                :key="stepRepair"
+                              >
+                                <td class="text-center" v-if="i < 12">
+                                  {{ i + 1 }}
+                                </td>
+                                <td v-if="i < 12" class="text-left">
+                                  {{ stepRepair.stepDesc }}
+                                </td>
+                                <td v-if="i < 12">
+                                  {{stepRepair.actualTime}}
+                                </td>
+                                <td v-if="i < 12">
+                                  {{stepRepair.idealTime}}
+                                </td>
+                                <td v-if="i < 12">
+                                  {{stepRepair.quick6}}
+                                </td>
+                                <!-- <td v-if="i < 7"></td>
+                                <td v-if="i < 7"></td>
+                                <td v-if="i < 7"></td>
+                                <td v-if="i < 7"></td> -->
+                              </tr>
+                              <tr class="text-center">
+                                <td colspan="2">Total Time</td>
+                                <td>{{jumlahActual}}</td>
+                                <td>{{jumlahIdeal}}</td>
+                                <td></td>
+                              </tr>
+                            </thead>
+                          </table>
+                          
+                        </td>
+                        <td 
+                            class="m-0 p-0 border-0 text-center justify-center" >
+                          <!-- <div style=" scale: 50%" class="m-0 p-0 content-top"> -->
+                            <div class="col m-0 p-0 text-center justify-center" style="width: 150px; height: 300px">
+                              <div class="row m-0 p-0" >
+                            <bar-chart  
+                            v-if="chartData.datasets[0].data[0] !== 0"
+                            style="height: 200px!important; width: 150px"
+                            :chart-data="chartData"
+                            :options="{
+                              responsive: true,
+                              maintainAspectRatio: false,
+                              plugins: {
+                                legend: { display: false },
+                                title: { display: true, },
+                              },
+                              scales: {
+                                yAxes: [{
+                                  ticks: {
+                                    min: 0,
+                                    
+                                    }
+                                }]
+                              }
+              
+                            }"
+                            />
+                              </div>
+                              <div class="card border-danger row m-0 p-0 text-center content-center" style="scale: 90%">
+                                <td class=" border-0 m-0 p-0" >
+                                  <h2>{{bigQuick}}</h2>
+                                  <b>{{bigDesc}}</b>
+                                </td>
+                              </div>
+                              <!-- <div class="row m-0 p-0 conten-center alignment-center">
+                                <td class="card bg-danger text-center m-0" style="width: 50px; height: 30px">
+                                  <p>{{jumlahActual}} min</p>
+                                  <p>Current Step</p>
+                                </td>
+                                <td class="text-center" style=" width: 50px; border: none">
+                                  <i class="fa fa-arrow-right p-0"></i>
+                                  <p class="text-danger">{{jumlahActual - jumlahIdeal}} min</p>
+                                </td>
+                                <td class="card bg-success text-center m-0" style="width: 50px; height: 30px">
+                                  <p>{{jumlahIdeal}} min</p>
+                                  <p>Ideal Step</p>
+                                </td>
+                              </div> -->
+                            </div>
+                          
+                          <!-- </div> -->
+                        </td>
                       
                   
                   </tr>
@@ -279,14 +278,14 @@
             </div>
           </div>
           <div class="row m-0 p-0">
-            <div class="col p-0 m-0 border-top border-dark">
+            <div class="col-12 p-0 m-0 border-top border-dark">
               <table class="table table-bordered-dark">
                 <thead>
                   <tr style="height: 30px">
                     <!-- TABLE WHY TERJADI -->
-                    <td colspan="2" class="bg-success m-0 p-0" style="max-width: 950px; font-weight: bolder">
+                    <td class="bg-success m-0 p-0" style="width: 50%; font-weight: bolder">
                       <tr>
-                        <td class="text-left px-2" style="width: 350px">5. 5W Analysis</td>
+                        <td>4. KENAPA TERJADI (5W Analysis)</td>
                         <td class="text-center m-0 p-0">
                           <tr>
                             <td style="width: 100px">PIC</td>
@@ -307,19 +306,8 @@
                         </td>
                       </tr>
                     </td>
-                    <td rowspan="2" class="bg-success text-left px-2" style=" font-weight: bolder">
-                      6. COUNTER MEASURE
-                    </td>
-                  </tr>
-                  <tr>
-                    <!-- <td class="bg-success" style="width: 50%; font-weight: bolder" colspan="2">
+                    <td class="bg-success" style="width: 50%; font-weight: bolder" colspan="2">
                       6. KENAPA LAMA ( 5W Analysis )
-                    </td> -->
-                    <td class="bg-succes text-center text" style="width: 475px; font-weight: bolder">
-                      5.a. KENAPA TERJADI
-                    </td>
-                    <td class="bg-succes text-center" style="width: 475px; font-weight: bolder">
-                      5.b. KENAPA LAMA
                     </td>
                   </tr>
                   <tr>
@@ -328,20 +316,20 @@
                       style="
                         height: 300px;
                         
+                        margin-top: 10px !important;
                       "
-                      class="text-center p-0 m-0"
                       rowspan="3"
                       v-if="newAnalisys"
                     >
-                      
-                      <TreeListAnalisys :hide="true" whyCategory="TERJADI"/>
-                      <img
-                      :src="`data:image/png;base64,${displayImageWhy}`"
-                        width="200px" class="img-fluid rounded content-center text-center"
+                      <div class= "m-0 p-0 text-center justify-center">
+                        <TreeListAnalisys :hide="true" whyCategory="TERJADI"/>
+                        <img
+                        :src="`data:image/png;base64,${displayImageWhy}`"
+                         width="40%" class="img-fluid rounded text-center"
                       />
-    
+                      </div>
                       
-                      <!-- <div
+                      <div
                         v-for="(whyTerjadi, i) in containerWhyTerjadi"
                         :key="whyTerjadi.machine" hidden
                       >
@@ -359,18 +347,19 @@
                           </td>
                         </tr>
                       </div>
-                      <img hidden
+                      <img
                         :src="displayImage"
                         alt=""
                         height="200"
                         style="position: absolute; top: 100px"
-                      /> -->
+                      />
                     </td>
                     <td
                       class="text-danger"
                       style="
                         height: 300px;
                         vertical-align: baseline !important;
+                        margin-top: 10px !important;
                       "
                       rowspan="3"
                       v-else
@@ -379,13 +368,15 @@
                     </td>
                     <!-- KENAPA LAMA -->
                     <td
-                      style="
-                      vertical-align: baseline !important"
-                      rowspan="3"
+                      style="vertical-align: baseline !important"
+                      colspan="2"
                       v-if="newAnalisys2"
                     >
-                      <TreeListAnalisys :hide="true" whyCategory="LAMA" />
-                      <!-- <div
+                      <div class= "content-center mx-10">
+                        <TreeListAnalisys :hide="true" whyCategory="LAMA" />
+                      </div>
+                      
+                      <div
                         v-for="(whyLama, i) in containerWhyLama"
                         :key="whyLama.machine" hidden
                       >
@@ -402,25 +393,31 @@
                             <i class="fa fa-arrow-down"></i>
                           </td>
                         </tr>
-                      </div> -->
+                      </div>
                     </td>
                     <td
                       class="text-danger"
-                      style=" vertical-align: baseline !important"
-                      rowspan="3"
+                      style="vertical-align: baseline !important"
+                      colspan="2"
                       v-else
                     >
                       Analisys kenapa Lama Belum Di isi
                     </td>
+                  </tr>
+                  <tr>
+                    <td class="bg-success">7. COUNTER MEASURE</td>
+                    <td class="bg-success">8. YOKOTEN COUNTERMEASURE</td>
+                  </tr>
+                  <tr>
                     <!-- TABLE CM -->
                     <td class="p-0 m-0" style="vertical-align: baseline !important">
                       <tr class="p-0 m-0 text-center">
                         <td style="width: 5%">No</td>
-                        <td>Countermeasure</td>
+                        <td style="width: 50%">Countermeasure</td>
                         <td>C/M Category</td>
                         <td>PIC</td>
                         <td>Bagian</td>
-                        <td style="width: 100px">Kapan</td>
+                        <td>Kapan</td>
                         <td>Judg</td>
                       </tr>
                       <tr class="text-center"
@@ -438,7 +435,7 @@
                         </td>
                         <td v-else class="text-danger">{{ "Belum" }}</td>
                       </tr>
-                      <tr class="text-center"
+                      <tr
                         v-for="(cmLama, i) in containerCmLama"
                         :key="cmLama.cmDesc"
                       >
@@ -460,54 +457,46 @@
                             vertical-align: baseline !important;
                             border: none;
                           "
-                          
+                          colspan="2"
                         >
                           Countermeasure Belum di isi
                         </td>
                       </tr>
                     </td>
-                  </tr>
-                  <tr>
-                    
-                    <td class="bg-success text-left px-2" style="font-weight: bolder">7. YOKOTEN COUNTERMEASURE</td>
-                  </tr>
-                  <tr>
                     <!-- TABLE YOKO -->
-                    <td class="p-0 m-0" style="vertical-align: baseline !important">
-                      <tr class="p-0 m-0 text-center">
-                        <td style="width: 30px">No</td>
-                        <td style="width: 300px">Machine</td>
-                        <td style="width: 80px">PIC</td>
-                        <td style="width: 80px">Bagian</td>
-                        <td style="width: 100px">Kapan</td>
-                        <td style="width: 80px">Judg</td>
+                    <td class="m-0 p-0" style="vertical-align: baseline !important">
+                      <tr>
+                        <td>Machine</td>
+                        <td>PIC</td>
+                        <td>Bagian</td>
+                        <td>Kapan</td>
+                        <td >Judg</td>
                       </tr>
                       
-                      <tr class="text-center" v-for="(yokoten,i) in containerYokoten" :key="yokoten">
-                        <td>{{ i + 1 }}</td>
-                        <td>{{ yokoten.machine }}</td>
-                        <td>{{ yokoten.pic }}</td>
-                        <td>MT</td>
-                        <td>{{ yokoten.datePlan }}</td>
-                        <td v-if="yokoten.judg" class="text-success">
-                          {{ "OK" }}
-                        </td>
-                        <td v-else class="text-danger">{{ "Belum" }}</td>
-                      </tr>
-                    
-                    
-                      <tr v-if="containerYokoten.length === 0">
-                        <td
-                          class="text-danger text-center"
-                          style="
-                            vertical-align: baseline !important;
-                            border: none;
-                          "
-                          
-                        >
-                          Yokoten Tidak Ada
-                        </td>
-                      </tr>
+                        <tr v-for="yokoten in containerYokoten" :key="yokoten">
+                          <td>{{ yokoten.machine }}</td>
+                          <td>{{ yokoten.pic }}</td>
+                          <td>MT</td>
+                          <td>{{ yokoten.datePlan }}</td>
+                          <td v-if="yokoten.judg" class="text-success">
+                            {{ "OK" }}
+                          </td>
+                          <td v-else class="text-danger">{{ "Belum" }}</td>
+                        </tr>
+                      
+                      
+                        <tr v-if="containerYokoten.length === 0">
+                          <td
+                            class="text-danger text-center"
+                            style="
+                              vertical-align: baseline !important;
+                              border: none;
+                            "
+                            colspan="2"
+                          >
+                            Yokoten Tidak Ada
+                          </td>
+                        </tr>
                      
                     </td>
                   </tr>
@@ -566,7 +555,7 @@ export default {
           {
             label: "Actual",
             data: [0, 0, 0, 0, 0, 0],
-            backgroundColor: ["#FF9B00", "#FF9B00", "#FF9B00", "#FF9B00", "#FF9B00", "#FF9B00"],
+            backgroundColor: "#FF0000",
           },
         ],
       },
@@ -613,7 +602,6 @@ export default {
       bigDesc: "",
       jumlahIdeal: 0,
       jumlahActual: 0,
-      stepColor: []
       
     };
   },
@@ -768,11 +756,6 @@ export default {
                 this.chartData.datasets[0].data[5] += this.containerStepRepair[i].idealTime;
                 this.chartData.datasets[1].data[5] += this.containerStepRepair[i].actualTime;
               }
-              if(this.containerStepRepair[i].actualTime > this.containerStepRepair[i].idealTime){
-                this.stepColor.push("#ff7f7f")
-              }else{
-                this.stepColor.push("white")
-              }
             }
           }
           if(this.chartData.datasets){
@@ -785,11 +768,6 @@ export default {
                 this.big = this.chartData.datasets[1].data[i] - this.chartData.datasets[0].data[i]
                 this.bigQuick = this.chartData.labels[i];
                 this.bigDesc = this.q6Desc[i];
-              }
-            }
-            for (let i = 0; i < 6; i++){
-              if(this.chartData.labels[i] == this.bigQuick){
-                this.chartData.datasets[1].backgroundColor[i] = "#FF0000"
               }
             }
           }

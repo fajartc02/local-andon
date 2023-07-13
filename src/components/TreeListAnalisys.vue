@@ -1,7 +1,7 @@
 <template>
   <div>
     <button v-if="!hide" class="btn btn-primary" @click="addNode">
-      Buat Analisis Baru
+      Buat Analisis Kenapa {{whyCategory}}
     </button>
     <vue-tree-list
       @click="onClick"
