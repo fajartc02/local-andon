@@ -35,7 +35,12 @@
                     />
                   </div>
                 </div>
+            </div>
+            <div class="row m-0">
+              <div class="col-12">
+                <button class="btn btn-primary w-100" @click="getMtbfMttr()">Search</button>
               </div>
+            </div>  
         </div>
         <div class="card-body mt-4">
             <GraphMtbf :mtfbMttrData="mtfbMttrData"/>
@@ -70,9 +75,15 @@ export default {
         getMtbfMttr() {
             let url = `${process.env.VUE_APP_HOST}/mtbf-mttr?start_date=${this.selectedStartDate}&end_date=${this.selectedEndDate}`;
             axios.get(url)
-            .then((result) => {
-                // console.log(result.data.data);
-                this.mtfbMttrData = result.data.data
+            .then(async (result) => {
+                console.log(result.data.data);
+                let mapResult = await result.data.data.map(item => {
+                  for (let i = 0; i < item.mcs.length; i++) {
+                    item.mcs[i].mttr = +(item.mcs[i].mttr/ 60).toFixed(2)
+                  }
+                  return item
+                })
+                this.mtfbMttrData = mapResult
             }).catch((err) => {
                 alert('Gagal Memuat data')
                 console.log(err);

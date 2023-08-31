@@ -958,8 +958,8 @@
                       <option value="Q2">Q2 (SparePart)</option>
                       <option value="Q3">Q3 (Tools)</option>
                       <option value="Q4">Q4 (Maintenance Ability)</option>
-                      <option value="Q5">Q5 (Machine Backup)</option>
-                      <option value="Q6">Q6 (Machine Setting)</option>
+                      <option value="Q5">Q5 (Machine Setting)</option>
+                      <option value="Q6">Q6 (Machine Backup)</option>
                     </select>
                   </td>
                   <td class="border">
@@ -1044,8 +1044,8 @@
                   <option value="Q2">Q2 (SparePart)</option>
                   <option value="Q3">Q3 (Tools)</option>
                   <option value="Q4">Q4 (Maintenance Ability)</option>
-                  <option value="Q5">Q5 (Machine Backup)</option>
-                  <option value="Q6">Q6 (Machine Setting)</option>
+                  <option value="Q5">Q5 (Machine Setting)</option>
+                  <option value="Q6">Q6 (Machine Backup)</option>
                 </select>
               </div>
               <div class="col p-0">
