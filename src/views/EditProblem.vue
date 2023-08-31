@@ -89,17 +89,59 @@
                   placeholder="masukan ilustrasi problem"
                 />
               </div>
-              <div class="col-2 p-0">
-                <!-- <button class="btn btn-secondary btn-sm" type="submit">
-                  Upload
-                </button> -->
+              <div class="col-1 py-0 m-0">
+                <h class="btn btn-success btn-sm" @click="addToogle('isImgProblem')" >
+                  +
+                </h>
+              </div>
+              <div class="col-1 py-0 m-0">
+                <h class="btn btn-danger btn-sm" 
+                @click="deleteImg('deleteProblem1','fimage_problem')">
+                  <i
+                    class="fa fa-trash"
+                    style="font-size: 10px"
+                  ></i>
+                </h>
+              </div>
+            </div>
+          </form>
+          <img :src="displayImg_problem" width="50" v-if="fimage_problem">
+          <form
+            v-if="isImgProblem || fimage2_problem"
+            method="post"
+            @submit.prevent="
+              onSubmitUploadFlex(
+                `${urlUpload}?folder=problem&nameFile=${fileName}`,
+                'file_problem2', 'fimage2_problem', 'displayImg2_problem'
+              )
+            "
+          >
+            <div class="row m-0 p-0">
+              <div class="col-8 p-0">
+                <input
+                  class="form-control"
+                  name="sampleFile2"
+                  ref="fimage2_problem"
+                  type="file"
+                  @change="uploadFile('fimage2_problem')"
+                  placeholder="masukan ilustrasi problem"
+                />
+              </div>
+              <div class="col-2 py-0 m-0">
+                <button class="btn btn-danger btn-sm" 
+                @click="onCancel('isImgProblem'), deleteImg('deleteProblem2','fimage2_problem')">
+                  <i
+                    class="fa fa-trash"
+                    style="font-size: 10px"
+                  ></i>
+                </button>
               </div>
               <!-- <div class="col-2 p-0">
                 <button class="btn btn-success btn-sm">View</button>
               </div> -->
             </div>
           </form>
-          <img :src="displayImg_problem" width="100">
+          <img :src="displayImg2_problem" width="50" v-if="isImgProblem || fimage2_problem">
         </div>
       </div>
       <div v-if="isLongBd" class="row m-0 p-0">
@@ -123,7 +165,7 @@
             "
           >
             <div class="row m-0 p-0">
-              <div class="col-10 p-0">
+              <div class="col-8 p-0">
                 <input
                   class="form-control"
                   name="sampleFilestd"
@@ -132,16 +174,56 @@
                   @change="uploadFile('std_img')"
                 />
               </div>
-              <div class="col-2 p-0">
-                <!-- <button class="btn btn-secondary btn-sm" type="submit">
-                  Upload
-                </button> -->
+              <div class="col-1 py-0 m-0">
+                <h class="btn btn-success btn-sm" @click="addToogle('isImgStd')" >
+                  +
+                </h>
+              </div>
+              <div class="col-1 py-0 m-0">
+                <h class="btn btn-danger btn-sm" 
+                @click="deleteImg('deleteStd1','std_img')">
+                  <i
+                    class="fa fa-trash"
+                    style="font-size: 10px"
+                  ></i>
+                </h>
               </div>
             </div>
           </form>
-          <img :src="displayStd_img" width="100">
+          <img :src="displayStd_img" width="50" v-if="std_img">
+          <form
+            v-if="isImgStd || std2_img"
+            method="post"
+            @submit.prevent="
+              onSubmitUploadFlex(
+                `${urlUpload}?folder=ilustration&nameFile=${fileName}`,
+                'std_file2', 'std2_img', 'displayStd2_img'
+              )
+            "
+          >
+            <div class="row m-0 p-0">
+              <div class="col-8 p-0">
+                <input
+                  class="form-control"
+                  name="sampleFilestd"
+                  ref="std2_img"
+                  type="file"
+                  @change="uploadFile('std2_img')"
+                />
+              </div>
+              <div class="col-2 py-0 m-0">
+                <button class="btn btn-danger btn-sm" 
+                @click="onCancel('isImgStd'), deleteImg('deleteStd2','std2_img')">
+                  <i
+                    class="fa fa-trash"
+                    style="font-size: 10px"
+                  ></i>
+                </button>
+              </div>
+            </div>
+          </form>
+          <img :src="displayStd2_img" width="50" v-if="isImgStd || std2_img">
         </div>
-        
       </div>
       <div v-if="isLongBd" class="row m-0 p-0">
         <div class="col-8 px-1 text-left">
@@ -164,7 +246,7 @@
             "
           >
             <div class="row m-0 p-0">
-              <div class="col-10 p-0">
+              <div class="col-8 p-0">
                 <input
                   class="form-control"
                   name="sampleFilestd"
@@ -173,14 +255,65 @@
                   @change="uploadFile('act_img')"
                 />
               </div>
-              <div class="col-2 p-0">
-                <!-- <button class="btn btn-secondary btn-sm" type="submit">
-                  Upload
-                </button> -->
+              <div class="col-1 py-0 m-0">
+                <h class="btn btn-success btn-sm" @click="addToogle('isImgAct')" >
+                  +
+                </h>
+              </div>
+              <div class="col-1 py-0 m-0">
+                <h class="btn btn-danger btn-sm" 
+                @click="deleteImg('deleteAct1','act_img')">
+                  <i
+                    class="fa fa-trash"
+                    style="font-size: 10px"
+                  ></i>
+                </h>
               </div>
             </div>
           </form>
-          <img :src="displayAct_img" width="100">
+          <img :src="displayAct_img" width="50" v-if="act_img">
+          <form
+            v-if="isImgAct || act2_img"
+            method="post"
+            @submit.prevent="
+              onSubmitUploadFlex(
+                `${urlUpload}?folder=ilustration&nameFile=${fileName}`,
+                'act_file2', 'act2_img', 'displayAct2_img'
+              )
+            "
+          >
+            <div class="row m-0 p-0">
+              <div class="col-8 p-0">
+                <input
+                  class="form-control"
+                  name="sampleFilestd"
+                  ref="act2_img"
+                  type="file"
+                  @change="uploadFile('act2_img')"
+                />
+              </div>
+              <div class="col-2 py-0 m-0">
+                <button class="btn btn-danger btn-sm" 
+                @click="onCancel('isImgAct'), deleteImg('deleteAct2','act2_img')">
+                  <i
+                    class="fa fa-trash"
+                    style="font-size: 10px"
+                  ></i>
+                </button>
+              </div>
+            </div>
+          </form>
+          <img :src="displayAct2_img" width="50" v-if="isImgAct || act2_img">
+        </div>
+      </div>
+      <div v-if="isLongBd" class="row m-0 p-0">
+        <div class="col-10 px-1 text-left">
+          <span class="input-lable">Gap Between Standard and Actual</span>
+          <input
+            class="form-control"
+            type="text"
+            placeholder="Gap of Condition"
+            v-model="gapIlustrasi"/>
         </div>
       </div>
 
@@ -542,7 +675,7 @@
       </div>
       <div class="row m-0 p-0">
         <div class="col px-1 text-left">
-          <span class="input-lable">5 Why Analysis Image</span>
+          <span class="input-lable">5 Why (Kenapa Terjadi) Image</span>
           <form
             method="post"
             @submit.prevent="
@@ -562,14 +695,55 @@
                   @change="uploadFile('why1_img')"
                 />
               </div>
-              <div class="col-2 p-0">
-                <!-- <button class="btn btn-secondary btn-sm" type="submit">
-                  Upload
-                </button> -->
+              <div class="px-3 m-0">
+                <h class="btn btn-success btn-sm" @click="addToogle('isImgTerjadi')" >
+                  +
+                </h>
+              </div>
+              <div class="px-2 m-0">
+                <h class="btn btn-danger btn-sm" 
+                @click="deleteImg('deleteWhy1','why1_img')">
+                  <i
+                    class="fa fa-trash"
+                    style="font-size: 10px"
+                  ></i>
+                </h>
               </div>
             </div>
           </form>
-          <img :src="displayWhy1_img" width="100">
+          <img :src="displayWhy1_img" width="50" v-if="why1_img">
+          <form
+            v-if="isImgTerjadi || (why12_img && why12_img != 'null')"
+            method="post"
+            @submit.prevent="
+              onSubmitUploadFlex(
+                `${urlUpload}?folder=ilustration&nameFile=${fileName}`,
+                '5whyterjadi_file2', 'why12_img', 'displayWhy12_img'
+              )
+            "
+          >
+            <div class="row m-0 p-0">
+              <div class="col-8 p-0">
+                <input
+                  class="form-control"
+                  name="sampleFile5why"
+                  ref="why12_img"
+                  type="file"
+                  @change="uploadFile('why12_img')"
+                />
+              </div>
+              <div class="col-2 py-0 m-0">
+                <button class="btn btn-danger btn-sm" 
+                @click="onCancel('isImgTerjadi'), deleteImg('deleteWhy12','why12_img')">
+                  <i
+                    class="fa fa-trash"
+                    style="font-size: 10px"
+                  ></i>
+                </button>
+              </div>
+            </div>
+          </form>
+          <img :src="displayWhy12_img" width="50" v-if="isImgTerjadi || (why12_img && why12_img != 'null')">
         </div>
       </div>
       <!-- Step Repair -->
@@ -663,7 +837,7 @@
                 </tr>
               </tbody>
             </table>
-            <!-- <div
+            <div
             class="
               row
               m-0
@@ -672,7 +846,7 @@
               justify-content-around
               align-content-center
             "
-            v-if="isStepRepair && containerStepRepair.length > 0"
+            v-if="isStepRepair && !isLongBd"
           >
             <div class="col-7 p-0">
               <input
@@ -697,7 +871,7 @@
                 Cancel
               </button>
             </div>
-          </div> -->
+          </div>
             <table
               id="table-step-repair"
               class="table table-responsive text-center"
@@ -841,7 +1015,7 @@
               </tbody>
             </table>
           </div>
-          <div v-if="isStepRepair" >
+          <div v-if="isStepRepair && isLongBd" >
             <div
               class="
                 row
@@ -1551,6 +1725,79 @@
           <div v-if="isLongBd" class="m-0 p-0">
             <TreeListAnalisys :hide="false" whyCategory="LAMA"/>
           </div>
+        </div>
+      </div>
+      <div class="row m-0 p-0">
+        <div class="col px-1 text-left">
+          <span class="input-lable">5 Why (Kenapa Lama) Image</span>
+          <form
+            method="post"
+            @submit.prevent="
+              onSubmitUploadFlex(
+                `${urlUpload}?folder=ilustration&nameFile=${fileName}`,
+                '5whyterjadi2_file', 'why2_img', 'displayWhy2_img'
+              )
+            "
+          >
+            <div class="row m-0 p-0">
+              <div class="col-8 p-0">
+                <input
+                  class="form-control"
+                  name="sampleFile5why"
+                  ref="why2_img"
+                  type="file"
+                  @change="uploadFile('why2_img')"
+                />
+              </div>
+              <div class=" px-3 m-0">
+                <h class="btn btn-success btn-sm" @click="addToogle('isImgLama')" >
+                  +
+                </h>
+              </div>
+              <div class=" px-2 m-0">
+                <h class="btn btn-danger btn-sm" 
+                @click="deleteImg('deleteWhy2','why2_img')">
+                  <i
+                    class="fa fa-trash"
+                    style="font-size: 10px"
+                  ></i>
+                </h>
+              </div>
+            </div>
+          </form>
+          <img :src="displayWhy2_img" width="50" v-if="why2_img">
+          <form
+            v-if="isImgLama || (why22_img && why22_img != 'null')"
+            method="post"
+            @submit.prevent="
+              onSubmitUploadFlex(
+                `${urlUpload}?folder=ilustration&nameFile=${fileName}`,
+                '5whyterjadi2_file2', 'why22_img', 'displayWhy22_img'
+              )
+            "
+          >
+            <div class="row m-0 p-0">
+              <div class="col-8 p-0">
+                <input
+                  class="form-control"
+                  name="sampleFile5why"
+                  ref="why22_img"
+                  type="file"
+                  @change="uploadFile('why22_img')"
+                />
+              </div>
+              <div class="col-2 py-0 m-0">
+                <button class="btn btn-danger btn-sm" 
+                @click="onCancel('isImgLama'), deleteImg('deleteWhy22','why22_img')">
+                  <i
+                    class="fa fa-trash"
+                    style="font-size: 10px"
+                  ></i>
+                </button>
+              </div>
+            </div>
+          </form>
+          <img :src="displayWhy22_img" width="50" v-if="isImgLama || (why22_img && why22_img != 'null')">
         </div>
       </div>
       <!-- CM LAMA -->
@@ -2688,18 +2935,46 @@ export default {
       selectedAttachFile: null,
       fimage_problem: null,
       displayImg_problem: null,
+      fimage2_problem: null,
+      displayImg2_problem: null,
       std_img: null,
       displayStd_img: null,
+      std2_img: null,
+      displayStd2_img: null,
       act_img: null,
       displayAct_img: null,
+      act2_img: null,
+      displayAct2_img: null,
       why1_img: null,
       displayWhy1_img: null,
+      why12_img: null,
+      displayWhy12_img: null,
       why2_img: null,
       displayWhy2_img: null,
+      why22_img: null,
+      displayWhy22_img: null,
       fattachment: null,
       displayAttachment: null,
       optOperators: ["Loading ..."],
       optOperatorsThema: ["Loading ..."],
+      gapIlustrasi: "",
+      isImgProblem: false,
+      isImgStd: false,
+      isImgAct: false,
+      isImgTerjadi: false,
+      isImgLama: false,
+      
+      deleteProblem1: false,
+      deleteProblem2: false,
+      deleteAct1: false,
+      deleteAct2: false,
+      deleteStd1: false,
+      deleteStd2: false,
+      deleteWhy1: false,
+      deleteWhy12: false,
+      deleteWhy2: false,
+      deleteWhy22: false,
+      
     };
   },
   watch: {
@@ -3279,6 +3554,11 @@ export default {
     onCancel(cond) {
       this[`${cond}`] = false;
     },
+
+    deleteImg(deletecond, displayImage) {
+      this[`${deletecond}`] = 1;
+      this[`${displayImage}`] = null;
+    },
     onAddWhyTerjadi() {
       this.containerWhyTerjadi.push(this.descWhyTerjadi);
       this.descWhyTerjadi = "";
@@ -3554,10 +3834,17 @@ https://smartandonsys.web.app/editProblem?v_=${this.$route.query.v_}`
       formData.append('std_img', this.std_img)
       formData.append('act_img', this.act_img)
       formData.append('why1_img', this.why1_img)
+      formData.append('why2_img', this.why2_img)
+      formData.append('fimage2_problem', this.fimage2_problem)
+      formData.append('std2_img', this.std2_img)
+      formData.append('act2_img', this.act2_img)
+      formData.append('why12_img', this.why12_img)
+      formData.append('why22_img', this.why22_img)
       let dataPrev = {
         furaian_kejadian_general: this.furaian_kejadian,
         furaian_kejadian_standard: this.filustrasi_standart,
         furaian_kejadian_actual: this.filustrasi_actual,   
+        gapIlustrasi: this.gapIlustrasi,
         ferror_name: this.ferror_name,
         foperator: this.foperator,
         fshift: this.fshift,
@@ -3584,6 +3871,16 @@ https://smartandonsys.web.app/editProblem?v_=${this.$route.query.v_}`
         fyokoten: JSON.stringify(this.containerYokoten),
         fpermanet_cm_lama: JSON.stringify(this.containerCmLama),
         temporaryAction: this.temporaryAction,
+        deleteProblem1: this.deleteProblem1,
+        deleteProblem2: this.deleteProblem2,
+        deleteAct1: this.deleteAct1,
+        deleteAct2: this.deleteAct2,
+        deleteStd1: this.deleteStd1,
+        deleteStd2: this.deleteStd2,
+        deleteWhy1: this.deleteWhy1,
+        deleteWhy12: this.deleteWhy12,
+        deleteWhy2: this.deleteWhy2,
+        deleteWhy22: this.deleteWhy22,
       };
       
       for (const key in dataPrev) {
@@ -3822,10 +4119,17 @@ https://smartandonsys.web.app/editProblem?v_=${this.$route.query.v_}`
       formData.append('std_img', this.std_img)
       formData.append('act_img', this.act_img)
       formData.append('why1_img', this.why1_img)
+      formData.append('why2_img', this.why2_img)
+      formData.append('fimage2_problem', this.fimage2_problem)
+      formData.append('std2_img', this.std2_img)
+      formData.append('act2_img', this.act2_img)
+      formData.append('why12_img', this.why12_img)
+      formData.append('why22_img', this.why22_img)
       let dataPrev = {
         furaian_kejadian_general: this.furaian_kejadian,
         furaian_kejadian_standard: this.filustrasi_standart,
-        furaian_kejadian_actual: this.filustrasi_actual,   
+        furaian_kejadian_actual: this.filustrasi_actual,  
+        gapIlustrasi: this.gapIlustrasi, 
         ferror_name: this.ferror_name,
         foperator: this.foperator,
         fav_categoty: this.fav_categoty,
@@ -3849,6 +4153,16 @@ https://smartandonsys.web.app/editProblem?v_=${this.$route.query.v_}`
         fyokoten: JSON.stringify(this.containerYokoten),
         fpermanet_cm_lama: JSON.stringify(this.containerCmLama),
         temporaryAction: this.temporaryAction,
+        deleteProblem1: this.deleteProblem1,
+        deleteProblem2: this.deleteProblem2,
+        deleteAct1: this.deleteAct1,
+        deleteAct2: this.deleteAct2,
+        deleteStd1: this.deleteStd1,
+        deleteStd2: this.deleteStd2,
+        deleteWhy1: this.deleteWhy1,
+        deleteWhy12: this.deleteWhy12,
+        deleteWhy2: this.deleteWhy2,
+        deleteWhy22: this.deleteWhy22,
       };
       for (const key in dataPrev) {
         let value = dataPrev[key]
@@ -4046,16 +4360,22 @@ https://smartandonsys.web.app/editProblem?v_=${this.$route.query.v_}`
                 this.furaian_kejadian = element.desc_nm
                 this.fimage_problem = element.ilustration;
                 this.displayImg_problem = `${process.env.VUE_APP_HOST}/image?path=${this.fimage_problem}`;
+                this.fimage2_problem = element.ilustration2;
+                this.displayImg2_problem = `${process.env.VUE_APP_HOST}/image?path=${this.fimage2_problem}`;
               }
               if(element.type_uraian == 'standard') {
                 this.filustrasi_standart = element.desc_nm;
                 this.std_img = element.ilustration;
                 this.displayStd_img = `${process.env.VUE_APP_HOST}/image?path=${this.std_img}`;
+                this.std2_img = element.ilustration2;
+                this.displayStd2_img = `${process.env.VUE_APP_HOST}/image?path=${this.std2_img}`;
               }
               if(element.type_uraian == 'actual') {
                 this.filustrasi_actual = element.desc_nm;
                 this.act_img = element.ilustration;
                 this.displayAct_img = `${process.env.VUE_APP_HOST}/image?path=${this.act_img}`;
+                this.act2_img = element.ilustration2;
+                this.displayAct2_img = `${process.env.VUE_APP_HOST}/image?path=${this.act2_img}`;
               }
             }
           }
@@ -4096,6 +4416,7 @@ https://smartandonsys.web.app/editProblem?v_=${this.$route.query.v_}`
           this.foperation_no = item.foperation_no;
           this.fmaker = item.fmaker;
           this.ferror_name = item.ferror_name;
+          this.gapIlustrasi = item.gapIlustrasi;
           
           // this.fileName = `ilustration_${Date.now()}`;
           this.foperator = item.foperator.includes(",")
@@ -4113,7 +4434,19 @@ https://smartandonsys.web.app/editProblem?v_=${this.$route.query.v_}`
           }
           if(item.why1_img){
             this.why1_img = item.why1_img;
-            this.displayWhy1_img = `${process.env.VUE_APP_HOST}/image?path=${item.why1_img}`;
+            this.displayWhy1_img = `${process.env.VUE_APP_HOST}/image?path=${this.why1_img}`;
+          }
+          if(item.why2_img){
+            this.why2_img = item.why2_img;
+            this.displayWhy2_img = `${process.env.VUE_APP_HOST}/image?path=${item.why2_img}`;
+          }
+          if(item.why12_img){
+            this.why12_img = item.why12_img;
+            this.displayWhy12_img = `${process.env.VUE_APP_HOST}/image?path=${item.why12_img}`;
+          }
+          if(item.why22_img){
+            this.why22_img = item.why22_img;
+            this.displayWhy22_img = `${process.env.VUE_APP_HOST}/image?path=${item.why22_img}`;
           }
           if (item.fattachment) {
             this.fattachment = item.fattachment;

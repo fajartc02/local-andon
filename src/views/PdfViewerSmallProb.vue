@@ -1,22 +1,61 @@
 <template>
-  <div class="container-fluid p-0 m-0">
-    <div class="row m-0 p-0" ref="content">
+  <div class="container-fluid p-0 text-dark" style="font-weight: bold">
+    <div class="row m-0 p-2" style="padding-right: 20px !important" ref="content">
       <div class="col-12 p-0">
         <div class="container-fluid p-0 m-0">
-          <div class="row m-0">
-            <div class="col-12 p-0">
-              <h3>Machine Breakdown Report</h3>
-              <i
-                v-if="isLoading"
-                class="fa fa-refresh fa-spin"
-                style="font-size: 30px"
-              ></i>
+          <div class="row m-0 text-center">
+            <div class="col-3 p-0 border border-dark" style="padding-top: 10px !important">
+              <h4 class="text-danger m-0">TMMIN</h4>
+              <h4 style="font-size: 12px">
+                PLANT 3 ENGINE PRODUCTION KARAWANG DIVISION
+              </h4>
+              <h4 class="text-primary" style="font-size: 12px">
+                MAINTENANCE DEPARTEMENT
+              </h4>
+            </div>
+            <div
+              class="
+                col
+                p-0
+                border
+                border-dark
+                d-flex
+                align-items-center
+                justify-content-center
+              "
+              style="vertical-align: middle"
+            >
+              <h4 class="text-primary" style="font-size: 20px">
+                Machine Breakdown Report
+              </h4>
+            </div>
+            <div class="col p-0 m-0 border border-left-0 border-dark" style="max-height: 140px">
+              <table class=" p-0 m-0 table table-bordered-dark">
+                <thead>
+                  <tr>
+                    <td style="width: 80px">D/H</td>
+                    <td style="width: 80px">S/H Staff</td>
+                    <td style="width: 80px">S/H Op</td>
+                    <td style="width: 80px">GL</td>
+                    <td style="width: 80px">TL</td>
+                  </tr>
+                  <tr>
+                    <td style="height: 80px"></td>
+                    <td rowspan="3"></td>
+                    <td rowspan="3"></td>
+                    <td rowspan="3"></td>
+                    <td rowspan="3"></td>
+                  </tr>
+                  
+                </thead>
+              </table>
             </div>
           </div>
+          
           <!-- Table Title -->
-          <div class="row m-0">
+          <div class="row m-0 border border-dark">
             <div class="col-12 p-0">
-              <table class="table table-bordered">
+              <table class=" m-0 p-0 table table-bordered">
                 <tbody>
                   <tr>
                     <td>Operation No</td>
@@ -67,27 +106,34 @@
             </div>
           </div>
           <!-- Problem -->
-          <div class="row m-0 table-bordered">
+          <div class="row m-0 border border-dark" style="font-weight: bolder; font-size: 16px">
             <div class="col-3 p-0 bg-primary text-center">Problems</div>
             <div class="col-9 p-0 text-center">{{ ferror_name }}</div>
           </div>
           <!-- Ilus & Step -->
-          <div class="row m-0 mt-1">
+          <div class="row m-0 mt-1 border border-dark">
             <div class="col-4 p-0">
-              <div class="row m-0 table-bordered">
-                <div class="col-12 p-0 bg-primary text-center">Ilustration</div>
-                <div class="col-12 p-0" style="height: 200px"></div>
+              <div class="row m-0 border border-left-0 border-bottom-0 border-dark">
+                <div class="col-12 p-0 bg-primary text-center" style="font-weight: bolder; font-size: 16px">Illustration</div>
+                <div class="col-12 p-0 text-center" style="height: 200px">
+                  <p class="p-0 m-0 text-left px-4">{{ furaian_kejadian }}</p>
+                  <img
+                    :src="`data:image/png;base64,${displayImage}`"
+                    width="250" class="img-fluid rounded"
+                  />
+                </div>
               </div>
             </div>
             <div class="col-8 p-0">
-              <div class="row m-0">
-                <div class="col-12 p-0 bg-primary text-center">Step Repair</div>
+              <div class="row m-0 border-top border-dark">
+                <div class="col-12 p-0 bg-primary text-center" style="font-weight: bolder; font-size: 16px">Step Repair</div>
                 <div class="col-12 p-0">
-                  <table class="table table-bordered text-center">
+                  <table class=" m-0 p-0 text-center">
                     <thead>
                       <tr>
                         <th style="max-width: 10px">No</th>
                         <th>Step Repair</th>
+                        <th style="max-width: 50px">Repair Time</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -97,6 +143,7 @@
                       >
                         <td style="max-width: 25px">{{ i + 1 }}</td>
                         <td class="text-left">{{ stepRepair }}</td>
+                        <td></td>
                       </tr>
                     </tbody>
                   </table>
@@ -105,21 +152,36 @@
             </div>
           </div>
           <!-- Why Analisys & CM (kenapa terjadi) -->
-          <div class="row m-0 mt-1">
-            <div class="col-6 p-0">
-              <div class="row m-0">
-                <div class="col-12 p-0 bg-primary text-center">
-                  Why Analisys (Kenapa Terjadi)
-                </div>
-                <div class="col-12 p-0">
-                  <table class="table table-bordered text-center">
-                    <thead>
-                      <tr>
-                        <th style="max-width: 20px">No</th>
-                        <th>Description</th>
+          <div class="row m-0 p-0 mt-1 border border-dark">
+            <div class="col p-0 m-0 border-top border-dark">
+              <table class=" m-0 p-0 table table-bordered-dark">
+                <thead>
+                  <tr>
+                    <td class="m-0 p-0 bg-primary text-center" style="width: 50% !important; font-weight: bolder; font-size: 16px">
+                      Why Analisys (Kenapa Terjadi)
+                    </td>
+                    <td class="m-0 p-0 bg-primary text-center" style="width: 50% !important; font-weight: bolder; font-size: 16px">
+                      Countermeasure (Kenapa Terjadi)
+                    </td>
+                  </tr>
+                  <tr>
+                    <td rowspan="3" 
+                    class=" m-0 p-0 text-center" 
+                    style="height: 200px; vertical-align: baseline !important"
+                    v-if="newAnalisys"
+                    >
+                      <TreeListAnalisys :hide="true" whyCategory="TERJADI"/>
+                    </td>
+                    <td
+                      rowspan="3"
+                      class=" m-0 p-0 text-center"
+                      style="height: 200px; vertical-align: baseline !important"
+                      v-else-if="containerWhyTerjadi.length > 0"
+                    >
+                      <tr class=" m-0 p-0">
+                        <td style="max-width: 10px">No</td>
+                        <td>Description</td>
                       </tr>
-                    </thead>
-                    <tbody class="text-left">
                       <tr
                         v-for="(whyTerjadi, i) in containerWhyTerjadi"
                         :key="whyTerjadi"
@@ -129,91 +191,101 @@
                           {{ whyTerjadi }}
                         </td>
                       </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-            <div class="col-6 p-0">
-              <div class="row m-0">
-                <div class="col-12 p-0 bg-primary text-center">
-                  Countermeasure (Kenapa Terjadi)
-                </div>
-                <div class="col-12 p-0">
-                  <table class="table table-bordered text-center">
-                    <thead>
-                      <tr>
-                        <th style="max-width: 20px">No</th>
-                        <th>Description</th>
-                        <th style="min-width: 90px">Date Plan</th>
-                        <th>Status</th>
+                    </td>
+                    <td
+                      class="text-danger"
+                      style="
+                        height: 200px;
+                        vertical-align: baseline !important;
+                      "
+                      rowspan="3"
+                      v-else
+                    >
+                      Analisys kenapa Terjadi Belum Di isi
+                    </td>
+                    <td class=" m-0 p-0 text-center table-center" style="vertical-align: baseline !important; "
+                    v-if="containerCmTerjadi !== 0"
+                    >
+                      <tr class="p-0 m-0 text-center d-flex justify-content-center">
+                        <th style="width: 30px" >No</th>
+                        <th style="width: 190px">Countermeasure</th>
+                        <th style="width: 90px">C/M Category</th>
+                        <th style="width: 80px">PIC</th>
+                        <th style="width: 50px">Bagian</th>
+                        <th style="width: 80px">Kapan</th>
+                        <th style="width: 40px">Judg</th>
                       </tr>
-                    </thead>
-                    <tbody class="text-left">
-                      <tr
+                      <tr class=" p-0 m-0 text-center d-flex justify-content-center"
                         v-for="(cmTerjadi, i) in containerCmTerjadi"
                         :key="cmTerjadi.cmDesc"
                       >
-                        <td style="max-width: 20px">{{ i + 1 }}</td>
-                        <td>
-                          {{ cmTerjadi.cmDesc }}
+                        <td style="width: 30px">{{ i + 1 }}</td>
+                        <td class="text-left" style="width: 190px">{{ cmTerjadi.cmDesc }}</td>
+                        <td style="width: 90px">{{cmTerjadi.cmCategory}}</td>
+                        <td style="width: 80px">{{ cmTerjadi.pic }}</td>
+                        <td style="width: 50px">MT</td>
+                        <td style="width: 80px">{{ cmTerjadi.datePlan }}</td>
+                        <td style="width: 40px" v-if="cmTerjadi.judg" class="text-success">
+                          {{ "OK" }}
                         </td>
-                        <td>{{ cmTerjadi.datePlan }}</td>
-                        <td class="text-success">
-                          {{ cmTerjadi.judg == false ? "Belum" : "Sudah" }}
-                        </td>
+                        <td style="width: 40px" v-else class="text-danger">{{ "Belum" }}</td>
                       </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Part changes & Yokoten -->
-          <div class="row m-0 mt-1">
-            <div class="col-6 p-0">
-              <div class="row m-0">
-                <div class="col-12 p-0 bg-primary text-center">Part Change</div>
-              </div>
-              <div class="row m-0">
-                <div class="col-12 table-bordered text-center">
-                  {{ fpart_change }}
-                </div>
-              </div>
-            </div>
-            <div class="col-6 p-0">
-              <div class="row m-0">
-                <div class="col-12 p-0 bg-primary text-center">Yokoten</div>
-              </div>
-              <div class="row m-0">
-                <div class="col-12 p-0 table-bordered text-center">
-                  <table class="table table-bordered text-center">
-                    <thead>
-                      <tr>
-                        <th style="max-width: 20px">No</th>
-                        <th>Item yokoten</th>
-                        <th style="min-width: 90px">Date Plan</th>
-                        <th>PIC</th>
-                        <th>Status</th>
+                      
+                    </td>
+                    <td
+                      class="text-danger text-center"
+                      style="
+                        vertical-align: baseline !important;
+                        border: none;
+                      "
+                      v-else
+                    >
+                      Countermeasure Belum di isi
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class=" p-0 bg-primary text-center" style="height: 20px; font-weight: bolder; font-size: 16px">
+                      Yokoten
+                    </td>
+                  </tr>
+                  <tr >
+                    <td class="m-0 p-0 text-center" style="vertical-align: baseline !important"
+                    v-if="containerYokoten.length !== 0"
+                    >
+                      <tr class="p-0 m-0 text-center d-flex justify-content-center">
+                        <th style="width: 30px">No</th>
+                        <th style="width: 310px">Item yokoten</th>
+                        <th style="width: 90px">Date Plan</th>
+                        <th style="width: 80px">PIC</th>
+                        <th style="width: 50px">Status</th>
                       </tr>
-                    </thead>
-                    <tbody class="text-left">
-                      <tr
+                      <tr class="p-0 m-0 text-center d-flex justify-content-center"
                         v-for="(yokoten, i) in containerYokoten"
                         :key="yokoten.machine"
                       >
-                        <td>{{ i + 1 }}</td>
-                        <td>
+                        <td style="width: 30px">{{ i + 1 }}</td>
+                        <td style="width: 310px">
                           {{ yokoten.machine }}
                         </td>
-                        <td>{{ yokoten.datePlan }}</td>
-                        <td>{{ yokoten.pic }}</td>
-                        <td class="text-success">{{ yokoten.judg }}</td>
+                        <td style="width: 90px">{{ yokoten.datePlan }}</td>
+                        <td style="width: 80px">{{ yokoten.pic }}</td>
+                        <td style="width: 50px" class="text-success">{{ yokoten.judg }}</td>
                       </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
+                    </td>
+                    <td
+                      class="text-danger text-center"
+                      style="
+                        vertical-align: baseline !important;
+                        border: none;
+                      "
+                      v-else
+                    >
+                      Yokoten Tidak Ada
+                    </td>
+                  </tr>
+                </thead>
+              </table>
+              
             </div>
           </div>
         </div>
@@ -221,31 +293,20 @@
     </div>
     <div class="row m-0" style="position: absolute; top: 0px">
       <div class="col-12 p-0">
-        <button @click="exportToPDF()" disabled>Loading ...</button>
+        <button class="btn btn-primary" @click="exportToPDF()">Download PDF</button>
       </div>
     </div>
-    <div class="row m-0">
-      <div class="col-12 p-0">
-        <v-dialog v-model="dialogLoading" hide-overlay persistent width="300">
-          <v-card color="primary" dark>
-            <v-card-text>
-              Downloading Pdf File
-              <v-progress-linear
-                indeterminate
-                color="white"
-                class="mb-0"
-              ></v-progress-linear>
-            </v-card-text>
-          </v-card>
-        </v-dialog>
-      </div>
-    </div>
+    
   </div>
 </template>
 
 <script>
 import html2pdf from "html2pdf.js";
 import axios from "axios";
+import TreeListAnalisys from "@/components/TreeListAnalisys.vue";
+import imageToBase64 from 'image-to-base64/browser'
+import {mapState} from "vuex"; 
+
 export default {
   name: "PdfViewerSmallProb",
   data() {
@@ -266,6 +327,9 @@ export default {
       endTime: "",
       fdur: "",
       fDescImage: "",
+      furaian_kejadian: "",
+      displayImage: null,
+      fimage_problem: null,
       isLongBd: false,
       url: null,
       containerWhyTerjadi: [],
@@ -277,33 +341,66 @@ export default {
       dialogLoading: false,
     };
   },
+
+  computed: {
+    ...mapState(["newAnalisys", "newAnalisys2"])
+  },
+  
   methods: {
-    exportToPDF(nameFile) {
+    exportToPDF() {
       html2pdf(this.$refs.content, {
         margin: 1,
-        filename: nameFile,
-        image: { type: "jpeg", quality: 0.98 },
-        html2canvas: { dpi: 192, letterRendering: true },
-        jsPDF: { unit: "pt", format: "a4", orientation: "p" },
+        filename: `${this.ferror_name}_${this.fmc_name}.pdf`,
+        quality: 50,
+        image: { type: "jpeg", quality: 1, },
+        html2canvas: { dpi: 192, letterRendering: true, scale: 2,},
+        jsPDF: { unit: "pt", format: "a4", orientation: "L" },
       }).then((pdf) => {
         console.log(pdf);
-        this.$router.go(-1);
+        // this.$router.go(-1);
         this.dialogLoading = false;
       });
     },
+    convertImgToBase64(urlImage) {
+      console.log(urlImage);
+      return imageToBase64(`${urlImage}`) // Image URL
+        .then(
+            (response) => {
+                console.log(response); // "iVBORw0KGgoAAAANSwCAIA..."
+                return response
+            }
+        )
+        .catch(
+            (error) => {
+                console.log(error); // Logs an error if there was one
+                return error
+            }
+        )
+    }
   },
-  mounted() {
+  async mounted() {
     this.isLoading = true;
-    this.dialogLoading = true;
+    // this.dialogLoading = true;
     // console.log(this.$route.query.v_);
-    axios
+    await axios
       .get(
         `${process.env.VUE_APP_HOST}/getDetailProblem?v_=${this.$route.query.v_}`
       )
-      .then((result) => {
+      .then(async (result) => {
         this.isLoading = false;
 
         console.log(result.data.data[0]);
+        if(result.data.data[0].uraian.length > 0) {
+          for (let i = 0; i < result.data.data[0].uraian.length; i++) {
+            const element = result.data.data[0].uraian[i];
+            if(element.type_uraian == 'general') {
+              this.furaian_kejadian = element.desc_nm
+              this.fimage_problem = element.ilustration;
+            }
+          }
+        }
+
+        this.displayImage = await this.convertImgToBase64(`${process.env.VUE_APP_HOST}/image?path=${this.fimage_problem}`);
         this.fmc_name = result.data.data[0].fmc_name;
         this.fline = result.data.data[0].fline;
         this.foperation_no = result.data.data[0].foperation_no;
@@ -348,7 +445,7 @@ export default {
             result.data.data[0].fpermanet_cm_lama
           );
         }
-        this.exportToPDF(`${this.ferror_name}_${this.fmc_name}.pdf`);
+        // this.exportToPDF(`${this.ferror_name}_${this.fmc_name}.pdf`);
         // setInterval(() => {
         //   this.$router.push("/problemHistory");
         // }, 3000);
@@ -356,6 +453,9 @@ export default {
       .catch((err) => {
         console.log(err);
       });
+  },
+  components: {
+    TreeListAnalisys,
   },
 };
 </script>

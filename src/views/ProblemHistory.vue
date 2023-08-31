@@ -164,11 +164,15 @@
           <thead class="title-text" style="font-size: 10px">
             <tr>
               <th scope="col">No</th>
-              <th style="min-width: 80px" scope="col">Date</th>
+              <th style="min-width: 80px; cursor: pointer" scope="col" @click="sortDate(), getProblemHistory()"> 
+                Date <i class="fa fa-sort"></i>
+              </th>
               <th style="min-width: 50px" scope="col">Machine</th>
               <th style="min-width: 150px" scope="col">Problem</th>
               <th style="min-width: 50px" scope="col">PIC</th>
-              <th style="min-width: 50px" scope="col">Duration</th>
+              <th style="min-width: 50px; cursor: pointer" scope="col" @click="sortDur(), getProblemHistory()">
+                Duration <i class="fa fa-sort"></i>
+              </th>
               <th scope="col" colspan="3">Actions</th>
             </tr>
           </thead>
@@ -193,7 +197,7 @@
                   class="btn-light"
                   small
                   color="primary"
-                  @click="exportPdf(problem.fid, problem.fdur)"
+                  @click="exportPdf(problem.fid, problem.fdur, problem.fline)"
                 >
                   <i class="fa fa-book"></i> Report
                 </v-btn>
@@ -561,6 +565,7 @@ import { ModelSelect } from "vue-search-select";
 import axios from "axios";
 import JsonExcel from "vue-json-excel";
 import Spinner2 from "@/components/spinner/Spinner-2";
+import {mapState} from "vuex"; 
 // import ExportExcelSheetVueJs from "export-excel-sheet-vue-js";
 
 export default {
@@ -630,6 +635,8 @@ export default {
         ],
       ],
       fileNameDownload: ``,
+      sortOrder: "fdur",
+      analisys: []
     };
   },
   watch: {
@@ -706,7 +713,18 @@ export default {
       }
     },
   },
+  
+  computed: {
+    ...mapState(["newAnalisys", "newAnalisys2"])
+  },
+
   methods: {
+    sortDate(){
+      this.sortOrder = "fstart_time"
+    },
+    sortDur(){
+      this.sortOrder = "fdur"
+    },
     showSearch() {
       if (this.isShow) {
         document.getElementById("content-search").style.top = "-50px";
@@ -721,13 +739,28 @@ export default {
       this.btnSeeAllProblem = false;
       await axios
         .get(
-          `${process.env.VUE_APP_HOST}/problemHistory?startDate=${this.selectedStartDate}&endDate=${this.selectedEndDate}`
+          `${process.env.VUE_APP_HOST}/problemHistory?startDate=${this.selectedStartDate}&endDate=${this.selectedEndDate}&sort=${this.sortOrder}`
         )
         .then((result) => {
           console.log(result.data.data);
           // this.containerProblems = result.data.data;
           let resData = result.data.data.map((item) => {
             if (item.fdur >= 30) {
+              // let v_ = item.fid;
+              // let json_analisys = [];
+              // axios
+              //   .get(
+              //     `${process.env.VUE_APP_HOST}/why_analisys/get/${v_}?analisys_category=TERJADI`
+              //   )
+              //   .then((result) => {
+              //     console.log(result);
+              //     if (result.data.data.length > 0) {
+              //       json_analisys = JSON.parse(result.data.data[0].json_string);
+              //     }
+              //   })
+              //   .catch((err) => {
+              //     console.log(err);
+              //   });
               if (item.freal_prob == "" || !item.freal_prob) {
                 return {
                   ...item,
@@ -759,7 +792,7 @@ export default {
     },
     async onSearch() {
       this.isLoading = true;
-      let url = `${process.env.VUE_APP_HOST}/problemHistory?startDate=${this.selectedStartDate}&endDate=${this.selectedEndDate}&isProblem=false`;
+      let url = `${process.env.VUE_APP_HOST}/problemHistory?startDate=${this.selectedStartDate}&endDate=${this.selectedEndDate}&isProblem=false&sort=${this.sortOrder}`;
       if (this.machineSelected != "") {
         url += `&machine=${this.machineSelected}`;
       }
@@ -941,12 +974,13 @@ export default {
           console.log(err);
         });
     },
-    exportPdf(id, dur) {
+    exportPdf(id, dur, fline) {
       console.log(dur);
       console.log(id);
-      if (dur > 120) {
+      if (dur > 120 || (dur >= 15 && fline == "ASSY LINE")) {
         this.$router.push(`/pdfViewerLong?v_=${id}`);
-      } else {
+      }
+      else{
         this.$router.push(`/pdfViewerSmall?v_=${id}`);
       }
     },

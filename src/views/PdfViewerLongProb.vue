@@ -141,27 +141,41 @@
                       3.b. Ilustrasi
                     </td>
                   </tr>
-                  <tr style="height: 300px">
-                    <td class="text-center" style="max-height: 300px; max-width: 200px">
-                      <p class="text-left px-4">{{ furaian_kejadian }}</p>
+                  <tr style="height: 350px">
+                    <td class="text-center" style="max-height: 300px; max-width: 200px; vertical-align: baseline !important">
+                      <p class="text-left px-2">{{ furaian_kejadian }}</p>
                       <img
                         :src="`data:image/png;base64,${displayImage}`"
-                        width="80%" class="img-fluid rounded"
+                        width="150px" class="img-fluid " 
+                      />
+                      <img
+                        :src="`data:image/png;base64,${displayImage2}`"
+                        width="150px" class="mx-2 img-fluid " v-if="displayImage2"
                       />
                     </td>
-                    <td class="text-center" style="max-height: 300px; max-width: 200px">
+                    <td class="text-center" style="max-height: 300px; max-width: 200px; vertical-align: baseline !important">
                       <p class="card text-center m-0" style="background-color: #008000; color: white; width: 60px">Standard</p>
                       <p class="text-left m-0 px-2">{{ filustrasi_standart }}</p>
                       <img
                         :src="`data:image/png;base64,${displayImageStd}`"
-                         width="50%" class="img-fluid rounded"
+                         width="100px" class="img-fluid "
                       />
-                      <p class="card text-center m-0" style="background-color: #E51A05; color: white; width: 60px">Actual</p>
+                      <img
+                        :src="`data:image/png;base64,${displayImageStd2}`"
+                         width="100px" class="mx-3 img-fluid" v-if="displayImageStd2"
+                      />
+                      <p class="card text-center m-0" style="background-color: #FF9B00; color: white; width: 60px">Actual</p>
                       <p class="text-left m-0 px-2">{{ filustrasi_actual }}</p>
                       <img
                         :src="`data:image/png;base64,${displayImageAct}`"
-                        width="50%" class="img-fluid rounded"
+                         width="100px" class="img-fluid"
                       />
+                      <img
+                        :src="`data:image/png;base64,${displayImageAct2}`"
+                         width="100px" class="mx-3 img-fluid" v-if="displayImageAct2"
+                      />
+                      <p class="card text-center m-0" style="background-color: #E51A05; color: white; width: 60px; font-size: 13px">Gap </p>
+                      <p class="text-left m-0 px-2" style="color: #E51A05; font-size: 14px">{{ gapIlustrasi }}</p>
                     </td>
             
                       <!-- ACTUAL -->
@@ -179,7 +193,7 @@
                             <!-- <td rowspan="2" colspan="5">Menit</td> -->
                             <td rowspan="2" style="width: 30px">Q6</td>
                           </tr>
-                          <tr>
+                          <tr class="text-center">
                             <td style="width: 60px">Actual</td>
                             <td style="width: 60px">Ideal</td>
                           </tr>
@@ -226,7 +240,7 @@
                           <div class="row m-0 p-0" >
                         <bar-chart  
                         v-if="chartData.datasets[0].data[0] !== 0"
-                        style="height: 200px!important; width: 150px"
+                        style="height: 200px!important; width: 150px;"
                         :chart-data="chartData"
                         :options="{
                           responsive: true,
@@ -326,8 +340,8 @@
                     <!-- KENAPA TERJADI -->
                     <td
                       style="
-                        height: 300px;
-                        
+                        height: 350px;
+                        vertical-align: baseline !important
                       "
                       class="text-center p-0 m-0"
                       rowspan="3"
@@ -337,7 +351,11 @@
                       <TreeListAnalisys :hide="true" whyCategory="TERJADI"/>
                       <img
                       :src="`data:image/png;base64,${displayImageWhy}`"
-                        width="200px" class="img-fluid rounded content-center text-center"
+                        width="120px" class="img-fluid  content-center text-center"
+                      />
+                      <img
+                      :src="`data:image/png;base64,${displayImageWhy12}`"
+                        width="120px" class=" mx-4 img-fluid  content-center text-center" v-if="displayImageWhy12"
                       />
     
                       
@@ -369,7 +387,7 @@
                     <td
                       class="text-danger"
                       style="
-                        height: 300px;
+                        height: 350px;
                         vertical-align: baseline !important;
                       "
                       rowspan="3"
@@ -382,9 +400,18 @@
                       style="
                       vertical-align: baseline !important"
                       rowspan="3"
+                      class="text-center p-0 m-0"
                       v-if="newAnalisys2"
                     >
                       <TreeListAnalisys :hide="true" whyCategory="LAMA" />
+                      <img
+                      :src="`data:image/png;base64,${displayImageWhy2}`"
+                        width="120px" class="img-fluid  content-center text-center"
+                      />
+                      <img
+                      :src="`data:image/png;base64,${displayImageWhy22}`"
+                        width="120px" class=" mx-4 img-fluid  content-center text-center" v-if="displayImageWhy22"
+                      />
                       <!-- <div
                         v-for="(whyLama, i) in containerWhyLama"
                         :key="whyLama.machine" hidden
@@ -551,6 +578,7 @@ import imageToBase64 from 'image-to-base64/browser'
 import {mapState} from "vuex"
 import BarChart from "@/components/BarChart.js";
 
+
 export default {
   name: "PdfViewerSmallProb",
   data() {
@@ -603,17 +631,31 @@ export default {
       std_img: null,
       act_img: null,
       why1_img: null,
+      why2_img: null,
+      fimage2_problem: null,
+      std2_img: null,
+      act2_img: null,
+      why12_img: null,
+      why22_img: null,
       displayImage: null,
       displayImageStd: null,
       displayImageAct: null,
       displayImageWhy: null,
+      displayImageWhy2: null,
+      displayImage2: null,
+      displayImageStd2: null,
+      displayImageAct2: null,
+      displayImageWhy12: null,
+      displayImageWhy22: null,
+      
       big: 0,
       bigQuick: "",
       q6Desc: ["Diagnose/Cause Analysis", "SparePart", "Tools", "Maintenance Ability", "Machine Backup", "Machine Setting"],
       bigDesc: "",
       jumlahIdeal: 0,
       jumlahActual: 0,
-      stepColor: []
+      stepColor: [],
+      gapIlustrasi: "",
       
     };
   },
@@ -631,7 +673,7 @@ export default {
         margin: 1,
         filename: nameFile,
         image: { type: "jpeg", quality: 0.98 },
-        html2canvas: { dpi: 192, letterRendering: true },
+        html2canvas: { dpi: 192, letterRendering: true, scale: 3 },
         jsPDF: { unit: "pt", format: "a3", orientation: "l" },
         allowTaint: true,
       }).then((pdf) => {
@@ -691,19 +733,26 @@ export default {
             if(element.type_uraian == 'general') {
               this.furaian_kejadian = element.desc_nm
               this.fimage_problem = element.ilustration;
+              this.fimage2_problem = element.ilustration2;
             }
             if(element.type_uraian == 'standard') {
               this.filustrasi_standart = element.desc_nm;
               this.std_img = element.ilustration;
+              this.std2_img = element.ilustration2;
             }
             if(element.type_uraian == 'actual') {
               this.filustrasi_actual = element.desc_nm;
               this.act_img = element.ilustration;
+              this.act2_img = element.ilustration2;
             }
           }
         }
         console.log(this.std_img);
         this.why1_img = result.data.data[0].why1_img;
+        this.why2_img = result.data.data[0].why2_img;
+        this.why12_img = result.data.data[0].why12_img;
+        this.why22_img = result.data.data[0].why22_img;
+        this.gapIlustrasi = result.data.data[0].gapIlustrasi;
         // this.displayImage = `${process.env.VUE_APP_HOST}/image?path=${result.data.data[0].fimage}`;
         // this.displayImage = await this.convertImgToBase64("http://localhost:3101/image?path=./upload/problem/file_problem_1685001006311-2023-05-25.png")
         // this.displayImageStd = await this.convertImgToBase64("http://localhost:3101/image?path=./upload/ilustration/std_file_1685001021779-2023-05-25.jpg")
@@ -714,6 +763,14 @@ export default {
         this.displayImageStd = await this.convertImgToBase64(`${process.env.VUE_APP_HOST}/image?path=${this.std_img}`);
         this.displayImageAct = await this.convertImgToBase64(`${process.env.VUE_APP_HOST}/image?path=${this.act_img}`);
         this.displayImageWhy = await this.convertImgToBase64(`${process.env.VUE_APP_HOST}/image?path=${this.why1_img}`);
+        this.displayImage2 = await this.convertImgToBase64(`${process.env.VUE_APP_HOST}/image?path=${this.fimage2_problem}`);
+        this.displayImageStd2 = await this.convertImgToBase64(`${process.env.VUE_APP_HOST}/image?path=${this.std2_img}`);
+        this.displayImageAct2 = await this.convertImgToBase64(`${process.env.VUE_APP_HOST}/image?path=${this.act2_img}`);
+        this.displayImageWhy12 = await this.convertImgToBase64(`${process.env.VUE_APP_HOST}/image?path=${this.why12_img}`);
+        this.displayImageWhy2 = await this.convertImgToBase64(`${process.env.VUE_APP_HOST}/image?path=${this.why2_img}`);
+        this.displayImageWhy22 = await this.convertImgToBase64(`${process.env.VUE_APP_HOST}/image?path=${this.why22_img}`);
+        // this.displayImageWhy2 = await this.convertImgToBase64(`${process.env.VUE_APP_HOST}/image?path=${this.why2_img}`);
+
         this.fid = result.data.data[0].fid;
         console.log(`${process.env.VUE_APP_HOST}/image?path=${this.fimage_problem}`);
         console.log(this.displayImage);
