@@ -102,7 +102,7 @@
                 Mttr
               </center>
             </div>
-            <div class="col-3 hover-menu p-1" @click="goTo('/mtbf-mttr')">
+            <div class="col-3 hover-menu p-1" @click="goTo('/job-analisys')">
               <center>
                 <img src="https://png.pngtree.com/png-vector/20220708/ourmid/pngtree-analyzing-data-png-image_5744358.png" width="30%" />
               </center>
