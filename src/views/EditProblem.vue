@@ -1727,7 +1727,7 @@
           </div>
         </div>
       </div>
-      <div class="row m-0 p-0">
+      <div class="row m-0 p-0" v-if="isLongBd">
         <div class="col px-1 text-left">
           <span class="input-lable">5 Why (Kenapa Lama) Image</span>
           <form
@@ -3069,7 +3069,7 @@ export default {
       let dura = (finish - start) / 1000 / 60;
       if (dura >= 120) {
         this.isLongBd = true;
-      } else if (dura >= 30 && this.fline == "ASSY LINE") {
+      } else if (dura >= 15 && this.fline == "ASSY LINE") {
         this.isLongBd = true;
       }
       if (dura.toFixed("1").includes("-")) {
@@ -3093,7 +3093,7 @@ export default {
       let dura = (finish - start) / 1000 / 60;
       if (dura >= 120) {
         this.isLongBd = true;
-      } else if (dura >= 30 && this.fline == "ASSY LINE") {
+      } else if (dura >= 15 && this.fline == "ASSY LINE") {
         this.isLongBd = true;
       }
       if (dura.toFixed("1").includes("-")) {
@@ -3119,7 +3119,7 @@ export default {
       console.log(this.whyCategory);
       if (dura >= 120) {
         this.isLongBd = true;
-      } else if (dura >= 30 && this.fline == "ASSY LINE") {
+      } else if (dura >= 15 && this.fline == "ASSY LINE") {
         this.isLongBd = true;
       }
       if (dura.toFixed("1").includes("-")) {
@@ -3145,7 +3145,7 @@ export default {
       let dura = (finish - start) / 1000 / 60;
       if (dura >= 120) {
         this.isLongBd = true;
-      } else if (dura >= 30 && this.fline == "ASSY LINE") {
+      } else if (dura >= 15 && this.fline == "ASSY LINE") {
         this.isLongBd = true;
       }
       if (dura.toFixed("1").includes("-")) {
