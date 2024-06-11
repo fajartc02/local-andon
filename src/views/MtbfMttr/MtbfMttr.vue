@@ -1,4 +1,10 @@
 <template>
+  <div>
+    <div class="card">
+      <router-link to="/mtbf-mttr/scatter">
+        Scatter Map
+      </router-link>
+    </div>
     <div class="card m-3">
         <div class="card-header">
             Search
@@ -47,6 +53,7 @@
             <GraphMttr :mtfbMttrData="mtfbMttrData"/>
         </div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -77,7 +84,7 @@ export default {
             axios.get(url)
             .then(async (result) => {
                 console.log(result.data.data);
-                let mapResult = await result.data.data.map(item => {
+                let mapResult = await result.data.data.mapResult.map(item => {
                   for (let i = 0; i < item.mcs.length; i++) {
                     item.mcs[i].mttr = +(item.mcs[i].mttr/ 60).toFixed(2)
                   }

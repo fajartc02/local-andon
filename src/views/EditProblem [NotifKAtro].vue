@@ -2,13 +2,21 @@
   <ScrollableContainer>
     <div class="container-fluid" style="padding-bottom: 80px">
       <h2>Edit Problem</h2>
-      <i v-if="isLoading" class="fa fa-refresh fa-spin" style="font-size: 30px"></i>
+      <i
+        v-if="isLoading"
+        class="fa fa-refresh fa-spin"
+        style="font-size: 30px"
+      ></i>
       <!-- LOADING -->
       <v-dialog v-model="isLoading" hide-overlay persistent width="300">
         <v-card color="primary" dark>
           <v-card-text>
             Loading...
-            <v-progress-linear indeterminate color="white" class="mb-0"></v-progress-linear>
+            <v-progress-linear
+              indeterminate
+              color="white"
+              class="mb-0"
+            ></v-progress-linear>
           </v-card-text>
         </v-card>
       </v-dialog>
@@ -25,7 +33,12 @@
       <div class="row m-0 p-0">
         <div class="col px-1 text-left">
           <span class="input-lable">Operation No.</span>
-          <input class="form-control" type="text" v-model="foperation_no" disabled />
+          <input
+            class="form-control"
+            type="text"
+            v-model="foperation_no"
+            disabled
+          />
         </div>
         <div class="col px-1 text-left">
           <span class="input-lable">Maker</span>
@@ -36,55 +49,91 @@
       <div class="row m-0 p-0">
         <div class="col px-1 text-left">
           <span class="input-lable">Problem</span>
-          <input type="text" class="form-control" placeholder="nama problem" v-model="ferror_name" />
+          <input
+            type="text"
+            class="form-control"
+            placeholder="nama problem"
+            v-model="ferror_name"
+          />
         </div>
       </div>
       <div class="row m-0 p-0">
         <div class="col-8 px-1 text-left">
           <span class="input-lable">Uraian Kejadian</span>
-          <input class="form-control" type="text" placeholder="Uraian Problem" v-model="furaian_kejadian" />
+          <input
+            class="form-control"
+            type="text"
+            placeholder="Uraian Problem"
+            v-model="furaian_kejadian"
+          />
         </div>
         <div class="col-4 px-1 text-left">
           <span class="input-lable">Upload Image</span>
-          <form method="post" @submit.prevent="
-            onSubmitUploadFlex(
-              `${urlUpload}?folder=problem&nameFile=${fileName}`,
-              'file_problem', 'fimage_problem', 'displayImg_problem'
-            )
-            ">
+          <form
+            method="post"
+            @submit.prevent="
+              onSubmitUploadFlex(
+                `${urlUpload}?folder=problem&nameFile=${fileName}`,
+                'file_problem', 'fimage_problem', 'displayImg_problem'
+              )
+            "
+          >
             <div class="row m-0 p-0">
               <div class="col-8 p-0">
-                <input class="form-control" name="sampleFile" ref="fimage_problem" type="file"
-                  @change="uploadFile('fimage_problem')" placeholder="masukan ilustrasi problem" />
+                <input
+                  class="form-control"
+                  name="sampleFile"
+                  ref="fimage_problem"
+                  type="file"
+                  @change="uploadFile('fimage_problem')"
+                  placeholder="masukan ilustrasi problem"
+                />
               </div>
               <div class="col-1 py-0 m-0">
-                <h class="btn btn-success btn-sm" @click="addToogle('isImgProblem')">
+                <h class="btn btn-success btn-sm" @click="addToogle('isImgProblem')" >
                   +
                 </h>
               </div>
               <div class="col-1 py-0 m-0">
-                <h class="btn btn-danger btn-sm" @click="deleteImg('deleteProblem1', 'fimage_problem')">
-                  <i class="fa fa-trash" style="font-size: 10px"></i>
+                <h class="btn btn-danger btn-sm" 
+                @click="deleteImg('deleteProblem1','fimage_problem')">
+                  <i
+                    class="fa fa-trash"
+                    style="font-size: 10px"
+                  ></i>
                 </h>
               </div>
             </div>
           </form>
           <img :src="displayImg_problem" width="50" v-if="fimage_problem">
-          <form v-if="isImgProblem || fimage2_problem" method="post" @submit.prevent="
-            onSubmitUploadFlex(
-              `${urlUpload}?folder=problem&nameFile=${fileName}`,
-              'file_problem2', 'fimage2_problem', 'displayImg2_problem'
-            )
-            ">
+          <form
+            v-if="isImgProblem || fimage2_problem"
+            method="post"
+            @submit.prevent="
+              onSubmitUploadFlex(
+                `${urlUpload}?folder=problem&nameFile=${fileName}`,
+                'file_problem2', 'fimage2_problem', 'displayImg2_problem'
+              )
+            "
+          >
             <div class="row m-0 p-0">
               <div class="col-8 p-0">
-                <input class="form-control" name="sampleFile2" ref="fimage2_problem" type="file"
-                  @change="uploadFile('fimage2_problem')" placeholder="masukan ilustrasi problem" />
+                <input
+                  class="form-control"
+                  name="sampleFile2"
+                  ref="fimage2_problem"
+                  type="file"
+                  @change="uploadFile('fimage2_problem')"
+                  placeholder="masukan ilustrasi problem"
+                />
               </div>
               <div class="col-2 py-0 m-0">
-                <button class="btn btn-danger btn-sm"
-                  @click="onCancel('isImgProblem'), deleteImg('deleteProblem2', 'fimage2_problem')">
-                  <i class="fa fa-trash" style="font-size: 10px"></i>
+                <button class="btn btn-danger btn-sm" 
+                @click="onCancel('isImgProblem'), deleteImg('deleteProblem2','fimage2_problem')">
+                  <i
+                    class="fa fa-trash"
+                    style="font-size: 10px"
+                  ></i>
                 </button>
               </div>
               <!-- <div class="col-2 p-0">
@@ -98,49 +147,77 @@
       <div v-if="isLongBd" class="row m-0 p-0">
         <div class="col-8 px-1 text-left">
           <span class="input-lable">Ilustrasi Standart</span>
-          <input class="form-control" type="text" placeholder="Standart Condition" v-model="filustrasi_standart" />
+          <input
+            class="form-control"
+            type="text"
+            placeholder="Standart Condition"
+            v-model="filustrasi_standart"/>
         </div>
         <div class="col-4 px-1 text-left">
           <span class="input-lable">Standart Image</span>
-          <form method="post" @submit.prevent="
-            onSubmitUploadFlex(
-              `${urlUpload}?folder=ilustration&nameFile=${fileName}`,
-              'std_file', 'std_img', 'displayStd_img'
-            )
-            ">
+          <form
+            method="post"
+            @submit.prevent="
+              onSubmitUploadFlex(
+                `${urlUpload}?folder=ilustration&nameFile=${fileName}`,
+                'std_file', 'std_img', 'displayStd_img'
+              )
+            "
+          >
             <div class="row m-0 p-0">
               <div class="col-8 p-0">
-                <input class="form-control" name="sampleFilestd" ref="std_img" type="file"
-                  @change="uploadFile('std_img')" />
+                <input
+                  class="form-control"
+                  name="sampleFilestd"
+                  ref="std_img"
+                  type="file"
+                  @change="uploadFile('std_img')"
+                />
               </div>
               <div class="col-1 py-0 m-0">
-                <h class="btn btn-success btn-sm" @click="addToogle('isImgStd')">
+                <h class="btn btn-success btn-sm" @click="addToogle('isImgStd')" >
                   +
                 </h>
               </div>
               <div class="col-1 py-0 m-0">
-                <h class="btn btn-danger btn-sm" @click="deleteImg('deleteStd1', 'std_img')">
-                  <i class="fa fa-trash" style="font-size: 10px"></i>
+                <h class="btn btn-danger btn-sm" 
+                @click="deleteImg('deleteStd1','std_img')">
+                  <i
+                    class="fa fa-trash"
+                    style="font-size: 10px"
+                  ></i>
                 </h>
               </div>
             </div>
           </form>
           <img :src="displayStd_img" width="50" v-if="std_img">
-          <form v-if="isImgStd || std2_img" method="post" @submit.prevent="
-            onSubmitUploadFlex(
-              `${urlUpload}?folder=ilustration&nameFile=${fileName}`,
-              'std_file2', 'std2_img', 'displayStd2_img'
-            )
-            ">
+          <form
+            v-if="isImgStd || std2_img"
+            method="post"
+            @submit.prevent="
+              onSubmitUploadFlex(
+                `${urlUpload}?folder=ilustration&nameFile=${fileName}`,
+                'std_file2', 'std2_img', 'displayStd2_img'
+              )
+            "
+          >
             <div class="row m-0 p-0">
               <div class="col-8 p-0">
-                <input class="form-control" name="sampleFilestd" ref="std2_img" type="file"
-                  @change="uploadFile('std2_img')" />
+                <input
+                  class="form-control"
+                  name="sampleFilestd"
+                  ref="std2_img"
+                  type="file"
+                  @change="uploadFile('std2_img')"
+                />
               </div>
               <div class="col-2 py-0 m-0">
-                <button class="btn btn-danger btn-sm"
-                  @click="onCancel('isImgStd'), deleteImg('deleteStd2', 'std2_img')">
-                  <i class="fa fa-trash" style="font-size: 10px"></i>
+                <button class="btn btn-danger btn-sm" 
+                @click="onCancel('isImgStd'), deleteImg('deleteStd2','std2_img')">
+                  <i
+                    class="fa fa-trash"
+                    style="font-size: 10px"
+                  ></i>
                 </button>
               </div>
             </div>
@@ -151,49 +228,77 @@
       <div v-if="isLongBd" class="row m-0 p-0">
         <div class="col-8 px-1 text-left">
           <span class="input-lable">Ilustrasi Actual</span>
-          <input class="form-control" type="text" placeholder="Actual Condition" v-model="filustrasi_actual" />
+          <input
+            class="form-control"
+            type="text"
+            placeholder="Actual Condition"
+            v-model="filustrasi_actual"/>
         </div>
         <div class="col-4 px-1 text-left">
           <span class="input-lable">Actual Image</span>
-          <form method="post" @submit.prevent="
-            onSubmitUploadFlex(
-              `${urlUpload}?folder=ilustration&nameFile=${fileName}`,
-              'act_file', 'act_img', 'displayAct_img'
-            )
-            ">
+          <form
+            method="post"
+            @submit.prevent="
+              onSubmitUploadFlex(
+                `${urlUpload}?folder=ilustration&nameFile=${fileName}`,
+                'act_file', 'act_img', 'displayAct_img'
+              )
+            "
+          >
             <div class="row m-0 p-0">
               <div class="col-8 p-0">
-                <input class="form-control" name="sampleFilestd" ref="act_img" type="file"
-                  @change="uploadFile('act_img')" />
+                <input
+                  class="form-control"
+                  name="sampleFilestd"
+                  ref="act_img"
+                  type="file"
+                  @change="uploadFile('act_img')"
+                />
               </div>
               <div class="col-1 py-0 m-0">
-                <h class="btn btn-success btn-sm" @click="addToogle('isImgAct')">
+                <h class="btn btn-success btn-sm" @click="addToogle('isImgAct')" >
                   +
                 </h>
               </div>
               <div class="col-1 py-0 m-0">
-                <h class="btn btn-danger btn-sm" @click="deleteImg('deleteAct1', 'act_img')">
-                  <i class="fa fa-trash" style="font-size: 10px"></i>
+                <h class="btn btn-danger btn-sm" 
+                @click="deleteImg('deleteAct1','act_img')">
+                  <i
+                    class="fa fa-trash"
+                    style="font-size: 10px"
+                  ></i>
                 </h>
               </div>
             </div>
           </form>
           <img :src="displayAct_img" width="50" v-if="act_img">
-          <form v-if="isImgAct || act2_img" method="post" @submit.prevent="
-            onSubmitUploadFlex(
-              `${urlUpload}?folder=ilustration&nameFile=${fileName}`,
-              'act_file2', 'act2_img', 'displayAct2_img'
-            )
-            ">
+          <form
+            v-if="isImgAct || act2_img"
+            method="post"
+            @submit.prevent="
+              onSubmitUploadFlex(
+                `${urlUpload}?folder=ilustration&nameFile=${fileName}`,
+                'act_file2', 'act2_img', 'displayAct2_img'
+              )
+            "
+          >
             <div class="row m-0 p-0">
               <div class="col-8 p-0">
-                <input class="form-control" name="sampleFilestd" ref="act2_img" type="file"
-                  @change="uploadFile('act2_img')" />
+                <input
+                  class="form-control"
+                  name="sampleFilestd"
+                  ref="act2_img"
+                  type="file"
+                  @change="uploadFile('act2_img')"
+                />
               </div>
               <div class="col-2 py-0 m-0">
-                <button class="btn btn-danger btn-sm"
-                  @click="onCancel('isImgAct'), deleteImg('deleteAct2', 'act2_img')">
-                  <i class="fa fa-trash" style="font-size: 10px"></i>
+                <button class="btn btn-danger btn-sm" 
+                @click="onCancel('isImgAct'), deleteImg('deleteAct2','act2_img')">
+                  <i
+                    class="fa fa-trash"
+                    style="font-size: 10px"
+                  ></i>
                 </button>
               </div>
             </div>
@@ -204,13 +309,21 @@
       <div v-if="isLongBd" class="row m-0 p-0">
         <div class="col-10 px-1 text-left">
           <span class="input-lable">Gap Between Standard and Actual</span>
-          <input class="form-control" type="text" placeholder="Gap of Condition" v-model="gapIlustrasi" />
+          <input
+            class="form-control"
+            type="text"
+            placeholder="Gap of Condition"
+            v-model="gapIlustrasi"/>
         </div>
       </div>
 
       <div class="row mx-0 my-4 p-0">
         <div class="col-6 px-1 py-0">
-          <button v-if="!is_ft_selected" class="btn btn-sm btn-outline-secondary w-100" @click="showModalFt()">
+          <button
+            v-if="!is_ft_selected"
+            class="btn btn-sm btn-outline-secondary w-100"
+            @click="showModalFt()"
+          >
             <i class="fa fa-cheklist"></i>Pilih Focus thema Member
           </button>
           <button v-else class="btn btn-sm btn-primary w-100" disabled>
@@ -225,17 +338,31 @@
               <v-card-text class="p-4">
                 <div class="row">
                   <div class="col-6">
-                    <v-text-field v-model="fmc_name" label="Mesin" required disabled></v-text-field>
+                    <v-text-field
+                      v-model="fmc_name"
+                      label="Mesin"
+                      required
+                      disabled
+                    ></v-text-field>
                   </div>
                   <div class="col-6">
-                    <v-text-field v-model="ferror_name" label="Problem" required disabled></v-text-field>
+                    <v-text-field
+                      v-model="ferror_name"
+                      label="Problem"
+                      required
+                      disabled
+                    ></v-text-field>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col text-left">
                     <label class="typo__label text-bold">PIC</label>
-                    <multiselect v-model="ft_pic" :options="optOperators" placeholder="Pilih Member"
-                      style="font-size: 10px"></multiselect>
+                    <multiselect
+                      v-model="ft_pic"
+                      :options="optOperators"
+                      placeholder="Pilih Member"
+                      style="font-size: 10px"
+                    ></multiselect>
                   </div>
                 </div>
               </v-card-text>
@@ -243,7 +370,12 @@
               <v-divider class="m-0"></v-divider>
 
               <v-card-actions>
-                <v-btn color="primary" text :loading="loadingBtn" @click="submitFT()">
+                <v-btn
+                  color="primary"
+                  text
+                  :loading="loadingBtn"
+                  @click="submitFT()"
+                >
                   Submit
                 </v-btn>
                 <v-btn color="warning" text @click="modalShow = false">
@@ -256,8 +388,12 @@
         <div class="col-6 px-1 py-0">
           <!-- TASKFORCE CHECKBOX -->
           <!-- <input type="checkbox" style="height: 20px" v-model="isTaskforce" /> -->
-          <b-form-checkbox v-model="isTaskforce" name="check-button" button
-            :button-variant="isTaskforce ? 'outline-danger' : 'primary'">
+          <b-form-checkbox
+            v-model="isTaskforce"
+            name="check-button"
+            button
+            :button-variant="isTaskforce ? 'outline-danger' : 'primary'"
+          >
             {{ isTaskforce ? "Batalkan Taskforce" : "Pilih Taskforce" }}
           </b-form-checkbox>
           <!-- <span style="font-size: 9px; font-weight: 800">Taskforce</span> -->
@@ -268,9 +404,18 @@
           <div class="row">
             <div class="col px-1 text-left">
               <span class="input-lable">Operator</span>
-              <input class="form-control" type="text" disabled v-model="foperator" />
-              <multiselect v-model="foperator" :options="optOperators" :multiple="true" style="font-size: 10px">
-              </multiselect>
+              <input
+                class="form-control"
+                type="text"
+                disabled
+                v-model="foperator"
+              />
+              <multiselect
+                v-model="foperator"
+                :options="optOperators"
+                :multiple="true"
+                style="font-size: 10px"
+              ></multiselect>
             </div>
             <!-- <div class="col">
               <input type="checkbox" style="height: 20px" v-model="isFullcap" />
@@ -283,7 +428,12 @@
       <div class="row m-0 p-0">
         <div class="col px-1 text-left">
           <span class="input-lable">AV Category</span>
-          <select ref="fav_categoty" id="fav_categoty" class="form-control" v-model="fav_categoty">
+          <select
+            ref="fav_categoty"
+            id="fav_categoty"
+            class="form-control"
+            v-model="fav_categoty"
+          >
             <option value="MESIN">MESIN</option>
             <option value="DIES">DIES</option>
             <option value="TOOL">TOOL</option>
@@ -292,7 +442,12 @@
         </div>
         <div class="col px-1 text-left">
           <span class="input-lable">Shift</span>
-          <select ref="fshift" id="fshift" class="form-control" v-model="fshift">
+          <select
+            ref="fshift"
+            id="fshift"
+            class="form-control"
+            v-model="fshift"
+          >
             <option value="r">RED</option>
             <option value="w">WHITE</option>
           </select>
@@ -301,7 +456,9 @@
       <!-- TIME -->
       <div class="row p-0 m-0">
         <div class="col p-0">
-          <span style="font-size: 8px; color: grey">AM (00:00 - 11:59) | PM (12:00 - 23:59)</span>
+          <span style="font-size: 8px; color: grey"
+            >AM (00:00 - 11:59) | PM (12:00 - 23:59)</span
+          >
         </div>
       </div>
       <div class="row m-0 p-0">
@@ -309,7 +466,12 @@
           <span class="input-lable">Start Date</span>
           <div class="row m-0 p-0">
             <div class="col-7 p-0">
-              <input style="font-size: 10px" class="form-control" type="date" v-model="startDate" />
+              <input
+                style="font-size: 10px"
+                class="form-control"
+                type="date"
+                v-model="startDate"
+              />
             </div>
             <div class="col-5 p-0">
               <input class="form-control" type="time" v-model="startTime" />
@@ -320,7 +482,12 @@
           <span class="input-lable">Finish Date</span>
           <div class="row m-0 p-0">
             <div class="col-7 p-0">
-              <input style="font-size: 10px" class="form-control" type="date" v-model="endDate" />
+              <input
+                style="font-size: 10px"
+                class="form-control"
+                type="date"
+                v-model="endDate"
+              />
             </div>
             <div class="col-5 p-0">
               <input class="form-control" type="time" v-model="endTime" />
@@ -346,8 +513,11 @@
         <div class="col px-1 text-left" style="display: none">
           <span class="input-lable">Image Ilustration</span>
           <img v-if="url" :src="url" style="width: 80%; height: 80%" />
-          <img v-else src="https://mtsn4malang.sch.id/wp-content/uploads/2019/08/placeholder-1.png"
-            style="width: 80%; height: 80%" />
+          <img
+            v-else
+            src="https://mtsn4malang.sch.id/wp-content/uploads/2019/08/placeholder-1.png"
+            style="width: 80%; height: 80%"
+          />
 
         </div>
       </div>
@@ -371,8 +541,12 @@
           </button> -->
           <!-- WHY TERJADI -->
           <div class="row m-0 p-0">
-            <table id="table-why-terjadi" class="table table-responsive text-center" style="font-size: 10px"
-              v-if="containerWhyTerjadi.length > 0">
+            <table
+              id="table-why-terjadi"
+              class="table table-responsive text-center"
+              style="font-size: 10px"
+              v-if="containerWhyTerjadi.length > 0"
+            >
               <thead>
                 <tr>
                   <th>No</th>
@@ -381,67 +555,109 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="(whyTerjadi, i) in containerWhyTerjadi" :key="whyTerjadi">
+                <tr
+                  v-for="(whyTerjadi, i) in containerWhyTerjadi"
+                  :key="whyTerjadi"
+                >
                   <td class="border" style="min-width: 10px">{{ i + 1 }}</td>
-                  <td class="text-left border" style="min-width: 220px"
-                    v-if="!isEditWhyTerjadi || idxWhyTerjadiSelected != i">
+                  <td
+                    class="text-left border"
+                    style="min-width: 220px"
+                    v-if="!isEditWhyTerjadi || idxWhyTerjadiSelected != i"
+                  >
                     {{ whyTerjadi }}
                   </td>
-                  <td class="text-left border" style="min-width: 220px"
-                    v-else-if="isEditWhyTerjadi && idxWhyTerjadiSelected == i">
+                  <td
+                    class="text-left border"
+                    style="min-width: 220px"
+                    v-else-if="isEditWhyTerjadi && idxWhyTerjadiSelected == i"
+                  >
                     <input type="text" v-model="descWhyTerjadi" />
                   </td>
                   <td class="border">
-                    <button class="btn btn-primary py-1 input-lable" @click="
-                      onToogleEdit(
-                        'isEditWhyTerjadi',
-                        'descWhyTerjadi',
-                        whyTerjadi,
-                        i
-                      )
-                      " v-if="!isEditWhyTerjadi || idxWhyTerjadiSelected != i">
-                      <i class="fa fa-pencil" style="font-size: 10px" aria-hidden="true"></i>
+                    <button
+                      class="btn btn-primary py-1 input-lable"
+                      @click="
+                        onToogleEdit(
+                          'isEditWhyTerjadi',
+                          'descWhyTerjadi',
+                          whyTerjadi,
+                          i
+                        )
+                      "
+                      v-if="!isEditWhyTerjadi || idxWhyTerjadiSelected != i"
+                    >
+                      <i
+                        class="fa fa-pencil"
+                        style="font-size: 10px"
+                        aria-hidden="true"
+                      ></i>
                     </button>
-                    <button class="btn btn-primary py-1 input-lable" @click="
-                      editContainerSingle(
-                        i,
-                        'containerWhyTerjadi',
-                        'descWhyTerjadi',
-                        'isEditWhyTerjadi'
-                      )
-                      " v-else-if="isEditWhyTerjadi && idxWhyTerjadiSelected == i">
-                      <i class="fa fa-send" style="font-size: 10px" aria-hidden="true"></i>
+                    <button
+                      class="btn btn-primary py-1 input-lable"
+                      @click="
+                        editContainerSingle(
+                          i,
+                          'containerWhyTerjadi',
+                          'descWhyTerjadi',
+                          'isEditWhyTerjadi'
+                        )
+                      "
+                      v-else-if="isEditWhyTerjadi && idxWhyTerjadiSelected == i"
+                    >
+                      <i
+                        class="fa fa-send"
+                        style="font-size: 10px"
+                        aria-hidden="true"
+                      ></i>
                     </button>
                   </td>
                   <td class="border">
                     <button class="btn btn-danger py-1 input-lable">
-                      <i class="fa fa-trash" style="font-size: 10px" aria-hidden="true"
-                        @click="removeContainerSingle(i, 'containerWhyTerjadi')"></i>
+                      <i
+                        class="fa fa-trash"
+                        style="font-size: 10px"
+                        aria-hidden="true"
+                        @click="removeContainerSingle(i, 'containerWhyTerjadi')"
+                      ></i>
                     </button>
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
-
-          <div class="
+          
+          <div
+            class="
               row
               m-0
               p-0
               d-flex
               justify-content-around
               align-content-center
-            " v-if="isWhyTerjadi">
+            "
+            v-if="isWhyTerjadi"
+          >
             <div class="col-7 p-0">
-              <input class="form-control mt-1" type="text" v-model="descWhyTerjadi" />
+              <input
+                class="form-control mt-1"
+                type="text"
+                v-model="descWhyTerjadi"
+              />
             </div>
             <div class="col-2 p-0">
-              <button class="btn btn-info py-1 input-lable" @click="onAddWhyTerjadi()">
+              <button
+                class="btn btn-info py-1 input-lable"
+                @click="onAddWhyTerjadi()"
+              >
                 Submit
               </button>
             </div>
             <div class="col-2 p-0 ml-2">
-              <button class="btn btn-danger py-1 input-lable" @click="onCancel('isWhyTerjadi')">
+              <button
+                class="btn btn-danger py-1 input-lable"
+                @click="onCancel('isWhyTerjadi')"
+              >
                 Cancel
               </button>
             </div>
@@ -454,45 +670,69 @@
       <div class="row m-0 p-0">
         <div class="col px-1 text-left">
           <span class="input-lable">5 Why (Kenapa Terjadi) Image</span>
-          <form method="post" @submit.prevent="
-            onSubmitUploadFlex(
-              `${urlUpload}?folder=ilustration&nameFile=${fileName}`,
-              '5whyterjadi_file', 'why1_img', 'displayWhy1_img'
-            )
-            ">
+          <form
+            method="post"
+            @submit.prevent="
+              onSubmitUploadFlex(
+                `${urlUpload}?folder=ilustration&nameFile=${fileName}`,
+                '5whyterjadi_file', 'why1_img', 'displayWhy1_img'
+              )
+            "
+          >
             <div class="row m-0 p-0">
               <div class="col-8 p-0">
-                <input class="form-control" name="sampleFile5why" ref="why1_img" type="file"
-                  @change="uploadFile('why1_img')" />
+                <input
+                  class="form-control"
+                  name="sampleFile5why"
+                  ref="why1_img"
+                  type="file"
+                  @change="uploadFile('why1_img')"
+                />
               </div>
               <div class="px-3 m-0">
-                <h class="btn btn-success btn-sm" @click="addToogle('isImgTerjadi')">
+                <h class="btn btn-success btn-sm" @click="addToogle('isImgTerjadi')" >
                   +
                 </h>
               </div>
               <div class="px-2 m-0">
-                <h class="btn btn-danger btn-sm" @click="deleteImg('deleteWhy1', 'why1_img')">
-                  <i class="fa fa-trash" style="font-size: 10px"></i>
+                <h class="btn btn-danger btn-sm" 
+                @click="deleteImg('deleteWhy1','why1_img')">
+                  <i
+                    class="fa fa-trash"
+                    style="font-size: 10px"
+                  ></i>
                 </h>
               </div>
             </div>
           </form>
           <img :src="displayWhy1_img" width="50" v-if="why1_img">
-          <form v-if="isImgTerjadi || (why12_img && why12_img != 'null')" method="post" @submit.prevent="
-            onSubmitUploadFlex(
-              `${urlUpload}?folder=ilustration&nameFile=${fileName}`,
-              '5whyterjadi_file2', 'why12_img', 'displayWhy12_img'
-            )
-            ">
+          <form
+            v-if="isImgTerjadi || (why12_img && why12_img != 'null')"
+            method="post"
+            @submit.prevent="
+              onSubmitUploadFlex(
+                `${urlUpload}?folder=ilustration&nameFile=${fileName}`,
+                '5whyterjadi_file2', 'why12_img', 'displayWhy12_img'
+              )
+            "
+          >
             <div class="row m-0 p-0">
               <div class="col-8 p-0">
-                <input class="form-control" name="sampleFile5why" ref="why12_img" type="file"
-                  @change="uploadFile('why12_img')" />
+                <input
+                  class="form-control"
+                  name="sampleFile5why"
+                  ref="why12_img"
+                  type="file"
+                  @change="uploadFile('why12_img')"
+                />
               </div>
               <div class="col-2 py-0 m-0">
-                <button class="btn btn-danger btn-sm"
-                  @click="onCancel('isImgTerjadi'), deleteImg('deleteWhy12', 'why12_img')">
-                  <i class="fa fa-trash" style="font-size: 10px"></i>
+                <button class="btn btn-danger btn-sm" 
+                @click="onCancel('isImgTerjadi'), deleteImg('deleteWhy12','why12_img')">
+                  <i
+                    class="fa fa-trash"
+                    style="font-size: 10px"
+                  ></i>
                 </button>
               </div>
             </div>
@@ -504,11 +744,19 @@
       <div class="row m-0 p-0">
         <div class="col px-1 text-left">
           <span class="input-lable">Step Repair </span>
-          <button class="btn btn-success py-1" @click="addToogle('isStepRepair')" style="font-size: 10px">
+          <button
+            class="btn btn-success py-1"
+            @click="addToogle('isStepRepair')"
+            style="font-size: 10px"
+          >
             +
           </button>
           <div class="row m-0 p-0">
-            <table id="table-step-repair" class="table table-responsive text-center" style="font-size: 10px">
+            <table
+              id="table-step-repair"
+              class="table table-responsive text-center"
+              style="font-size: 10px"
+            >
               <thead>
                 <tr>
                   <th>No</th>
@@ -517,70 +765,113 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="(stepRepair, i) in containerStepRepair" :key="stepRepair">
+                <tr
+                  v-for="(stepRepair, i) in containerStepRepair"
+                  :key="stepRepair"
+                >
                   <td class="border" style="min-width: 10px">{{ i + 1 }}</td>
-                  <td class="text-left border" style="min-width: 220px"
-                    v-if="!isEditStepRepair || idxStepRepairSelected != i">
+                  <td
+                    class="text-left border"
+                    style="min-width: 220px"
+                    v-if="!isEditStepRepair || idxStepRepairSelected != i"
+                  >
                     {{ stepRepair }}
                   </td>
-                  <td class="text-left border" style="min-width: 220px"
-                    v-else-if="isEditStepRepair || idxStepRepairSelected != i">
+                  <td
+                    class="text-left border"
+                    style="min-width: 220px"
+                    v-else-if="isEditStepRepair || idxStepRepairSelected != i"
+                  >
                     <input type="text" v-model="descStepRepair" />
                   </td>
                   <td class="border">
                     <button class="btn btn-primary py-1 input-lable">
-                      <i class="fa fa-pencil" style="font-size: 10px" aria-hidden="true" @click="
-                        onToogleEdit(
-                          'isEditStepRepair',
-                          'descStepRepair',
-                          stepRepair,
-                          i
-                        )
-                        " v-if="!isEditStepRepair || idxStepRepairSelected != i"></i>
-                      <i class="fa fa-send" style="font-size: 10px" aria-hidden="true" @click="
-                        editContainerSingle(
-                          i,
-                          'containerStepRepair',
-                          'descStepRepair',
-                          'isEditStepRepair'
-                        )
-                        " v-else-if="isEditStepRepair || idxStepRepairSelected != i
-                        "></i>
+                      <i
+                        class="fa fa-pencil"
+                        style="font-size: 10px"
+                        aria-hidden="true"
+                        @click="
+                          onToogleEdit(
+                            'isEditStepRepair',
+                            'descStepRepair',
+                            stepRepair,
+                            i
+                          )
+                        "
+                        v-if="!isEditStepRepair || idxStepRepairSelected != i"
+                      ></i>
+                      <i
+                        class="fa fa-send"
+                        style="font-size: 10px"
+                        aria-hidden="true"
+                        @click="
+                          editContainerSingle(
+                            i,
+                            'containerStepRepair',
+                            'descStepRepair',
+                            'isEditStepRepair'
+                          )
+                        "
+                        v-else-if="
+                          isEditStepRepair || idxStepRepairSelected != i
+                        "
+                      ></i>
                     </button>
                   </td>
                   <td class="border">
                     <button class="btn btn-danger py-1 input-lable">
-                      <i class="fa fa-trash" style="font-size: 10px" aria-hidden="true"
-                        @click="removeContainerSingle(i, 'containerStepRepair')"></i>
+                      <i
+                        class="fa fa-trash"
+                        style="font-size: 10px"
+                        aria-hidden="true"
+                        @click="removeContainerSingle(i, 'containerStepRepair')"
+                      ></i>
                     </button>
                   </td>
                 </tr>
               </tbody>
             </table>
-            <div class="
+            <div
+            class="
               row
               m-0
               p-0
               d-flex
               justify-content-around
               align-content-center
-            " v-if="isStepRepair && !isLongBd">
-              <div class="col-7 p-0">
-                <input class="form-control mt-1" type="text" v-model="descStepRepair" />
-              </div>
-              <div class="col-2 p-0">
-                <button class="btn btn-info py-1 input-lable" @click="onAddStepRepair()">
-                  Submit
-                </button>
-              </div>
-              <div class="col-2 p-0 ml-2">
-                <button class="btn btn-danger py-1 input-lable" @click="onCancel('isStepRepair')">
-                  Cancel
-                </button>
-              </div>
+            "
+            v-if="isStepRepair && !isLongBd"
+          >
+            <div class="col-7 p-0">
+              <input
+                class="form-control mt-1"
+                type="text"
+                v-model="descStepRepair"
+              />
             </div>
-            <table id="table-step-repair" class="table table-responsive text-center" style="font-size: 10px"
-              v-if="containerStepRepairNew.length > 0">
+            <div class="col-2 p-0">
+              <button
+                class="btn btn-info py-1 input-lable"
+                @click="onAddStepRepair()"
+              >
+                Submit
+              </button>
+            </div>
+            <div class="col-2 p-0 ml-2">
+              <button
+                class="btn btn-danger py-1 input-lable"
+                @click="onCancel('isStepRepair')"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+            <table
+              id="table-step-repair"
+              class="table table-responsive text-center"
+              style="font-size: 10px"
+              v-if="containerStepRepairNew.length > 0"
+            >
               <thead>
                 <tr>
                   <th>No</th>
@@ -592,39 +883,70 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="(stepRepair, i) in containerStepRepairNew" :key="stepRepair">
+                <tr
+                  v-for="(stepRepair, i) in containerStepRepairNew"
+                  :key="stepRepair"
+                >
                   <td class="border" style="min-width: 10px">{{ i + 1 }}</td>
-                  <td class="text-left border" style="min-width: 220px"
-                    v-if="!isEditStepRepair || idxStepRepairSelected != i">
+                  <td
+                    class="text-left border"
+                    style="min-width: 220px"
+                    v-if="!isEditStepRepair || idxStepRepairSelected != i"
+                  >
                     {{ stepRepair.stepDesc }}
                   </td>
-                  <td class="text-left border" style="min-width: 220px"
-                    v-else-if="isEditStepRepair || idxStepRepairSelected != i">
+                  <td
+                    class="text-left border"
+                    style="min-width: 220px"
+                    v-else-if="isEditStepRepair || idxStepRepairSelected != i"
+                  >
                     <input type="text" v-model="stepRepair.stepDesc" />
                   </td>
-                  <td class="text-left border" style="min-width: 50px"
-                    v-if="!isEditStepRepair || idxStepRepairSelected != i">
-                    {{ stepRepair.actualTime }}
+                  <td
+                    class="text-left border"
+                    style="min-width: 50px"
+                    v-if="!isEditStepRepair || idxStepRepairSelected != i"
+                  >
+                    {{stepRepair.actualTime}}
                   </td>
-                  <td class="text-left border" style="min-width: 50px"
-                    v-else-if="isEditStepRepair || idxStepRepairSelected != i">
+                  <td
+                    class="text-left border"
+                    style="min-width: 50px"
+                    v-else-if="isEditStepRepair || idxStepRepairSelected != i"
+                  >
                     <input v-model.number="stepRepair.actualTime" />
                   </td>
-                  <td class="text-left border" style="min-width: 50px"
-                    v-if="!isEditStepRepair || idxStepRepairSelected != i">
-                    {{ stepRepair.idealTime }}
+                  <td
+                    class="text-left border"
+                    style="min-width: 50px"
+                    v-if="!isEditStepRepair || idxStepRepairSelected != i"
+                  >
+                    {{stepRepair.idealTime}}
                   </td>
-                  <td class="text-left border" style="min-width: 50px"
-                    v-else-if="isEditStepRepair || idxStepRepairSelected != i">
+                  <td
+                    class="text-left border"
+                    style="min-width: 50px"
+                    v-else-if="isEditStepRepair || idxStepRepairSelected != i"
+                  >
                     <input v-model.number="stepRepair.idealTime" />
                   </td>
-                  <td class="text-left border" style="min-width: 50px"
-                    v-if="!isEditStepRepair || idxStepRepairSelected != i">
-                    {{ stepRepair.quick6 }}
+                  <td
+                    class="text-left border"
+                    style="min-width: 50px"
+                    v-if="!isEditStepRepair || idxStepRepairSelected != i"
+                  >
+                    {{stepRepair.quick6}}
                   </td>
-                  <td class="text-left border" style="min-width: 50px"
-                    v-else-if="isEditStepRepair || idxStepRepairSelected != i">
-                    <select class="text-center border" style="min-width: 50px" v-model="stepRepair.quick6">
+                  <td
+                    class="text-left border"
+                    style="min-width: 50px"
+                    v-else-if="isEditStepRepair || idxStepRepairSelected != i"
+                  >
+                    <select
+                      class="text-center border"
+                      style="min-width: 50px"
+                      v-model="stepRepair.quick6"
+                    >
                       <option disabled value="">Quick 6</option>
                       <option value="Q1">Q1 (Diagnose/Cause Analysis)</option>
                       <option value="Q2">Q2 (SparePart)</option>
@@ -635,52 +957,82 @@
                     </select>
                   </td>
                   <td class="border">
-                    <button class="btn btn-primary py-1 input-lable" @click="
-                      onToogleEditStep(
-                        'isEditStepRepair',
-                        'stepField',
-                        stepRepair,
-                        i
-                      )
-                      " v-if="!isEditStepRepair || idxStepRepairSelected != i">
-                      <i class="fa fa-pencil" style="font-size: 10px" aria-hidden="true"></i>
+                    <button
+                      class="btn btn-primary py-1 input-lable"
+                      @click="
+                        onToogleEditStep(
+                          'isEditStepRepair',
+                          'stepField',
+                          stepRepair,
+                          i
+                        )
+                      "
+                      v-if="!isEditStepRepair || idxStepRepairSelected != i"
+                    >
+                      <i
+                        class="fa fa-pencil"
+                        style="font-size: 10px"
+                        aria-hidden="true"
+                      ></i>
                     </button>
-                    <button class="btn btn-primary py-1 input-lable" @click="
-                      editContainerObjStep(
-                        i,
-                        'containerStepRepairNew',
-                        'stepField',
-                        'isEditStepRepair',
-                        stepRepair
-                      )
-                      " v-else-if="isEditStepRepair || idxStepRepairSelected != i">
-                      <i class="fa fa-send" style="font-size: 10px" aria-hidden="true"></i>
+                    <button
+                      class="btn btn-primary py-1 input-lable"
+                      @click="
+                        editContainerObjStep(
+                          i,
+                          'containerStepRepairNew',
+                          'stepField',
+                          'isEditStepRepair',
+                          stepRepair
+                        )
+                      "
+                      v-else-if="isEditStepRepair || idxStepRepairSelected != i"
+                    >
+                      <i
+                        class="fa fa-send"
+                        style="font-size: 10px"
+                        aria-hidden="true"
+                      ></i>
                     </button>
                   </td>
                   <td class="border">
                     <button class="btn btn-danger py-1 input-lable">
-                      <i class="fa fa-trash" style="font-size: 10px" aria-hidden="true"
-                        @click="removeContainerSingle(i, 'containerStepRepairNew')"></i>
+                      <i
+                        class="fa fa-trash"
+                        style="font-size: 10px"
+                        aria-hidden="true"
+                        @click="removeContainerSingle(i, 'containerStepRepairNew')"
+                      ></i>
                     </button>
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <div v-if="isStepRepair && isLongBd">
-            <div class="
+          <div v-if="isStepRepair && isLongBd" >
+            <div
+              class="
                 row
                 m-0
                 p-0
                 d-flex
                 justify-content-around
                 align-content-center
-              ">
+              "
+            >
               <div class="col-6 p-0">
-                <input class="form-control mt-1" type="text" placeholder="Description" v-model="stepField.stepDesc" />
+                <input
+                  class="form-control mt-1"
+                  type="text"
+                  placeholder="Description"
+                  v-model="stepField.stepDesc"
+                />
               </div>
               <div class="col p-0">
-                <select class="form-control mt-1" v-model="stepField.quick6">
+                <select
+                  class="form-control mt-1"
+                  v-model="stepField.quick6"
+                >
                   <option disabled value="">Quick 6</option>
                   <option value="Q1">Q1 (Diagnose/Cause Analysis)</option>
                   <option value="Q2">Q2 (SparePart)</option>
@@ -691,21 +1043,35 @@
                 </select>
               </div>
               <div class="col p-0">
-                <input class="form-control mt-1" placeholder="Actual Time" v-model.number="stepField.actualTime" />
+                <input
+                  class="form-control mt-1"
+                  placeholder="Actual Time"
+                  v-model.number="stepField.actualTime"
+                />
               </div>
               <div class="col p-0">
-                <input class="form-control mt-1" placeholder="Ideal Time" v-model.number="stepField.idealTime" />
+                <input
+                  class="form-control mt-1"
+                  placeholder="Ideal Time"
+                  v-model.number="stepField.idealTime"
+                />
               </div>
-
+              
             </div>
             <div class="row m-0 p-0 text-right justify-content-end">
               <div class="col-2 p-0">
-                <button class="btn btn-info py-1 input-lable" @click="onAddStepRepairNew()">
+                <button
+                  class="btn btn-info py-1 input-lable"
+                  @click="onAddStepRepairNew()"
+                >
                   Submit
                 </button>
               </div>
               <div class="col-1 p-0 ml-2">
-                <button class="btn btn-danger py-1 input-lable" @click="onCancel('isStepRepair')">
+                <button
+                  class="btn btn-danger py-1 input-lable"
+                  @click="onCancel('isStepRepair')"
+                >
                   Cancel
                 </button>
               </div>
@@ -721,15 +1087,23 @@
         </div>
       </div>
       <!-- Countermeasure (terjadi) -->
-      <div class="row m-0 p-0">
+      <div  class="row m-0 p-0">
         <div class="col px-1 text-left">
           <span class="input-lable">Countermeasure (kenapa terjadi) </span>
-          <button class="btn btn-success py-1" @click="addToogle('isCmTerjadi')" style="font-size: 10px">
+          <button
+            class="btn btn-success py-1"
+            @click="addToogle('isCmTerjadi')"
+            style="font-size: 10px"
+          >
             +
           </button>
           <div class="row m-0 p-0">
-            <table id="table-cm-terjadi" class="table table-responsive text-center" style="font-size: 10px"
-              v-if="containerCmTerjadi.length > 0">
+            <table
+              id="table-cm-terjadi"
+              class="table table-responsive text-center"
+              style="font-size: 10px"
+              v-if="containerCmTerjadi.length > 0"
+            >
               <thead>
                 <tr>
                   <th>No</th>
@@ -745,36 +1119,67 @@
               <tbody>
                 <tr v-for="(cmTerjadi, i) in containerCmTerjadi" :key="i">
                   <td class="border" style="min-width: 10px">{{ i + 1 }}</td>
-                  <td class="text-left border" style="min-width: 220px"
-                    v-if="!isEditCmTerjadi || idxCmTerjadiSelected != i">
+                  <td
+                    class="text-left border"
+                    style="min-width: 220px"
+                    v-if="!isEditCmTerjadi || idxCmTerjadiSelected != i"
+                  >
                     {{ cmTerjadi.cmDesc }}
                   </td>
-                  <td class="text-left border" style="min-width: 220px"
-                    v-else-if="isEditCmTerjadi || idxCmTerjadiSelected == i">
+                  <td
+                    class="text-left border"
+                    style="min-width: 220px"
+                    v-else-if="isEditCmTerjadi || idxCmTerjadiSelected == i"
+                  >
                     <input type="text" v-model="cmTerjadi.cmDesc" />
                   </td>
-                  <td class="text-left border" style="min-width: 50px"
-                    v-if="!isEditCmTerjadi || idxCmTerjadiSelected != i">
+                  <td
+                    class="text-left border"
+                    style="min-width: 50px"
+                    v-if="!isEditCmTerjadi || idxCmTerjadiSelected != i"
+                  >
                     {{ cmTerjadi.datePlan }}
                   </td>
-                  <td class="text-left border" style="min-width: 50px"
-                    v-else-if="isEditCmTerjadi || idxCmTerjadiSelected == i">
+                  <td
+                    class="text-left border"
+                    style="min-width: 50px"
+                    v-else-if="isEditCmTerjadi || idxCmTerjadiSelected == i"
+                  >
                     <input type="date" v-model="cmTerjadi.datePlan" />
                   </td>
-                  <td class="text-left border" v-if="!isEditCmTerjadi || idxCmTerjadiSelected != i">
+                  <td
+                    class="text-left border"
+                    v-if="!isEditCmTerjadi || idxCmTerjadiSelected != i"
+                  >
                     {{ cmTerjadi.pic }}
                   </td>
-                  <td class="text-left border" v-else-if="isEditCmTerjadi || idxCmTerjadiSelected == i">
-                    <multiselect v-model="cmTerjadi.pic" :options="optOperators" :multiple="false"
-                      style="font-size: 10px"></multiselect>
+                  <td
+                    class="text-left border"
+                    v-else-if="isEditCmTerjadi || idxCmTerjadiSelected == i"
+                  >
+                    <multiselect
+                      v-model="cmTerjadi.pic"
+                      :options="optOperators"
+                      :multiple="false"
+                      style="font-size: 10px"
+                    ></multiselect>
                   </td>
-                  <td class="text-left border" style="min-width: 50px"
-                    v-if="!isEditCmTerjadi || idxCmTerjadiSelected != i">
-                    {{ cmTerjadi.cmCategory }}
+                  <td
+                    class="text-left border"
+                    style="min-width: 50px"
+                    v-if="!isEditCmTerjadi || idxCmTerjadiSelected != i"
+                  >
+                    {{cmTerjadi.cmCategory}}
                   </td>
-                  <td class="text-left border" style="min-width: 50px"
-                    v-else-if="isEditCmTerjadi || idxCmTerjadiSelected == i">
-                    <select class="form-control mt-1" v-model="cmTerjadi.cmCategory">
+                  <td
+                    class="text-left border"
+                    style="min-width: 50px"
+                    v-else-if="isEditCmTerjadi || idxCmTerjadiSelected == i"
+                  >
+                    <select
+                      class="form-control mt-1"
+                      v-model="cmTerjadi.cmCategory"
+                    >
                       <option value="">C/M Category</option>
                       <option value="Improvement">Improvement</option>
                       <option value="Training">Training</option>
@@ -782,56 +1187,93 @@
                       <option value="Sparepart">Sparepart</option>
                     </select>
                   </td>
-                  <td v-if="cmTerjadi.judg == true &&
-                    (!isEditCmTerjadi || idxCmTerjadiSelected != i)
-                  " class="text-center border text-success" style="min-width: 50px">
+                  <td
+                    v-if="
+                      cmTerjadi.judg == true &&
+                      (!isEditCmTerjadi || idxCmTerjadiSelected != i)
+                    "
+                    class="text-center border text-success"
+                    style="min-width: 50px"
+                  >
                     {{ "Sudah" }}
                   </td>
-                  <td v-else-if="cmTerjadi.judg == false &&
-                    (!isEditCmTerjadi || idxCmTerjadiSelected != i)
-                  " class="text-center border text-danger" style="min-width: 50px">
+                  <td
+                    v-else-if="
+                      cmTerjadi.judg == false &&
+                      (!isEditCmTerjadi || idxCmTerjadiSelected != i)
+                    "
+                    class="text-center border text-danger"
+                    style="min-width: 50px"
+                  >
                     {{ "Belum" }}
                   </td>
-                  <td class="text-center border" style="min-width: 50px"
-                    v-else-if="isEditCmTerjadi || idxCmTerjadiSelected == i">
+                  <td
+                    class="text-center border"
+                    style="min-width: 50px"
+                    v-else-if="isEditCmTerjadi || idxCmTerjadiSelected == i"
+                  >
                     <select v-model="cmTerjadi.judg">
                       <option :value="false">Belum</option>
                       <option :value="true">Sudah</option>
                     </select>
                   </td>
                   <td class="border">
-                    <input v-if="isEditCmTerjadi || idxCmTerjadiSelected == i" type="text" v-model="cmTerjadi.result" />
+                    <input
+                      v-if="isEditCmTerjadi || idxCmTerjadiSelected == i"
+                      type="text"
+                      v-model="cmTerjadi.result"
+                    />
                     <p class="m-0" v-else>
                       {{ cmTerjadi.result ? cmTerjadi.result : "-" }}
                     </p>
                   </td>
                   <td class="border">
-                    <button class="btn btn-primary py-1 input-lable" @click="
-                      onToogleEditObj(
-                        'isEditCmTerjadi',
-                        'cmField',
-                        cmTerjadi,
-                        i
-                      )
-                      " v-if="!isEditCmTerjadi || idxCmTerjadiSelected != i">
-                      <i class="fa fa-pencil" style="font-size: 10px" aria-hidden="true"></i>
+                    <button
+                      class="btn btn-primary py-1 input-lable"
+                      @click="
+                        onToogleEditObj(
+                          'isEditCmTerjadi',
+                          'cmField',
+                          cmTerjadi,
+                          i
+                        )
+                      "
+                      v-if="!isEditCmTerjadi || idxCmTerjadiSelected != i"
+                    >
+                      <i
+                        class="fa fa-pencil"
+                        style="font-size: 10px"
+                        aria-hidden="true"
+                      ></i>
                     </button>
-                    <button class="btn btn-primary py-1 input-lable" @click="
-                      editContainerObj(
-                        i,
-                        'containerCmTerjadi',
-                        'cmField',
-                        'isEditCmTerjadi',
-                        cmTerjadi
-                      )
-                      " v-else-if="isEditCmTerjadi || idxCmTerjadiSelected == i">
-                      <i class="fa fa-send" style="font-size: 10px" aria-hidden="true"></i>
+                    <button
+                      class="btn btn-primary py-1 input-lable"
+                      @click="
+                        editContainerObj(
+                          i,
+                          'containerCmTerjadi',
+                          'cmField',
+                          'isEditCmTerjadi',
+                          cmTerjadi
+                        )
+                      "
+                      v-else-if="isEditCmTerjadi || idxCmTerjadiSelected == i"
+                    >
+                      <i
+                        class="fa fa-send"
+                        style="font-size: 10px"
+                        aria-hidden="true"
+                      ></i>
                     </button>
                   </td>
                   <td class="border">
                     <button class="btn btn-danger py-1 input-lable">
-                      <i class="fa fa-trash" style="font-size: 10px" aria-hidden="true"
-                        @click="removeContainerSingle(i, 'containerCmTerjadi')"></i>
+                      <i
+                        class="fa fa-trash"
+                        style="font-size: 10px"
+                        aria-hidden="true"
+                        @click="removeContainerSingle(i, 'containerCmTerjadi')"
+                      ></i>
                     </button>
                   </td>
                 </tr>
@@ -839,7 +1281,8 @@
             </table>
           </div>
           <div v-if="isCmTerjadi">
-            <div class="
+            <div
+              class="
                 border border-secondary
                 row
                 m-0
@@ -847,17 +1290,26 @@
                 d-flex
                 justify-content-around
                 align-content-center
-              ">
+              "
+            >
               <div class="col-12 col-md-4 p-0">
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <div class="input-group-text">
                       Ini Action? -
-                      <input type="checkbox" style="height: 20px" v-model="isActionCm" />
+                      <input
+                        type="checkbox"
+                        style="height: 20px"
+                        v-model="isActionCm"
+                      />
                     </div>
                   </div>
-                  <input class="form-control mt-1" type="text" placeholder="countermeasure / action"
-                    v-model="cmField.cmDesc" />
+                  <input
+                    class="form-control mt-1"
+                    type="text"
+                    placeholder="countermeasure / action"
+                    v-model="cmField.cmDesc"
+                  />
                 </div>
               </div>
               <div class="col-12 col-md-2 p-0">
@@ -865,7 +1317,12 @@
                   <div class="input-group-prepend">
                     <div class="input-group-text">Plan Date</div>
                   </div>
-                  <input class="form-control mt-1" type="date" placeholder="date" v-model="cmField.datePlan" />
+                  <input
+                    class="form-control mt-1"
+                    type="date"
+                    placeholder="date"
+                    v-model="cmField.datePlan"
+                  />
                 </div>
               </div>
               <div class="col-12 col-md-2 p-0">
@@ -873,7 +1330,10 @@
                   <div class="input-group-prepend">
                     <div class="input-group-text">C/M Category</div>
                   </div>
-                  <select class="form-control mt-1" v-model="cmField.cmCategory">
+                  <select
+                    class="form-control mt-1"
+                    v-model="cmField.cmCategory"
+                  >
                     <option value="">C/M Category</option>
                     <option value="Improvement">Improvement</option>
                     <option value="Training">Training</option>
@@ -887,19 +1347,30 @@
                   <div class="input-group-prepend">
                     <div class="input-group-text">Pic</div>
                   </div>
-                  <multiselect v-model="cmField.pic" :options="optOperators" :multiple="false" class="w-80"
-                    style="font-size: 10px"></multiselect>
+                  <multiselect
+                    v-model="cmField.pic"
+                    :options="optOperators"
+                    :multiple="false"
+                    class="w-80"
+                    style="font-size: 10px"
+                  ></multiselect>
                 </div>
               </div>
             </div>
             <div class="row m-0 p-0 text-right justify-content-end">
               <div class="col-2 p-0">
-                <button class="btn btn-info py-1 input-lable" @click="onAddCmTerjadi()">
+                <button
+                  class="btn btn-info py-1 input-lable"
+                  @click="onAddCmTerjadi()"
+                >
                   Submit
                 </button>
               </div>
               <div class="col-1 p-0 ml-2">
-                <button class="btn btn-danger py-1 input-lable" @click="onCancel('isCmTerjadi')">
+                <button
+                  class="btn btn-danger py-1 input-lable"
+                  @click="onCancel('isCmTerjadi')"
+                >
                   Cancel
                 </button>
               </div>
@@ -911,12 +1382,20 @@
       <div class="row m-0 p-0">
         <div class="col px-1 text-left mb-2">
           <span class="input-lable">Yokoten </span>
-          <button class="btn btn-success py-1" @click="addToogle('isYokoten')" style="font-size: 10px">
+          <button
+            class="btn btn-success py-1"
+            @click="addToogle('isYokoten')"
+            style="font-size: 10px"
+          >
             +
           </button>
           <div class="row m-0 p-0">
-            <table id="table-yokoten" class="table table-responsive text-center" style="font-size: 10px"
-              v-if="containerYokoten.length != 0">
+            <table
+              id="table-yokoten"
+              class="table table-responsive text-center"
+              style="font-size: 10px"
+              v-if="containerYokoten.length != 0"
+            >
               <thead>
                 <tr>
                   <th>No</th>
@@ -930,47 +1409,82 @@
               <tbody>
                 <tr v-for="(yokoten, i) in containerYokoten" :key="i">
                   <td class="border" style="min-width: 10px">{{ i + 1 }}</td>
-                  <td class="text-left border" style="min-width: 220px"
-                    v-if="!isEditYokoten || idxYokotenSelected != i">
+                  <td
+                    class="text-left border"
+                    style="min-width: 220px"
+                    v-if="!isEditYokoten || idxYokotenSelected != i"
+                  >
                     {{ yokoten.machine }}
                   </td>
-                  <td class="text-left border" style="min-width: 220px"
-                    v-else-if="isEditYokoten || idxYokotenSelected != i">
+                  <td
+                    class="text-left border"
+                    style="min-width: 220px"
+                    v-else-if="isEditYokoten || idxYokotenSelected != i"
+                  >
                     <input type="text" v-model="yokoten.machine" />
                   </td>
-                  <td class="text-left border" style="min-width: 50px" v-if="!isEditYokoten || idxYokotenSelected != i">
+                  <td
+                    class="text-left border"
+                    style="min-width: 50px"
+                    v-if="!isEditYokoten || idxYokotenSelected != i"
+                  >
                     {{ yokoten.datePlan }}
                   </td>
-                  <td class="text-left border" style="min-width: 220px"
-                    v-else-if="isEditYokoten || idxYokotenSelected != i">
+                  <td
+                    class="text-left border"
+                    style="min-width: 220px"
+                    v-else-if="isEditYokoten || idxYokotenSelected != i"
+                  >
                     <input type="date" v-model="yokoten.datePlan" />
                   </td>
-                  <td class="text-left border" style="min-width: 50px" v-if="!isEditYokoten || idxYokotenSelected != i">
+                  <td
+                    class="text-left border"
+                    style="min-width: 50px"
+                    v-if="!isEditYokoten || idxYokotenSelected != i"
+                  >
                     {{ yokoten.pic }}
                   </td>
-                  <td class="text-left border" style="min-width: 50px"
-                    v-else-if="isEditYokoten || idxYokotenSelected != i">
+                  <td
+                    class="text-left border"
+                    style="min-width: 50px"
+                    v-else-if="isEditYokoten || idxYokotenSelected != i"
+                  >
                     <input type="text" v-model="yokoten.pic" />
                   </td>
-                  <td v-if="yokoten.judg == true &&
-                    (!isEditYokoten || idxYokotenSelected != i)
-                  " class="text-center border text-success" style="min-width: 50px">
+                  <td
+                    v-if="
+                      yokoten.judg == true &&
+                      (!isEditYokoten || idxYokotenSelected != i)
+                    "
+                    class="text-center border text-success"
+                    style="min-width: 50px"
+                  >
                     {{ "Sudah" }}
                   </td>
-                  <td v-else-if="yokoten.judg == false &&
-                    (!isEditYokoten || idxYokotenSelected != i)
-                  " class="text-center border text-danger" style="min-width: 50px">
+                  <td
+                    v-else-if="
+                      yokoten.judg == false &&
+                      (!isEditYokoten || idxYokotenSelected != i)
+                    "
+                    class="text-center border text-danger"
+                    style="min-width: 50px"
+                  >
                     {{ "Belum" }}
                   </td>
-                  <td class="text-center border" style="min-width: 50px"
-                    v-else-if="isEditYokoten || idxYokotenSelected == i">
+                  <td
+                    class="text-center border"
+                    style="min-width: 50px"
+                    v-else-if="isEditYokoten || idxYokotenSelected == i"
+                  >
                     <select v-model="yokoten.judg">
                       <option :value="false">Belum</option>
                       <option :value="true">Sudah</option>
                     </select>
                   </td>
                   <td class="border">
-                    <button class="btn btn-primary py-1 input-lable" v-if="!isEditYokoten || idxYokotenSelected != i"
+                    <button
+                      class="btn btn-primary py-1 input-lable"
+                      v-if="!isEditYokoten || idxYokotenSelected != i"
                       @click="
                         onToogleEditObj(
                           'isEditYokoten',
@@ -978,25 +1492,42 @@
                           yokoten,
                           i
                         )
-                        ">
-                      <i class="fa fa-pencil" style="font-size: 10px" aria-hidden="true"></i>
+                      "
+                    >
+                      <i
+                        class="fa fa-pencil"
+                        style="font-size: 10px"
+                        aria-hidden="true"
+                      ></i>
                     </button>
-                    <button class="btn btn-primary py-1 input-lable" @click="
-                      editContainerObj(
-                        i,
-                        'containerYokoten',
-                        'yokoField',
-                        'isEditYokoten',
-                        yokoten
-                      )
-                      " v-else-if="isEditYokoten || idxYokotenSelected == i">
-                      <i class="fa fa-send" style="font-size: 10px" aria-hidden="true"></i>
+                    <button
+                      class="btn btn-primary py-1 input-lable"
+                      @click="
+                        editContainerObj(
+                          i,
+                          'containerYokoten',
+                          'yokoField',
+                          'isEditYokoten',
+                          yokoten
+                        )
+                      "
+                      v-else-if="isEditYokoten || idxYokotenSelected == i"
+                    >
+                      <i
+                        class="fa fa-send"
+                        style="font-size: 10px"
+                        aria-hidden="true"
+                      ></i>
                     </button>
                   </td>
                   <td class="border">
                     <button class="btn btn-danger py-1 input-lable">
-                      <i class="fa fa-trash" style="font-size: 10px" aria-hidden="true"
-                        @click="removeContainerSingle(i, 'containerYokoten')"></i>
+                      <i
+                        class="fa fa-trash"
+                        style="font-size: 10px"
+                        aria-hidden="true"
+                        @click="removeContainerSingle(i, 'containerYokoten')"
+                      ></i>
                     </button>
                   </td>
                 </tr>
@@ -1004,32 +1535,55 @@
             </table>
           </div>
           <div v-if="isYokoten">
-            <div class="
+            <div
+              class="
                 row
                 m-0
                 p-0
                 d-flex
                 justify-content-around
                 align-content-center
-              ">
+              "
+            >
               <div class="col p-0">
-                <input class="form-control mt-1" type="text" placeholder="yokoyen item" v-model="yokoField.machine" />
+                <input
+                  class="form-control mt-1"
+                  type="text"
+                  placeholder="yokoyen item"
+                  v-model="yokoField.machine"
+                />
               </div>
               <div class="col p-0">
-                <input class="form-control mt-1" type="date" placeholder="date" v-model="yokoField.datePlan" />
+                <input
+                  class="form-control mt-1"
+                  type="date"
+                  placeholder="date"
+                  v-model="yokoField.datePlan"
+                />
               </div>
               <div class="col p-0">
-                <input class="form-control mt-1" type="text" placeholder="Pic" v-model="yokoField.pic" />
+                <input
+                  class="form-control mt-1"
+                  type="text"
+                  placeholder="Pic"
+                  v-model="yokoField.pic"
+                />
               </div>
             </div>
             <div class="row m-0 p-0">
               <div class="col p-0">
-                <button class="btn btn-info py-1 input-lable" @click="onAddYokoten()">
+                <button
+                  class="btn btn-info py-1 input-lable"
+                  @click="onAddYokoten()"
+                >
                   Submit
                 </button>
               </div>
               <div class="col p-0 ml-2">
-                <button class="btn btn-danger py-1 input-lable" @click="onCancel('isYokoten')">
+                <button
+                  class="btn btn-danger py-1 input-lable"
+                  @click="onCancel('isYokoten')"
+                >
                   Cancel
                 </button>
               </div>
@@ -1051,7 +1605,11 @@
             +
           </button> -->
           <div class="row m-0 p-0">
-            <table id="table-why-lama" class="table table-responsive text-center" style="font-size: 10px">
+            <table
+              id="table-why-lama"
+              class="table table-responsive text-center"
+              style="font-size: 10px"
+            >
               <thead>
                 <tr>
                   <th>No</th>
@@ -1062,63 +1620,102 @@
               <tbody>
                 <tr v-for="(whyLama, i) in containerWhyLama" :key="whyLama">
                   <td class="border" style="min-width: 10px">{{ i + 1 }}</td>
-                  <td class="text-left border" style="min-width: 220px"
-                    v-if="!isEditWhyLama || idxWhyLamaSelected != i">
+                  <td
+                    class="text-left border"
+                    style="min-width: 220px"
+                    v-if="!isEditWhyLama || idxWhyLamaSelected != i"
+                  >
                     {{ whyLama }}
                   </td>
-                  <td class="text-left border" style="min-width: 220px"
-                    v-else-if="isEditWhyLama && idxWhyLamaSelected == i">
+                  <td
+                    class="text-left border"
+                    style="min-width: 220px"
+                    v-else-if="isEditWhyLama && idxWhyLamaSelected == i"
+                  >
                     <input type="text" v-model="descWhyLama" />
                   </td>
                   <td class="border">
-                    <button class="btn btn-primary py-1 input-lable" @click="
-                      onToogleEdit('isEditWhyLama', 'descWhyLama', whyLama, i)
-                      " v-if="!isEditWhyLama || idxWhyLamaSelected != i">
-                      <i class="fa fa-pencil" style="font-size: 10px" aria-hidden="true"></i>
+                    <button
+                      class="btn btn-primary py-1 input-lable"
+                      @click="
+                        onToogleEdit('isEditWhyLama', 'descWhyLama', whyLama, i)
+                      "
+                      v-if="!isEditWhyLama || idxWhyLamaSelected != i"
+                    >
+                      <i
+                        class="fa fa-pencil"
+                        style="font-size: 10px"
+                        aria-hidden="true"
+                      ></i>
                     </button>
-                    <button class="btn btn-primary py-1 input-lable" @click="
-                      editContainerSingle(
-                        i,
-                        'containerWhyLama',
-                        'descWhyLama',
-                        'isEditWhyLama'
-                      )
-                      " v-else-if="isEditWhyLama && idxWhyLamaSelected == i">
-                      <i class="fa fa-send" style="font-size: 10px" aria-hidden="true"></i>
+                    <button
+                      class="btn btn-primary py-1 input-lable"
+                      @click="
+                        editContainerSingle(
+                          i,
+                          'containerWhyLama',
+                          'descWhyLama',
+                          'isEditWhyLama'
+                        )
+                      "
+                      v-else-if="isEditWhyLama && idxWhyLamaSelected == i"
+                    >
+                      <i
+                        class="fa fa-send"
+                        style="font-size: 10px"
+                        aria-hidden="true"
+                      ></i>
                     </button>
                   </td>
                   <td class="border">
                     <button class="btn btn-danger py-1 input-lable">
-                      <i class="fa fa-trash" style="font-size: 10px" aria-hidden="true"
-                        @click="removeContainerSingle(i, 'containerWhyLama')"></i>
+                      <i
+                        class="fa fa-trash"
+                        style="font-size: 10px"
+                        aria-hidden="true"
+                        @click="removeContainerSingle(i, 'containerWhyLama')"
+                      ></i>
                     </button>
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <div class="
+          <div
+            class="
               row
               m-0
               p-0
               d-flex
               justify-content-around
               align-content-center
-            " v-if="isWhyLama">
+            "
+            v-if="isWhyLama"
+          >
             <div class="col-7 p-0">
-              <input class="form-control mt-1" type="text" v-model="descWhyLama" />
+              <input
+                class="form-control mt-1"
+                type="text"
+                v-model="descWhyLama"
+              />
             </div>
             <div class="col-2 p-0">
-              <button class="btn btn-info py-1 input-lable" @click="onAddWhyLama()">
+              <button
+                class="btn btn-info py-1 input-lable"
+                @click="onAddWhyLama()"
+              >
                 Submit
               </button>
             </div>
             <div class="col-2 p-0 ml-2">
-              <button class="btn btn-danger py-1 input-lable" @click="onCancel('isWhyLama')">
+              <button
+                class="btn btn-danger py-1 input-lable"
+                @click="onCancel('isWhyLama')"
+              >
                 Cancel
               </button>
             </div>
-          </div>
+          </div >
           <div v-if="isLongBd" class="m-0 p-0">
             <TreeListAnalisys :hide="false" whyCategory="LAMA" :report="false" />
           </div>
@@ -1127,45 +1724,69 @@
       <div class="row m-0 p-0" v-if="isLongBd">
         <div class="col px-1 text-left">
           <span class="input-lable">5 Why (Kenapa Lama) Image</span>
-          <form method="post" @submit.prevent="
-            onSubmitUploadFlex(
-              `${urlUpload}?folder=ilustration&nameFile=${fileName}`,
-              '5whyterjadi2_file', 'why2_img', 'displayWhy2_img'
-            )
-            ">
+          <form
+            method="post"
+            @submit.prevent="
+              onSubmitUploadFlex(
+                `${urlUpload}?folder=ilustration&nameFile=${fileName}`,
+                '5whyterjadi2_file', 'why2_img', 'displayWhy2_img'
+              )
+            "
+          >
             <div class="row m-0 p-0">
               <div class="col-8 p-0">
-                <input class="form-control" name="sampleFile5why" ref="why2_img" type="file"
-                  @change="uploadFile('why2_img')" />
+                <input
+                  class="form-control"
+                  name="sampleFile5why"
+                  ref="why2_img"
+                  type="file"
+                  @change="uploadFile('why2_img')"
+                />
               </div>
               <div class=" px-3 m-0">
-                <h class="btn btn-success btn-sm" @click="addToogle('isImgLama')">
+                <h class="btn btn-success btn-sm" @click="addToogle('isImgLama')" >
                   +
                 </h>
               </div>
               <div class=" px-2 m-0">
-                <h class="btn btn-danger btn-sm" @click="deleteImg('deleteWhy2', 'why2_img')">
-                  <i class="fa fa-trash" style="font-size: 10px"></i>
+                <h class="btn btn-danger btn-sm" 
+                @click="deleteImg('deleteWhy2','why2_img')">
+                  <i
+                    class="fa fa-trash"
+                    style="font-size: 10px"
+                  ></i>
                 </h>
               </div>
             </div>
           </form>
           <img :src="displayWhy2_img" width="50" v-if="why2_img">
-          <form v-if="isImgLama || (why22_img && why22_img != 'null')" method="post" @submit.prevent="
-            onSubmitUploadFlex(
-              `${urlUpload}?folder=ilustration&nameFile=${fileName}`,
-              '5whyterjadi2_file2', 'why22_img', 'displayWhy22_img'
-            )
-            ">
+          <form
+            v-if="isImgLama || (why22_img && why22_img != 'null')"
+            method="post"
+            @submit.prevent="
+              onSubmitUploadFlex(
+                `${urlUpload}?folder=ilustration&nameFile=${fileName}`,
+                '5whyterjadi2_file2', 'why22_img', 'displayWhy22_img'
+              )
+            "
+          >
             <div class="row m-0 p-0">
               <div class="col-8 p-0">
-                <input class="form-control" name="sampleFile5why" ref="why22_img" type="file"
-                  @change="uploadFile('why22_img')" />
+                <input
+                  class="form-control"
+                  name="sampleFile5why"
+                  ref="why22_img"
+                  type="file"
+                  @change="uploadFile('why22_img')"
+                />
               </div>
               <div class="col-2 py-0 m-0">
-                <button class="btn btn-danger btn-sm"
-                  @click="onCancel('isImgLama'), deleteImg('deleteWhy22', 'why22_img')">
-                  <i class="fa fa-trash" style="font-size: 10px"></i>
+                <button class="btn btn-danger btn-sm" 
+                @click="onCancel('isImgLama'), deleteImg('deleteWhy22','why22_img')">
+                  <i
+                    class="fa fa-trash"
+                    style="font-size: 10px"
+                  ></i>
                 </button>
               </div>
             </div>
@@ -1177,12 +1798,20 @@
       <div v-if="isLongBd" class="row m-0 p-0">
         <div class="col px-1 text-left">
           <span class="input-lable">Countermeasure (kenapa Lama) </span>
-          <button class="btn btn-success py-1" @click="addToogle('isCmLama')" style="font-size: 10px">
+          <button
+            class="btn btn-success py-1"
+            @click="addToogle('isCmLama')"
+            style="font-size: 10px"
+          >
             +
           </button>
           <div class="row m-0 p-0">
-            <table id="table-cm-lama" class="table table-responsive text-center" style="font-size: 10px"
-              v-if="containerCmLama.length > 0">
+            <table
+              id="table-cm-lama"
+              class="table table-responsive text-center"
+              style="font-size: 10px"
+              v-if="containerCmLama.length > 0"
+            >
               <thead>
                 <tr>
                   <th>No</th>
@@ -1198,33 +1827,64 @@
               <tbody>
                 <tr v-for="(cmLama, i) in containerCmLama" :key="i">
                   <td class="border" style="min-width: 10px">{{ i + 1 }}</td>
-                  <td class="text-left border" style="min-width: 220px" v-if="!isEditCmLama || idxCmLamaSelected != i">
+                  <td
+                    class="text-left border"
+                    style="min-width: 220px"
+                    v-if="!isEditCmLama || idxCmLamaSelected != i"
+                  >
                     {{ cmLama.cmDesc }}
                   </td>
-                  <td class="text-left border" style="min-width: 220px"
-                    v-else-if="isEditCmLama || idxCmLamaSelected == i">
+                  <td
+                    class="text-left border"
+                    style="min-width: 220px"
+                    v-else-if="isEditCmLama || idxCmLamaSelected == i"
+                  >
                     <input type="text" v-model="cmLama.cmDesc" />
                   </td>
-                  <td class="text-left border" style="min-width: 50px" v-if="!isEditCmLama || idxCmLamaSelected != i">
+                  <td
+                    class="text-left border"
+                    style="min-width: 50px"
+                    v-if="!isEditCmLama || idxCmLamaSelected != i"
+                  >
                     {{ cmLama.datePlan }}
                   </td>
-                  <td class="text-left border" style="min-width: 50px"
-                    v-else-if="isEditCmLama || idxCmLamaSelected == i">
+                  <td
+                    class="text-left border"
+                    style="min-width: 50px"
+                    v-else-if="isEditCmLama || idxCmLamaSelected == i"
+                  >
                     <input type="date" v-model="cmLama.datePlan" />
                   </td>
-                  <td class="text-left border" style="min-width: 50px" v-if="!isEditCmLama || idxCmLamaSelected != i">
+                  <td
+                    class="text-left border"
+                    style="min-width: 50px"
+                    v-if="!isEditCmLama || idxCmLamaSelected != i"
+                  >
                     {{ cmLama.pic }}
                   </td>
-                  <td class="text-left border" style="min-width: 50px"
-                    v-else-if="isEditCmLama || idxCmLamaSelected == i">
+                  <td
+                    class="text-left border"
+                    style="min-width: 50px"
+                    v-else-if="isEditCmLama || idxCmLamaSelected == i"
+                  >
                     <input type="text" v-model="cmLama.pic" />
                   </td>
-                  <td class="text-left border" style="min-width: 50px" v-if="!isEditCmLama || idxCmLamaSelected != i">
-                    {{ cmLama.cmCategory }}
+                  <td
+                    class="text-left border"
+                    style="min-width: 50px"
+                    v-if="!isEditCmLama || idxCmLamaSelected != i"
+                  >
+                    {{cmLama.cmCategory}}
                   </td>
-                  <td class="text-left border" style="min-width: 50px"
-                    v-else-if="isEditCmLama || idxCmLamaSelected == i">
-                    <select class="form-control mt-1" v-model="cmLama.cmCategory">
+                  <td
+                    class="text-left border"
+                    style="min-width: 50px"
+                    v-else-if="isEditCmLama || idxCmLamaSelected == i"
+                  >
+                    <select
+                      class="form-control mt-1"
+                      v-model="cmLama.cmCategory"
+                    >
                       <option value="">C/M Category</option>
                       <option value="Improvement">Improvement</option>
                       <option value="Training">Training</option>
@@ -1232,51 +1892,90 @@
                       <option value="Sparepart">Sparepart</option>
                     </select>
                   </td>
-                  <td v-if="cmLama.judg == true &&
-                    (!isEditCmLama || idxCmLamaSelected != i)
-                  " class="text-center border text-success" style="min-width: 50px">
+                  <td
+                    v-if="
+                      cmLama.judg == true &&
+                      (!isEditCmLama || idxCmLamaSelected != i)
+                    "
+                    class="text-center border text-success"
+                    style="min-width: 50px"
+                  >
                     {{ "Sudah" }}
                   </td>
-                  <td class="text-center border text-danger" style="min-width: 50px" v-else-if="cmLama.judg == false &&
-                    (!isEditCmLama || idxCmLamaSelected != i)
-                  ">
+                  <td
+                    class="text-center border text-danger"
+                    style="min-width: 50px"
+                    v-else-if="
+                      cmLama.judg == false &&
+                      (!isEditCmLama || idxCmLamaSelected != i)
+                    "
+                  >
                     {{ "Belum" }}
                   </td>
-                  <td class="text-center border" style="min-width: 50px"
-                    v-else-if="isEditCmLama || idxCmLamaSelected == i">
+                  <td
+                    class="text-center border"
+                    style="min-width: 50px"
+                    v-else-if="isEditCmLama || idxCmLamaSelected == i"
+                  >
                     <select v-model="cmLama.judg">
                       <option :value="false">Belum</option>
                       <option :value="true">Sudah</option>
                     </select>
                   </td>
                   <td class="border">
-                    <input v-if="isEditCmLama || idxCmLamaSelected == i" type="text" v-model="cmLama.result" />
+                    <input
+                      v-if="isEditCmLama || idxCmLamaSelected == i"
+                      type="text"
+                      v-model="cmLama.result"
+                    />
                     <p class="m-0" v-else>
                       {{ cmLama.result ? cmLama.result : "-" }}
                     </p>
                   </td>
                   <td class="border">
-                    <button class="btn btn-primary py-1 input-lable" @click="
-                      onToogleEditObj('isEditCmLama', 'cmField', cmLama, i)
-                      " v-if="!isEditCmLama || idxCmLamaSelected != i">
-                      <i class="fa fa-pencil" style="font-size: 10px" aria-hidden="true"></i>
+                    <button
+                      class="btn btn-primary py-1 input-lable"
+                      @click="
+                        onToogleEditObj('isEditCmLama', 'cmField', cmLama, i)
+                      "
+                      v-if="!isEditCmLama || idxCmLamaSelected != i"
+                    >
+                      <i
+                        class="fa fa-pencil"
+                        style="font-size: 10px"
+                        aria-hidden="true"
+                      ></i>
                     </button>
-                    <button class="btn btn-primary py-1 input-lable" @click="
-                      editContainerObj(
-                        i,
-                        'containerCmLama',
-                        'cmField',
-                        'isEditCmLama',
-                        cmLama
-                      )
-                      " v-else-if="isEditCmLama || idxCmLamaSelected == i">
-                      <i class="fa fa-send" style="font-size: 10px" aria-hidden="true"></i>
+                    <button
+                      class="btn btn-primary py-1 input-lable"
+                      @click="
+                        editContainerObj(
+                          i,
+                          'containerCmLama',
+                          'cmField',
+                          'isEditCmLama',
+                          cmLama
+                        )
+                      "
+                      v-else-if="isEditCmLama || idxCmLamaSelected == i"
+                    >
+                      <i
+                        class="fa fa-send"
+                        style="font-size: 10px"
+                        aria-hidden="true"
+                      ></i>
                     </button>
                   </td>
                   <td class="border">
-                    <button class="btn btn-danger py-1 input-lable"
-                      @click="removeContainerSingle(i, 'containerCmLama')">
-                      <i class="fa fa-trash" style="font-size: 10px" aria-hidden="true"></i>
+                    <button
+                      class="btn btn-danger py-1 input-lable"
+                      @click="removeContainerSingle(i, 'containerCmLama')"
+                    >
+                      <i
+                        class="fa fa-trash"
+                        style="font-size: 10px"
+                        aria-hidden="true"
+                      ></i>
                     </button>
                   </td>
                 </tr>
@@ -1284,25 +1983,45 @@
             </table>
           </div>
           <div v-if="isCmLama">
-            <div class="
+            <div
+              class="
                 row
                 m-0
                 p-0
                 d-flex
                 justify-content-around
                 align-content-center
-              ">
+              "
+            >
               <div class="col p-0">
-                <input class="form-control mt-1" type="text" placeholder="countermeasure" v-model="cmField.cmDesc" />
+                <input
+                  class="form-control mt-1"
+                  type="text"
+                  placeholder="countermeasure"
+                  v-model="cmField.cmDesc"
+                />
               </div>
               <div class="col p-0">
-                <input class="form-control mt-1" type="date" placeholder="date" v-model="cmField.datePlan" />
+                <input
+                  class="form-control mt-1"
+                  type="date"
+                  placeholder="date"
+                  v-model="cmField.datePlan"
+                />
               </div>
               <div class="col p-0">
-                <input class="form-control mt-1" type="text" placeholder="Pic" v-model="cmField.pic" />
+                <input
+                  class="form-control mt-1"
+                  type="text"
+                  placeholder="Pic"
+                  v-model="cmField.pic"
+                />
               </div>
               <div class="col p-0">
-                <select class="form-control mt-1" v-model="cmField.cmCategory">
+                <select
+                  class="form-control mt-1"
+                  v-model="cmField.cmCategory"
+                >
                   <option value="">C/M Category</option>
                   <option value="Improvement">Improvement</option>
                   <option value="Training">Training</option>
@@ -1313,12 +2032,18 @@
             </div>
             <div class="row m-0 p-0 text-right justify-content-end">
               <div class="col-2 p-0">
-                <button class="btn btn-info py-1 input-lable" @click="onAddCmLama()">
+                <button
+                  class="btn btn-info py-1 input-lable"
+                  @click="onAddCmLama()"
+                >
                   Submit
                 </button>
               </div>
               <div class="col-1 p-0 ml-2">
-                <button class="btn btn-danger py-1 input-lable" @click="onCancel('isCmLama')">
+                <button
+                  class="btn btn-danger py-1 input-lable"
+                  @click="onCancel('isCmLama')"
+                >
                   Cancel
                 </button>
               </div>
@@ -1331,26 +2056,45 @@
         <div class="col px-1 text-left">
           <!-- <input type="file" > -->
           <span class="input-lable">Attachment Meeting</span>
-          <div class="row m-0 p-0">
-            <div class="col-8 p-0">
-              <input class="form-control" name="sampleFile" ref="attachFile" type="file" @change="onSelectAttachment" />
-            </div>
-            <div class="col-2 p-0">
-              <button class="btn btn-secondary btn-sm" type="submit"
-                @click="onSubmitAttach(`${urlUpload}?folder=attachmentMeeting&nameFile=attachment_${selectedAttachFile.name}`)">
-                Upload
-              </button>
-            </div>
-            <!-- <div class="col-2 p-0">
+          <form
+            method="post"
+            @submit.prevent="
+              onSubmitAttach(
+                `${urlUpload}?folder=attachmentMeeting&nameFile=attachment_${fileName}`
+              )
+            "
+          >
+            <div class="row m-0 p-0">
+              <div class="col-8 p-0">
+                <input
+                  class="form-control"
+                  name="sampleFile"
+                  ref="attachFile"
+                  type="file"
+                  @change="onSelectAttachment"
+                />
+              </div>
+              <div class="col-2 p-0">
+                <button class="btn btn-secondary btn-sm" type="submit">
+                  Upload
+                </button>
+              </div>
+              <!-- <div class="col-2 p-0">
                 <button class="btn btn-success btn-sm">View</button>
               </div> -->
-          </div>
+            </div>
+          </form>
         </div>
       </div>
       <!-- DISPLAY ATTACHMENT MEETING -->
       <div class="row m-0 p-0" v-if="fattachment">
         <div class="col px-1">
-          <a class="btn btn-primary w-100 text-light" :href="displayAttachment" style="opacity: 0.9" target="_blank">
+          <a
+            class="btn btn-primary w-100 text-light"
+            :href="displayAttachment"
+            style="opacity: 0.9"
+            target="_blank"
+          >
             See Attachment
           </a>
         </div>
@@ -1359,28 +2103,43 @@
       <div class="card">
         <div class="row m-0 p-0 mt-1">
           <div class="col text-left">
-            <span style="font-size: 9px; font-weight: bold">Approval Status 5 Why</span>
+            <span style="font-size: 9px; font-weight: bold"
+              >Approval Status 5 Why</span
+            >
           </div>
-          <div class="col justify-content-around" v-if="setRole != 'TM' &&
-            setRole != 'GH' &&
-            setRole != 'Staff' &&
-            setRole != 'Dph' &&
-            setRole != 'DDH'
-          ">
-            <button class="btn-success btn px-2 py-1 fontSp mr-1" @click="submitEdit('WHY')"
-              :disabled="containerWhyTerjadi.length == 0">
+          <div
+            class="col justify-content-around"
+            v-if="
+              setRole != 'TM' &&
+              setRole != 'GH' &&
+              setRole != 'Staff' &&
+              setRole != 'DpH' &&
+              setRole != 'DDH'
+            "
+          >
+            <button
+              class="btn-success btn px-2 py-1 fontSp mr-1"
+              @click="submitEdit('WHY')"
+              :disabled="containerWhyTerjadi.length < 0"
+            >
               Approve
             </button>
-            <button class="btn-info btn px-2 py-1 fontSp" @click="
-              setRole == 'LH'
-                ? (isDialogShowLhFiveWhy = true)
-                : (isDialogShowShFiveWhy = true)
-              ">
+            <button
+              class="btn-info btn px-2 py-1 fontSp"
+              @click="
+                setRole == 'LH'
+                  ? (isDialogShowLhFiveWhy = true)
+                  : (isDialogShowShFiveWhy = true)
+              "
+            >
               Comment
             </button>
             <v-dialog v-model="isDialogShowLhFiveWhy" persistent width="500">
               <v-card>
-                <v-card-title class="headline grey lighten-2" style="font-size: 15px !important">
+                <v-card-title
+                  class="headline grey lighten-2"
+                  style="font-size: 15px !important"
+                >
                   Comment 5 Why Line Head:
                 </v-card-title>
 
@@ -1392,7 +2151,11 @@
                           <div class="input-group-prepend">
                             <span class="input-group-text">Feedback</span>
                           </div>
-                          <input type="text" v-model="fiveWhyLhFeedback" class="form-control" />
+                          <input
+                            type="text"
+                            v-model="fiveWhyLhFeedback"
+                            class="form-control"
+                          />
                         </div>
                       </div>
                     </div>
@@ -1401,10 +2164,20 @@
                 <v-divider></v-divider>
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <button type="button" class="btn btn-success" data-dismiss="modal" @click="submitEdit('WHYFB')">
+                  <button
+                    type="button"
+                    class="btn btn-success"
+                    data-dismiss="modal"
+                    @click="submitEdit('WHYFB')"
+                  >
                     Send Feedback
                   </button>
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="clearDialog()">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-dismiss="modal"
+                    @click="clearDialog()"
+                  >
                     Close
                   </button>
                 </v-card-actions>
@@ -1412,7 +2185,10 @@
             </v-dialog>
             <v-dialog v-model="isDialogShowShFiveWhy" persistent width="500">
               <v-card>
-                <v-card-title class="headline grey lighten-2" style="font-size: 15px !important">
+                <v-card-title
+                  class="headline grey lighten-2"
+                  style="font-size: 15px !important"
+                >
                   Comment 5 Why Section Head:
                 </v-card-title>
 
@@ -1424,7 +2200,11 @@
                           <div class="input-group-prepend">
                             <span class="input-group-text">Feedback</span>
                           </div>
-                          <input type="text" v-model="fiveWhyShFeedback" class="form-control" />
+                          <input
+                            type="text"
+                            v-model="fiveWhyShFeedback"
+                            class="form-control"
+                          />
                         </div>
                       </div>
                     </div>
@@ -1433,10 +2213,20 @@
                 <v-divider></v-divider>
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <button type="button" class="btn btn-success" data-dismiss="modal" @click="submitEdit('WHYFB')">
+                  <button
+                    type="button"
+                    class="btn btn-success"
+                    data-dismiss="modal"
+                    @click="submitEdit('WHYFB')"
+                  >
                     Send Feedback
                   </button>
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="clearDialog()">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-dismiss="modal"
+                    @click="clearDialog()"
+                  >
                     Close
                   </button>
                 </v-card-actions>
@@ -1480,28 +2270,43 @@
         <div>
           <div class="row m-0 p-0 mt-1">
             <div class="col text-left">
-              <span style="font-size: 9px; font-weight: bold">Approval Status Countermeasure</span>
+              <span style="font-size: 9px; font-weight: bold"
+                >Approval Status Countermeasure</span
+              >
             </div>
-            <div class="col justify-content-around" v-if="setRole != 'TM' &&
-              setRole != 'GH' &&
-              setRole != 'Staff' &&
-              setRole != 'Dph' &&
-              setRole != 'DDH'
-            ">
-              <button class="btn-success btn px-2 py-1 fontSp mr-1" @click="submitEdit('CM')"
-                :disabled="containerCmTerjadi.length == 0">
+            <div
+              class="col justify-content-around"
+              v-if="
+                setRole != 'TM' &&
+                setRole != 'GH' &&
+                setRole != 'Staff' &&
+                setRole != 'DpH' &&
+                setRole != 'DDH'
+              "
+            >
+              <button
+                class="btn-success btn px-2 py-1 fontSp mr-1"
+                @click="submitEdit('CM')"
+                :disabled="containerCmTerjadi.length < 0"
+              >
                 Approve
               </button>
-              <button class="btn-info btn px-2 py-1 fontSp" @click="
-                setRole == 'LH'
-                  ? (isDialogShowLhCm = true)
-                  : (isDialogShowShCm = true)
-                ">
+              <button
+                class="btn-info btn px-2 py-1 fontSp"
+                @click="
+                  setRole == 'LH'
+                    ? (isDialogShowLhCm = true)
+                    : (isDialogShowShCm = true)
+                "
+              >
                 Comment
               </button>
               <v-dialog v-model="isDialogShowLhCm" persistent width="500">
                 <v-card>
-                  <v-card-title class="headline grey lighten-2" style="font-size: 15px !important">
+                  <v-card-title
+                    class="headline grey lighten-2"
+                    style="font-size: 15px !important"
+                  >
                     Comment C/M Line Head:
                   </v-card-title>
 
@@ -1513,7 +2318,11 @@
                             <div class="input-group-prepend">
                               <span class="input-group-text">Feedback</span>
                             </div>
-                            <input type="text" v-model="cmLhFeedback" class="form-control" />
+                            <input
+                              type="text"
+                              v-model="cmLhFeedback"
+                              class="form-control"
+                            />
                           </div>
                         </div>
                       </div>
@@ -1522,10 +2331,20 @@
                   <v-divider></v-divider>
                   <v-card-actions>
                     <v-spacer></v-spacer>
-                    <button type="button" class="btn btn-success" data-dismiss="modal" @click="submitEdit('CMFB')">
+                    <button
+                      type="button"
+                      class="btn btn-success"
+                      data-dismiss="modal"
+                      @click="submitEdit('CMFB')"
+                    >
                       Send Feedback
                     </button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="clearDialog()">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-dismiss="modal"
+                      @click="clearDialog()"
+                    >
                       Close
                     </button>
                   </v-card-actions>
@@ -1533,7 +2352,10 @@
               </v-dialog>
               <v-dialog v-model="isDialogShowShCm" persistent width="500">
                 <v-card>
-                  <v-card-title class="headline grey lighten-2" style="font-size: 15px !important">
+                  <v-card-title
+                    class="headline grey lighten-2"
+                    style="font-size: 15px !important"
+                  >
                     Comment C/M Section Head:
                   </v-card-title>
 
@@ -1545,7 +2367,11 @@
                             <div class="input-group-prepend">
                               <span class="input-group-text">Feedback</span>
                             </div>
-                            <input type="text" v-model="cmShFeedback" class="form-control" />
+                            <input
+                              type="text"
+                              v-model="cmShFeedback"
+                              class="form-control"
+                            />
                           </div>
                         </div>
                       </div>
@@ -1554,10 +2380,20 @@
                   <v-divider></v-divider>
                   <v-card-actions>
                     <v-spacer></v-spacer>
-                    <button type="button" class="btn btn-success" data-dismiss="modal" @click="submitEdit('CMFB')">
+                    <button
+                      type="button"
+                      class="btn btn-success"
+                      data-dismiss="modal"
+                      @click="submitEdit('CMFB')"
+                    >
                       Send Feedback
                     </button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="clearDialog()">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-dismiss="modal"
+                      @click="clearDialog()"
+                    >
                       Close
                     </button>
                   </v-card-actions>
@@ -1565,7 +2401,9 @@
               </v-dialog>
             </div>
           </div>
-          <div class="row align-items-center justify-content-center m-0 p-0 mt-1">
+          <div
+            class="row align-items-center justify-content-center m-0 p-0 mt-1"
+          >
             <div class="col">
               <table class="table table-bordered mt-1">
                 <thead class="fontSp">
@@ -1599,22 +2437,33 @@
           </div>
         </div>
         <!-- Approval Status CM DH -->
-        <div>
+        <div v-if="fiveWhyShApprove == 1">
           <div class="row m-0 p-0 mt-1">
             <div class="col text-left">
-              <span style="font-size: 9px; font-weight: bold">Approval Status Departement Head</span>
+              <span style="font-size: 9px; font-weight: bold"
+                >Approval Status Departement Head</span
+              >
             </div>
-            <div class="col justify-content-around" v-if="setRole == 'Dph'">
-              <button class="btn-success btn px-2 py-1 fontSp mr-1" @click="submitEdit('CM')"
-                :disabled="containerCmTerjadi.length == 0">
+            <div class="col justify-content-around" v-if="setRole == 'DpH'">
+              <button
+                class="btn-success btn px-2 py-1 fontSp mr-1"
+                @click="submitEdit('CM')"
+                :disabled="containerCmTerjadi.length < 0"
+              >
                 Approve
               </button>
-              <button class="btn-info btn px-2 py-1 fontSp" @click="isDialogShowDhCm = true">
+              <button
+                class="btn-info btn px-2 py-1 fontSp"
+                @click="isDialogShowDhCm = true"
+              >
                 Comment
               </button>
               <v-dialog v-model="isDialogShowDhCm" persistent width="500">
                 <v-card>
-                  <v-card-title class="headline grey lighten-2" style="font-size: 15px !important">
+                  <v-card-title
+                    class="headline grey lighten-2"
+                    style="font-size: 15px !important"
+                  >
                     Comment C/M Departement Head:
                   </v-card-title>
 
@@ -1626,7 +2475,11 @@
                             <div class="input-group-prepend">
                               <span class="input-group-text">Feedback</span>
                             </div>
-                            <input type="text" v-model="cmDhFeedback" class="form-control" />
+                            <input
+                              type="text"
+                              v-model="cmDhFeedback"
+                              class="form-control"
+                            />
                           </div>
                         </div>
                       </div>
@@ -1635,10 +2488,20 @@
                   <v-divider></v-divider>
                   <v-card-actions>
                     <v-spacer></v-spacer>
-                    <button type="button" class="btn btn-success" data-dismiss="modal" @click="submitEdit('CMFB')">
+                    <button
+                      type="button"
+                      class="btn btn-success"
+                      data-dismiss="modal"
+                      @click="submitEdit('CMFB')"
+                    >
                       Send Feedback
                     </button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="clearDialog()">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-dismiss="modal"
+                      @click="clearDialog()"
+                    >
                       Close
                     </button>
                   </v-card-actions>
@@ -1646,12 +2509,14 @@
               </v-dialog>
             </div>
           </div>
-          <div class="row align-items-center justify-content-center m-0 p-0 mt-1">
+          <div
+            class="row align-items-center justify-content-center m-0 p-0 mt-1"
+          >
             <div class="col">
               <table class="table table-bordered mt-1">
                 <thead class="fontSp">
                   <tr>
-                    <th>Dph Check</th>
+                    <th>DpH Check</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -1671,43 +2536,71 @@
         <div>
           <div class="row m-0 p-0 mt-1">
             <div class="col text-left">
-              <span style="font-size: 9px; font-weight: bold">Comments 5 Why</span>
+              <span style="font-size: 9px; font-weight: bold"
+                >Comments 5 Why</span
+              >
             </div>
           </div>
           <!-- isi comment 5 Why LH -->
-          <div class="row mb-1" v-if="String(fiveWhyLhFeedback) != 'null' &&
-            String(fiveWhyLhFeedback) != ''
-          ">
+          <div
+            class="row mb-1"
+            v-if="
+              String(fiveWhyLhFeedback) != 'null' &&
+              String(fiveWhyLhFeedback) != ''
+            "
+          >
             <div class="col-2 p-1 pr-0">
-              <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil" width="30"
-                style="position: absolute" />
+              <img
+                src="https://ptetutorials.com/images/user-profile.png"
+                alt="sunil"
+                width="30"
+                style="position: absolute"
+              />
             </div>
             <div class="col-9 p-1">
-              <div class="card rounded-all text-left p-1" style="font-size: 9px">
-                GL: {{ fiveWhyLhFeedback }}
+              <div
+                class="card rounded-all text-left p-1"
+                style="font-size: 9px"
+              >
+                {{ fiveWhyLhFeedback }}
               </div>
             </div>
           </div>
           <!-- isi comment 5 Why SH -->
-          <div class="row mb-1" v-if="String(fiveWhyShFeedback) != 'null' &&
-            String(fiveWhyShFeedback) != ''
-          ">
+          <div
+            class="row mb-1"
+            v-if="
+              String(fiveWhyShFeedback) != 'null' &&
+              String(fiveWhyShFeedback) != ''
+            "
+          >
             <div class="col-2 p-1 pr-0">
-              <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil" width="30"
-                style="position: absolute" />
+              <img
+                src="https://ptetutorials.com/images/user-profile.png"
+                alt="sunil"
+                width="30"
+                style="position: absolute"
+              />
             </div>
             <div class="col-9 p-1">
-              <div class="card rounded-all text-left p-1" style="font-size: 9px">
-                SH: {{ fiveWhyShFeedback }}
+              <div
+                class="card rounded-all text-left p-1"
+                style="font-size: 9px"
+              >
+                {{ fiveWhyShFeedback }}
               </div>
             </div>
           </div>
           <!-- no comment -->
-          <div class="row p-0 m-0" v-if="(String(fiveWhyShFeedback) == 'null' &&
-            String(fiveWhyLhFeedback) == 'null') ||
-            (String(fiveWhyShFeedback) == '' &&
-              String(fiveWhyLhFeedback) == '')
-          ">
+          <div
+            class="row p-0 m-0"
+            v-if="
+              (String(fiveWhyShFeedback) == 'null' &&
+                String(fiveWhyLhFeedback) == 'null') ||
+              (String(fiveWhyShFeedback) == '' &&
+                String(fiveWhyLhFeedback) == '')
+            "
+          >
             <div class="col text-secondary text-start fontSp">No Comments</div>
           </div>
         </div>
@@ -1715,66 +2608,109 @@
         <div>
           <div class="row m-0 p-0 mt-1">
             <div class="col text-left">
-              <span style="font-size: 9px; font-weight: bold">Comments Countermeasure</span>
+              <span style="font-size: 9px; font-weight: bold"
+                >Comments Countermeasure</span
+              >
             </div>
           </div>
           <!-- isi comment Countermeasure LH -->
-          <div class="row mb-1" v-if="String(cmLhFeedback) != 'null' && String(cmLhFeedback) != ''">
+          <div
+            class="row mb-1"
+            v-if="String(cmLhFeedback) != 'null' && String(cmLhFeedback) != ''"
+          >
             <div class="col-2 p-1 pr-0">
-              <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil" width="30"
-                style="position: absolute" />
+              <img
+                src="https://ptetutorials.com/images/user-profile.png"
+                alt="sunil"
+                width="30"
+                style="position: absolute"
+              />
             </div>
             <div class="col-9 p-1">
-              <div class="card rounded-all text-left p-1" style="font-size: 9px">
-                GL: {{ cmLhFeedback }}
+              <div
+                class="card rounded-all text-left p-1"
+                style="font-size: 9px"
+              >
+                {{ cmLhFeedback }}
               </div>
             </div>
           </div>
           <!-- isi comment 5 Why SH -->
-          <div class="row mb-1" v-if="String(cmShFeedback) != 'null' && String(cmShFeedback) != ''">
+          <div
+            class="row mb-1"
+            v-if="String(cmShFeedback) != 'null' && String(cmShFeedback) != ''"
+          >
             <div class="col-2 p-1 pr-0">
-              <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil" width="30"
-                style="position: absolute" />
+              <img
+                src="https://ptetutorials.com/images/user-profile.png"
+                alt="sunil"
+                width="30"
+                style="position: absolute"
+              />
             </div>
             <div class="col-9 p-1">
-              <div class="card rounded-all text-left p-1" style="font-size: 9px">
-                SH: {{ cmShFeedback }}
+              <div
+                class="card rounded-all text-left p-1"
+                style="font-size: 9px"
+              >
+                {{ cmShFeedback }}
               </div>
             </div>
           </div>
           <!-- isi comment 5 Why SH -->
-          <div class="row mb-1" v-if="String(cmDhFeedback) != 'null' && String(cmDhFeedback) != ''">
+          <div
+            class="row mb-1"
+            v-if="String(cmDhFeedback) != 'null' && String(cmDhFeedback) != ''"
+          >
             <div class="col-2 p-1 pr-0">
-              <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil" width="30"
-                style="position: absolute" />
+              <img
+                src="https://ptetutorials.com/images/user-profile.png"
+                alt="sunil"
+                width="30"
+                style="position: absolute"
+              />
             </div>
             <div class="col-9 p-1">
-              <div class="card rounded-all text-left p-1" style="font-size: 9px">
-                Dph: {{ cmDhFeedback }}
+              <div
+                class="card rounded-all text-left p-1"
+                style="font-size: 9px"
+              >
+                {{ cmDhFeedback }}
               </div>
             </div>
           </div>
           <!-- no comment -->
-          <div class="row p-0 m-0" v-if="(String(cmShFeedback) == 'null' &&
-            String(cmLhFeedback) == 'null') ||
-            (String(cmShFeedback) == '' && String(cmLhFeedback) == '')
-          ">
+          <div
+            class="row p-0 m-0"
+            v-if="
+              (String(cmShFeedback) == 'null' &&
+                String(cmLhFeedback) == 'null') ||
+              (String(cmShFeedback) == '' && String(cmLhFeedback) == '')
+            "
+          >
             <div class="col text-secondary text-start fontSp">No Comments</div>
           </div>
         </div>
         <div class="row m-0 p-0 justify-content-center" v-if="fimage">
           <div class="col-12 col-md-10 col-xl-12 py-0">
-            <span style="font-size: 12px; font-weight: bold">Image Ilustration</span>
+            <span style="font-size: 12px; font-weight: bold"
+              >Image Ilustration</span
+            >
           </div>
           <div class="col-12 col-md-10 col-xl-12 py-0">
             <img :src="displayImg_problem" :alt="fimage" height="300" width="300" />
-            <a class="btn btn-primary text-light justify-content-center" style="
+            <a
+              class="btn btn-primary text-light justify-content-center"
+              style="
                 position: absolute;
                 left: 25%;
                 bottom: 0px;
                 width: 50%;
                 opacity: 0.9;
-              " :href="displayImg" target="_blank">
+              "
+              :href="displayImg"
+              target="_blank"
+            >
               Preview Image
             </a>
           </div>
@@ -1784,19 +2720,41 @@
       <hr class="bg-light m-0" />
       <div class="row m-0 p-0 mt-3">
         <div class="col-6">
-          <button v-if="!isDurationInvalid" class="btn btn-outline-success" :id="`${isPleaseFinish ? 'blink' : ''}`"
-            @click="submitEdit()" :disabled="isLoading" style="width: 100%">
-            <i v-if="isLoading" class="fa fa-refresh fa-spin" style="font-size: 14px"></i>
+          <button
+            v-if="!isDurationInvalid"
+            class="btn btn-outline-success"
+            :id="`${isPleaseFinish ? 'blink' : ''}`"
+            @click="submitEdit()"
+            :disabled="isLoading"
+            style="width: 100%"
+          >
+            <i
+              v-if="isLoading"
+              class="fa fa-refresh fa-spin"
+              style="font-size: 14px"
+            ></i>
             <div v-else>Finish</div>
           </button>
-          <button class="btn btn-outline-info" v-if="isDurationInvalid && !isProblemClose" @click="updateEdit()"
-            style="width: 100%">
-            <i v-if="isLoading" class="fa fa-refresh fa-spin" style="font-size: 14px"></i>
+          <button
+            class="btn btn-outline-info"
+            v-if="isDurationInvalid && !isProblemClose"
+            @click="updateEdit()"
+            style="width: 100%"
+          >
+            <i
+              v-if="isLoading"
+              class="fa fa-refresh fa-spin"
+              style="font-size: 14px"
+            ></i>
             <div v-else>Update</div>
           </button>
         </div>
         <div class="col-6">
-          <button class="btn btn-outline-danger" @click="goBack()" style="width: 100%">
+          <button
+            class="btn btn-outline-danger"
+            @click="goBack()"
+            style="width: 100%"
+          >
             Cancel
           </button>
         </div>
@@ -1815,7 +2773,6 @@ import LegendStatus from "@/components/LegendStatus";
 import formatDate from "@/functions/formatDate";
 
 import TreeListAnalisys from "@/components/TreeListAnalisys.vue";
-import Swal from "sweetalert2";
 
 export default {
   name: "EditProblem",
@@ -1868,7 +2825,7 @@ export default {
       containerCmTerjadi: [],
       containerCmLama: [],
       containerYokoten: [],
-
+      
       descWhyTerjadi: "",
       descWhyLama: "",
       descStepRepair: "",
@@ -2000,7 +2957,7 @@ export default {
       isImgAct: false,
       isImgTerjadi: false,
       isImgLama: false,
-
+      
       deleteProblem1: false,
       deleteProblem2: false,
       deleteAct1: false,
@@ -2011,7 +2968,7 @@ export default {
       deleteWhy12: false,
       deleteWhy2: false,
       deleteWhy22: false,
-
+      
     };
   },
   watch: {
@@ -2199,7 +3156,7 @@ export default {
         this.isProblemClose = true;
       }
     },
-    isEditWhyTerjadi: function () { },
+    isEditWhyTerjadi: function () {},
     isEditWhyLama: function () {
       console.log("lama berubah");
     },
@@ -2409,8 +3366,8 @@ export default {
         this.dph_comment ? (newThema.dph_comment = this.dph_comment) : null;
         this.containerThemaActivity.length > 0
           ? (newThema.detail_activity = JSON.stringify(
-            this.containerThemaActivity
-          ))
+              this.containerThemaActivity
+            ))
           : null;
         console.log(newThema);
         if (this.id_m_problem_member) {
@@ -2473,7 +3430,7 @@ export default {
       this.isLoading = true;
       if (this.$refs[ref].files[0]) {
         const formData = new FormData();
-
+        
         formData.append("file", this.$refs[ref].files[0]);
         // for (var key of formData.entries()) {
         //   console.log(key[1]);
@@ -2518,7 +3475,6 @@ export default {
       }
     },
     onSelectAttachment() {
-      console.log(this.$refs.attachFile.files[0]);
       const attachFile = this.$refs.attachFile.files[0];
       this.selectedAttachFile = attachFile;
     },
@@ -2559,58 +3515,28 @@ export default {
       }
     },
     async onSubmitAttach(url) {
-      try {
-        if (!this.fattachment) {
-          this.isLoading = true;
-          const formData = new FormData();
-          formData.append("file", this.selectedAttachFile);
-          await axios
-            .post(url, formData)
-            .then((result) => {
-              console.log(result);
-              if (result.status == 201) {
-                this.fattachment = result.data.path;
-                // localStorage.setItem("image", result.data.path);
-                this.displayAttachment = `${process.env.VUE_APP_HOST}/image?path=${result.data.path}`;
-                alert(
-                  "success to upload, silahkan tekan tombol finished kalau sudah slesai input semua data"
-                );
-              }
-              this.isLoading = false;
-            })
-        } else {
-          Swal.fire({
-            title: "File sebelumnya akan hilang! kamu yakin ingin upload file?",
-            showCancelButton: true,
-            confirmButtonText: "Ya",
-          }).then(async (result) => {
-            /* Read more about isConfirmed, isDenied below */
-            if (result.isConfirmed) {
-              this.isLoading = true;
-              const formData = new FormData();
-              formData.append("file", this.selectedAttachFile);
-              await axios
-                .post(url, formData)
-                .then((result) => {
-                  console.log(result);
-                  if (result.status == 201) {
-                    this.fattachment = result.data.path;
-                    // localStorage.setItem("image", result.data.path);
-                    this.displayAttachment = `${process.env.VUE_APP_HOST}/image?path=${result.data.path}`;
-                    alert(
-                      "success to upload, silahkan tekan tombol finished kalau sudah slesai input semua data"
-                    );
-                  }
-                  this.isLoading = false;
-                })
-            }
-          });
-        }
-      } catch (error) {
-        alert(error);
-        console.log(error);
-        this.isLoading = false;
-      }
+      this.isLoading = true;
+      const formData = new FormData();
+      formData.append("file", this.selectedAttachFile);
+      await axios
+        .post(url, formData)
+        .then((result) => {
+          console.log(result);
+          if (result.status == 201) {
+            this.fattachment = result.data.path;
+            // localStorage.setItem("image", result.data.path);
+            this.displayAttachment = `${process.env.VUE_APP_HOST}/image?path=${result.data.path}`;
+            alert(
+              "success to upload, silahkan tekan tombol finished kalau sudah slesai input semua data"
+            );
+          }
+          this.isLoading = false;
+        })
+        .catch((err) => {
+          console.log(err);
+          this.isLoading = false;
+          // alert(JSON.stringify(err));
+        });
     },
     checkStatus(state) {
       // 1: approveCm, 2: delay, 3: comment, 4: none,
@@ -2655,7 +3581,7 @@ export default {
       this.stepField = {
         stepDesc: "",
         quick6: "",
-        idealTime: 0,
+        idealTime: 0, 
         actualTime: 0
       };
       this.isStepRepair = false;
@@ -2708,7 +3634,7 @@ export default {
     onToogleEditStep(condToogle, editDesc = null, beforeValue = null, idxSelected) {
       this[`${condToogle}`] = true;
       this.idxStepRepairSelected = idxSelected;
-      if (editDesc || beforeValue) {
+      if(editDesc || beforeValue) {
         this[`${editDesc}`] = {
           stepDesc: beforeValue.stepDesc,
           idealTime: beforeValue.idealTime,
@@ -2771,13 +3697,18 @@ export default {
       this[`${condToogle}`] = false;
       this[`${editDesc}`] = { cmDesc: "", datePlan: "", pic: "", cmCategory: "", judg: false };
     },
-    editCmCategory(idx, containerName, afterVal) {
-      this[`${containerName}`].splice(idx, 1, afterVal);
+    editCmCategory(idx, containerName, afterVal){
+      // if((this.containerName.length) != idx){
+      //   for (let index = 0; index < idx; index++) {
+      //     this.containerName.push("");
+      //   }
+      // }else{
+        this[`${containerName}`].splice(idx, 1, afterVal);
+      
       afterVal = "";
     },
 
-    async submitEdit() {
-      console.log(localStorage.getItem("intervalId"));
+    async submitEdit(approveStatus) {
       console.log(this.newAnalisys);
       if (this.newAnalisys) {
         axios
@@ -2810,6 +3741,90 @@ export default {
       }
       this.isLoading = true;
       let isBack = true;
+      if (approveStatus == "WHY") {
+        isBack = false;
+        if (this.setRole == "LH") {
+          this.fiveWhyLhApprove = 1;
+        } else if (this.setRole == "SH") {
+          this.fiveWhyShApprove = 1;
+        }
+      } else if (approveStatus == "CM") {
+        isBack = false;
+        if (this.setRole == "LH") {
+          this.cmLhApprove = 1;
+        } else if (this.setRole == "SH") {
+          this.cmShApprove = 1;
+        } else if (this.setRole == "DpH") {
+          this.cmDhApprove = 1;
+        }
+      } else if (approveStatus == "WHYFB") {
+        isBack = false;
+        if (this.setRole == "LH") {
+          this.fiveWhyLhFeedback = `${this.setName}(${this.setRole}): ${this.fiveWhyLhFeedback}`;
+          await this.sendFeedback("LH5W");
+        } else if (this.setRole == "SH") {
+          this.fiveWhyShFeedback = `${this.setName}(${this.setRole}): ${this.fiveWhyShFeedback}`;
+          await this.sendFeedback("SH5W");
+        }
+      } else if (approveStatus == "CMFB") {
+        isBack = false;
+        if (this.setRole == "LH") {
+          this.cmLhFeedback = `${this.setName}(${this.setRole}): ${this.cmLhFeedback}`;
+          await this.sendFeedback("LHCM");
+        } else if (this.setRole == "SH") {
+          this.cmShFeedback = `${this.setName}(${this.setRole}): ${this.cmShFeedback}`;
+          await this.sendFeedback("SHCM");
+        } else if (this.setRole == "DpH") {
+          this.cmDhFeedback = `${this.setName}(${this.setRole}): ${this.cmDhFeedback}`;
+          await this.sendFeedback("DHCM");
+        }
+      }
+
+      // #REVISICM
+      if (localStorage.getItem("beforeCm")) {
+        if (
+          JSON.stringify(this.containerCmTerjadi) !=
+          localStorage.getItem("beforeCm")
+        ) {
+          // console.log("Ada Revisi");
+          if (
+            this.cmLhApprove != 1 &&
+            (this.cmLhFeedback != "" || this.cmLhFeedback != "null")
+          ) {
+            await this.sendNotif(
+              this.fline,
+              this.fshift === "w" ? "WHITE" : "RED",
+              "LH",
+              `Countermeasure sudah di revisi Silahkan kembali di cek:
+https://smartandonsys.web.app/editProblem?v_=${this.$route.query.v_}`
+            );
+          } else if (
+            this.cmShApprove != 1 &&
+            (this.cmShFeedback != "" || this.cmShFeedback != "null")
+          ) {
+            await this.sendNotif(
+              this.fline,
+              this.fshift === "w" ? "WHITE" : "RED",
+              "SH",
+              `Countermeasure sudah di revisi Silahkan kembali di cek:
+https://smartandonsys.web.app/editProblem?v_=${this.$route.query.v_}`
+            );
+          } else if (
+            // SH must approve dulu
+            this.cmDhApprove != 1 &&
+            this.cmShApprove == 1 &&
+            (this.cmDhFeedback != "" || this.cmDhFeedback != "null")
+          ) {
+            await this.sendNotif(
+              this.fline,
+              "NON",
+              "DpH",
+              `Countermeasure sudah di revisi Silahkan kembali di cek:
+https://smartandonsys.web.app/editProblem?v_=${this.$route.query.v_}`
+            );
+          }
+        }
+      }
       if (this.containerWhyTerjadi.length == 1) {
         this.containerWhyTerjadi.push("");
       }
@@ -2827,13 +3842,10 @@ export default {
       formData.append('act2_img', this.act2_img)
       formData.append('why12_img', this.why12_img)
       formData.append('why22_img', this.why22_img)
-      if (this.fattachment) {
-        formData.append('fattachment', this.fattachment);
-      }
       let dataPrev = {
         furaian_kejadian_general: this.furaian_kejadian,
         furaian_kejadian_standard: this.filustrasi_standart,
-        furaian_kejadian_actual: this.filustrasi_actual,
+        furaian_kejadian_actual: this.filustrasi_actual,   
         gapIlustrasi: this.gapIlustrasi,
         ferror_name: this.ferror_name,
         foperator: this.foperator,
@@ -2872,10 +3884,10 @@ export default {
         deleteWhy2: this.deleteWhy2,
         deleteWhy22: this.deleteWhy22,
       };
-
+      
       for (const key in dataPrev) {
         let value = dataPrev[key]
-
+        
         formData.append(key, value)
       }
       dataPrev = formData
@@ -2883,14 +3895,17 @@ export default {
         dataPrev.fimage = this.fimage;
       }
 
+      if (this.fattachment) {
+        dataPrev.fattachment = this.fattachment;
+      }
 
-      // HENKATEN NO NEED
-      // if (
-      //   this.temporaryAction != "" &&
-      //   `${this.temporaryAction}`.toLowerCase() != "null"
-      // ) {
-      //   // await this.postHenkaten();
-      // }
+      if (
+        this.temporaryAction != "" &&
+        `${this.temporaryAction}`.toLowerCase() != "null"
+      ) {
+        // await this.postHenkaten();
+      }
+      console.log();
       console.log(dataPrev);
       if (this.fav_categoty != null) {
         if (this.fshift != null) {
@@ -2903,6 +3918,141 @@ export default {
             .put(url, dataPrev)
             .then(async (result) => {
               console.log(result);
+              if (this.fdur >= 30) {
+                if (
+                  this.fiveWhyLhApprove == 0 &&
+                  (this.fiveWhyLhFeedback == "" ||
+                    this.fiveWhyLhFeedback == "null" ||
+                    this.fiveWhyLhFeedback == null) &&
+                  (this.setRole == "TM" || this.setRole == "GH")
+                ) {
+                  await this.sendNotif(
+                    this.setArea,
+                    this.fshift === "w" ? "WHITE" : "RED",
+                    "LH",
+                    `Ada 5 Why Problem baru yang harus di cek
+Silahkan klik link di bawah:
+https://smartandonsys.web.app/editProblem?v_=${this.$route.query.v_}`
+                  );
+                }
+                if (
+                  this.fiveWhyLhApprove == 1 &&
+                  this.fiveWhyShApprove == 0 &&
+                  (this.fiveWhyShFeedback == "" ||
+                    this.fiveWhyShFeedback == "null")
+                ) {
+                  // SEND NOTIF TO LINE HEAD to confirm check analysis and creator info Lh already approve
+                  await this.sendNotif(
+                    this.setArea,
+                    this.fshift === "w" ? "WHITE" : "RED",
+                    "SH,GH,TM",
+                    `5 Why sudah di approve pak ${this.setName}(${this.setRole}) selanjutnya SH untuk cek:
+https://smartandonsys.web.app/editProblem?v_=${this.$route.query.v_}`
+                  );
+                }
+                if (
+                  this.fiveWhyShApprove == 1 &&
+                  this.fiveWhyLhApprove == 1 &&
+                  this.containerCmTerjadi.length == 0 &&
+                  this.setRole == "SH"
+                ) {
+                  // SEND NOTIF TO LINE HEAD & CREATOR to create countermeasure
+                  await this.sendNotif(
+                    this.setArea,
+                    this.fshift === "w" ? "WHITE" : "RED",
+                    "LH,TM,GH",
+                    `5 Why Problem sudah di approve oleh pak ${this.setName}(${this.setRole})
+silahkan di buat untuk countermeasurenya:
+https://smartandonsys.web.app/editProblem?v_=${this.$route.query.v_}`
+                  );
+                }
+                if (
+                  (this.containerCmTerjadi.length > 0 ||
+                    this.containerCmLama.length > 0) &&
+                  this.cmLhApprove == 0 &&
+                  this.fiveWhyLhApprove == 1 &&
+                  this.fiveWhyShApprove == 1 &&
+                  (this.cmLhFeedback == "" || this.cmLhFeedback == "null") &&
+                  (this.setRole == "TM" || this.setRole == "GH")
+                ) {
+                  // SEND NOTIF TO LH if TM already submit C/M
+                  await this.sendNotif(
+                    this.setArea,
+                    this.fshift === "w" ? "WHITE" : "RED",
+                    "LH",
+                    `Countermeasure sudah di buat pak ${this.setName}(${this.setRole})
+Selanjutnya LH untuk cek:
+https://smartandonsys.web.app/editProblem?v_=${this.$route.query.v_}`
+                  );
+                }
+                if (
+                  (this.containerCmTerjadi.length > 0 ||
+                    this.containerCmLama.length > 0) &&
+                  this.cmLhApprove == 1 &&
+                  this.cmShApprove == 0 &&
+                  (this.cmShFeedback == "" || this.cmShFeedback == "null") &&
+                  this.setRole == "LH"
+                ) {
+                  // SEND NOTIF TO SECTION HEAD to confirm check countermeasure and creator info Lh already approve
+                  // this.sendNotif(name, message)
+                  await this.sendNotif(
+                    this.setArea,
+                    this.fshift === "w" ? "WHITE" : "RED",
+                    "SH,GH,TM",
+                    `Countermeasure sudah di approve pak ${this.setName}(${this.setRole}) selanjutnya SH untuk cek:
+https://smartandonsys.web.app/editProblem?v_=${this.$route.query.v_}`
+                  );
+                }
+                if (
+                  this.cmShApprove == 1 &&
+                  this.cmLhApprove == 1 &&
+                  this.cmDhApprove == 1
+                ) {
+                  // SEND NOTIF TO LINE HEAD & CREATOR to do countermeasure
+                  await this.sendNotif(
+                    this.setArea,
+                    this.fshift === "w" ? "WHITE" : "RED",
+                    "LH,TM,GH",
+                    `Countermeasure sudah di approve oleh pak ${this.setName}(${this.setRole})
+silahkan Eksekusi untuk countermeasurenya:
+https://smartandonsys.web.app/editProblem?v_=${this.$route.query.v_}`
+                  );
+                }
+
+                if (
+                  (this.setRole == "TM" || this.setRole == "GH") &&
+                  this.fiveWhyLhFeedback != "null" &&
+                  this.fiveWhyLhFeedback != null &&
+                  this.fiveWhyLhFeedback != "" &&
+                  this.fiveWhyLhApprove == 0 &&
+                  this.fiveWhyShApprove == 0
+                ) {
+                  // SEND NOTIF TO LH Feedback 5Why already repaired
+                  await this.sendNotif(
+                    this.setArea,
+                    this.fshift === "w" ? "WHITE" : "RED",
+                    "LH",
+                    `5 Why sudah di Perbaiki pak ${this.setName} Silahkan kembali di cek:
+https://smartandonsys.web.app/editProblem?v_=${this.$route.query.v_}`
+                  );
+                }
+                if (
+                  (this.setRole == "TM" || this.setRole == "GH") &&
+                  this.fiveWhyShFeedback != "null" &&
+                  this.fiveWhyShFeedback != "" &&
+                  this.fiveWhyLhApprove == 1 &&
+                  this.fiveWhyShApprove == 0
+                ) {
+                  // SEND NOTIF TO SH Feedback 5Why already repaired
+                  await this.sendNotif(
+                    this.setArea,
+                    this.fshift === "w" ? "WHITE" : "RED",
+                    "SH",
+                    `5 Why sudah di Perbaiki pak ${this.setName} Silahkan kembali di cek:
+https://smartandonsys.web.app/editProblem?v_=${this.$route.query.v_}`
+                  );
+                }
+              }
               this.isLoading = false;
               if (isBack) {
                 alert("Success to Edit Problem");
@@ -2918,11 +4068,6 @@ export default {
               // this.submitEdit();
               this.isLoading = false;
             });
-          if (localStorage.getItem("intervalId")) {
-            clearInterval(localStorage.getItem("intervalId"))
-            localStorage.removeItem("intervalId")
-            localStorage.removeItem('notificationId')
-          }
         } else {
           document.getElementById("fshift").style.borderColor = "red";
           this.$refs.fshift.focus();
@@ -2985,8 +4130,8 @@ export default {
       let dataPrev = {
         furaian_kejadian_general: this.furaian_kejadian,
         furaian_kejadian_standard: this.filustrasi_standart,
-        furaian_kejadian_actual: this.filustrasi_actual,
-        gapIlustrasi: this.gapIlustrasi,
+        furaian_kejadian_actual: this.filustrasi_actual,  
+        gapIlustrasi: this.gapIlustrasi, 
         ferror_name: this.ferror_name,
         foperator: this.foperator,
         fav_categoty: this.fav_categoty,
@@ -3023,7 +4168,7 @@ export default {
       };
       for (const key in dataPrev) {
         let value = dataPrev[key]
-
+        
         formData.append(key, value)
       }
       dataPrev = formData
@@ -3077,6 +4222,79 @@ export default {
       this.isDialogShowShFiveWhy = false;
       this.isDialogShowShCm = false;
       this.isDialogShowDhCm = false;
+    },
+    sendNotif(area, shift, targetRole, message) {
+      axios
+        .post(`${process.env.VUE_APP_HOST}/sendWhatsapp`, {
+          area,
+          shift,
+          targetRole,
+          message,
+          targetLine: this.fline,
+          isLhApprove: this.fiveWhyLhApprove || this.cmLhApprove,
+        })
+        .then((result) => {
+          console.log(result);
+          // alert("notifikasi terkirim.");
+        })
+        .catch((err) => {
+          console.log(err);
+          // alert(JSON.stringify(err));
+        });
+    },
+    async sendFeedback(state) {
+      if (state == "LH5W") {
+        await this.sendNotif(
+          this.setArea,
+          this.fshift === "w" ? "WHITE" : "RED",
+          "TM,GH",
+          `Ada Feedback 5Why dari pak ${this.setName}(${
+            this.setRole
+          }) tolong di cek:
+Comment: "${this.fiveWhyLhFeedback.split(": ")[1]}"
+https://smartandonsys.web.app/editProblem?v_=${this.$route.query.v_}`
+        );
+      } else if (state == "SH5W") {
+        await this.sendNotif(
+          this.setArea,
+          this.fshift === "w" ? "WHITE" : "RED",
+          "TM,LH,GH",
+          `Ada Feedback 5Why dari pak ${this.setName}(${
+            this.setRole
+          }) tolong di cek:
+Comment: "${this.fiveWhyShFeedback.split(": ")[1]}"
+https://smartandonsys.web.app/editProblem?v_=${this.$route.query.v_}`
+        );
+      } else if (state == "LHCM") {
+        await this.sendNotif(
+          this.setArea,
+          this.fshift === "w" ? "WHITE" : "RED",
+          "TM,GH",
+          `Ada Feedback Countermeasure dari pak ${this.setName}(${this.setRole}) tolong di cek:
+Comment: "${this.cmLhFeedback}"
+https://smartandonsys.web.app/editProblem?v_=${this.$route.query.v_}`
+        );
+      } else if (state == "SHCM") {
+        await this.sendNotif(
+          this.setArea,
+          this.fshift === "w" ? "WHITE" : "RED",
+          "TM,LH,GH",
+          `Ada Feedback Countermeasure dari pak ${this.setName}(${this.setRole}) tolong di cek:
+Comment: "${this.cmShFeedback}"
+https://smartandonsys.web.app/editProblem?v_=${this.$route.query.v_}`
+        );
+      } else if (state == "DHCM") {
+        await this.sendNotif(
+          this.setArea,
+          this.fshift === "w" ? "WHITE" : "RED",
+          "TM,LH,GH,SH",
+          `Ada Feedback Countermeasure dari pak ${this.setName}(${this.setRole}) tolong di cek:
+Comment: "${this.cmDhFeedback}"
+https://smartandonsys.web.app/editProblem?v_=${this.$route.query.v_}`
+        );
+      }
+      this.clearDialog();
+      // this.submitEdit();
     },
     checkPermission() {
       this.setName = localStorage.getItem("name");
@@ -3137,24 +4355,24 @@ export default {
           let item = result.data.data[0];
           console.log(item.uraian);
           // AMJAD1
-          if (item.uraian.length > 0) {
+          if(item.uraian.length > 0) {
             for (let i = 0; i < item.uraian.length; i++) {
               const element = item.uraian[i];
-              if (element.type_uraian == 'general') {
+              if(element.type_uraian == 'general') {
                 this.furaian_kejadian = element.desc_nm
                 this.fimage_problem = element.ilustration;
                 this.displayImg_problem = `${process.env.VUE_APP_HOST}/image?path=${this.fimage_problem}`;
                 this.fimage2_problem = element.ilustration2;
                 this.displayImg2_problem = `${process.env.VUE_APP_HOST}/image?path=${this.fimage2_problem}`;
               }
-              if (element.type_uraian == 'standard') {
+              if(element.type_uraian == 'standard') {
                 this.filustrasi_standart = element.desc_nm;
                 this.std_img = element.ilustration;
                 this.displayStd_img = `${process.env.VUE_APP_HOST}/image?path=${this.std_img}`;
                 this.std2_img = element.ilustration2;
                 this.displayStd2_img = `${process.env.VUE_APP_HOST}/image?path=${this.std2_img}`;
               }
-              if (element.type_uraian == 'actual') {
+              if(element.type_uraian == 'actual') {
                 this.filustrasi_actual = element.desc_nm;
                 this.act_img = element.ilustration;
                 this.displayAct_img = `${process.env.VUE_APP_HOST}/image?path=${this.act_img}`;
@@ -3201,7 +4419,7 @@ export default {
           this.fmaker = item.fmaker;
           this.ferror_name = item.ferror_name;
           this.gapIlustrasi = item.gapIlustrasi;
-
+          
           // this.fileName = `ilustration_${Date.now()}`;
           this.foperator = item.foperator.includes(",")
             ? item.foperator.split(",")
@@ -3214,19 +4432,19 @@ export default {
             this.fimage = item.fimage;
             this.displayImg = `${process.env.VUE_APP_HOST}/image?path=${item.fimage}`;
           }
-          if (item.why1_img) {
+          if(item.why1_img){
             this.why1_img = item.why1_img;
             this.displayWhy1_img = `${process.env.VUE_APP_HOST}/image?path=${this.why1_img}`;
           }
-          if (item.why2_img) {
+          if(item.why2_img){
             this.why2_img = item.why2_img;
             this.displayWhy2_img = `${process.env.VUE_APP_HOST}/image?path=${item.why2_img}`;
           }
-          if (item.why12_img) {
+          if(item.why12_img){
             this.why12_img = item.why12_img;
             this.displayWhy12_img = `${process.env.VUE_APP_HOST}/image?path=${item.why12_img}`;
           }
-          if (item.why22_img) {
+          if(item.why22_img){
             this.why22_img = item.why22_img;
             this.displayWhy22_img = `${process.env.VUE_APP_HOST}/image?path=${item.why22_img}`;
           }
@@ -3285,9 +4503,7 @@ export default {
           } else if (item.cmLhApprove == 1) {
             this.cmlhCheck = this.checkStatus(1);
           }
-          console.log('item.fiveWhyShApprove');
-          console.log(item.fiveWhyShApprove);
-          console.log(item.fiveWhyShFeedback);
+
           if (item.fiveWhyShApprove == 0) {
             let diffInTime =
               new Date().getTime() - new Date(item.fstart_time).getTime();
@@ -3298,7 +4514,7 @@ export default {
                 item.fiveWhyShFeedback == "")
             ) {
               this.fiveWhyshCheck = this.checkStatus(2);
-            } else if (String(item.fiveWhyShFeedback) != "null") {
+            } else if (String(item.cmShFeedback) != "null") {
               this.fiveWhyshCheck = this.checkStatus(3);
             } else {
               this.fiveWhyshCheck = this.checkStatus(4);
@@ -3374,7 +4590,7 @@ export default {
               return item;
             });
           }
-
+          
           console.log(item.froot_cause);
           if (item.fend_time != null) {
             if (item.froot_cause.includes("\n")) {
@@ -3495,22 +4711,18 @@ export default {
   color: black;
   font-weight: 800;
 }
-
 .form-control {
   background-color: transparent !important;
   color: black;
   padding-left: 3px;
 }
-
 h6 {
   font-family: "Bebas Neue", cursive;
 }
-
 .col {
   padding-top: 0px;
   padding-bottom: 0px;
 }
-
 input,
 select {
   /* color: white; */
@@ -3523,27 +4735,21 @@ select {
 #table-why-terjadi {
   color: black;
 }
-
 #table-why-lama {
   color: black;
 }
-
 #table-cm-lama {
   color: black;
 }
-
 #table-cm-terjadi {
   color: black;
 }
-
 #table-yokoten {
   color: black;
 }
-
 #table-step-repair {
   color: black;
 }
-
 td {
   font-size: 12px;
 }
@@ -3554,19 +4760,16 @@ td {
   animation-iteration-count: infinite;
   animation-direction: alternate;
 }
-
 @keyframes blink {
   from {
     /* opacity: 1; */
     background-color: khaki;
   }
-
   to {
     /* opacity: 0; */
     background-color: greenyellow;
   }
 }
-
 .fontSp {
   font-size: 9px;
 }
@@ -3579,7 +4782,6 @@ td {
   display: inline-block;
   border: 1px solid black;
 }
-
 .dotDelay {
   height: 25px;
   width: 25px;
@@ -3588,7 +4790,6 @@ td {
   display: inline-block;
   border: 1px solid black;
 }
-
 .dotApprove {
   height: 25px;
   width: 25px;
@@ -3597,7 +4798,6 @@ td {
   display: inline-block;
   border: 1px solid black;
 }
-
 .dotComment {
   height: 25px;
   width: 25px;
@@ -3606,11 +4806,9 @@ td {
   display: inline-block;
   border: 1px solid black;
 }
-
 .card:active {
   background-color: none !important;
 }
-
 .incoming_msg_img {
   display: inline-block;
   width: 6%;

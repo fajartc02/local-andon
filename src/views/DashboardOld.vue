@@ -1,123 +1,77 @@
 <template>
   <div class="container p-1">
     <div class="row m-0 p-0 mt-2 bordered">
-      <p>
+      <p class="text-left">
         Hallo, <b>{{ name }}</b>
+        <br>
+        This web can visit
+        link:<code><a href="https://smartandonsys.web.app" target="_blank" style="text-decoration: none;">https://smartandonsys.web.app</a></code>
       </p>
       <div class="col-12 p-0">
         <div class="card container-menu bg-light">
           <div class="row m-0 p-0 flex-row flex-nowrap overflow-auto">
-            <!-- <a
-              class="col-3 hover-menu p-1"
-              href="http://lproms.prd.toyota.co.id/HomeMTPM"
-              target="_blank"
-              style="text-decoration: none; color: black"
-            >
+            <a v-if="isStaff" class="col-3 hover-menu p-1" @click="goTo('/ltb-report')" target="_blank"
+              style="text-decoration: none; color: black">
               <center>
-                <img
-                  src="https://cdn3.iconfinder.com/data/icons/eziconic-v1-0/256/03.png"
-                  width="30%"
-                />
+                <img src="https://www.pngmart.com/files/8/Report-PNG-Photos.png" width="30%" />
               </center>
-              <center class="card-title">TPM<br />Monitoring</center>
-            </a> -->
-            <a class="col-3 hover-menu p-1" href="https://tclass-dev.toyota.co.id/" target="_blank"
+              <center class="card-title">LTB Report</center>
+            </a>
+            <!-- <a v-else class="col-3 hover-menu p-1" href="https://tclass-dev.toyota.co.id/" target="_blank"
               style="text-decoration: none; color: black">
               <center>
                 <img src="https://cdn-icons-png.flaticon.com/512/201/201614.png" width="30%" />
               </center>
               <center class="card-title">T-Class</center>
-            </a>
-            <!-- <div
-              class="col-3 hover-menu p-1"
-              @click="goTo('/oee/dashboard')"
-              target="_blank"
-              style="text-decoration: none; color: black"
-            >
+            </a> -->
+            <a v-else class="col-3 hover-menu p-1" @click="goTo('/q6-anlysis')"
+              style="text-decoration: none; color: black">
               <center>
-                <img
-                  class="rounded-img-20"
-                  src="@/assets/indicator.gif"
-                  width="40%"
-                />
+                <img src="https://cdn0.iconfinder.com/data/icons/finance-141/33/analysis-1024.png" width="30%" />
               </center>
-              <center class="card-title">OEE<br />Summary</center>
-            </div> -->
+              <center class="card-title">Q6 Analysis</center>
+            </a>
             <div class="col-3 hover-menu p-1" @click="goTo('/realtimePareto')">
               <center>
                 <img src="https://cdn0.iconfinder.com/data/icons/accounting-and-tax/48/17-512.png" width="30%" />
               </center>
               <center class="card-title">Realtime<br />Pareto</center>
             </div>
-            <div class="col-3 hover-menu p-1" @click="goTo('/parameter/dashboard')">
-              <!--  @click="goTo('/parameter/dashboard')" -->
-              <!-- <div class="col-3 hover-menu p-1" @click="goTo('/symptompDesktop')"> -->
-              <center>
-                <img src="https://cdn0.iconfinder.com/data/icons/Utilize/512/Activity_Monitor.png" width="30%" />
-              </center>
-              <center class="card-title">Symptom<br />Desktop.</center>
-            </div>
-            <a class="col-3 hover-menu p-1" href="https://iwms.toyota.co.id/StorageInquiry" target="_blank"
-              style="text-decoration: none; color: black">
-              <center>
-                <img src="https://cdn-icons-png.flaticon.com/512/2271/2271166.png" width="30%" />
-              </center>
-              <center class="card-title">Order<br />Spareparts</center>
-            </a>
-            <div class="col-3 hover-menu p-1" @click="goTo('/symptom')">
-              <!--  @click="goTo('/parameter/dashboard')" -->
-              <!-- <div class="col-3 hover-menu p-1" @click="goTo('/symptompDesktop')"> -->
-              <center>
-                <img src="https://cdn0.iconfinder.com/data/icons/Utilize/512/Activity_Monitor.png" width="30%" />
-              </center>
-              <center class="card-title">Symptom<br />Mgmt.</center>
-            </div>
-
-          </div>
-          <div class="row m-0 p-0 mt-2 flex-row flex-nowrap overflow-auto">
-            <!-- <div class="col-3 hover-menu p-1" @click="goTo('/focus-theme/taskforce')">
-              <center>
-                <img src="https://cdn.iconscout.com/icon/free/png-256/focus-1512706-1282214.png" width="30%" />
-              </center>
-              <center class="card-title">
-                Task <br />
-                Force
-              </center>
-            </div> -->
-            <!-- <div class="col-3 hover-menu p-1" @click="goTo('/quality')">
-              <center>
-                <img src="@/assets/quality.png" width="30%" />
-              </center>
-              <center class="card-title">
-                Quality <br />
-                Monitoring
-              </center>
-            </div> -->
-            <div class="col-3 hover-menu p-1" @click="goTo('/mtbf-mttr')">
-              <center>
-                <img src="https://www.pngmart.com/files/21/3D-Printer-PNG-Picture.png" width="30%" />
-              </center>
-              <center class="card-title">
-                Mtbf <br />
-                Mttr
-              </center>
-            </div>
             <div class="col-3 hover-menu p-1" @click="goTo('/job-analisys')">
               <center>
-                <img src="https://png.pngtree.com/png-vector/20220708/ourmid/pngtree-analyzing-data-png-image_5744358.png" width="30%" />
+                <img
+                  src="https://png.pngtree.com/png-vector/20220708/ourmid/pngtree-analyzing-data-png-image_5744358.png"
+                  width="30%" />
               </center>
               <center class="card-title">
                 Repair<br />
                 Analisys
               </center>
             </div>
-            <a class="col-3 hover-menu p-1" href="http://hem-dev.toyota.co.id/" target="_blank"
+            <div class="col-3 hover-menu p-1" @click="goTo('/floating-plunger')">
+              <center>
+                <img src="https://www.downloadclipart.net/large/32035-trend-infographic-clipart.png" width="30%" />
+              </center>
+              <center class="card-title">Floating<br />Plunger Tip</center>
+            </div>
+            <div class="col-3 hover-menu p-1" href="https://iwms.toyota.co.id/StorageInquiry" target="_blank"
               style="text-decoration: none; color: black">
               <center>
-                <img src="https://cdn-icons-png.flaticon.com/512/3010/3010599.png" width="30%" />
+                <img src="https://cdn-icons-png.flaticon.com/512/2271/2271166.png" width="30%" />
               </center>
-              <center class="card-title">Henkaten<br />Mgmt</center>
-            </a>
+              <center class="card-title">Order<br />Spareparts</center>
+            </div>
+          </div>
+          <div class="row m-0 p-0 mt-2 flex-row flex-nowrap overflow-auto">
+            <div class="col-3 hover-menu p-1" @click="goTo('/mtbf-mttr')">
+              <center>
+                <img src="https://cdn3d.iconscout.com/3d/premium/thumb/achievement-6456750-5348958.png" width="30%" />
+              </center>
+              <center class="card-title">
+                Mtbf <br />
+                Mttr
+              </center>
+            </div>
 
             <div class="col-3 hover-menu p-1" @click="goTo('/focus-theme/member')">
               <center>
@@ -128,60 +82,12 @@
                 Thema
               </center>
             </div>
-            <!-- <div
-              class="col-3 hover-menu p-1"
-              v-if="name == 'FAJAR TRI CAHYONO'"
-              @click="goTo('/symptompDesktop')"
-            >
-              <center>
-                <img
-                  src="https://cdn0.iconfinder.com/data/icons/Utilize/512/Activity_Monitor.png"
-                  width="30%"
-                />
-              </center>
-              <center class="card-title">Symptom<br />Desktop</center>
-            </div> -->
             <div class="col-3 hover-menu p-1" @click="goTo('/cmFollowup')">
               <center>
-                <img
-                  src="https://images.assetsdelivery.com/compings_v2/ahasoft2000/ahasoft20001601/ahasoft2000160101030.jpg"
-                  width="30%" />
+                <img src="https://cdn-icons-png.flaticon.com/512/3652/3652191.png" width="30%" />
               </center>
               <center class="card-title">CM<br />Followup</center>
             </div>
-            <div class="col-3 hover-menu p-1" @click="goTo('/totalProblem')">
-              <center>
-                <img src="@/assets/totalProblem.png" width="30%" />
-              </center>
-              <center class="card-title">
-                Total <br />
-                Problem
-              </center>
-            </div>
-            <div class="col-3 hover-menu p-1" @click="goTo('/job')">
-              <center>
-                <img src="https://cdn-icons-png.flaticon.com/512/5189/5189017.png" width="30%" />
-              </center>
-              <center class="card-title">Heijunka<br />Job</center>
-            </div>
-            <div class="col-3 hover-menu p-1" @click="goTo('/summaryWeekly')">
-              <center>
-                <img src="https://icon-library.com/images/summary-icon/summary-icon-15.jpg" width="30%" />
-              </center>
-              <center class="card-title">
-                Report <br />
-                Status
-              </center>
-            </div>
-            <a class="col-3 hover-menu p-1"
-              href="https://tmmin.sharepoint.com/sites/MaintenancePlant3/Dokumen%20Berbagi/Forms/AllItems.aspx"
-              target="_blank" style="text-decoration: none; color: black">
-              <!-- <div class="col-3 hover-menu p-1" @click="goTo('/manualBook')"> -->
-              <center>
-                <img src="@/assets/icons/manualBook.png" width="42%" />
-              </center>
-              <center class="card-title">Manual<br />Book</center>
-            </a>
             <div class="col-3 hover-menu p-1" @click="goTo('/problemHistory')">
               <center>
                 <img src="https://cdn2.iconfinder.com/data/icons/plump-by-zerode_/256/Folder-URL-History-icon.png"
@@ -189,12 +95,34 @@
               </center>
               <center class="card-title">Problem<br />History</center>
             </div>
-            <div class="col-3 hover-menu p-1" @click="goTo('/cycleTimeMachine')">
+
+            <div class="col-3 hover-menu p-1" @click="goTo('/summaryWeekly')">
               <center>
-                <img src="@/assets/cycleTime.png" width="30%" />
+                <img src="https://icon-library.com/images/summary-icon/summary-icon-15.jpg" width="30%" />
               </center>
-              <center class="card-title">CycleTime<br />Machines</center>
+              <center class="card-title">
+                LTB Report <br />
+                Status
+              </center>
             </div>
+            <button class="col-3 hover-menu p-1 m-0"
+              href="https://tmmin.sharepoint.com/sites/MaintenancePlant3/Dokumen%20Berbagi/Forms/AllItems.aspx"
+              target="_blank" style="text-decoration: none; color: black;background-color: #e5e5e5;" disabled>
+              <center>
+                <img src="@/assets/icons/manualBook.png" width="42%" />
+              </center>
+              <center class="card-title">Manual Book <br />& Drawing</center>
+            </button>
+            <button class="col-3 hover-menu p-1 m-0" @click="goTo('/totalProblem')" disabled
+              style="background-color: #e5e5e5;">
+              <center>
+                <img src="@/assets/totalProblem.png" width="30%" />
+              </center>
+              <center class="card-title">
+                Total <br />
+                Problem
+              </center>
+            </button>
             <div class="col-3 hover-menu p-1" @click="goTo('/henkaten')">
               <center>
                 <img src="https://cdn-icons-png.flaticon.com/512/6214/6214240.png" width="30%" />
@@ -213,7 +141,7 @@
       </div>
     </div>
     <div class="row m-0 p-0 mt-1">
-      <div :class="`${isProd ? 'col-12 p-0' : 'col-6 p-0'}`">
+      <div :class="`${isProd ? 'col-12 p-0' : 'col-12 p-0'}`">
         <div style="width: 100%; display: none" id="reader"></div>
         <div class="card">
           <div class="btn btn-info" data-toggle="modal" data-target="#exampleModal" @click="getMachines()"
@@ -285,14 +213,17 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text">Problem</span>
                       </div>
-                      <input type="text" id="problem" v-model="problem" class="form-control"
+
+                      <multiselect v-if="!is_new_problem" v-model="problem" :options="optProblems"
+                        style="font-size: 10px;width: 75%;" :disabled="!selectedLine">
+                      </multiselect>
+                      <input v-else type="text" id="problem" v-model="problem" class="form-control"
                         aria-label="Amount (to the nearest dollar)" />
+
                     </div>
+                    <span v-if="selectedLine">*jika tidak menemukan problem, klik </span><button v-if="selectedLine"
+                      class="btn btn-primary rounded-all" @click="is_new_problem = true">Add Problem !</button>
                   </div>
-                </div>
-                <div v-if="setRole == 'Staff'">
-                  <input type="checkbox" style="height: 20px" v-model="categoryProblem" />
-                  Fullcap
                 </div>
               </div>
             </v-card-text>
@@ -311,243 +242,6 @@
           </v-card>
         </v-dialog>
       </div>
-      <div v-if="!isProd" class="col-6 p-0" @click="modalShow = !modalShow">
-        <div style="width: 100%; display: none" id="reader"></div>
-        <div class="card">
-          <div class="btn btn-success" data-toggle="modal" data-target="#exampleModal" style="height: 50px">
-            <h1 class="title-text" :style="`color: black; font-size: ${isMobile ? '18px' : '25px'}`">
-              <i class="fa fa-book"></i>
-              JOB INPUT MAINTENANCE
-              <i class="fa fa-book"></i>
-            </h1>
-          </div>
-        </div>
-      </div>
-      <v-dialog v-model="modalShow" class="p-4" persistent>
-        <v-card class="p-4">
-          <v-card-title class="headline grey lighten-2">
-            Input Job Maintenance
-          </v-card-title>
-          <template #modal-header="{ close }">
-            <!-- Emulate built in modal header close button action -->
-            <b-button size="sm" variant="outline-danger" @click="close()">
-              X
-            </b-button>
-            <h5>Input Job</h5>
-          </template>
-          <b-tabs content-class="mt-3">
-            <b-tab title="Single" active>
-              <div class="container-fluid p-0 mt-4">
-                <div class="row p-0 m-0">
-                  <div class="col p-0">
-                    <div class="input-group mb-3">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text" style="min-width: 20%">Job Type</span>
-                      </div>
-                      <b-form-select size="sm" v-model="fjob_type" :options="jobTypes"></b-form-select>
-                    </div>
-                  </div>
-                </div>
-                <div class="row p-0 m-0">
-                  <div class="col p-0">
-                    <div class="input-group mb-3">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text" style="min-width: 100px">Area / Mesin</span>
-                      </div>
-                      <input type="text" id="line" v-model="farea" class="form-control pl-2"
-                        aria-label="Amount (to the nearest dollar)" />
-                    </div>
-                  </div>
-                </div>
-                <div class="row p-0 m-0">
-                  <div class="col p-0">
-                    <div class="input-group mb-3">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text" style="min-width: 20%">Kamu Kerja di line mana?</span>
-                      </div>
-                      <select class="form-control" v-model="fline">
-                        <option v-for="(line, i) in optsLine" :key="i" :value="line">
-                          {{ line }}
-                        </option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-                <div class="row p-0 m-0">
-                  <div class="col p-0">
-                    <div class="input-group mb-3">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text">Operator</span>
-                      </div>
-                      <input type="text" id="operator" v-model="foperator" class="form-control"
-                        aria-label="Amount (to the nearest dollar)" />
-                    </div>
-                  </div>
-                </div>
-                <div class="row p-0 m-0">
-                  <div class="col p-0">
-                    <div class="input-group mb-3">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text">Description</span>
-                      </div>
-                      <input type="text" v-model="fdesc" class="form-control"
-                        aria-label="Amount (to the nearest dollar)" />
-                    </div>
-                  </div>
-                </div>
-                <div class="row p-0 m-0">
-                  <div class="col p-0">
-                    <div class="input-group mb-3">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text">Start Date</span>
-                      </div>
-                      <div class="row m-0 p-0">
-                        <div class="col-7 p-0">
-                          <input style="font-size: 10px" class="form-control" type="date" v-model="fstart_time[0]" />
-                        </div>
-                        <div class="col-5 p-0">
-                          <input class="form-control" type="time" v-model="fstart_time[1]"
-                            pattern="([1]?[0-9]|2[0-3]):[0-5][0-9]" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="row p-0 m-0">
-                  <div class="col p-0">
-                    <div class="input-group mb-3">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text">Finish Date</span>
-                      </div>
-                      <div class="row m-0 p-0">
-                        <div class="col-7 p-0">
-                          <input style="font-size: 10px" class="form-control" type="date" v-model="fend_time[0]" />
-                        </div>
-                        <div class="col-5 p-0">
-                          <input class="form-control" type="time" v-model="fend_time[1]"
-                            pattern="([1]?[0-9]|2[0-3]):[0-5][0-9]" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </b-tab>
-            <b-tab title="Routine">
-              <div class="container-fluid p-0 mt-4">
-                <div class="row p-0 m-0">
-                  <div class="col p-0">
-                    <div class="input-group mb-3">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text" style="min-width: 20%">Job Type</span>
-                      </div>
-                      <b-form-select size="sm" v-model="fjob_type" :options="jobTypes"></b-form-select>
-                    </div>
-                  </div>
-                </div>
-                <div class="row p-0 m-0">
-                  <div class="col p-0">
-                    <div class="input-group mb-3">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text" style="min-width: 100px">Area / Mesin</span>
-                      </div>
-                      <input type="text" id="line" v-model="farea" class="form-control pl-2"
-                        aria-label="Amount (to the nearest dollar)" />
-                    </div>
-                  </div>
-                </div>
-                <div class="row p-0 m-0">
-                  <div class="col p-0">
-                    <div class="input-group mb-3">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text" style="min-width: 20%">Kamu Kerja di line mana?</span>
-                      </div>
-                      <select class="form-control" v-model="fline">
-                        <option v-for="(line, i) in optsLine" :key="i" :value="line">
-                          {{ line }}
-                        </option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-                <div class="row p-0 m-0">
-                  <div class="col p-0">
-                    <div class="input-group mb-3">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text">Operator</span>
-                      </div>
-                      <input type="text" id="operator" v-model="foperator" class="form-control"
-                        aria-label="Amount (to the nearest dollar)" />
-                    </div>
-                  </div>
-                </div>
-                <div class="row p-0 m-0">
-                  <div class="col p-0">
-                    <div class="input-group mb-3">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text">Description</span>
-                      </div>
-                      <input type="text" v-model="fdesc" class="form-control"
-                        aria-label="Amount (to the nearest dollar)" />
-                    </div>
-                  </div>
-                </div>
-                <div class="row p-0 m-0">
-                  <div class="col p-0">
-                    <div class="input-group mb-3">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text">Start Date</span>
-                      </div>
-                      <div class="row m-0 p-0">
-                        <div class="col-7 p-0">
-                          <input style="font-size: 10px" class="form-control" type="date" v-model="fstart_time[0]" />
-                        </div>
-                        <div class="col-5 p-0">
-                          <input class="form-control" type="time" v-model="fstart_time[1]" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="row p-0 m-0">
-                  <div class="col p-0">
-                    <div class="input-group mb-3">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text">Interval</span>
-                        <b-form-radio v-model="intervalDays" class="ml-2" name="some-radios" :value="30">1
-                          Month</b-form-radio>
-                        <b-form-radio v-model="intervalDays" class="ml-2" name="some-radios" :value="7">1
-                          Week</b-form-radio>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="row p-0 m-0">
-                  <div class="col p-0">
-                    <div class="input-group mb-3">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text">Finish Date</span>
-                      </div>
-                      <div class="row m-0 p-0">
-                        <div class="col-7 p-0">
-                          <input style="font-size: 10px" class="form-control" disabled type="date"
-                            v-model="fend_time[0]" />
-                        </div>
-                        <div class="col-5 p-0">
-                          <input class="form-control" type="time" v-model="fend_time[1]" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </b-tab>
-          </b-tabs>
-          <b-button class="mx-2" size="sm" variant="success" @click="submitJob()">Submit</b-button>
-          <b-button class="mx-2" size="sm" variant="danger" @click="modalShow = false">Cancel</b-button>
-        </v-card>
-      </v-dialog>
     </div>
     <!-- LOADING -->
     <v-dialog v-model="isLoading" hide-overlay persistent width="300">
@@ -606,7 +300,7 @@
       </div>
     </div>
     <div>
-      <a class="btn btn-success p-2 text-light" style="
+      <!-- <a class="btn btn-success p-2 text-light" style="
           position: fixed;
           z-index: 100;
           bottom: 10px;
@@ -615,7 +309,8 @@
           opacity: 0.7;
         " target="_blank" href="https://wa.me/6282211511213">
         <span style="font-size: 12px"><b>Ada Masukan?</b><i class="fa fa-whatsapp"></i></span>
-      </a>
+      </a> -->
+      <button @click="showPersistentNotification">Show Persistent Notification</button>
     </div>
   </div>
 </template>
@@ -630,11 +325,14 @@ import moment from "moment";
 import { ModelSelect } from "vue-search-select";
 
 import formatDate from "@/functions/formatDate";
+// import notificationProblemCount from "@/functions/notificationProblemCount";
 
 export default {
   name: "DashboardOld",
   data() {
     return {
+      isStaff: localStorage.getItem('role') === 'STAFF' ? true : false,
+      is_new_problem: false,
       lineAchivements: [
         {
           name: "ASSY LINE",
@@ -736,8 +434,11 @@ export default {
       windowWidth: window.innerWidth,
       isMobile: false,
       optOperators: [],
+      optProblems: [],
       isProd: false,
       mtMember: false,
+      intervalId: null,
+      notificationId: null
     };
   },
   computed: {
@@ -831,6 +532,9 @@ export default {
       this.fend_time = formatDate.YYYYMMDD_HHMM(new Date(dateAdd)).split(" ");
       this.isBulk = true;
     },
+    selectedLine: function () {
+      this.getProblems()
+    }
   },
   methods: {
     ...mapActions([
@@ -839,6 +543,106 @@ export default {
       "storeGetLines",
       "storeGetMachines",
     ]),
+    showPersistentNotification() {
+      if ('Notification' in window && 'serviceWorker' in navigator) {
+        if (Notification.permission === 'granted') {
+          this.showNotification();
+        } else if (Notification.permission !== 'denied') {
+          Notification.requestPermission().then(permission => {
+            if (permission === 'granted') {
+              this.showNotification();
+            }
+          });
+        }
+      }
+    },
+    showNotification() {
+      const countdownSeconds = 0; // Set the duration of the countdown in seconds
+      let remainingSeconds = countdownSeconds;
+
+      this.intervalId = setInterval(() => {
+        remainingSeconds++;
+        this.updateNotificationContent(remainingSeconds);
+      }, 1000);
+      localStorage.setItem('intervalId', this.intervalId)
+      this.updateNotificationContent(remainingSeconds);
+    },
+    updateNotificationContent(remainingSeconds) {
+      const notificationTitle = `Problem ${this.problem} masih aktif`;
+      const notificationOptions = {
+        body: `Tolong jangan closed notifikasi ini sampai Problem closed: ${remainingSeconds} seconds.`,
+        requireInteraction: true, // Make the notification persistent
+        tag: "Alert"
+      };
+      navigator.serviceWorker.ready.then(async registration => {
+        console.log('registration');
+        console.log(registration);
+        if (!localStorage.getItem('notificationId')) {
+          // Create a new notification if one doesn't exist
+          await registration.showNotification(notificationTitle, notificationOptions)
+            .then(notification => {
+              console.log('notification showNotification THEN');
+              console.log(notification);
+              localStorage.setItem('notificationId', notification.notificationId)
+              this.notificationId = notification.notificationId;
+            })
+            .catch(error => {
+              console.error('Error showing notification:', error);
+            });
+        } else {
+          // Update the existing notification
+          await registration.getNotification(localStorage.getItem('notificationId'))
+            .then(existingNotification => {
+              existingNotification.close(); // Close the existing notification
+              registration.showNotification(notificationTitle, notificationOptions)
+                .then(notification => {
+                  console.log('notification GET NOTIF THEN');
+                  console.log(notification);
+                  this.notificationId = notification.notificationId;
+                  localStorage.setItem('notificationId', this.notificationId)
+                })
+                .catch(error => {
+                  console.error('Error showing notification:', error);
+                });
+            })
+            .catch(() => {
+              // If the existing notification is not found, create a new one
+              registration.showNotification(notificationTitle, notificationOptions)
+                .then(notification => {
+                  console.log('notification GET NOTIF CATCH');
+                  console.log(notification);
+                  this.notificationId = notification.notificationId;
+                  localStorage.setItem('notificationId', this.notificationId)
+                })
+                .catch(error => {
+                  console.error('Error showing notification:', error);
+                });
+            });
+        }
+      });
+    },
+    async getProblems() {
+      try {
+        let problems = await axios.get(`${process.env.VUE_APP_HOST}/v2/master/problem?f_line=${this.selectedLine}`)
+        this.optProblems = problems.data.data
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async addNewProblem() {
+      try {
+        let form = {
+          line_nm: this.selectedLine,
+          prob_nm: this.problem,
+          created_by: this.mtMember
+        }
+        let resp = await axios.post(`${process.env.VUE_APP_HOST}/v2/master/problem`, form)
+
+        console.log(resp);
+      } catch (error) {
+        console.error(error)
+      }
+    },
     goTo(link) {
       this.$router.push(link);
     },
@@ -852,7 +656,11 @@ export default {
       }
     },
     async problemInput() {
+
       let { problem, operator, fmc_id } = this;
+      if (this.is_new_problem) {
+        this.addNewProblem()
+      }
       if (this.isProd && !this.mtMember) {
         alert("masukan nama maintenance terlebih dahulu");
       } else {
@@ -899,20 +707,13 @@ export default {
               console.log(err);
               this.isLoading = false;
             });
+          this.showPersistentNotification()
         }
       }
     },
     async getColorDash() {
       this.storeProdAchievments();
       this.storeCountProbTemp();
-      await axios
-        .get(`${process.env.VUE_APP_HOST}/sendNotifWhatsapp`)
-        .then((result) => {
-          console.log(result);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
     },
     async getMachines(first = true) {
       if (first) {

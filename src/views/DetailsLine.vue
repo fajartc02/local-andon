@@ -2,34 +2,22 @@
   <div class="container-fluid p-0" style="margin-bottom: 100px">
     <div class="row m-2">
       <div class="col p-0">
-        <div
-          class="title-text text-light bg-dark px-2 rounded"
-          style="z-index: 1; font-size: 20px; opacity: 0.9"
-        >
+        <div class="title-text text-light bg-dark px-2 rounded" style="z-index: 1; font-size: 20px; opacity: 0.9">
           {{ $route.query.v_ }}
         </div>
       </div>
       <div class="col p-0" v-if="containerActiveProblem.length === 0">
-        <div
-          class="title-text text-light bg-success px-2 rounded"
-          style="z-index: 1; font-size: 20px; opacity: 0.9"
-        >
+        <div class="title-text text-light bg-success px-2 rounded" style="z-index: 1; font-size: 20px; opacity: 0.9">
           RUN
         </div>
       </div>
       <div class="col p-0" v-else>
-        <div
-          class="title-text text-light bg-danger px-2 rounded"
-          style="z-index: 1; font-size: 20px; opacity: 0.9"
-        >
+        <div class="title-text text-light bg-danger px-2 rounded" style="z-index: 1; font-size: 20px; opacity: 0.9">
           STOP
         </div>
       </div>
       <div class="col p-0">
-        <div
-          class="title-text text-light bg-dark px-2 rounded"
-          style="z-index: 1; font-size: 20px; opacity: 0.9"
-        >
+        <div class="title-text text-light bg-dark px-2 rounded" style="z-index: 1; font-size: 20px; opacity: 0.9">
           {{ timeNow }}
         </div>
       </div>
@@ -48,35 +36,22 @@
     <!-- OEE -->
     <div class="row m-0" style="margin-top: 70px !important">
       <div class="col-4 p-0 px-2">
-        <div
-          class="
+        <div class="
             card
             bg-dark
             m-0
             d-flex
             justify-content-center
             align-items-center
-          "
-          style="width: 100px; height: 100px; opacity: 0.8"
-        >
-          <vm-progress
-            type="circle"
-            :width="80"
-            :percentage="currentOEE"
-            status="success"
-          >
-            <strong class="text-center text-success"
-              >OEE <br />{{ currentOEE }}%</strong
-            >
+          " style="width: 100px; height: 100px; opacity: 0.8">
+          <vm-progress type="circle" :width="80" :percentage="currentOEE" status="success">
+            <strong class="text-center text-success">OEE <br />{{ currentOEE }}%</strong>
           </vm-progress>
         </div>
       </div>
     </div>
     <!-- INFO -->
-    <div
-      class="row m-0"
-      style="margin-top: -55px !important; padding-left: 110px; opacity: 0.8"
-    >
+    <div class="row m-0" style="margin-top: -55px !important; padding-left: 110px; opacity: 0.8">
       <div class="col p-0">
         <div class="card bg-dark text-light">
           <table>
@@ -126,16 +101,8 @@
     </h2>
     <div class="row m-0 mt-2">
       <div class="col p-0">
-        <v-carousel
-          v-model="model"
-          style="height: 200px"
-          v-if="containerActiveProblem.length != 0"
-        >
-          <v-carousel-item
-            v-for="problem in containerActiveProblem"
-            :key="problem.fid"
-            style="height: 200px"
-          >
+        <v-carousel v-model="model" style="height: 200px" v-if="containerActiveProblem.length != 0">
+          <v-carousel-item v-for="problem in containerActiveProblem" :key="problem.fid" style="height: 200px">
             <v-sheet color="error" height="100%" tile>
               <div class="row m-0">
                 <div class="col p-0 title-text">MACHINE STOP</div>
@@ -144,35 +111,19 @@
                 <div class="col p-0">
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                      <span class="input-group-text" id="basic-addon1"
-                        >Problem</span
-                      >
+                      <span class="input-group-text" id="basic-addon1">Problem</span>
                     </div>
-                    <input
-                      type="text"
-                      class="form-control"
-                      placeholder="Problem"
-                      aria-describedby="basic-addon1"
-                      disabled
-                      v-model="problem.ferror_name"
-                    />
+                    <input type="text" class="form-control" placeholder="Problem" aria-describedby="basic-addon1"
+                      disabled v-model="problem.ferror_name" />
                   </div>
                 </div>
                 <div class="col p-0">
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                      <span class="input-group-text" id="basic-addon1"
-                        >Machine</span
-                      >
+                      <span class="input-group-text" id="basic-addon1">Machine</span>
                     </div>
-                    <input
-                      type="text"
-                      class="form-control"
-                      placeholder="Machine"
-                      aria-describedby="basic-addon1"
-                      disabled
-                      v-model="problem.fmc_name"
-                    />
+                    <input type="text" class="form-control" placeholder="Machine" aria-describedby="basic-addon1"
+                      disabled v-model="problem.fmc_name" />
                   </div>
                 </div>
               </div>
@@ -180,58 +131,30 @@
                 <div class="col p-0">
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                      <span class="input-group-text" id="basic-addon1"
-                        >Operator</span
-                      >
+                      <span class="input-group-text" id="basic-addon1">Operator</span>
                     </div>
-                    <input
-                      type="text"
-                      class="form-control"
-                      placeholder="Operator"
-                      aria-describedby="basic-addon1"
-                      disabled
-                      v-model="problem.foperator"
-                    />
+                    <input type="text" class="form-control" placeholder="Operator" aria-describedby="basic-addon1"
+                      disabled v-model="problem.foperator" />
                   </div>
                 </div>
                 <div class="col p-0">
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                      <span class="input-group-text" id="basic-addon1"
-                        >Duration (min)</span
-                      >
+                      <span class="input-group-text" id="basic-addon1">Duration (min)</span>
                     </div>
-                    <input
-                      type="text"
-                      class="form-control"
-                      placeholder="Shift"
-                      aria-describedby="basic-addon1"
-                      disabled
-                      v-model="problem.fdur"
-                    />
+                    <input type="text" class="form-control" placeholder="Shift" aria-describedby="basic-addon1" disabled
+                      v-model="problem.fdur" />
                   </div>
                 </div>
               </div>
               <div class="row m-0">
                 <div class="col p-0 text-left" style="height: 200px">
                   <label class="m-0" style="font-size: 10px">Step Repair</label>
-                  <textarea
-                    class="bg-white form-control"
-                    style="max-height: 60px !important"
-                    name=""
-                    id=""
-                    cols="25"
-                    rows="10"
-                    disabled
-                    v-model="problem.fstep_repair"
-                  ></textarea>
+                  <textarea class="bg-white form-control" style="max-height: 60px !important" name="" id="" cols="25"
+                    rows="10" disabled v-model="problem.fstep_repair"></textarea>
                 </div>
                 <div class="col p-0 mt-4">
-                  <button
-                    class="btn btn-info title-text"
-                    style="max-height: 29px"
-                    @click="editProblem(problem.fid)"
-                  >
+                  <button class="btn btn-info title-text" style="max-height: 29px" @click="editProblem(problem.fid)">
                     Edit Problem <i class="fa fa-chevron-circle-right"></i>
                   </button>
                 </div>
@@ -246,10 +169,7 @@
     <h2 class="mt-4" style="font-size: 20px">Problem Close Hari ini</h2>
     <div class="row m-0">
       <div class="col p-0 px-1">
-        <table
-          class="table table-striped table-dark table-responsive text-left"
-          style="max-height: 350px"
-        >
+        <table class="table table-striped table-dark table-responsive text-left" style="max-height: 350px">
           <thead class="title-text" style="font-size: 10px">
             <tr>
               <th scope="col">No</th>
@@ -274,12 +194,7 @@
               <td style="min-width: 50px">{{ problem.foperator }}</td>
               <td style="min-width: 50px">{{ problem.fdur }}</td>
               <td style="min-width: 70px">
-                <v-btn
-                  class="btn-light"
-                  small
-                  color="primary"
-                  @click="exportPdf(problem.fid, problem.fdur)"
-                >
+                <v-btn class="btn-light" small color="primary" @click="exportPdf(problem.fid, problem.fdur)">
                   <i class="fa fa-book"></i> Report
                 </v-btn>
               </td>
@@ -289,31 +204,20 @@
                 </v-btn>
               </td>
               <td style="min-width: 70px">
-                <v-btn
-                  elevation="2"
-                  data-toggle="modal"
-                  :data-target="`#modal${problem.fid}`"
-                  small
-                  color="error"
-                  ><i class="fa fa-trash"></i> Delete</v-btn
-                >
-                <div
-                  class="modal fade"
-                  :id="`modal${problem.fid}`"
-                  tabindex="-1"
-                  role="dialog"
-                  aria-hidden="true"
-                >
-                  <div class="modal-dialog" role="document">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-danger btn-sm" small data-toggle="modal"
+                  :data-target="`#modal${problem.fid}`" style="font-size: 11px;">
+                  <i class="fa fa-trash"></i> Delete
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" :id="`modal${problem.fid}`" tabindex="-1" aria-labelledby="exampleModalLabel"
+                  aria-hidden="true">
+                  <div class="modal-dialog">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h5 class="modal-title text-dark">Delete Problem</h5>
-                        <button
-                          type="button"
-                          class="close"
-                          data-dismiss="modal"
-                          aria-label="Close"
-                        >
+                        <h5 class="modal-title text-dark" id="exampleModalLabel">Delete Problem</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                         </button>
                       </div>
@@ -321,24 +225,15 @@
                         <p>
                           apakah kamu yakin ingin menghapus problem
                           <b>{{ problem.ferror_name }}</b> ID:
-                          <b>{{ problem.fid }}</b
-                          >?
+                          <b>{{ problem.fid }}</b>?
                         </p>
                       </div>
                       <div class="modal-footer">
-                        <button
-                          type="button"
-                          class="btn btn-danger"
-                          data-dismiss="modal"
-                          @click="deleteProblem(problem.fid)"
-                        >
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"
+                          @click="deleteProblem(problem.fid)">
                           Ya, hapus!
                         </button>
-                        <button
-                          type="button"
-                          class="btn btn-secondary"
-                          data-dismiss="modal"
-                        >
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
                           Engga jadi deh
                         </button>
                       </div>
@@ -348,19 +243,13 @@
               </td>
             </tr>
           </tbody>
-          <tbody
-            v-else-if="containerProblems.length == 0 && isLoading == false"
-          >
+          <tbody v-else-if="containerProblems.length == 0 && isLoading == false">
             <tr>
               <td class="text-center" colspan="9">Tidak Ada Problem</td>
             </tr>
           </tbody>
         </table>
-        <i
-          v-if="isLoading"
-          class="fa fa-refresh fa-spin"
-          style="font-size: 30px"
-        ></i>
+        <i v-if="isLoading" class="fa fa-refresh fa-spin" style="font-size: 30px"></i>
       </div>
     </div>
   </div>
@@ -452,9 +341,8 @@ export default {
       await reGetting();
     },
     intervalTime() {
-      this.timeNow = `${
-        moment().format("MMMM Do YYYY, h:mm:ss a").split(", ")[1]
-      }`;
+      this.timeNow = `${moment().format("MMMM Do YYYY, h:mm:ss a").split(", ")[1]
+        }`;
     },
     formatDate(date) {
       var d = new Date(date),
@@ -485,7 +373,7 @@ export default {
         .then((result) => {
           console.log(result);
           this.$router.go();
-          this.getProblemHistory();
+          // this.getProblemHistory();
         })
         .catch((err) => {
           // this.deleteProblem(_v)
@@ -518,7 +406,7 @@ export default {
       let finishDate = this.formatDate(new Date());
       await axios
         .get(
-          `${process.env.VUE_APP_HOST}/problemHistory?startDate=${startDate}&endDate=${finishDate}&line=${this.$route.query.v_}`
+          `${process.env.VUE_APP_HOST}/problemHistory?startDate=${startDate}&endDate=${finishDate}&line=${this.$route.query.v_}&sort=fdur`
         )
         .then((result) => {
           console.log(result.data.data);
@@ -533,13 +421,11 @@ export default {
   async mounted() {
     console.log(this.isActiveRoutes);
     this.isActiveLine = this.$route.query.v_;
-    let dateConvert = `${moment().format("L").split("/")[1]}/${
-      moment().format("L").split("/")[0]
-    }/${moment().format("L").split("/")[2]}`;
+    let dateConvert = `${moment().format("L").split("/")[1]}/${moment().format("L").split("/")[0]
+      }/${moment().format("L").split("/")[2]}`;
     console.log(dateConvert);
-    this.timeNow = `${
-      moment().format("MMMM Do YYYY, h:mm:ss a").split(", ")[1]
-    }`;
+    this.timeNow = `${moment().format("MMMM Do YYYY, h:mm:ss a").split(", ")[1]
+      }`;
     let intervalStart = setInterval(this.intervalTime, 1000);
     console.log(intervalStart);
     this.countProblemThisMonth();
@@ -566,15 +452,19 @@ export default {
 td {
   font-size: 10px;
 }
+
 .form-control {
   font-size: 12px;
 }
+
 .v-data-table__mobile-row {
   padding: 5px !important;
 }
+
 .v-carousel__controls {
   height: 30px !important;
 }
+
 .v-time-picker-clock__item,
 .v-time-picker-clock__item--active,
 span {

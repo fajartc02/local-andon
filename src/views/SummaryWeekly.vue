@@ -2,8 +2,8 @@
   <div class="container-fluid mt-4">
     <div class="row">
       <div class="col-12">
-        <h2>Problem Report Progress</h2>
-        <p>Problem (> 30 min)</p>
+        <h2>LTB Report Status</h2>
+        <p>Problem (>= 120 min)</p>
       </div>
     </div>
     <div class="row">
@@ -21,10 +21,7 @@
                   <div class="tableFixHead">
                     <div class="card">
                       <b-input-group size="sm" prepend="Name">
-                        <b-form-input
-                          placeholder="name TL/GL"
-                          v-model="findLeader"
-                        ></b-form-input>
+                        <b-form-input placeholder="name TL/GL" v-model="findLeader"></b-form-input>
                       </b-input-group>
                     </div>
                     <Spinner2 v-if="isLoading" />
@@ -32,10 +29,12 @@
                       <thead>
                         <tr>
                           <th>No</th>
+                          <th v-if="!isMobile">Date</th>
                           <th v-if="!isMobile">Mesin</th>
                           <th>
                             {{ isMobile ? "Mesin" : "Problem Description" }}
                           </th>
+                          <th v-if="!isMobile">Duration</th>
                           <th>TL</th>
                           <th>GL</th>
                           <th>
@@ -56,12 +55,12 @@
                           </th>
                         </tr>
                       </thead>
-                      <tbody
-                        v-for="(item, i) in tableProblemFup"
-                        :key="item.fid"
-                      >
+                      <tbody v-for="(item, i) in tableProblemFup" :key="item.fid">
                         <tr>
                           <td>{{ i + 1 }}</td>
+                          <td v-if="!isMobile">
+                            {{ item.fstart_time.split('T')[0] }}
+                          </td>
                           <td v-if="!isMobile">
                             {{ item.fmc_name }}
                           </td>
@@ -69,6 +68,9 @@
                             <router-link :to="`/editProblem?v_=${item.fid}`">{{
                               isMobile ? item.fmc_name : item.ferror_name
                             }}</router-link>
+                          </td>
+                          <td v-if="!isMobile">
+                            {{ item.fdur }}
                           </td>
                           <td>{{ item.tlName }}</td>
                           <td>{{ item.glName }}</td>
@@ -102,10 +104,7 @@
             <b-tab title="Grafik Summary">
               <div class="row">
                 <div class="col-12">
-                  <bar-chart
-                    :chart-data="datacollection"
-                    :options="options"
-                  ></bar-chart>
+                  <bar-chart :chart-data="datacollection" :options="options"></bar-chart>
                 </div>
               </div>
             </b-tab>
@@ -255,72 +254,72 @@ export default {
         {
           line: "CYLINDER BLOCK",
           shift: "w",
-          name: "Vaip JH",
+          name: "FERDIANSYAH",
         },
         {
           line: "CRANK SHAFT",
           shift: "w",
-          name: "Vaip JH",
+          name: "FERDIANSYAH",
         },
         {
           line: "CAM SHAFT",
           shift: "w",
-          name: "Vaip JH",
+          name: "FERDIANSYAH",
         },
         {
           line: "CYLINDER HEAD",
           shift: "w",
-          name: "Vaip JH",
+          name: "FERDIANSYAH",
         },
         {
           line: "HPDC",
           shift: "w",
-          name: "Triyanto",
+          name: "TRIYANTO",
         },
         {
           line: "LPDC",
           shift: "w",
-          name: "Triyanto",
+          name: "TRIYANTO",
         },
         {
           line: "ASSY LINE",
           shift: "w",
-          name: "Vaip JH",
+          name: "FERDIANSYAH",
         },
         {
           line: "CYLINDER BLOCK",
           shift: "r",
-          name: "Fandy JD",
+          name: "WAHYU SUWARNO",
         },
         {
           line: "CRANK SHAFT",
           shift: "r",
-          name: "Fandy JD",
+          name: "WAHYU SUWARNO",
         },
         {
           line: "CAM SHAFT",
           shift: "r",
-          name: "Fandy JD",
+          name: "WAHYU SUWARNO",
         },
         {
           line: "CYLINDER HEAD",
           shift: "r",
-          name: "Fandy JD",
+          name: "WAHYU SUWARNO",
         },
         {
           line: "HPDC",
           shift: "r",
-          name: "Supriyadi",
+          name: "HARTANTO",
         },
         {
           line: "LPDC",
           shift: "r",
-          name: "Supriyadi",
+          name: "HARTANTO",
         },
         {
           line: "ASSY LINE",
           shift: "r",
-          name: "Fandy JD",
+          name: "WAHYU SUWARNO",
         },
       ],
       containerSh: [
@@ -362,22 +361,22 @@ export default {
         {
           line: "CYLINDER BLOCK",
           shift: "r",
-          name: "ZAHRONI",
+          name: "ARIS BUDIANTO",
         },
         {
           line: "CRANK SHAFT",
           shift: "r",
-          name: "ZAHRONI",
+          name: "ARIS BUDIANTO",
         },
         {
           line: "CAM SHAFT",
           shift: "r",
-          name: "ZAHRONI",
+          name: "ARIS BUDIANTO",
         },
         {
           line: "CYLINDER HEAD",
           shift: "r",
-          name: "ZAHRONI",
+          name: "ARIS BUDIANTO",
         },
         {
           line: "HPDC",
@@ -392,7 +391,7 @@ export default {
         {
           line: "ASSY LINE",
           shift: "r",
-          name: "ZAHRONI",
+          name: "ARIS BUDIANTO",
         },
       ],
       tableProblemFup: [],
@@ -490,12 +489,11 @@ export default {
     await axios
       .get(`${process.env.VUE_APP_HOST}/delayProblemCm`)
       .then((result) => {
-        //   0: Herman, 1: Hartanto, 2: Wahyu, 3: Triyanto
+        //   0: FERDIANSYAH, 1: HARTANTO, 2: WAHYU SUWARNO, 3: TRIYANTO
         this.isLoading = false;
         this.containerDataHerman = result.data.data[0];
         this.containerDataHartanto = result.data.data[1];
         this.containerDataWahyu = result.data.data[2];
-        // this.containerDataTriyanto = result.data.data[3];
         let combineProblem = [
           ...result.data.data[8],
           ...result.data.data[9],
@@ -503,8 +501,8 @@ export default {
           a.fstart_time > b.fstart_time
             ? 1
             : b.fstart_time > a.fstart_time
-            ? -1
-            : 0
+              ? -1
+              : 0
         );
         console.log(result.data.data[8]);
         console.log(result.data.data[9]);
@@ -519,8 +517,8 @@ export default {
             this.containerDataTriyanto.push(item);
           }
         });
-        let mapProblemFup = combineProblem.map((item, i) => {
-          console.log(item);
+        let mapProblemFup = combineProblem.map((item) => {
+          // console.log(item);
           let idxTl = this.containerTl.findIndex(
             (x) =>
               x.line.toUpperCase() == item.fline.toUpperCase() &&
@@ -531,8 +529,8 @@ export default {
               x.line.toUpperCase() == item.fline.toUpperCase() &&
               x.shift == item.fshift
           );
-          console.log(item);
-          console.log(this.containerTl[idxTl].name);
+          // console.log(item);
+          // console.log(this.containerTl[idxTl].name);
           if (this.containerTl[idxTl].name) {
             item.tlName = this.containerTl[idxTl].name;
           } else {
@@ -561,7 +559,6 @@ export default {
               item.lhCheck = this.checkStatus(2);
             } else if (String(item.cmLhFeedback) != "null") {
               item.lhCheck = this.checkStatus(3);
-              item.lhCheck = this.checkStatus(1);
             } else {
               item.lhCheck = this.checkStatus(4);
             }
@@ -586,7 +583,9 @@ export default {
           } else if (item.cmShApprove == 1) {
             item.shCheck = this.checkStatus(1);
           }
-
+          if (item.cmDhApprove == 'null') {
+            item.cmDhApprove = 0
+          }
           if (item.cmDhApprove == 0) {
             let diffInTime =
               new Date().getTime() - new Date(item.fstart_time).getTime();
@@ -600,19 +599,21 @@ export default {
             } else if (String(item.cmDhFeedback) != "null") {
               item.dhCheck = this.checkStatus(3);
             } else {
-              if (i > 41) {
-                item.dhCheck = this.checkStatus(4);
-              }
+              item.dhCheck = this.checkStatus(4);
             }
           } else if (item.cmDhApprove == 1) {
             item.dhCheck = this.checkStatus(1);
+          }
+          if (item.ferror_name == 'Servo alarm A498 & A46F (Master error)') {
+            console.log(item);
+            console.log();
           }
           return item;
         });
         this.containerProblemFup = mapProblemFup;
         this.tableProblemFup = mapProblemFup;
         this.datacollection = {
-          labels: ["TRIYANTO", "SUPRIYADI", "FANDY JD", "HARTANTO"],
+          labels: ["TRIYANTO", "HARTANTO", "WAHYU SUWARNO", "HARTANTO"],
           datasets: [
             {
               label: "Blm Close",
@@ -642,13 +643,16 @@ export default {
 .v-application ol {
   padding-left: 0px;
 }
+
 td {
   font-size: 12px;
 }
+
 .tableFixHead {
   overflow: auto;
-  height: 600px;
+  height: 70vh;
 }
+
 .tableFixHead thead th {
   position: sticky;
   top: 0;
@@ -660,6 +664,7 @@ table {
   border-collapse: collapse;
   width: 100%;
 }
+
 /* .card {
   background-color: transparent !important;
 } */
@@ -668,9 +673,11 @@ td {
   padding: 8px 16px;
   font-size: 12px;
 }
+
 th {
   background: #eee;
 }
+
 .dot {
   height: 25px;
   width: 25px;
@@ -679,6 +686,7 @@ th {
   display: inline-block;
   border: 1px solid black;
 }
+
 .dotDelay {
   height: 25px;
   width: 25px;
@@ -687,6 +695,7 @@ th {
   display: inline-block;
   border: 1px solid black;
 }
+
 .dotApprove {
   height: 25px;
   width: 25px;
@@ -695,6 +704,7 @@ th {
   display: inline-block;
   border: 1px solid black;
 }
+
 .dotComment {
   height: 25px;
   width: 25px;

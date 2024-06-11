@@ -296,115 +296,6 @@
         </div>
       </div>
     </div>
-    <div class="overflow-auto">
-      <table class="table table-bordered table-stripped">
-        <thead>
-          <tr>
-            <th>No</th>
-            <th>Date</th>
-            <th>Machine</th>
-            <th>Pic</th>
-            <th>Description</th>
-            <th>Status</th>
-            <th colspan="2">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(henkaten, i) in containerHenkaten" :key="henkaten.fid">
-            <td>
-              {{ i+1 }}
-            </td>
-            <td>
-              {{
-                henkaten.fdate.split("T")[0]
-              }}
-            </td>
-            <td>
-              {{ henkaten.fmc ? henkaten.fmc : 'bukan henkaten mesin'}}
-            </td>
-            <td>
-              {{ henkaten.fpic }}
-            </td>
-            <td class="text-left pl-3">
-              {{ henkaten.fchanges_item }}
-            </td>
-            <td>
-              <span :class="`badge ${henkaten.fstatus ? 'badge-success' : 'badge-warning'}  justify-content-start`">{{
-              henkaten.fstatus ? "FIX" : "TEMPORARY"
-            }}</span>
-            </td>
-            <td>
-              <button
-                class="btn btn-sm btn-pill btn-danger"
-                data-toggle="modal"
-                :data-target="`#modal${henkaten.fid}`"
-              >
-                <i class="fa fa-trash"></i>
-              </button>
-              <div
-                      class="modal fade"
-                      :id="`modal${henkaten.fid}`"
-                      tabindex="-1"
-                      role="dialog"
-                      aria-hidden="true"
-                    >
-                      <div class="modal-dialog" role="document">
-                        <div class="modal-content" style="height: 40vh">
-                          <div class="modal-header">
-                            <h5 class="modal-title text-dark">Delete Problem</h5>
-                            <button
-                              type="button"
-                              class="close"
-                              data-dismiss="modal"
-                              aria-label="Close"
-                            >
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                          <div class="modal-body text-dark">
-                            <p>
-                              apakah kamu yakin ingin menghapus henkaten
-                              <b>{{ henkaten.fmc }}</b> Problem:
-                              <b>{{ henkaten.fproblem }}</b
-                              >?
-                            </p>
-                          </div>
-                          <div class="modal-footer">
-                            <button
-                              type="button"
-                              class="btn btn-danger"
-                              data-dismiss="modal"
-                              @click="deleteHenkaten(henkaten.fid)"
-                            >
-                              Ya, hapus!
-                            </button>
-                            <button
-                              type="button"
-                              class="btn btn-secondary"
-                              data-dismiss="modal"
-                            >
-                              Engga jadi deh
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-            </td>
-            <td>
-              <button
-                class="btn btn-sm btn-pill btn-primary"
-                small
-                data-toggle="modal"
-                data-target="#addModalHenkaten"
-                @click="editHenkaten(henkaten.fid, henkaten)"
-              >
-                <i class="fa fa-pencil"></i>
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
     <div
       class="
         d-flex
@@ -417,8 +308,125 @@
       "
       v-if="containerHenkaten.length !== 0 && isLoading === false"
     >
+      <template v-for="henkaten in containerHenkaten">
+        <div class="mt-3" :key="henkaten.fid">
+          <span :class="`badge ${henkaten.fstatus ? 'badge-success' : 'badge-warning'}  justify-content-start`">{{
+            henkaten.fstatus ? "FIX" : "TEMPORARY"
+          }}</span>
+          <!-- <CardInquiry :henkatenData="henkaten" :delHenkaten="deleteHenkaten(henkaten.fid)" :editHenkaten="editHenkaten(henkaten.fid, henkaten)" /> -->
+          <div
+            class="aw-card"
+            :style="`border:${
+              henkaten.fstatus ? '1px green solid' : '1px #f4ce0e solid'
+            }`"
+          >
+            <div class="container">
+              <div class="row">
+                <!-- <span class="badge badge-primary">Fix</span> -->
+                <div class="col text-left pb-0 align-items-center">
+                  <!-- limit 8 -->
+                  <span class="badge badge-light">{{ henkaten.fmc }}</span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col text-left py-0">
+                  <span class="badge badge-dark">{{ henkaten.fpic }}</span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col text-left py-0" style="height: 130px">
+                  <!-- description max length 50 -->
+                  <b style="font-size: 12px">Item Temporary:</b><br />
+                  <small>{{ henkaten.fchanges_item }}</small>
+                  <hr class="m-0 bg-success" />
+                  <b style="font-size: 12px">Next Action:</b><br />
+                  <small>{{ henkaten.fnote }}</small>
+                </div>
+              </div>
+              <div class="justify-content-around row">
+                <div class="col text-left">
+                  <small>Dibuat: </small
+                  ><span class="badge badge-light">{{
+                    henkaten.fdate.split("T")[0]
+                  }}</span>
+                </div>
+              </div>
+              <div class="justify-content-center align-items-end row p-1">
+                <div class="col py-0">
+                  <button
+                    class="btn btn-sm btn-pill btn-danger"
+                    data-toggle="modal"
+                    :data-target="`#modal${henkaten.fid}`"
+                  >
+                    <i class="fa fa-trash"></i>
+                  </button>
+                </div>
+                <div class="col py-0 align-items-center">
+                  <button
+                    class="btn btn-sm btn-pill btn-primary"
+                    small
+                    data-toggle="modal"
+                    data-target="#addModalHenkaten"
+                    @click="editHenkaten(henkaten.fid, henkaten)"
+                  >
+                    <i class="fa fa-pencil"></i>
+                  </button>
+                  <div
+                    class="modal fade"
+                    :id="`modal${henkaten.fid}`"
+                    tabindex="-1"
+                    role="dialog"
+                    aria-hidden="true"
+                  >
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content" style="height: 40vh">
+                        <div class="modal-header">
+                          <h5 class="modal-title text-dark">Delete Problem</h5>
+                          <button
+                            type="button"
+                            class="close"
+                            data-dismiss="modal"
+                            aria-label="Close"
+                          >
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body text-dark">
+                          <p>
+                            apakah kamu yakin ingin menghapus henkaten
+                            <b>{{ henkaten.fmc }}</b> Problem:
+                            <b>{{ henkaten.fproblem }}</b
+                            >?
+                          </p>
+                        </div>
+                        <div class="modal-footer">
+                          <button
+                            type="button"
+                            class="btn btn-danger"
+                            data-dismiss="modal"
+                            @click="deleteHenkaten(henkaten.fid)"
+                          >
+                            Ya, hapus!
+                          </button>
+                          <button
+                            type="button"
+                            class="btn btn-secondary"
+                            data-dismiss="modal"
+                          >
+                            Engga jadi deh
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </template>
       <!-- DIALOG LOADER -->
-      <v-dialog v-model="isDialogLoading" persistent>
+      <v-dialog v-model="isDialogLoading" hide-overlay persistent width="300">
         <v-card color="primary" dark>
           <v-card-text>
             Please stand by
@@ -686,7 +694,6 @@ export default {
         });
     },
     editHenkaten(id, data) {
-    console.log(id, data);
       this.isSuccess = false;
       this.fidEdit = id;
       this.postData = {

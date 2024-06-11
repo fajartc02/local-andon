@@ -51,9 +51,11 @@
         "vue-scrollable-container": "^1.8.2",
         "vue-search-select": "^2.9.3",
         "vue-select": "^3.11.2",
+        "vue-toastification": "^1.7.14",
         "vue-tree-list-new": "^1.6.8",
         "vuetify": "^2.4.0",
-        "vuex": "^3.4.0"
+        "vuex": "^3.4.0",
+        "xlsx": "^0.18.5"
     },
     "devDependencies": {
         "@vue/cli-plugin-babel": "^4.5.0",

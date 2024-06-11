@@ -614,12 +614,16 @@ export default {
       btnSeeAllProblem: false,
       json_fields: {
         No: "no",
-        Date: "fstart_time",
+        Date: "date",
+        Time: "time",
         Line: "fline",
         Machine: "fmachine",
         Category: "fav_categoty",
         Problem: "ferror_name",
+        "Kenapa Terjadi": "whyHappen",
+        "Kenapa Lama": "whyLong",
         "Duration (min)": "fdur",
+        "Step Repair": "stepRepair",
         // Min: "min",
         // "Min/Hour": "minHour",
         Pic: "foperator",
@@ -689,28 +693,78 @@ export default {
         this.selectedEndDate = this.formatDate(new Date());
       }
     },
-    containerProblems: function () {
-      console.log("BERUBAH CONTAINER PROBLEMS");
+    containerProblems: async function () {
+      this.isLoading = true
       if (this.containerProblems.length > 0) {
-        let mapProblem = this.containerProblems.map((item, i) => {
+        let mapProblem = await this.containerProblems.map(async (item, i) => {
+          // let anlysisTerjadi = await axios
+          //   .get(
+          //     `${process.env.VUE_APP_HOST}/why_analisys/get/${item.fid}?analisys_category=TERJADI`
+          //   )
+          //   .then(async (result) => {
+          //     if (result.data.data.length > 0) {
+          //       let json_analisys = JSON.parse(result.data.data[0].json_string);
+          //       if(json_analisys) {
+          //         let mapData = await json_analisys.map(async analysis => {
+          //           return `${analysis.name} \n ${analysis.children ? await analysis.children.map(child => {
+          //               return `-->${child.name}\n`
+          //             }) : ''}`
+          //         })
+          //         return mapData
+          //       }
+          //       return ''
+          //     }
+          // })
+          // let anlysisLama = await axios
+          //   .get(
+          //     `${process.env.VUE_APP_HOST}/why_analisys/get/${item.fid}?analisys_category=LAMA`
+          //   )
+          //   .then(async (result) => {
+          //     if (result.data.data.length > 0) {
+          //       let json_analisys = JSON.parse(result.data.data[0].json_string);
+          //       if(json_analisys) {
+          //         let mapData = await json_analisys.map(async analysis => {
+          //           return `${analysis.name} \n ${analysis.children ? await analysis.children.map(child => {
+          //               return `-->${child.name}\n`
+          //             }) : ''}`
+          //         })
+          //         return mapData
+          //       }
+          //       return ''
+          //     }
+          // })
+          // const whyRawTerjadi = anlysisTerjadi ? await Promise.all(anlysisTerjadi) : ['']
+          // const whyRawLama = anlysisLama ? await Promise.all(anlysisLama) : ['']
+
           return {
             no: `${i + 1}`,
-            fstart_time: `${item.fstart_time.split("T")[0]}`,
+            date: `${item.fstart_time.split("T")[0]}`,
+            time: `${item.fstart_time.split("T")[1].split('.')[0]}`,
             fline: item.fline,
             fmachine: item.fmc_name,
             fav_categoty: item.fav_categoty,
             ferror_name: `${item.ferror_name}`,
             fdur: `${item.fdur}`,
+            // whyAnalisys
+            // whyHappen: whyRawTerjadi[0],
+            // whyLong: whyRawLama[0],
+            // stepRepair
+            // stepRepair: `${JSON.parse(item.fstep_new).length > 0 ? JSON.parse(item.fstep_new).map((stepR,i) => {
+            //   return `${i}. ${stepR.stepDesc},${stepR.quick6},${stepR.idealTime},${stepR.actualTime}`
+            // }) : `${item.fstep_repair.split('\n').map((stepR, i) => {
+            //   return `${i}. ${stepR}`
+            // })}`}`,
+            // Countermeasure
             // min: 60,
             // minHour: ``,
             foperator: `${item.foperator}`,
             fshift: `${item.fshift == "w" ? "WHITE" : "RED"}`,
           };
-        });
-        // console.log("this map problem");
-        // console.log(mapProblem);
-        this.json_data = mapProblem;
+        })
+
+        this.json_data = await Promise.all(mapProblem)
       }
+      this.isLoading = false
     },
   },
   
@@ -761,7 +815,7 @@ export default {
               //   .catch((err) => {
               //     console.log(err);
               //   });
-              if (item.freal_prob == "" || !item.freal_prob) {
+              if (!item.isAnalysis) {
                 return {
                   ...item,
                   bgCol: "#ff7f7f",
@@ -808,7 +862,7 @@ export default {
           console.log(result.data.data);
           let resData = result.data.data.map((item) => {
             if (item.fdur >= 30) {
-              if (item.freal_prob == "" || !item.freal_prob) {
+              if (item.isAnalysis == false) {
                 return {
                   ...item,
                   bgCol: "#ff7f7f",
@@ -867,7 +921,7 @@ export default {
           console.log(result.data.data);
           let resData = result.data.data.map((item) => {
             if (item.fdur >= 30) {
-              if (item.freal_prob == "" || !item.freal_prob) {
+              if (item.isAnalysis == false) {
                 return {
                   ...item,
                   bgCol: "#ff7f7f",
@@ -907,7 +961,7 @@ export default {
           console.log(result.data.data);
           let resData = result.data.data.map((item) => {
             if (item.fdur >= 30) {
-              if (item.freal_prob == "" || !item.freal_prob) {
+              if (item.isAnalysis == false) {
                 return {
                   ...item,
                   bgCol: "#ff7f7f",
@@ -977,7 +1031,7 @@ export default {
     exportPdf(id, dur, fline) {
       console.log(dur);
       console.log(id);
-      if (dur > 120 || (dur >= 15 && fline == "ASSY LINE")) {
+      if (dur >= 120 || (dur >= 15 && fline == "ASSY LINE")) {
         this.$router.push(`/pdfViewerLong?v_=${id}`);
       }
       else{

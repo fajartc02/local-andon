@@ -144,7 +144,7 @@ export default {
     setInterval(() => {
       this.getMachinesStatus();
       console.log(this.stateProdAchievements);
-    }, 3000);
+    }, 20000);
   },
 };
 </script>

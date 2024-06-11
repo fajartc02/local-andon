@@ -339,14 +339,6 @@ export default {
       }, 60000);
       await this.storeProdAchievments();
       await this.storeCountProbTemp();
-      await axios
-        .get(`${process.env.VUE_APP_HOST}/sendNotifWhatsapp`)
-        .then((result) => {
-          console.log(result);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
     },
     async getMachines(first = true) {
       if (first) {

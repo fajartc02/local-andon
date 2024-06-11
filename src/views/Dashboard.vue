@@ -366,19 +366,6 @@ export default {
     getColorDash() {
       this.storeProdAchievments();
       this.storeCountProbTemp();
-      // http://localhost:5001/smartandonsys/us-central1/app/
-      axios
-        .post(`${process.env.VUE_APP_HOST}/sendNotifWhatsapp`)
-        .then((result) => {
-          console.log(result);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-      // this.fnInterval = setInterval(() => {
-      //   this.storeProdAchievments();
-      //   this.cycleCount += 1;
-      // }, 60000);
     },
     getMachines(first = true) {
       if (first) {

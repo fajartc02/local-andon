@@ -1,11 +1,6 @@
 <template>
   <div id="chart">
-    <apexchart
-      type="bar"
-      height="700"
-      :options="chartOptions"
-      :series="series"
-    ></apexchart>
+    <apexchart type="bar" height="700" :options="chartOptions" :series="series"></apexchart>
     <v-dialog v-model="isShowDialog">
       <v-card class="p-3">
         <!-- <v-card-title class="headline grey lighten-2">
@@ -54,11 +49,7 @@
       <v-card color="primary" dark>
         <v-card-text>
           Loading...
-          <v-progress-linear
-            indeterminate
-            color="white"
-            class="mb-0"
-          ></v-progress-linear>
+          <v-progress-linear indeterminate color="white" class="mb-0"></v-progress-linear>
         </v-card-text>
       </v-card>
     </v-dialog>
@@ -129,10 +120,8 @@ export default {
               let labelSelected = this.series[config.seriesIndex].name;
               axios
                 .get(
-                  `${
-                    process.env.VUE_APP_HOST
-                  }/getJobData?filterQuery=WHERE~(fgroup~=~'${labelSelected}'~OR~fjob_type~=~'${labelSelected}')~AND~fend_time~IS~NOT~NULL~AND~MONTH(fstart_time)~=~${
-                    config.dataPointIndex - 8
+                  `${process.env.VUE_APP_HOST
+                  }/getJobData?filterQuery=WHERE~(fgroup~=~'${labelSelected}'~OR~fjob_type~=~'${labelSelected}')~AND~fend_time~IS~NOT~NULL~AND~MONTH(fstart_time)~=~${config.dataPointIndex - 8
                   }`
                 )
                 .then((result) => {
@@ -203,9 +192,8 @@ export default {
               console.log(ctx);
               let arr = STATE_JOB.thn21.arrMh;
               console.log(arr[ctx.seriesIndex][ctx.dataPointIndex]);
-              return `${value}% (${
-                arr[ctx.seriesIndex][ctx.dataPointIndex]
-              } MH)`;
+              return `${value}% (${arr[ctx.seriesIndex][ctx.dataPointIndex]
+                } MH)`;
             },
             // title: {
             //   formatter: function (
@@ -329,6 +317,6 @@ export default {
       this.isShowDialog = true;
     },
   },
-  mounted() {},
+  mounted() { },
 };
 </script>
