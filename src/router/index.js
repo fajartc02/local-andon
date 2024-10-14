@@ -337,6 +337,11 @@ const routes = [
         component: () => import("@/views/Q6/Q6Anlysis"),
       },
       {
+        path: "/ky-machines",
+        name: "KYMachine",
+        component: () => import("@/views/KYMachine/KYMachine"),
+      },
+      {
         path: "/floating-plunger",
         name: "FloatingPlunger",
         component: () => import("@/views/FloatingPlunger/FloatingPlunger"),

@@ -8,136 +8,7 @@
         link:<code><a href="https://smartandonsys.web.app" target="_blank" style="text-decoration: none;">https://smartandonsys.web.app</a></code>
       </p>
       <div class="col-12 p-0">
-        <div class="card container-menu bg-light">
-          <div class="row m-0 p-0 flex-row flex-nowrap overflow-auto">
-            <a v-if="isStaff" class="col-3 hover-menu p-1" @click="goTo('/ltb-report')" target="_blank"
-              style="text-decoration: none; color: black">
-              <center>
-                <img src="https://www.pngmart.com/files/8/Report-PNG-Photos.png" width="30%" />
-              </center>
-              <center class="card-title">LTB Report</center>
-            </a>
-            <!-- <a v-else class="col-3 hover-menu p-1" href="https://tclass-dev.toyota.co.id/" target="_blank"
-              style="text-decoration: none; color: black">
-              <center>
-                <img src="https://cdn-icons-png.flaticon.com/512/201/201614.png" width="30%" />
-              </center>
-              <center class="card-title">T-Class</center>
-            </a> -->
-            <a v-else class="col-3 hover-menu p-1" @click="goTo('/q6-anlysis')"
-              style="text-decoration: none; color: black">
-              <center>
-                <img src="https://cdn0.iconfinder.com/data/icons/finance-141/33/analysis-1024.png" width="30%" />
-              </center>
-              <center class="card-title">Q6 Analysis</center>
-            </a>
-            <div class="col-3 hover-menu p-1" @click="goTo('/realtimePareto')">
-              <center>
-                <img src="https://cdn0.iconfinder.com/data/icons/accounting-and-tax/48/17-512.png" width="30%" />
-              </center>
-              <center class="card-title">Realtime<br />Pareto</center>
-            </div>
-            <div class="col-3 hover-menu p-1" @click="goTo('/job-analisys')">
-              <center>
-                <img
-                  src="https://png.pngtree.com/png-vector/20220708/ourmid/pngtree-analyzing-data-png-image_5744358.png"
-                  width="30%" />
-              </center>
-              <center class="card-title">
-                Repair<br />
-                Analisys
-              </center>
-            </div>
-            <div class="col-3 hover-menu p-1" @click="goTo('/floating-plunger')">
-              <center>
-                <img src="https://www.downloadclipart.net/large/32035-trend-infographic-clipart.png" width="30%" />
-              </center>
-              <center class="card-title">Floating<br />Plunger Tip</center>
-            </div>
-            <div class="col-3 hover-menu p-1" href="https://iwms.toyota.co.id/StorageInquiry" target="_blank"
-              style="text-decoration: none; color: black">
-              <center>
-                <img src="https://cdn-icons-png.flaticon.com/512/2271/2271166.png" width="30%" />
-              </center>
-              <center class="card-title">Order<br />Spareparts</center>
-            </div>
-          </div>
-          <div class="row m-0 p-0 mt-2 flex-row flex-nowrap overflow-auto">
-            <div class="col-3 hover-menu p-1" @click="goTo('/mtbf-mttr')">
-              <center>
-                <img src="https://cdn3d.iconscout.com/3d/premium/thumb/achievement-6456750-5348958.png" width="30%" />
-              </center>
-              <center class="card-title">
-                Mtbf <br />
-                Mttr
-              </center>
-            </div>
-
-            <div class="col-3 hover-menu p-1" @click="goTo('/focus-theme/member')">
-              <center>
-                <img src="https://cdn-icons-png.flaticon.com/512/1879/1879426.png" width="30%" />
-              </center>
-              <center class="card-title">
-                Focus <br />
-                Thema
-              </center>
-            </div>
-            <div class="col-3 hover-menu p-1" @click="goTo('/cmFollowup')">
-              <center>
-                <img src="https://cdn-icons-png.flaticon.com/512/3652/3652191.png" width="30%" />
-              </center>
-              <center class="card-title">CM<br />Followup</center>
-            </div>
-            <div class="col-3 hover-menu p-1" @click="goTo('/problemHistory')">
-              <center>
-                <img src="https://cdn2.iconfinder.com/data/icons/plump-by-zerode_/256/Folder-URL-History-icon.png"
-                  width="30%" />
-              </center>
-              <center class="card-title">Problem<br />History</center>
-            </div>
-
-            <div class="col-3 hover-menu p-1" @click="goTo('/summaryWeekly')">
-              <center>
-                <img src="https://icon-library.com/images/summary-icon/summary-icon-15.jpg" width="30%" />
-              </center>
-              <center class="card-title">
-                LTB Report <br />
-                Status
-              </center>
-            </div>
-            <button class="col-3 hover-menu p-1 m-0"
-              href="https://tmmin.sharepoint.com/sites/MaintenancePlant3/Dokumen%20Berbagi/Forms/AllItems.aspx"
-              target="_blank" style="text-decoration: none; color: black;background-color: #e5e5e5;" disabled>
-              <center>
-                <img src="@/assets/icons/manualBook.png" width="42%" />
-              </center>
-              <center class="card-title">Manual Book <br />& Drawing</center>
-            </button>
-            <button class="col-3 hover-menu p-1 m-0" @click="goTo('/totalProblem')" disabled
-              style="background-color: #e5e5e5;">
-              <center>
-                <img src="@/assets/totalProblem.png" width="30%" />
-              </center>
-              <center class="card-title">
-                Total <br />
-                Problem
-              </center>
-            </button>
-            <div class="col-3 hover-menu p-1" @click="goTo('/henkaten')">
-              <center>
-                <img src="https://cdn-icons-png.flaticon.com/512/6214/6214240.png" width="30%" />
-              </center>
-              <center class="card-title">Temporary<br />Action List</center>
-            </div>
-
-            <div class="col-3 hover-menu p-1" @click="goTo('/registerNewMachine')">
-              <center>
-                <img src="@/assets/fanuc.png" width="20%" />
-              </center>
-              <center class="card-title">Register<br />Mc</center>
-            </div>
-          </div>
-        </div>
+        <features-menu :isStaff="isStaff"></features-menu>
       </div>
     </div>
     <div class="row m-0 p-0 mt-1">
@@ -153,6 +24,76 @@
             </h1>
           </div>
         </div>
+        <v-dialog v-model="isKyDialog" persistent width="500">
+          <v-card class="p-1">
+            <v-card-title class="d-flex headline grey lighten-2">
+              <b>E - S</b><small class="align-items-end pt-2" style="font-size: 15px;">hort</small> <b
+                class="ml-2">KY</b>
+            </v-card-title>
+            <v-card-text class="p-1">
+              <h6 class="text-left mt-2 pl-0">Machine: {{ machineSelected }}</h6>
+              <router-link class="text-decoration-none text-left text-success text-weight-bold"
+                :to="`/ky-machines?fline=${selectedLine.toUpperCase()}&fid=${fmc_id}`">
+                Tambah KY (klik disini!)
+              </router-link>
+              <hr class="m-0 p-1">
+              <div class="badge badge-danger badge-pill text-center font-weight-bold">Terjepit</div>
+              <div class="badge badge-warning badge-pill text-center font-weight-bold">Tertimpa</div>
+              <div class="badge badge-info badge-pill text-center font-weight-bold">Tertabrak</div>
+              <div class="badge badge-primary badge-pill text-center font-weight-bold">Terjatuh</div>
+              <div class="badge badge-secondary badge-pill text-center font-weight-bold">Tersetrum</div>
+              <div class="badge badge-dark badge-pill text-center font-weight-bold">Terbakar</div>
+              <div class="badge badge-light badge-pill text-center font-weight-bold">Other</div>
+              <hr class="m-0 p-1">
+              <template v-if="kyData.length > 0">
+                <div v-for="(item, index) in kyData" :key="index" class="row text-left">
+                  <div class="col-12 d-flex align-items-center">
+                    <div class="m-0 align-items-center">
+                      <div v-if="item.stop6_category == 'A'"
+                        class="badge badge-danger badge-pill text-center font-weight-bold">Terjepit</div>
+                      <div v-if="item.stop6_category == 'B'"
+                        class="badge badge-warning badge-pill text-center font-weight-bold">Tertimpa</div>
+                      <div v-if="item.stop6_category == 'C'"
+                        class="badge badge-info badge-pill text-center font-weight-bold">Tertabrak</div>
+                      <div v-if="item.stop6_category == 'D'"
+                        class="badge badge-primary badge-pill text-center font-weight-bold">Terjatuh</div>
+                      <div v-if="item.stop6_category == 'E'"
+                        class="badge badge-secondary badge-pill text-center font-weight-bold">Tersetrum</div>
+                      <div v-if="item.stop6_category == 'F'"
+                        class="badge badge-dark badge-pill text-center font-weight-bold">Terbakar</div>
+                      <br>
+                      <div v-if="item.stop6_category == 'Other'"
+                        class="badge badge-light badge-pill text-center font-weight-bold">Other</div>
+
+                      <p>{{ item.details }}<input class="ml-2" type="checkbox" v-model="item.is_checked"></p>
+                      <img v-if="item.ilustration" :src="item.ilustration" style="width: 100%" />
+                    </div>
+                  </div>
+                </div>
+              </template>
+              <template v-else>
+                <h6 class="text-center">Belum Ada Data KY</h6>
+              </template>
+              <div class="card p-3">
+                <div class="d-flex justify-content-start align-items-center">
+                  <input class="mr-2" type="checkbox"
+                    :checked="kyData.filter(x => x.is_checked == true).length == counter_total_ky" disabled>
+                  <h6 class="text-left">Saya "Telah membaca dan memahami terkait bahaya di Atas!"</h6>
+                </div>
+              </div>
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <button
+                :class="`btn ${kyData.filter(x => x.is_checked == true).length != counter_total_ky ? 'btn-danger' : 'btn-success'} btn-sm`"
+                @click="isKyDialog = false"
+                :disabled="kyData.filter(x => x.is_checked == true).length != counter_total_ky">{{
+                  kyData.filter(x =>
+                    x.is_checked ==
+                    true).length != counter_total_ky ? 'Baca Dahulu!' : 'Saya Paham!' }}</button>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
         <v-dialog v-model="dialog" persistent width="500">
           <v-card class="p-1">
             <v-card-title class="headline grey lighten-2">
@@ -219,7 +160,6 @@
                       </multiselect>
                       <input v-else type="text" id="problem" v-model="problem" class="form-control"
                         aria-label="Amount (to the nearest dollar)" />
-
                     </div>
                     <span v-if="selectedLine">*jika tidak menemukan problem, klik </span><button v-if="selectedLine"
                       class="btn btn-primary rounded-all" @click="is_new_problem = true">Add Problem !</button>
@@ -260,7 +200,7 @@
     <!-- Card PRod -->
     <div class="row m-0 p-0">
       <CardProd v-for="line in lineAchivements" :key="line.name" :propsLine="line" :propsLoading="skeletonLoading" />
-      <div class="col-6 mt-2 px-1 py-0">
+      <div class="col-6 col-lg-3 mt-2 px-1 py-0">
         <div id="cardProd" class="`card shadow bg-dark w-100" style="height: 100%">
           <div class="row m-0">
             <div class="col text-left text-light title-text px-1 py-1">
@@ -299,19 +239,8 @@
         </div>
       </div>
     </div>
-    <div>
-      <!-- <a class="btn btn-success p-2 text-light" style="
-          position: fixed;
-          z-index: 100;
-          bottom: 10px;
-          right: 10px;
-          font-size: 20px;
-          opacity: 0.7;
-        " target="_blank" href="https://wa.me/6282211511213">
-        <span style="font-size: 12px"><b>Ada Masukan?</b><i class="fa fa-whatsapp"></i></span>
-      </a> -->
-      <button @click="showPersistentNotification">Show Persistent Notification</button>
-    </div>
+    <UpdateDialog :dialog="isShowDialogUpdate" :list="listUpdate" :oldVersion="oldVersion"
+      @dialog-close="isShowDialogUpdate = false" />
   </div>
 </template>
 
@@ -321,16 +250,56 @@ import CardProd from "@/components/CardProd";
 import { mapActions, mapState } from "vuex";
 import axios from "axios";
 import moment from "moment";
+import UpdateDialog from "@/components/UpdateDialog/UpdateDialog.vue";
 
 import { ModelSelect } from "vue-search-select";
 
 import formatDate from "@/functions/formatDate";
-// import notificationProblemCount from "@/functions/notificationProblemCount";
+import FeaturesMenu from '../components/FeaturesMenu.vue';
 
 export default {
   name: "DashboardOld",
   data() {
     return {
+      counter_total_ky: 0,
+      kyData: [],
+      isKyDialog: false,
+      isShowDialogUpdate: false,
+      listUpdate: [
+        // {
+        //   type: "new",
+        //   name: 'Pengingat Bahaya yang ada pada mesin sebelum kamu input problem, kamu bisa tambahkan item-item safety yang ada di mesin pada menu "KY Machines Data"'
+        // },
+        // {
+        //   type: "new",
+        //   name: 'Report LTB Generator Excel, Kamu bisa akses pada screen edit problem problem & bisa download template lalu upload setelah report sudah di perbaiki (pastikan report sudah lengkap yaa!, baru kamu bisa download template LTB nya)'
+        // },
+        {
+          type: "new",
+          name: 'Saat Input problem, untuk KY machine harus di ceklis terlbih dahulu, baru bisa melanjutkan input problem'
+        },
+        // {
+        //   type: "enhance",
+        //   name: 'KY Machine Data sekarang bisa kamu tambahkan gambarnya!'
+        // },
+        // {
+        //   type: "enhance",
+        //   name: 'Input Floating tip dengan notes / comments, dan bisa View mode TABLE / GRAPH'
+        // },
+        {
+          type: "bug",
+          name: 'fixing temporary action list, Id is not increment'
+        },
+        {
+          type: "bug",
+          name: 'fixing chart on realtime pareto machine name did not appear'
+        },
+        // {
+        //   type: "enhance",
+        //   name: 'type here...'
+        // }
+      ],
+      oldVersion: null,
       isStaff: localStorage.getItem('role') === 'STAFF' ? true : false,
       is_new_problem: false,
       lineAchivements: [
@@ -495,10 +464,12 @@ export default {
       });
       this.machines = this.stateMachines;
     },
-    machineSelected: function () {
-      console.log(this.machineSelected);
+    machineSelected: async function () {
+      // console.log(this.machineSelected);
+      // let machine = "-1"
       if (this.machineSelected != "") {
-        let mcSelected = this.containerRawMachine.map((mc) => {
+        this.isKyDialog = true
+        let mcSelected = await this.containerRawMachine.map((mc) => {
           if (mc.fmc_name == this.machineSelected) {
             this.fmc_id = mc.fid;
             return mc.fline;
@@ -506,8 +477,9 @@ export default {
             return null;
           }
         });
-        console.log(mcSelected.sort());
+        // console.log(mcSelected.sort());
         this.selectedLine = mcSelected.sort()[0];
+        await this.getKy({ fline: this.selectedLine, fid: this.fmc_id })
       }
     },
     categoryProblem: function () {
@@ -537,6 +509,19 @@ export default {
     }
   },
   methods: {
+    async getKy(filter) {
+      try {
+        this.isLoading = true
+        const rawKy = await axios.get(`${process.env.VUE_APP_HOST}/v2/ky/get`, { params: filter });
+        console.log(rawKy.data.data[0]);
+        this.kyData = rawKy.data.data[0][0].ky_data.sort((ky) => ky.stop6_category)
+        this.counter_total_ky = rawKy.data.data[0][0].ky_data.length
+        this.isLoading = false
+      } catch (error) {
+        this.isLoading = false
+        alert(JSON.stringify(error));
+      }
+    },
     ...mapActions([
       "storeProdAchievments",
       "storeCountProbTemp",
@@ -902,8 +887,18 @@ export default {
   components: {
     CardProd,
     ModelSelect,
+    UpdateDialog,
+    FeaturesMenu
   },
   async mounted() {
+    let newVersion = process.env.VUE_APP_VERSION
+    // let newVersion = '2.0.2'
+    const newVersionAvailable = localStorage.getItem("oldVersion") != newVersion
+    if (newVersionAvailable) {
+      this.oldVersion = newVersion;
+      this.isShowDialogUpdate = true;
+      localStorage.setItem("oldVersion", newVersion);
+    }
     this.onResize();
     this.skeletonLoading = true;
     if (localStorage.getItem("name")) {

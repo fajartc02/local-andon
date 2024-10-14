@@ -123,6 +123,15 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-12 p-0">
+                                    <div class="input-group my-2">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text font-weight-bold text-center"
+                                                style="min-width: 130px">Notes / Comments</span>
+                                        </div>
+                                        <textarea v-model="form.notes" class="form-control pl-2" />
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </v-card-text>
@@ -180,28 +189,83 @@
                 </div>
             </div>
         </div>
+        <div class="row mt-2 px-4 mx-4">
+            <div v-if="viewMode == 'GRAPH'" class="col p-2 card bg-info text-light font-weight-bold">
+                GRAPH
+            </div>
+            <div v-else class="col p-2 card text-dark" @click="changeMode('GRAPH')">
+                GRAPH
+            </div>
+            <div v-if="viewMode == 'TABLE'" class="col p-2 card bg-info text-light font-weight-bold">
+                TABLE
+            </div>
+            <div v-else class="col p-2 card text-dark" @click="changeMode('TABLE')">
+                TABLE
+            </div>
+        </div>
         <!-- Data -->
-        <div v-if="floatingData.length > 0" class="row justify-content-between align-items-center my-2">
-            <div v-for="parent in floatingData" :key="parent.machine_nm" class="col-12 my-2">
-                <div class="my-1" v-for="child in parent.children" :key="child.param">
-                    <h6 class="text-left font-weight-bold">
-                        <div class="badge badge-primary">{{ parent.machine_nm }}</div>{{ child.param }} (Std:
-                        {{ child.limit.length > 1 ? child.limit[0].y : child.min }} ~ {{ child.limit[child.limit.length
-                            - 1].y }}
-                        mm)
-                    </h6>
-                    <div class="card mt-2 p-2">
-                        <ChartTip :limit="child.limit" :seriesData="child.data" :min="child.min" :max="child.max"
-                            :units="child.units" />
+        <template v-if="viewMode == 'GRAPH'">
+            <div v-if="floatingData.length > 0" class="row justify-content-between align-items-center my-2">
+                <div v-for="parent in floatingData" :key="parent.machine_nm" class="col-12 my-2">
+                    <div class="my-1" v-for="child in parent.children" :key="child.param">
+                        <h6 class="text-left font-weight-bold">
+                            <div class="badge badge-primary">{{ parent.machine_nm }}</div>{{ child.param }} (Std:
+                            {{ child.limit.length > 1 ? child.limit[0].y : child.min }} ~ {{
+                                child.limit[child.limit.length
+                                    - 1].y }}
+                            mm)
+                        </h6>
+                        <div class="card mt-2 p-2">
+                            <ChartTip :limit="child.limit" :seriesData="child.data" :min="child.min" :max="child.max"
+                                :units="child.units" :notes="child.notes" />
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div v-else class="row">
-            <div class="col-12">
-                <h6 class="badge badge-info text-center font-weight-bold">No Data</h6>
+            <div v-else class="row">
+                <div class="col-12">
+                    <h6 class="badge badge-info text-center font-weight-bold">No Data</h6>
+                </div>
             </div>
-        </div>
+        </template>
+        <template v-else-if="viewMode == 'TABLE'">
+            <div class="row">
+                <div class="col overflow-auto">
+                    <table class="table table-sm table-hover">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th style="width: 100px">Date</th>
+                                <th style="width: 100px">Machine</th>
+                                <th>Tip Counter</th>
+                                <th>Sleeve Counter</th>
+                                <th>Spruebush Counter</th>
+                                <th>Celah Tip Atas</th>
+                                <th>Celah Tip Bawah</th>
+                                <th>Kedalaman Tip Atas</th>
+                                <th>Kedalaman Tip Bawah</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody v-if="floatingDataTable.length > 0">
+                            <tr v-for="(data, index) in floatingDataTable" :key="index">
+                                <td>{{ index + 1 }}</td>
+                                <td>{{ data.check_date }}</td>
+                                <td>{{ data.machine_nm }}</td>
+                                <td>{{ data.tip_counter }}</td>
+                                <td>{{ data.sleeve_counter }}</td>
+                                <td>{{ data.spruebush_counter }}</td>
+                                <td>{{ data.upper_gap_tip }}</td>
+                                <td>{{ data.lower_gap_tip }}</td>
+                                <td>{{ data.upper_depth_tip }}</td>
+                                <td>{{ data.lower_depth_tip }}</td>
+                                <td>{{ data.notes ? data.notes : "-" }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </template>
 
         <!-- LOADING -->
         <v-dialog v-model="isLoading" hide-overlay persistent width="300">
@@ -218,6 +282,7 @@
 import moment from 'moment';
 import ChartTip from '@/components/ApexChart/FloatingTip/ChartTip.vue';
 import axios from 'axios';
+import isNotEmpty from '../../functions/isNotEmpty';
 
 export default {
     name: "CastingTrend",
@@ -225,6 +290,7 @@ export default {
         return {
             isLoading: false,
             floatingData: [],
+            floatingDataTable: [],
             filter: {
                 fstart_date: moment().startOf('month').format('YYYY-MM-DD'),
                 fend_date: moment().format('YYYY-MM-DD'),
@@ -250,11 +316,16 @@ export default {
                 upper_gap_tip: null,
                 upper_depth_tip: null,
                 lower_gap_tip: null,
-                lower_depth_tip: null
-            }
+                lower_depth_tip: null,
+                notes: null
+            },
+            viewMode: "GRAPH" // GRAPH | TABLE
         }
     },
     methods: {
+        changeMode(mode) {
+            this.viewMode = mode
+        },
         clearSubmit() {
             this.form = {
                 machine_nm: null,
@@ -265,18 +336,25 @@ export default {
                 upper_gap_tip: null,
                 upper_depth_tip: null,
                 lower_gap_tip: null,
-                lower_depth_tip: null
+                lower_depth_tip: null,
+                notes: null
             }
             this.dialog = false
         },
         async submitData() {
             try {
                 this.isLoading = true
+                if (!isNotEmpty(this.form, 'notes')) {
+                    this.isLoading = false
+                    alert("Form tidak boleh kosong")
+                    return
+                }
                 await axios.post(`${process.env.VUE_APP_HOST}/v2/floating-tip`, this.form)
                 await this.getData()
                 this.isLoading = false
                 this.clearSubmit()
             } catch (error) {
+                alert(JSON.stringify(error));
                 this.isLoading = false
             }
         },
@@ -287,6 +365,18 @@ export default {
                 this.floatingData = response.data.data
                 this.isLoading = false
             } catch (error) {
+                alert(JSON.stringify(error));
+                this.isLoading = false
+            }
+        },
+        async getDataTable() {
+            try {
+                this.isLoading = true
+                const response = await axios.get(`${process.env.VUE_APP_HOST}/v2/floating-tip/table`, { params: this.filter })
+                this.floatingDataTable = response.data.data
+                this.isLoading = false
+            } catch (error) {
+                alert(JSON.stringify(error));
                 this.isLoading = false
             }
         }
@@ -294,15 +384,27 @@ export default {
     watch: {
         filter: {
             handler() {
-                this.getData()
+                if (this.viewMode == "GRAPH") {
+                    this.getData()
+                } else {
+                    this.getDataTable()
+                }
             },
             deep: true
+        },
+        viewMode: function () {
+            if (this.viewMode == "GRAPH") {
+                this.getData()
+            } else {
+                this.getDataTable()
+            }
         }
     },
     components: {
         ChartTip
     },
     mounted() {
+
         this.getData()
     }
 }

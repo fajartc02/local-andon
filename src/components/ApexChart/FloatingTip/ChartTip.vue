@@ -4,6 +4,7 @@
     </div>
 </template>
 <script>
+
 import VueApexCharts from "vue-apexcharts";
 
 export default {
@@ -55,8 +56,8 @@ export default {
                     title: {
                         text: this.units
                     },
-                    min: 0,
-                    max: 0.3
+                    // min: 0,
+                    // max: 0.3
                 },
                 annotations: {
                     yaxis: [
@@ -83,8 +84,8 @@ export default {
                 tooltip: {
                     shared: true,
                     y: {
-                        formatter: function (val, opts) {
-                            console.log(val, opts);
+                        formatter: function (val) {
+                            // console.log(val, opts);
                             return val.toFixed(1) + " (Count Tip: " + val + ")";
                         }
                     }
@@ -128,11 +129,18 @@ export default {
         max: {
             type: Number,
             default: 0.3
+        },
+        notes: {
+            type: Array,
+            default: () => {
+                return []
+            }
         }
     },
     watch: {
         seriesData: {
             handler() {
+                // let max = this.seriesData.sort((a, b) => a - b)[this.seriesData.length - 1] + 5
                 this.series = [{
                     name: 'Value',
                     data: this.seriesData
@@ -140,18 +148,19 @@ export default {
                 this.chartOptions = {
                     yaxis: {
                         min: this.min,
-                        max: this.max,
+                        // max: this.max,
                         title: {
                             text: this.units
                         },
                     },
                     annotations: {
-                        yaxis: this.limit
+                        yaxis: this.limit,
+                        points: this.notes
                     },
                     tooltip: {
                         y: {
                             formatter: (val, opts) => {
-                                console.log(this.seriesData[opts.dataPointIndex]);
+                                // console.log(this.seriesData[opts.dataPointIndex]);
                                 return val.toFixed(2) + ` mm (Tip: ${this.seriesData[opts.dataPointIndex].tip_counter} | Sleeve: ${this.seriesData[opts.dataPointIndex].sleeve_counter} | Spruebush: ${this.seriesData[opts.dataPointIndex].spruebush_counter})`;
                             }
                         }
@@ -169,18 +178,18 @@ export default {
         this.chartOptions = {
             yaxis: {
                 min: this.min,
-                max: this.max,
+                // max: this.max,
                 title: {
                     text: this.units
                 },
             },
             annotations: {
-                yaxis: this.limit
+                yaxis: this.limit,
+                points: this.notes
             },
             tooltip: {
                 y: {
                     formatter: (val, opts) => {
-                        console.log(this.seriesData[opts.dataPointIndex]);
                         return val.toFixed(2) + ` mm (Tip: ${this.seriesData[opts.dataPointIndex].tip_counter} | Sleeve: ${this.seriesData[opts.dataPointIndex].sleeve_counter} | Spruebush: ${this.seriesData[opts.dataPointIndex].spruebush_counter})`;
                     }
                 }

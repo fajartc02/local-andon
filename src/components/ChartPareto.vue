@@ -1,17 +1,14 @@
 <template>
   <div>
-    <bar-chart style="height: 300px" :chart-data="datacollection" :options="options"></bar-chart>
-    <v-expansion-panels :v-model="propsPanel" multiple>
+    <bar-chart style="height: 300px;margin-bottom: 50px;" :chart-data="datacollection" :options="options"></bar-chart>
+    <v-expansion-panels class="mt-4" :v-model="propsPanel" multiple>
       <v-expansion-panel>
         <v-expansion-panel-header @click="resetTable()">{{
           propsPanel.toUpperCase()
         }}</v-expansion-panel-header>
         <v-expansion-panel-content>
           <!-- MOBILE -->
-          <table
-            class="table table-striped table-dark table-responsive text-left"
-            v-if="isMobile"
-          >
+          <table class="table table-striped table-dark table-responsive text-left" v-if="isMobile">
             <thead class="title-text" style="font-size: 10px">
               <tr>
                 <th scope="col">No</th>
@@ -36,46 +33,25 @@
                 <td style="min-width: 250px">{{ problem.foperator }}</td>
                 <td style="min-width: 50px">{{ problem.fdur }}</td>
                 <td style="min-width: 70px">
-                  <v-btn
-                    class="btn-light"
-                    small
-                    color="primary"
-                    @click="exportPdf(problem.fid, problem.fdur)"
-                  >
+                  <v-btn class="btn-light" small style="margin: 0px!important;" color="primary"
+                    @click="exportPdf(problem.fid, problem.fdur)">
                     <i class="fa fa-book"></i> Report
                   </v-btn>
                 </td>
                 <td style="min-width: 70px">
-                  <v-btn @click="editProblem(problem.fid)" small>
+                  <v-btn style="margin: 0px!important;" @click="editProblem(problem.fid)" small>
                     <i class="fa fa-edit"></i> Edit
                   </v-btn>
                 </td>
                 <td style="min-width: 70px">
-                  <v-btn
-                    elevation="2"
-                    data-toggle="modal"
-                    :data-target="`#modal${problem.fid}`"
-                    small
-                    color="error"
-                    ><i class="fa fa-trash"></i> Delete</v-btn
-                  >
-                  <div
-                    class="modal fade"
-                    :id="`modal${problem.fid}`"
-                    tabindex="1"
-                    role="dialog"
-                    aria-hidden="true"
-                  >
+                  <v-btn style="margin: 0px!important;" elevation="2" data-toggle="modal"
+                    :data-target="`#modal${problem.fid}`" small color="error"><i class="fa fa-trash"></i> Delete</v-btn>
+                  <div class="modal fade" :id="`modal${problem.fid}`" tabindex="1" role="dialog" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                       <div class="modal-content">
                         <div class="modal-header">
                           <h5 class="modal-title text-dark">Delete Problem</h5>
-                          <button
-                            type="button"
-                            class="close"
-                            data-dismiss="modal"
-                            aria-label="Close"
-                          >
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                           </button>
                         </div>
@@ -83,24 +59,15 @@
                           <p>
                             apakah kamu yakin ingin menghapus problem
                             <b>{{ problem.ferror_name }}</b> ID:
-                            <b>{{ problem.fid }}</b
-                            >?
+                            <b>{{ problem.fid }}</b>?
                           </p>
                         </div>
                         <div class="modal-footer">
-                          <button
-                            type="button"
-                            class="btn btn-danger"
-                            data-dismiss="modal"
-                            @click="deleteProblem(problem.fid)"
-                          >
+                          <button type="button" class="btn btn-danger" data-dismiss="modal"
+                            @click="deleteProblem(problem.fid)">
                             Ya, hapus!
                           </button>
-                          <button
-                            type="button"
-                            class="btn btn-secondary"
-                            data-dismiss="modal"
-                          >
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">
                             Engga jadi deh
                           </button>
                         </div>
@@ -119,25 +86,18 @@
             <tbody v-else-if="isLoading">
               <tr>
                 <td colspan="10">
-                  <i
-                    v-if="isLoading"
-                    class="fa fa-refresh fa-spin"
-                    style="font-size: 30px"
-                  ></i>
+                  <i v-if="isLoading" class="fa fa-refresh fa-spin" style="font-size: 30px"></i>
                 </td>
               </tr>
             </tbody>
           </table>
           <!-- DESKTOP -->
-          <table
-            class="
+          <table class="
               table table-striped table-light
               text-dark
               table-responsive
               text-left
-            "
-            v-else
-          >
+            " v-else>
             <thead class="title-text text-center" style="font-size: 14px">
               <tr>
                 <th scope="col" style="min-width: 50px">No</th>
@@ -151,10 +111,7 @@
                 </th>
               </tr>
             </thead>
-            <tbody
-              class="text-center"
-              v-if="containerProblem.length != 0 && !isLoading"
-            >
+            <tbody class="text-center" v-if="containerProblem.length != 0 && !isLoading">
               <tr v-for="(problem, i) in containerProblem" :key="problem.fid">
                 <td scope="row" style="font-size: 14px !important">
                   {{ i + 1 }}
@@ -175,12 +132,7 @@
                   {{ problem.fdur }}
                 </td>
                 <td style="font-size: 14px !important">
-                  <v-btn
-                    class="btn-light"
-                    small
-                    color="primary"
-                    @click="exportPdf(problem.fid, problem.fdur)"
-                  >
+                  <v-btn class="btn-light" small color="primary" @click="exportPdf(problem.fid, problem.fdur)">
                     <i class="fa fa-book"></i> Report
                   </v-btn>
                 </td>
@@ -190,31 +142,14 @@
                   </v-btn>
                 </td>
                 <td style="font-size: 14px !important">
-                  <v-btn
-                    elevation="2"
-                    data-toggle="modal"
-                    :data-target="`#modal${problem.fid}`"
-                    small
-                    color="error"
-                    ><i class="fa fa-trash"></i> Delete</v-btn
-                  >
-                  <div
-                    class="modal fade"
-                    :id="`modal${problem.fid}`"
-                    tabindex="1"
-                    role="dialog"
-                    aria-hidden="true"
-                  >
+                  <v-btn elevation="2" data-toggle="modal" :data-target="`#modal${problem.fid}`" small color="error"><i
+                      class="fa fa-trash"></i> Delete</v-btn>
+                  <div class="modal fade" :id="`modal${problem.fid}`" tabindex="1" role="dialog" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                       <div class="modal-content">
                         <div class="modal-header">
                           <h5 class="modal-title text-dark">Delete Problem</h5>
-                          <button
-                            type="button"
-                            class="close"
-                            data-dismiss="modal"
-                            aria-label="Close"
-                          >
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                           </button>
                         </div>
@@ -222,24 +157,15 @@
                           <p>
                             apakah kamu yakin ingin menghapus problem
                             <b>{{ problem.ferror_name }}</b> ID:
-                            <b>{{ problem.fid }}</b
-                            >?
+                            <b>{{ problem.fid }}</b>?
                           </p>
                         </div>
                         <div class="modal-footer">
-                          <button
-                            type="button"
-                            class="btn btn-danger"
-                            data-dismiss="modal"
-                            @click="deleteProblem(problem.fid)"
-                          >
+                          <button type="button" class="btn btn-danger" data-dismiss="modal"
+                            @click="deleteProblem(problem.fid)">
                             Ya, hapus!
                           </button>
-                          <button
-                            type="button"
-                            class="btn btn-secondary"
-                            data-dismiss="modal"
-                          >
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">
                             Engga jadi deh
                           </button>
                         </div>
@@ -258,11 +184,7 @@
             <tbody v-else-if="isLoading">
               <tr>
                 <td colspan="10">
-                  <i
-                    v-if="isLoading"
-                    class="fa fa-refresh fa-spin"
-                    style="font-size: 30px"
-                  ></i>
+                  <i v-if="isLoading" class="fa fa-refresh fa-spin" style="font-size: 30px"></i>
                 </td>
               </tr>
             </tbody>
@@ -334,7 +256,7 @@ export default {
     labels: function () {
       this.fillData();
     },
-    dataDur: function () {},
+    dataDur: function () { },
     machineSelected: function () {
       this.getDetailsProblem(this.machineSelected);
     },
@@ -385,9 +307,8 @@ export default {
                 if (this.showDialog == false) {
                   this.showDialog = true;
                 }
-                return `${this.propsIsOrderFreq ? "Freq" : "Duration"}: ${
-                  tooltipItem.value
-                } ${this.propsIsOrderFreq ? "x" : "Min"}`;
+                return `${this.propsIsOrderFreq ? "Freq" : "Duration"}: ${tooltipItem.value
+                  } ${this.propsIsOrderFreq ? "x" : "Min"}`;
               },
             },
           },
@@ -468,9 +389,8 @@ export default {
                 if (this.showDialog == false) {
                   this.showDialog = true;
                 }
-                return `${this.propsIsOrderFreq ? "Freq" : "Duration"}: ${
-                  tooltipItem.value
-                } ${this.propsIsOrderFreq ? "x" : "Min"}`;
+                return `${this.propsIsOrderFreq ? "Freq" : "Duration"}: ${tooltipItem.value
+                  } ${this.propsIsOrderFreq ? "x" : "Min"}`;
               },
             },
           },
@@ -560,9 +480,8 @@ export default {
             if (this.showDialog == false) {
               this.showDialog = true;
             }
-            return `${this.propsIsOrderFreq ? "Freq" : "Duration"}: ${
-              tooltipItem.value
-            } ${this.propsIsOrderFreq ? "x" : "Min"}`;
+            return `${this.propsIsOrderFreq ? "Freq" : "Duration"}: ${tooltipItem.value
+              } ${this.propsIsOrderFreq ? "x" : "Min"}`;
           },
         },
       },
@@ -692,14 +611,20 @@ export default {
 .v-dialog .v-dialog--active {
   margin: 0px !important;
 }
+
 td {
-  font-size: 10px;
+  font-size: 7px;
 }
+
 .v-expansion-panel-content__wrap {
   padding: 0px !important;
 }
 
-/* #bar-chart {
+.v-btn {
+  margin: 0px !important;
+}
+
+#bar-chart {
   height: 350px !important;
-} */
+}
 </style>

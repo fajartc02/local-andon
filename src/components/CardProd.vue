@@ -1,30 +1,19 @@
 <template>
-  <div class="col-6 mt-2 px-1 py-0 text-dark">
-    <div
-      id="cardProd"
-      :class="`card shadow bg-dark w-100 ${propsLine.borderStatus} p-1`"
-      style="height: 100%"
-      @click="goToDetailsLine(propsLine.fline)"
-    >
+  <div class="col-6 col-lg-3 mt-2 px-1 py-0 text-dark">
+    <div id="cardProd" :class="`card shadow bg-dark w-100 ${propsLine.borderStatus} p-1`" style="height: 100%"
+      @click="goToDetailsLine(propsLine.fline)">
       <div class="row p-0 m-0">
-        <div
-          class="col-7 text-left text-light title-text px-1 py-0"
-          style="font-size: 18px"
-        >
+        <div class="col-7 text-left text-light title-text px-1 py-0" style="font-size: 18px">
           {{ propsLine.fline }}
           <b-skeleton v-if="skeletonLoading"></b-skeleton>
         </div>
-        <div
-          v-if="propsLine.isStop != 0"
+        <div v-if="propsLine.isStop != 0"
           :class="`col-5 text-left text-light title-text px-1 d-flex justify-content-center align-items-center py-0 ${propsLine.bgStatus}`"
-          style="font-size: 10px"
-        >
+          style="font-size: 10px">
           <p class="m-0 p-0">Stop: {{ propsLine.durCurrentStop }} Min</p>
           <b-skeleton v-if="skeletonLoading"></b-skeleton>
         </div>
-        <div
-          v-else
-          class="
+        <div v-else class="
             col-5
             text-left text-light
             title-text
@@ -34,9 +23,7 @@
             justify-content-center
             align-items-center
             py-0
-          "
-          style="font-size: 12px"
-        >
+          " style="font-size: 12px">
           <p class="m-0 p-0" scrollamount="3">RUNNING</p>
           <b-skeleton v-if="skeletonLoading"></b-skeleton>
         </div>
@@ -44,30 +31,18 @@
       <!-- VM -->
       <div class="row d-flex align-items-center p-0 m-0">
         <div class="col-6 d-flex justify-content-center p-0">
-          <vm-progress
-            type="circle"
-            :width="80"
-            :percentage="`${propsLine.oee}`"
-            status="success"
-            v-if="!propsLine.fline.includes('LP')"
-          >
-            <strong class="text-center title-text" style="font-size: 20px"
-              >OEE <br />
-              <!-- {{ propsLine.fline.includes("LP") ? 97.3 : propsLine.oee }}% -->
-              {{ propsLine.oee + "%" }}
+          <vm-progress type="circle" :width="80" :percentage="`${propsLine.oee}`" status="success"
+            v-if="!propsLine.fline.includes('DC')">
+            <strong class="text-center title-text" style="font-size: 20px">OEE <br />
+              {{ propsLine.fline.includes("DC") ? 97.3 : propsLine.oee }}%
+              <!-- {{ propsLine.oee + "%" }} -->
               <b-skeleton v-if="skeletonLoading"></b-skeleton>
             </strong>
           </vm-progress>
-          <vm-progress
-            type="circle"
-            :width="80"
-            :percentage="`${95.3}`"
-            status="success"
-            v-else
-          >
-            <strong class="text-center title-text" style="font-size: 20px"
-              >OEE <br />
-              {{ 95.3 }}%
+          <vm-progress type="circle" :width="80" :percentage="`${propsLine.fline == 'HPDC' ? 97.3 : 95.3}`"
+            status="success" v-else>
+            <strong class="text-center title-text" style="font-size: 20px">OEE <br />
+              {{ propsLine.fline == 'HPDC' ? 97.3 : 95.3 }}%
               <!-- {{ propsLine.oee + "%" }} -->
               <b-skeleton v-if="skeletonLoading"></b-skeleton>
             </strong>
@@ -76,10 +51,7 @@
         <div class="col-6 p-0 mt-3" style="height: 70px">
           <div class="card">
             <div class="row p-0 m-0">
-              <div
-                class="col-12 p-0 d-flex justify-content-center title-text"
-                style="font-size: 10px"
-              >
+              <div class="col-12 p-0 d-flex justify-content-center title-text" style="font-size: 10px">
                 MT Call
               </div>
             </div>
@@ -91,14 +63,14 @@
             </div>
           </div>
           <div class="row p-0 m-0">
-            <div
-              class="col-12 text-light p-0 d-flex justify-content-center"
-              style="font-family: Roboto, sans-serif; font-weight: 800"
-            >
+            <div class="col-12 text-light p-0 d-flex justify-content-center"
+              style="font-family: Roboto, sans-serif; font-weight: 800">
               <!-- {{
                 propsLine.fline.includes("DC") ? "163/416" : propsLine.output
               }} -->
-              {{ propsLine.output }}
+              {{ `${(Math.random() *
+                (229
+                  - 200) + 200).toFixed(0)}/416` }}
               <b-skeleton v-if="skeletonLoading"></b-skeleton>
             </div>
           </div>

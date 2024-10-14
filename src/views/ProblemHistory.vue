@@ -10,31 +10,17 @@
               <div class="col-6 p-0">
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1"
-                      >Start</span
-                    >
+                    <span class="input-group-text" id="basic-addon1">Start</span>
                   </div>
-                  <input
-                    type="date"
-                    v-model="selectedStartDate"
-                    class="form-control"
-                    placeholder="Start Date"
-                  />
+                  <input type="date" v-model="selectedStartDate" class="form-control" placeholder="Start Date" />
                 </div>
               </div>
               <div class="col-6 p-0 pl-1">
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1"
-                      >Finish</span
-                    >
+                    <span class="input-group-text" id="basic-addon1">Finish</span>
                   </div>
-                  <input
-                    type="date"
-                    class="form-control"
-                    v-model="selectedEndDate"
-                    placeholder="End Date"
-                  />
+                  <input type="date" class="form-control" v-model="selectedEndDate" placeholder="End Date" />
                 </div>
               </div>
             </div>
@@ -44,28 +30,18 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">Line</span>
                   </div>
-                  <model-select
-                    :options="optionsLines"
-                    v-model="lineSelected"
-                    placeholder="select line"
-                    style="width: 70%; font-size: 10px; color: black"
-                  >
+                  <model-select :options="optionsLines" v-model="lineSelected" placeholder="select line"
+                    style="width: 70%; font-size: 10px; color: black">
                   </model-select>
                 </div>
               </div>
               <div class="col-6 p-0 pl-1">
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1"
-                      >Machine</span
-                    >
+                    <span class="input-group-text" id="basic-addon1">Machine</span>
                   </div>
-                  <model-select
-                    :options="optionsMcs"
-                    v-model="machineSelected"
-                    placeholder="All"
-                    style="width: 60%; font-size: 10px; color: black"
-                  >
+                  <model-select :options="optionsMcs" v-model="machineSelected" placeholder="All"
+                    style="width: 60%; font-size: 10px; color: black">
                   </model-select>
                 </div>
               </div>
@@ -74,16 +50,9 @@
               <div class="col-10 p-0">
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1"
-                      >Problem</span
-                    >
+                    <span class="input-group-text" id="basic-addon1">Problem</span>
                   </div>
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Problem"
-                    v-model="problemSelected"
-                  />
+                  <input type="text" class="form-control" placeholder="Problem" v-model="problemSelected" />
                 </div>
               </div>
               <div class="col-2 p-0">
@@ -119,13 +88,8 @@
     </div>
     <div class="row m-0 mt-1 mx-4 mb-2">
       <div class="col p-0 px-2">
-        <download-excel
-          class="btn btn-primary"
-          :data="json_data"
-          :fields="json_fields"
-          worksheet="My Worksheet"
-          :name="fileNameDownload"
-        >
+        <download-excel class="btn btn-primary" :data="json_data" :fields="json_fields" worksheet="My Worksheet"
+          :name="fileNameDownload">
           Download Excel
         </download-excel>
       </div>
@@ -156,15 +120,12 @@
         <h4 v-if="containerProblems.length === 0 && !isLoading">
           Tidak Ada Problem
         </h4>
-        <table
-          class="table table-striped table-dark table-responsive text-left"
-          style="max-height: 350px"
-          v-if="containerProblems.length !== 0 && !isLoading"
-        >
+        <table class="table table-striped table-dark table-responsive text-left" style="max-height: 350px"
+          v-if="containerProblems.length !== 0 && !isLoading">
           <thead class="title-text" style="font-size: 10px">
             <tr>
               <th scope="col">No</th>
-              <th style="min-width: 80px; cursor: pointer" scope="col" @click="sortDate(), getProblemHistory()"> 
+              <th style="min-width: 80px; cursor: pointer" scope="col" @click="sortDate(), getProblemHistory()">
                 Date <i class="fa fa-sort"></i>
               </th>
               <th style="min-width: 50px" scope="col">Machine</th>
@@ -173,15 +134,12 @@
               <th style="min-width: 50px; cursor: pointer" scope="col" @click="sortDur(), getProblemHistory()">
                 Duration <i class="fa fa-sort"></i>
               </th>
-              <th scope="col" colspan="3">Actions</th>
+              <th scope="col" colspan="2">Actions</th>
             </tr>
           </thead>
           <tbody>
-            <tr
-              v-for="(problem, i) in containerProblems"
-              :key="problem.fid"
-              :style="`background-color: ${problem.bgCol}!important;color:${problem.txtCol}`"
-            >
+            <tr v-for="(problem, i) in containerProblems" :key="problem.fid"
+              :style="`background-color: ${problem.bgCol}!important;color:${problem.txtCol}`">
               <th scope="row">{{ i + 1 }}</th>
               <td style="min-width: 80px">
                 {{ problem.fstart_time.split("T")[0] }}
@@ -192,47 +150,25 @@
               <td style="min-width: 150px">{{ problem.ferror_name }}</td>
               <td style="min-width: 50px">{{ problem.foperator }}</td>
               <td style="min-width: 50px">{{ problem.fdur }}</td>
-              <td style="min-width: 70px">
-                <v-btn
-                  class="btn-light"
-                  small
-                  color="primary"
-                  @click="exportPdf(problem.fid, problem.fdur, problem.fline)"
-                >
+              <!-- <td style="min-width: 70px">
+                <a class="btn btn-sm" >
                   <i class="fa fa-book"></i> Report
-                </v-btn>
-              </td>
+                </a>
+              </td> -->
               <td style="min-width: 70px">
                 <v-btn @click="editProblem(problem.fid)" small>
                   <i class="fa fa-edit"></i> Edit
                 </v-btn>
               </td>
               <td style="min-width: 70px">
-                <v-btn
-                  elevation="2"
-                  data-toggle="modal"
-                  :data-target="`#modal${problem.fid}`"
-                  small
-                  color="error"
-                  ><i class="fa fa-trash"></i> Delete</v-btn
-                >
-                <div
-                  class="modal fade"
-                  :id="`modal${problem.fid}`"
-                  tabindex="-1"
-                  role="dialog"
-                  aria-hidden="true"
-                >
+                <v-btn elevation="2" data-toggle="modal" :data-target="`#modal${problem.fid}`" small color="error"><i
+                    class="fa fa-trash"></i> Delete</v-btn>
+                <div class="modal fade" :id="`modal${problem.fid}`" tabindex="-1" role="dialog" aria-hidden="true">
                   <div class="modal-dialog" role="document">
                     <div class="modal-content">
                       <div class="modal-header">
                         <h5 class="modal-title text-dark">Delete Problem</h5>
-                        <button
-                          type="button"
-                          class="close"
-                          data-dismiss="modal"
-                          aria-label="Close"
-                        >
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                         </button>
                       </div>
@@ -240,24 +176,15 @@
                         <p>
                           apakah kamu yakin ingin menghapus problem
                           <b>{{ problem.ferror_name }}</b> ID:
-                          <b>{{ problem.fid }}</b
-                          >?
+                          <b>{{ problem.fid }}</b>?
                         </p>
                       </div>
                       <div class="modal-footer">
-                        <button
-                          type="button"
-                          class="btn btn-danger"
-                          data-dismiss="modal"
-                          @click="deleteProblem(problem.fid)"
-                        >
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"
+                          @click="deleteProblem(problem.fid)">
                           Ya, hapus!
                         </button>
-                        <button
-                          type="button"
-                          class="btn btn-secondary"
-                          data-dismiss="modal"
-                        >
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
                           Engga jadi deh
                         </button>
                       </div>
@@ -291,10 +218,7 @@
           <!-- RED -->
           <div class="row mb-1 m-0">
             <div class="col-12 text-center">
-              <button
-                class="btn btn-outline-danger w-100 disabled"
-                style="font-size: 10px"
-              >
+              <button class="btn btn-outline-danger w-100 disabled" style="font-size: 10px">
                 RED
               </button>
             </div>
@@ -304,36 +228,20 @@
               <div class="card bg-dark shadow">
                 <div class="row">
                   <div class="col-12 d-flex justify-content-center">
-                    <button
-                      class="btn btn-outline-info disabled w-100"
-                      style="font-size: 10px"
-                    >
+                    <button class="btn btn-outline-info disabled w-100" style="font-size: 10px">
                       Casting
                     </button>
                   </div>
                 </div>
                 <div class="row">
-                  <div
-                    class="col-12 d-flex justify-content-center text-light"
-                    style="font-size: 20px"
-                  >
-                    <b
-                      id="castProbNotCloseRed"
-                      class="sevenDisplay text-danger"
-                      >{{ probCastRed.length }}</b
-                    >
+                  <div class="col-12 d-flex justify-content-center text-light" style="font-size: 20px">
+                    <b id="castProbNotCloseRed" class="sevenDisplay text-danger">{{ probCastRed.length }}</b>
                   </div>
                 </div>
                 <div class="row">
-                  <div
-                    class="col-12 d-flex justify-content-center text-light"
-                    style="font-size: 10px"
-                  >
-                    <button
-                      class="btn btn-warning mt-1"
-                      style="font-size: 8px"
-                      @click="getProblemNotClose('probCastRed')"
-                    >
+                  <div class="col-12 d-flex justify-content-center text-light" style="font-size: 10px">
+                    <button class="btn btn-warning mt-1" style="font-size: 8px"
+                      @click="getProblemNotClose('probCastRed')">
                       See Problems
                     </button>
                   </div>
@@ -344,36 +252,20 @@
               <div class="card bg-dark shadow">
                 <div class="row">
                   <div class="col-12 d-flex justify-content-center">
-                    <button
-                      class="btn btn-outline-info disabled w-100"
-                      style="font-size: 10px"
-                    >
+                    <button class="btn btn-outline-info disabled w-100" style="font-size: 10px">
                       Machining
                     </button>
                   </div>
                 </div>
                 <div class="row">
-                  <div
-                    class="col-12 d-flex justify-content-center text-light"
-                    style="font-size: 20px"
-                  >
-                    <b
-                      id="machProbNotCloseRed"
-                      class="sevenDisplay text-danger"
-                      >{{ probMachRed.length }}</b
-                    >
+                  <div class="col-12 d-flex justify-content-center text-light" style="font-size: 20px">
+                    <b id="machProbNotCloseRed" class="sevenDisplay text-danger">{{ probMachRed.length }}</b>
                   </div>
                 </div>
                 <div class="row">
-                  <div
-                    class="col-12 d-flex justify-content-center text-light"
-                    style="font-size: 10px"
-                  >
-                    <button
-                      class="btn btn-warning mt-1"
-                      style="font-size: 8px"
-                      @click="getProblemNotClose('probMachRed')"
-                    >
+                  <div class="col-12 d-flex justify-content-center text-light" style="font-size: 10px">
+                    <button class="btn btn-warning mt-1" style="font-size: 8px"
+                      @click="getProblemNotClose('probMachRed')">
                       See Problems
                     </button>
                   </div>
@@ -384,36 +276,20 @@
               <div class="card bg-dark shadow">
                 <div class="row">
                   <div class="col-12 d-flex justify-content-center">
-                    <button
-                      class="btn btn-outline-info disabled w-100"
-                      style="font-size: 10px"
-                    >
+                    <button class="btn btn-outline-info disabled w-100" style="font-size: 10px">
                       Assembly
                     </button>
                   </div>
                 </div>
                 <div class="row">
-                  <div
-                    class="col-12 d-flex justify-content-center text-light"
-                    style="font-size: 20px"
-                  >
-                    <b
-                      id="assyProbNotCloseRed"
-                      class="sevenDisplay text-danger"
-                      >{{ probAssyRed.length }}</b
-                    >
+                  <div class="col-12 d-flex justify-content-center text-light" style="font-size: 20px">
+                    <b id="assyProbNotCloseRed" class="sevenDisplay text-danger">{{ probAssyRed.length }}</b>
                   </div>
                 </div>
                 <div class="row">
-                  <div
-                    class="col-12 d-flex justify-content-center text-light"
-                    style="font-size: 10px"
-                  >
-                    <button
-                      class="btn btn-warning mt-1"
-                      style="font-size: 8px"
-                      @click="getProblemNotClose('probAssyRed')"
-                    >
+                  <div class="col-12 d-flex justify-content-center text-light" style="font-size: 10px">
+                    <button class="btn btn-warning mt-1" style="font-size: 8px"
+                      @click="getProblemNotClose('probAssyRed')">
                       See Problems
                     </button>
                   </div>
@@ -424,10 +300,7 @@
           <!-- WHITE -->
           <div class="row m-0 mb-1">
             <div class="col-12 text-center">
-              <button
-                class="btn btn-outline-dark w-100 disabled text-dark"
-                style="font-size: 10px"
-              >
+              <button class="btn btn-outline-dark w-100 disabled text-dark" style="font-size: 10px">
                 WHITE
               </button>
             </div>
@@ -437,36 +310,20 @@
               <div class="card bg-dark shadow">
                 <div class="row">
                   <div class="col-12 d-flex justify-content-center">
-                    <button
-                      class="btn btn-outline-info disabled w-100"
-                      style="font-size: 10px"
-                    >
+                    <button class="btn btn-outline-info disabled w-100" style="font-size: 10px">
                       Casting
                     </button>
                   </div>
                 </div>
                 <div class="row">
-                  <div
-                    class="col-12 d-flex justify-content-center text-light"
-                    style="font-size: 20px"
-                  >
-                    <b
-                      id="castProbNotCloseWhite"
-                      class="sevenDisplay text-danger"
-                      >{{ probCastWhite.length }}</b
-                    >
+                  <div class="col-12 d-flex justify-content-center text-light" style="font-size: 20px">
+                    <b id="castProbNotCloseWhite" class="sevenDisplay text-danger">{{ probCastWhite.length }}</b>
                   </div>
                 </div>
                 <div class="row">
-                  <div
-                    class="col-12 d-flex justify-content-center text-light"
-                    style="font-size: 10px"
-                  >
-                    <button
-                      class="btn btn-warning mt-1"
-                      style="font-size: 8px"
-                      @click="getProblemNotClose('probCastWhite')"
-                    >
+                  <div class="col-12 d-flex justify-content-center text-light" style="font-size: 10px">
+                    <button class="btn btn-warning mt-1" style="font-size: 8px"
+                      @click="getProblemNotClose('probCastWhite')">
                       See Problems
                     </button>
                   </div>
@@ -477,36 +334,20 @@
               <div class="card bg-dark shadow">
                 <div class="row">
                   <div class="col-12 d-flex justify-content-center">
-                    <button
-                      class="btn btn-outline-info disabled w-100"
-                      style="font-size: 10px"
-                    >
+                    <button class="btn btn-outline-info disabled w-100" style="font-size: 10px">
                       Machining
                     </button>
                   </div>
                 </div>
                 <div class="row">
-                  <div
-                    class="col-12 d-flex justify-content-center text-light"
-                    style="font-size: 20px"
-                  >
-                    <b
-                      id="machProbNotCloseWhite"
-                      class="sevenDisplay text-danger"
-                      >{{ probMachWhite.length }}</b
-                    >
+                  <div class="col-12 d-flex justify-content-center text-light" style="font-size: 20px">
+                    <b id="machProbNotCloseWhite" class="sevenDisplay text-danger">{{ probMachWhite.length }}</b>
                   </div>
                 </div>
                 <div class="row">
-                  <div
-                    class="col-12 d-flex justify-content-center text-light"
-                    style="font-size: 10px"
-                  >
-                    <button
-                      class="btn btn-warning mt-1"
-                      style="font-size: 8px"
-                      @click="getProblemNotClose('probMachWhite')"
-                    >
+                  <div class="col-12 d-flex justify-content-center text-light" style="font-size: 10px">
+                    <button class="btn btn-warning mt-1" style="font-size: 8px"
+                      @click="getProblemNotClose('probMachWhite')">
                       See Problems
                     </button>
                   </div>
@@ -517,36 +358,20 @@
               <div class="card bg-dark shadow">
                 <div class="row">
                   <div class="col-12 d-flex justify-content-center">
-                    <button
-                      class="btn btn-outline-info disabled w-100"
-                      style="font-size: 10px"
-                    >
+                    <button class="btn btn-outline-info disabled w-100" style="font-size: 10px">
                       Assembly
                     </button>
                   </div>
                 </div>
                 <div class="row">
-                  <div
-                    class="col-12 d-flex justify-content-center text-light"
-                    style="font-size: 20px"
-                  >
-                    <b
-                      id="assyProbNotCloseWhite"
-                      class="sevenDisplay text-danger"
-                      >{{ probAssyWhite.length }}</b
-                    >
+                  <div class="col-12 d-flex justify-content-center text-light" style="font-size: 20px">
+                    <b id="assyProbNotCloseWhite" class="sevenDisplay text-danger">{{ probAssyWhite.length }}</b>
                   </div>
                 </div>
                 <div class="row">
-                  <div
-                    class="col-12 d-flex justify-content-center text-light"
-                    style="font-size: 10px"
-                  >
-                    <button
-                      class="btn btn-warning mt-1"
-                      style="font-size: 8px"
-                      @click="getProblemNotClose('probAssyWhite')"
-                    >
+                  <div class="col-12 d-flex justify-content-center text-light" style="font-size: 10px">
+                    <button class="btn btn-warning mt-1" style="font-size: 8px"
+                      @click="getProblemNotClose('probAssyWhite')">
                       See Problems
                     </button>
                   </div>
@@ -565,7 +390,7 @@ import { ModelSelect } from "vue-search-select";
 import axios from "axios";
 import JsonExcel from "vue-json-excel";
 import Spinner2 from "@/components/spinner/Spinner-2";
-import {mapState} from "vuex"; 
+import { mapState } from "vuex";
 // import ExportExcelSheetVueJs from "export-excel-sheet-vue-js";
 
 export default {
@@ -767,16 +592,16 @@ export default {
       this.isLoading = false
     },
   },
-  
+
   computed: {
     ...mapState(["newAnalisys", "newAnalisys2"])
   },
 
   methods: {
-    sortDate(){
+    sortDate() {
       this.sortOrder = "fstart_time"
     },
-    sortDur(){
+    sortDur() {
       this.sortOrder = "fdur"
     },
     showSearch() {
@@ -1034,7 +859,7 @@ export default {
       if (dur >= 120 || (dur >= 15 && fline == "ASSY LINE")) {
         this.$router.push(`/pdfViewerLong?v_=${id}`);
       }
-      else{
+      else {
         this.$router.push(`/pdfViewerSmall?v_=${id}`);
       }
     },
@@ -1153,18 +978,22 @@ export default {
   from {
     color: white;
   }
+
   to {
     color: black;
   }
 }
+
 #btn-search-toggle {
   animation-name: colorChanges;
   animation-duration: 1s;
   animation-iteration-count: infinite;
 }
+
 #content-search {
   transition: all 0.5s;
 }
+
 th,
 td {
   padding-top: 2px !important;
@@ -1172,10 +1001,12 @@ td {
   padding-left: 1px !important;
   padding-right: 1px !important;
 }
+
 td,
 th {
   vertical-align: middle !important;
 }
+
 .v-btn__content {
   font-size: 7px;
 }

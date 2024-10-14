@@ -5,6 +5,7 @@
 </template>
 <script>
 import VueApexCharts from "vue-apexcharts";
+const Q6_CATEGORY = [['Q1', '(Diagnose)'], ['Q2', '(Spareparts)'], ['Q3', '(Tools)'], ['Q4', '(Maintenance Ability)'], ['Q5', '(Machine Setting)'], ['Q6', '(Machine Backup)']];
 export default {
     components: {
         apexchart: VueApexCharts,
@@ -30,7 +31,31 @@ export default {
                     enabled: true,
                     enabledOnSeries: [0, 1, 2]
                 },
-                labels: ['Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6'],
+                // [{
+                //     category: "Q1",
+                //     description: "Diagnose / Cause Analysis",
+                // },
+                // {
+                //     category: "Q2",
+                //     description: "Spareparts",
+                // },
+                // {
+                //     category: "Q3",
+                //     description: "Tools",
+                // },
+                // {
+                //     category: "Q4",
+                //     description: "Maintenance Ability",
+                // },
+                // {
+                //     category: "Q5",
+                //     description: "Machine Setting",
+                // },
+                // {
+                //     category: "Q6",
+                //     description: "Machine Backup",
+                // },
+                labels: Q6_CATEGORY,
                 yaxis: []
             },
         }
@@ -63,7 +88,7 @@ export default {
                         enabled: true,
                         enabledOnSeries: this.graphData.chartOptions.enabledOnSeries
                     },
-                    labels: ['Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6'],
+                    labels: Q6_CATEGORY,
                     yaxis: this.chartOptions.yaxis
                 }
             },
@@ -102,7 +127,7 @@ export default {
                 enabled: true,
                 enabledOnSeries: this.graphData.chartOptions.enabledOnSeries
             },
-            labels: ['Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6'],
+            labels: Q6_CATEGORY,
             yaxis: this.chartOptions.yaxis
         }
     }

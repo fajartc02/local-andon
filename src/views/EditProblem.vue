@@ -1780,6 +1780,23 @@
           </div>
         </div>
       </div>
+      <div class="card mt-2">
+        <span class="input-lable">Last Report File</span>
+        <button v-if="!file_report" class="btn btn-sm btn-warning" disabled>Belum Ada Report di upload</button>
+        <a v-else class="btn btn-sm btn-success text-light"
+          :href="`https://mt-system.id/v2/download-report?fid=${id_p_m}`">Download Report</a>
+      </div>
+      <div class="card mt-2">
+        <div class="card-body">
+          <span class="input-lable">Upload Report <a class="badge badge-pill badge-primary text-light"
+              :href="`https://mt-system.id/v2/download-report?fid=${id_p_m}`">Download
+              Template</a></span>
+          <input type="file" class="form-control" ref="fileReport" @change="isNotFill = false" />
+          <button class="btn btn-sm btn-primary" :disabled="isNotFill" @click="uploadFileReport()">
+            Upload
+          </button>
+        </div>
+      </div>
       <!-- SUBMIT EDIT BTN -->
       <hr class="bg-light m-0" />
       <div class="row m-0 p-0 mt-3">
@@ -1821,6 +1838,8 @@ export default {
   name: "EditProblem",
   data() {
     return {
+      isNotFill: true,
+      file_report: null,
       loadingBtn: false,
       memberFT: null,
       is_ft_selected: false,
@@ -2319,6 +2338,25 @@ export default {
     ...mapState(["storeTheme", "newAnalisys", "newAnalisys2"]),
   },
   methods: {
+    async uploadFileReport() {
+      try {
+        this.isLoading = true
+        const formData = new FormData();
+        formData.append('fid', this.$route.query.v_)
+        formData.append('problem', this.ferror_name)
+        formData.append("file", this.$refs.fileReport.files[0]);
+        await axios.put(`${process.env.VUE_APP_HOST}/v2/upload-report`, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data"
+          }
+        })
+        await this.getDetailProblem()
+        this.isLoading = false
+      } catch (error) {
+        this.isLoading = false
+        alert('gagal upload!')
+      }
+    },
     checkAnalysis(state) {
       console.log('CHECK ANALYSIS state');
       if (state) {
@@ -2777,273 +2815,245 @@ export default {
     },
 
     async submitEdit() {
-      console.log(localStorage.getItem("intervalId"));
-      console.log(this.newAnalisys);
-      if (this.newAnalisys) {
-        axios
-          .post(
-            `${process.env.VUE_APP_HOST}/why_analisys/add/${this.$route.query.v_}?analisys_category=TERJADI`,
-            this.newAnalisys
-          )
-          .then((result) => {
-            console.log(result);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      }
-      if (this.newAnalisys2) {
-        axios
-          .post(
-            `${process.env.VUE_APP_HOST}/why_analisys/add/${this.$route.query.v_}?analisys_category=LAMA`,
-            this.newAnalisys2
-          )
-          .then((result) => {
-            console.log(result);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      }
-      if (this.picThema) {
-        this.addMemberTheme();
-      }
-      this.isLoading = true;
-      let isBack = true;
-      if (this.containerWhyTerjadi.length == 1) {
-        this.containerWhyTerjadi.push("");
-      }
-      if (this.containerWhyLama.length == 1) {
-        this.containerWhyTerjadi.push("");
-      }
-      let formData = new FormData();
-      formData.append('fimage_problem', this.fimage_problem)
-      formData.append('std_img', this.std_img)
-      formData.append('act_img', this.act_img)
-      formData.append('why1_img', this.why1_img)
-      formData.append('why2_img', this.why2_img)
-      formData.append('fimage2_problem', this.fimage2_problem)
-      formData.append('std2_img', this.std2_img)
-      formData.append('act2_img', this.act2_img)
-      formData.append('why12_img', this.why12_img)
-      formData.append('why22_img', this.why22_img)
-      if (this.fattachment) {
-        formData.append('fattachment', this.fattachment);
-      }
-      let dataPrev = {
-        furaian_kejadian_general: this.furaian_kejadian,
-        furaian_kejadian_standard: this.filustrasi_standart,
-        furaian_kejadian_actual: this.filustrasi_actual,
-        gapIlustrasi: this.gapIlustrasi,
-        ferror_name: this.ferror_name,
-        foperator: this.foperator,
-        fshift: this.fshift,
-        fav_categoty: this.fav_categoty,
-        fstart_time: `${this.startDate} ${this.startTime}`,
-        fend_time: `${this.endDate} ${this.endTime}`,
-        fpart_change: this.fpart_change,
-        fDescImage: this.fDescImage,
-        fstep_repair: this.containerStepRepair.join("\n"),
-        fstep_new: JSON.stringify(this.containerStepRepairNew),
-        fiveWhyLhApprove: this.fiveWhyLhApprove,
-        fiveWhyShApprove: this.fiveWhyShApprove,
-        cmLhApprove: this.cmLhApprove,
-        cmShApprove: this.cmShApprove,
-        cmDhApprove: this.cmDhApprove,
-        fiveWhyLhFeedback: this.fiveWhyLhFeedback,
-        fiveWhyShFeedback: this.fiveWhyShFeedback,
-        cmLhFeedback: this.cmLhFeedback,
-        cmShFeedback: this.cmShFeedback,
-        cmDhFeedback: this.cmDhFeedback,
-        freal_prob: this.containerWhyTerjadi.join("\n"),
-        froot_cause: this.containerWhyLama.join("\n"),
-        fpermanet_cm: JSON.stringify(this.containerCmTerjadi),
-        fyokoten: JSON.stringify(this.containerYokoten),
-        fpermanet_cm_lama: JSON.stringify(this.containerCmLama),
-        temporaryAction: this.temporaryAction,
-        deleteProblem1: this.deleteProblem1,
-        deleteProblem2: this.deleteProblem2,
-        deleteAct1: this.deleteAct1,
-        deleteAct2: this.deleteAct2,
-        deleteStd1: this.deleteStd1,
-        deleteStd2: this.deleteStd2,
-        deleteWhy1: this.deleteWhy1,
-        deleteWhy12: this.deleteWhy12,
-        deleteWhy2: this.deleteWhy2,
-        deleteWhy22: this.deleteWhy22,
-      };
-
-      for (const key in dataPrev) {
-        let value = dataPrev[key]
-
-        formData.append(key, value)
-      }
-      dataPrev = formData
-      if (this.fimage) {
-        dataPrev.fimage = this.fimage;
-      }
-
-
-      // HENKATEN NO NEED
-      // if (
-      //   this.temporaryAction != "" &&
-      //   `${this.temporaryAction}`.toLowerCase() != "null"
-      // ) {
-      //   // await this.postHenkaten();
-      // }
-      console.log(dataPrev);
-      if (this.fav_categoty != null) {
-        if (this.fshift != null) {
-          // let url' = `http://localhost:5001/smartandonsys/us-central1/app/editProblem/${this.$route.query.v_}`;
-          let url = `${process.env.VUE_APP_HOST}/editProblem/${this.$route.query.v_}`;
-          if (this.isProblemClose) {
-            url += `?isFinished=${this.fmc_id}&line=${this.fline}`;
-          }
+      try {
+        if (this.newAnalisys) {
           await axios
-            .put(url, dataPrev)
-            .then(async (result) => {
-              console.log(result);
-              this.isLoading = false;
-              if (isBack) {
-                alert("Success to Edit Problem");
-                this.$router.go(-1);
-              } else {
-                // alert("Success");
-                this.getDetailProblem();
-                // this.$router.go();
-              }
-            })
-            .catch((err) => {
-              alert(JSON.stringify(err));
-              // this.submitEdit();
-              this.isLoading = false;
-            });
-          if (localStorage.getItem("intervalId")) {
-            clearInterval(localStorage.getItem("intervalId"))
-            localStorage.removeItem("intervalId")
-            localStorage.removeItem('notificationId')
+            .post(
+              `${process.env.VUE_APP_HOST}/why_analisys/add/${this.$route.query.v_}?analisys_category=TERJADI`,
+              this.newAnalisys
+            )
+        }
+        if (this.newAnalisys2) {
+          await axios
+            .post(
+              `${process.env.VUE_APP_HOST}/why_analisys/add/${this.$route.query.v_}?analisys_category=LAMA`,
+              this.newAnalisys2
+            )
+        }
+        if (this.picThema) {
+          this.addMemberTheme();
+        }
+        this.isLoading = true;
+        let isBack = true;
+        if (this.containerWhyTerjadi.length == 1) {
+          this.containerWhyTerjadi.push("");
+        }
+        if (this.containerWhyLama.length == 1) {
+          this.containerWhyTerjadi.push("");
+        }
+        let formData = new FormData();
+        formData.append('fimage_problem', this.fimage_problem)
+        formData.append('std_img', this.std_img)
+        formData.append('act_img', this.act_img)
+        formData.append('why1_img', this.why1_img)
+        formData.append('why2_img', this.why2_img)
+        formData.append('fimage2_problem', this.fimage2_problem)
+        formData.append('std2_img', this.std2_img)
+        formData.append('act2_img', this.act2_img)
+        formData.append('why12_img', this.why12_img)
+        formData.append('why22_img', this.why22_img)
+        if (this.fattachment) {
+          formData.append('fattachment', this.fattachment);
+        }
+        let dataPrev = {
+          furaian_kejadian_general: this.furaian_kejadian,
+          furaian_kejadian_standard: this.filustrasi_standart,
+          furaian_kejadian_actual: this.filustrasi_actual,
+          gapIlustrasi: this.gapIlustrasi,
+          ferror_name: this.ferror_name,
+          foperator: this.foperator,
+          fshift: this.fshift,
+          fav_categoty: this.fav_categoty,
+          fstart_time: `${this.startDate} ${this.startTime}`,
+          fend_time: `${this.endDate} ${this.endTime}`,
+          fpart_change: this.fpart_change,
+          fDescImage: this.fDescImage,
+          fstep_repair: this.containerStepRepair.join("\n"),
+          fstep_new: JSON.stringify(this.containerStepRepairNew),
+          fiveWhyLhApprove: this.fiveWhyLhApprove,
+          fiveWhyShApprove: this.fiveWhyShApprove,
+          cmLhApprove: this.cmLhApprove,
+          cmShApprove: this.cmShApprove,
+          cmDhApprove: this.cmDhApprove,
+          fiveWhyLhFeedback: this.fiveWhyLhFeedback,
+          fiveWhyShFeedback: this.fiveWhyShFeedback,
+          cmLhFeedback: this.cmLhFeedback,
+          cmShFeedback: this.cmShFeedback,
+          cmDhFeedback: this.cmDhFeedback,
+          freal_prob: this.containerWhyTerjadi.join("\n"),
+          froot_cause: this.containerWhyLama.join("\n"),
+          fpermanet_cm: JSON.stringify(this.containerCmTerjadi),
+          fyokoten: JSON.stringify(this.containerYokoten),
+          fpermanet_cm_lama: JSON.stringify(this.containerCmLama),
+          temporaryAction: this.temporaryAction,
+          deleteProblem1: this.deleteProblem1,
+          deleteProblem2: this.deleteProblem2,
+          deleteAct1: this.deleteAct1,
+          deleteAct2: this.deleteAct2,
+          deleteStd1: this.deleteStd1,
+          deleteStd2: this.deleteStd2,
+          deleteWhy1: this.deleteWhy1,
+          deleteWhy12: this.deleteWhy12,
+          deleteWhy2: this.deleteWhy2,
+          deleteWhy22: this.deleteWhy22,
+        };
+
+        for (const key in dataPrev) {
+          let value = dataPrev[key]
+
+          formData.append(key, value)
+        }
+        dataPrev = formData
+        if (this.fimage) {
+          dataPrev.fimage = this.fimage;
+        }
+
+        if (this.fav_categoty != null) {
+          if (this.fshift != null) {
+            let url = `${process.env.VUE_APP_HOST}/editProblem/${this.$route.query.v_}`;
+            if (this.isProblemClose) {
+              url += `?isFinished=${this.fmc_id}&line=${this.fline}`;
+            }
+            await axios
+              .put(url, dataPrev)
+              .then(async (result) => {
+                console.log(result);
+                this.isLoading = false;
+                if (isBack) {
+                  alert("Success to Edit Problem");
+                  this.$router.go(-1);
+                } else {
+                  // alert("Success");
+                  this.getDetailProblem();
+                  // this.$router.go();
+                }
+              })
+            if (localStorage.getItem("intervalId")) {
+              clearInterval(localStorage.getItem("intervalId"))
+              localStorage.removeItem("intervalId")
+              localStorage.removeItem('notificationId')
+            }
+          } else {
+            document.getElementById("fshift").style.borderColor = "red";
+            this.$refs.fshift.focus();
+            this.isLoading = false;
           }
         } else {
-          document.getElementById("fshift").style.borderColor = "red";
-          this.$refs.fshift.focus();
+          if (this.fshift != null) {
+            console.log(dataPrev);
+            this.isLoading = false;
+          } else {
+            this.$refs.fshift.focus();
+            document.getElementById("fshift").style.borderColor = "red";
+            this.isLoading = false;
+          }
+          this.$refs.fav_categoty.focus();
           this.isLoading = false;
+          document.getElementById("fav_categoty").style.borderColor = "red";
         }
-      } else {
-        if (this.fshift != null) {
-          console.log(dataPrev);
-          this.isLoading = false;
-        } else {
-          this.$refs.fshift.focus();
-          document.getElementById("fshift").style.borderColor = "red";
-          this.isLoading = false;
-        }
-        this.$refs.fav_categoty.focus();
+      } catch (error) {
+        alert(JSON.stringify(error));
         this.isLoading = false;
-        document.getElementById("fav_categoty").style.borderColor = "red";
       }
     },
-    updateEdit() {
-      console.log(this.newAnalisys);
-      if (this.newAnalisys) {
-        axios
-          .post(
-            `${process.env.VUE_APP_HOST}/why_analisys/add/${this.$route.query.v_}?analisys_category=TERJADI`,
-            this.newAnalisys
-          )
-          .then((result) => {
-            console.log(result);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      }
-      if (this.newAnalisys2) {
-        axios
-          .post(
-            `${process.env.VUE_APP_HOST}/why_analisys/add/${this.$route.query.v_}?analisys_category=LAMA`,
-            this.newAnalisys2
-          )
-          .then((result) => {
-            console.log(result);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      }
-      this.isLoading = true;
-      let formData = new FormData();
-      formData.append('fimage_problem', this.fimage_problem)
-      formData.append('std_img', this.std_img)
-      formData.append('act_img', this.act_img)
-      formData.append('why1_img', this.why1_img)
-      formData.append('why2_img', this.why2_img)
-      formData.append('fimage2_problem', this.fimage2_problem)
-      formData.append('std2_img', this.std2_img)
-      formData.append('act2_img', this.act2_img)
-      formData.append('why12_img', this.why12_img)
-      formData.append('why22_img', this.why22_img)
-      let dataPrev = {
-        furaian_kejadian_general: this.furaian_kejadian,
-        furaian_kejadian_standard: this.filustrasi_standart,
-        furaian_kejadian_actual: this.filustrasi_actual,
-        gapIlustrasi: this.gapIlustrasi,
-        ferror_name: this.ferror_name,
-        foperator: this.foperator,
-        fav_categoty: this.fav_categoty,
-        fstart_time: `${this.startDate} ${this.startTime}`,
-        fend_time: `${this.endDate} ${this.endTime}`,
-        fpart_change: this.fpart_change,
-        fDescImage: this.fDescImage,
-        fiveWhyLhApprove: this.fiveWhyLhApprove,
-        fiveWhyShApprove: this.fiveWhyShApprove,
-        cmLhApprove: this.cmLhApprove,
-        cmShApprove: this.cmShApprove,
-        fiveWhyLhFeedback: this.fiveWhyLhFeedback,
-        fiveWhyShFeedback: this.fiveWhyShFeedback,
-        cmLhFeedback: this.cmLhFeedback,
-        cmShFeedback: this.cmShFeedback,
-        fstep_repair: this.containerStepRepair.join("\n"),
-        fstep_new: JSON.stringify(this.containerStepRepairNew),
-        freal_prob: this.containerWhyTerjadi.join("\n"),
-        froot_cause: this.containerWhyLama.join("\n"),
-        fpermanet_cm: JSON.stringify(this.containerCmTerjadi),
-        fyokoten: JSON.stringify(this.containerYokoten),
-        fpermanet_cm_lama: JSON.stringify(this.containerCmLama),
-        temporaryAction: this.temporaryAction,
-        deleteProblem1: this.deleteProblem1,
-        deleteProblem2: this.deleteProblem2,
-        deleteAct1: this.deleteAct1,
-        deleteAct2: this.deleteAct2,
-        deleteStd1: this.deleteStd1,
-        deleteStd2: this.deleteStd2,
-        deleteWhy1: this.deleteWhy1,
-        deleteWhy12: this.deleteWhy12,
-        deleteWhy2: this.deleteWhy2,
-        deleteWhy22: this.deleteWhy22,
-      };
-      for (const key in dataPrev) {
-        let value = dataPrev[key]
+    async updateEdit() {
+      try {
+        console.log(this.newAnalisys);
+        if (this.newAnalisys) {
+          await axios
+            .post(
+              `${process.env.VUE_APP_HOST}/why_analisys/add/${this.$route.query.v_}?analisys_category=TERJADI`,
+              this.newAnalisys
+            )
+            .then((result) => {
+              console.log(result);
+            })
+        }
+        if (this.newAnalisys2) {
+          await axios
+            .post(
+              `${process.env.VUE_APP_HOST}/why_analisys/add/${this.$route.query.v_}?analisys_category=LAMA`,
+              this.newAnalisys2
+            )
+            .then((result) => {
+              console.log(result);
+            })
+        }
+        this.isLoading = true;
+        let formData = new FormData();
+        formData.append('fimage_problem', this.fimage_problem)
+        formData.append('std_img', this.std_img)
+        formData.append('act_img', this.act_img)
+        formData.append('why1_img', this.why1_img)
+        formData.append('why2_img', this.why2_img)
+        formData.append('fimage2_problem', this.fimage2_problem)
+        formData.append('std2_img', this.std2_img)
+        formData.append('act2_img', this.act2_img)
+        formData.append('why12_img', this.why12_img)
+        formData.append('why22_img', this.why22_img)
+        let dataPrev = {
+          furaian_kejadian_general: this.furaian_kejadian,
+          furaian_kejadian_standard: this.filustrasi_standart,
+          furaian_kejadian_actual: this.filustrasi_actual,
+          gapIlustrasi: this.gapIlustrasi,
+          ferror_name: this.ferror_name,
+          foperator: this.foperator,
+          fav_categoty: this.fav_categoty,
+          fstart_time: `${this.startDate} ${this.startTime}`,
+          fend_time: `${this.endDate} ${this.endTime}`,
+          fpart_change: this.fpart_change,
+          fDescImage: this.fDescImage,
+          fiveWhyLhApprove: this.fiveWhyLhApprove,
+          fiveWhyShApprove: this.fiveWhyShApprove,
+          cmLhApprove: this.cmLhApprove,
+          cmShApprove: this.cmShApprove,
+          fiveWhyLhFeedback: this.fiveWhyLhFeedback,
+          fiveWhyShFeedback: this.fiveWhyShFeedback,
+          cmLhFeedback: this.cmLhFeedback,
+          cmShFeedback: this.cmShFeedback,
+          fstep_repair: this.containerStepRepair.join("\n"),
+          fstep_new: JSON.stringify(this.containerStepRepairNew),
+          freal_prob: this.containerWhyTerjadi.join("\n"),
+          froot_cause: this.containerWhyLama.join("\n"),
+          fpermanet_cm: JSON.stringify(this.containerCmTerjadi),
+          fyokoten: JSON.stringify(this.containerYokoten),
+          fpermanet_cm_lama: JSON.stringify(this.containerCmLama),
+          temporaryAction: this.temporaryAction,
+          deleteProblem1: this.deleteProblem1,
+          deleteProblem2: this.deleteProblem2,
+          deleteAct1: this.deleteAct1,
+          deleteAct2: this.deleteAct2,
+          deleteStd1: this.deleteStd1,
+          deleteStd2: this.deleteStd2,
+          deleteWhy1: this.deleteWhy1,
+          deleteWhy12: this.deleteWhy12,
+          deleteWhy2: this.deleteWhy2,
+          deleteWhy22: this.deleteWhy22,
+        };
+        for (const key in dataPrev) {
+          let value = dataPrev[key]
 
-        formData.append(key, value)
-      }
-      dataPrev = formData
+          formData.append(key, value)
+        }
+        dataPrev = formData
 
-      if (this.fshift) {
-        dataPrev.fshift = this.fshift;
+        if (this.fshift) {
+          dataPrev.fshift = this.fshift;
+        }
+        let url = `${process.env.VUE_APP_HOST}/editProblem/${this.$route.query.v_}?fline=${this.fline}&fmc_name=${this.fmc_name}`;
+        await axios
+          .put(url, dataPrev)
+          .then(() => {
+            alert("Success to update problem");
+            this.isLoading = false;
+            this.$router.go(-1);
+          })
+
+      } catch (err) {
+        console.log(err);
+        alert(JSON.stringify(err));
+        this.isLoading = false;
       }
-      let url = `${process.env.VUE_APP_HOST}/editProblem/${this.$route.query.v_}?fline=${this.fline}&fmc_name=${this.fmc_name}`;
-      axios
-        .put(url, dataPrev)
-        .then(() => {
-          alert("Success to update problem");
-          this.isLoading = false;
-          this.$router.go(-1);
-        })
-        .catch((err) => {
-          console.log(err);
-          alert(JSON.stringify(err));
-          this.isLoading = false;
-        });
     },
     onFileChange(e) {
       // const file
@@ -3137,6 +3147,9 @@ export default {
           let item = result.data.data[0];
           console.log(item.uraian);
           // AMJAD1
+          if (item.file_report) {
+            this.file_report = item.file_report
+          }
           if (item.uraian.length > 0) {
             for (let i = 0; i < item.uraian.length; i++) {
               const element = item.uraian[i];
