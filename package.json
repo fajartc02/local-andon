@@ -6,7 +6,8 @@
         "serve": "vue-cli-service serve",
         "build": "vue-cli-service build",
         "lint": "vue-cli-service lint",
-        "build-deploy": "yarn build && cp ./dist/index.html ./dist/404.html && firebase deploy --only hosting"
+        "build-deploy": "yarn build && cp ./dist/index.html ./dist/404.html && firebase deploy --only hosting",
+        "serve:dev:windows": "vue-cli-service serve --mode dev"
     },
     "dependencies": {
         "@syncfusion/ej2-vue-diagrams": "^21.2.6",

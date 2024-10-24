@@ -894,6 +894,7 @@ export default {
     let newVersion = process.env.VUE_APP_VERSION
     // let newVersion = '2.0.2'
     const newVersionAvailable = localStorage.getItem("oldVersion") != newVersion
+        && (!localStorage.getItem("name") || localStorage.getItem("name") == "Guest")
     if (newVersionAvailable) {
       this.oldVersion = newVersion;
       this.isShowDialogUpdate = true;
