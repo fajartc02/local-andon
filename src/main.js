@@ -68,6 +68,8 @@ Vue.use(VuePageTransition);
 
 // Vue.use(MdButton)
 
+console.log("vue config", process.env.VUE_APP_HOST);
+
 Vue.config.productionTip = false;
 // if ("serviceWorker" in navigator) {
 //   window.addEventListener("load", function() {

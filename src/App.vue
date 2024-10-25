@@ -8,7 +8,7 @@
 
 <script>
 // import ContainerMenu from "@/components/ContainerMenu";
-import { mapActions } from "vuex";
+import {mapActions} from "vuex";
 // import PWABadge from "pwa-badge";
 import axios from "axios";
 
@@ -94,12 +94,11 @@ export default {
     permissionCheck() {
       if (localStorage.getItem("name") == "Guest") {
         alert(
-          "Login toyota sudah tidak tersedia, Silahkan register dan menunggu notifikasi approve dari SMART ANDON"
+            "Login toyota sudah tidak tersedia, Silahkan register dan menunggu notifikasi approve dari SMART ANDON"
         );
         localStorage.removeItem("name");
         this.$router.push("/login");
-      }
-      if (!localStorage.getItem("name")) {
+      } else if (!localStorage.getItem("name")) {
         this.$router.push("/login");
       } else {
         this.name = localStorage.getItem("name");
@@ -112,28 +111,28 @@ export default {
     },
     async checkScreen() {
       axios
-        .get(`${process.env.VUE_APP_HOST}/checkScreen`)
-        .then((result) => {
-          // console.log(result);
-          if (result.data.data.length > 0) {
-            let path = result.data.data[0].path;
-            axios
-              .put(`${process.env.VUE_APP_HOST}/updateScreen`, {
-                path,
-                status: 1,
-              })
-              .then(() => {
-                this.$router.push(path);
-                // console.log(msgUpdate);
-              })
-              .catch((err) => {
-                console.log(err);
-              });
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+          .get(`${process.env.VUE_APP_HOST}/checkScreen`)
+          .then((result) => {
+            // console.log(result);
+            if (result.data.data.length > 0) {
+              let path = result.data.data[0].path;
+              axios
+                  .put(`${process.env.VUE_APP_HOST}/updateScreen`, {
+                    path,
+                    status: 1,
+                  })
+                  .then(() => {
+                    this.$router.push(path);
+                    // console.log(msgUpdate);
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                  });
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
     },
     mouseMove(event) {
       this.mousePos = event.clientX;
@@ -233,9 +232,11 @@ export default {
 .rounded-img-20 {
   border-radius: 10%;
 }
+
 .pointer {
   cursor: pointer;
 }
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -270,6 +271,7 @@ html {
   background-color: rgb(234, 252, 252);
   background-color: #101820ff;
 }
+
 .modal-backdrop {
   z-index: -1;
 }

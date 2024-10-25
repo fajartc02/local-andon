@@ -15,34 +15,34 @@
       <div class="row m-0 p-0">
         <div class="col px-1 text-left">
           <span class="input-lable">Machine</span>
-          <input class="form-control" type="text" v-model="fmc_name" disabled />
+          <input class="form-control" type="text" v-model="fmc_name" disabled/>
         </div>
         <div class="col px-1 text-left">
           <span class="input-lable">Line</span>
-          <input class="form-control" type="text" v-model="fline" disabled />
+          <input class="form-control" type="text" v-model="fline" disabled/>
         </div>
       </div>
       <div class="row m-0 p-0">
         <div class="col px-1 text-left">
           <span class="input-lable">Operation No.</span>
-          <input class="form-control" type="text" v-model="foperation_no" disabled />
+          <input class="form-control" type="text" v-model="foperation_no" disabled/>
         </div>
         <div class="col px-1 text-left">
           <span class="input-lable">Maker</span>
-          <input class="form-control" type="text" v-model="fmaker" disabled />
+          <input class="form-control" type="text" v-model="fmaker" disabled/>
         </div>
       </div>
       <!-- Prob & OP -->
       <div class="row m-0 p-0">
         <div class="col px-1 text-left">
           <span class="input-lable">Problem</span>
-          <input type="text" class="form-control" placeholder="nama problem" v-model="ferror_name" />
+          <input type="text" class="form-control" placeholder="nama problem" v-model="ferror_name"/>
         </div>
       </div>
       <div class="row m-0 p-0">
         <div class="col-8 px-1 text-left">
           <span class="input-lable">Uraian Kejadian</span>
-          <input class="form-control" type="text" placeholder="Uraian Problem" v-model="furaian_kejadian" />
+          <input class="form-control" type="text" placeholder="Uraian Problem" v-model="furaian_kejadian"/>
         </div>
         <div class="col-4 px-1 text-left">
           <span class="input-lable">Upload Image</span>
@@ -55,7 +55,7 @@
             <div class="row m-0 p-0">
               <div class="col-8 p-0">
                 <input class="form-control" name="sampleFile" ref="fimage_problem" type="file"
-                  @change="uploadFile('fimage_problem')" placeholder="masukan ilustrasi problem" />
+                       @change="uploadFile('fimage_problem')" placeholder="masukan ilustrasi problem"/>
               </div>
               <div class="col-1 py-0 m-0">
                 <h class="btn btn-success btn-sm" @click="addToogle('isImgProblem')">
@@ -79,11 +79,11 @@
             <div class="row m-0 p-0">
               <div class="col-8 p-0">
                 <input class="form-control" name="sampleFile2" ref="fimage2_problem" type="file"
-                  @change="uploadFile('fimage2_problem')" placeholder="masukan ilustrasi problem" />
+                       @change="uploadFile('fimage2_problem')" placeholder="masukan ilustrasi problem"/>
               </div>
               <div class="col-2 py-0 m-0">
                 <button class="btn btn-danger btn-sm"
-                  @click="onCancel('isImgProblem'), deleteImg('deleteProblem2', 'fimage2_problem')">
+                        @click="onCancel('isImgProblem'), deleteImg('deleteProblem2', 'fimage2_problem')">
                   <i class="fa fa-trash" style="font-size: 10px"></i>
                 </button>
               </div>
@@ -98,7 +98,7 @@
       <div v-if="isLongBd" class="row m-0 p-0">
         <div class="col-8 px-1 text-left">
           <span class="input-lable">Ilustrasi Standart</span>
-          <input class="form-control" type="text" placeholder="Standart Condition" v-model="filustrasi_standart" />
+          <input class="form-control" type="text" placeholder="Standart Condition" v-model="filustrasi_standart"/>
         </div>
         <div class="col-4 px-1 text-left">
           <span class="input-lable">Standart Image</span>
@@ -111,7 +111,7 @@
             <div class="row m-0 p-0">
               <div class="col-8 p-0">
                 <input class="form-control" name="sampleFilestd" ref="std_img" type="file"
-                  @change="uploadFile('std_img')" />
+                       @change="uploadFile('std_img')"/>
               </div>
               <div class="col-1 py-0 m-0">
                 <h class="btn btn-success btn-sm" @click="addToogle('isImgStd')">
@@ -135,11 +135,11 @@
             <div class="row m-0 p-0">
               <div class="col-8 p-0">
                 <input class="form-control" name="sampleFilestd" ref="std2_img" type="file"
-                  @change="uploadFile('std2_img')" />
+                       @change="uploadFile('std2_img')"/>
               </div>
               <div class="col-2 py-0 m-0">
                 <button class="btn btn-danger btn-sm"
-                  @click="onCancel('isImgStd'), deleteImg('deleteStd2', 'std2_img')">
+                        @click="onCancel('isImgStd'), deleteImg('deleteStd2', 'std2_img')">
                   <i class="fa fa-trash" style="font-size: 10px"></i>
                 </button>
               </div>
@@ -151,7 +151,7 @@
       <div v-if="isLongBd" class="row m-0 p-0">
         <div class="col-8 px-1 text-left">
           <span class="input-lable">Ilustrasi Actual</span>
-          <input class="form-control" type="text" placeholder="Actual Condition" v-model="filustrasi_actual" />
+          <input class="form-control" type="text" placeholder="Actual Condition" v-model="filustrasi_actual"/>
         </div>
         <div class="col-4 px-1 text-left">
           <span class="input-lable">Actual Image</span>
@@ -164,7 +164,7 @@
             <div class="row m-0 p-0">
               <div class="col-8 p-0">
                 <input class="form-control" name="sampleFilestd" ref="act_img" type="file"
-                  @change="uploadFile('act_img')" />
+                       @change="uploadFile('act_img')"/>
               </div>
               <div class="col-1 py-0 m-0">
                 <h class="btn btn-success btn-sm" @click="addToogle('isImgAct')">
@@ -188,11 +188,11 @@
             <div class="row m-0 p-0">
               <div class="col-8 p-0">
                 <input class="form-control" name="sampleFilestd" ref="act2_img" type="file"
-                  @change="uploadFile('act2_img')" />
+                       @change="uploadFile('act2_img')"/>
               </div>
               <div class="col-2 py-0 m-0">
                 <button class="btn btn-danger btn-sm"
-                  @click="onCancel('isImgAct'), deleteImg('deleteAct2', 'act2_img')">
+                        @click="onCancel('isImgAct'), deleteImg('deleteAct2', 'act2_img')">
                   <i class="fa fa-trash" style="font-size: 10px"></i>
                 </button>
               </div>
@@ -204,7 +204,7 @@
       <div v-if="isLongBd" class="row m-0 p-0">
         <div class="col-10 px-1 text-left">
           <span class="input-lable">Gap Between Standard and Actual</span>
-          <input class="form-control" type="text" placeholder="Gap of Condition" v-model="gapIlustrasi" />
+          <input class="form-control" type="text" placeholder="Gap of Condition" v-model="gapIlustrasi"/>
         </div>
       </div>
 
@@ -235,7 +235,7 @@
                   <div class="col text-left">
                     <label class="typo__label text-bold">PIC</label>
                     <multiselect v-model="ft_pic" :options="optOperators" placeholder="Pilih Member"
-                      style="font-size: 10px"></multiselect>
+                                 style="font-size: 10px"></multiselect>
                   </div>
                 </div>
               </v-card-text>
@@ -257,7 +257,7 @@
           <!-- TASKFORCE CHECKBOX -->
           <!-- <input type="checkbox" style="height: 20px" v-model="isTaskforce" /> -->
           <b-form-checkbox v-model="isTaskforce" name="check-button" button
-            :button-variant="isTaskforce ? 'outline-danger' : 'primary'">
+                           :button-variant="isTaskforce ? 'outline-danger' : 'primary'">
             {{ isTaskforce ? "Batalkan Taskforce" : "Pilih Taskforce" }}
           </b-form-checkbox>
           <!-- <span style="font-size: 9px; font-weight: 800">Taskforce</span> -->
@@ -268,7 +268,7 @@
           <div class="row">
             <div class="col px-1 text-left">
               <span class="input-lable">Operator</span>
-              <input class="form-control" type="text" disabled v-model="foperator" />
+              <input class="form-control" type="text" disabled v-model="foperator"/>
               <multiselect v-model="foperator" :options="optOperators" :multiple="true" style="font-size: 10px">
               </multiselect>
             </div>
@@ -309,10 +309,10 @@
           <span class="input-lable">Start Date</span>
           <div class="row m-0 p-0">
             <div class="col-7 p-0">
-              <input style="font-size: 10px" class="form-control" type="date" v-model="startDate" />
+              <input style="font-size: 10px" class="form-control" type="date" v-model="startDate"/>
             </div>
             <div class="col-5 p-0">
-              <input class="form-control" type="time" v-model="startTime" />
+              <input class="form-control" type="time" v-model="startTime"/>
             </div>
           </div>
         </div>
@@ -320,10 +320,10 @@
           <span class="input-lable">Finish Date</span>
           <div class="row m-0 p-0">
             <div class="col-7 p-0">
-              <input style="font-size: 10px" class="form-control" type="date" v-model="endDate" />
+              <input style="font-size: 10px" class="form-control" type="date" v-model="endDate"/>
             </div>
             <div class="col-5 p-0">
-              <input class="form-control" type="time" v-model="endTime" />
+              <input class="form-control" type="time" v-model="endTime"/>
             </div>
           </div>
         </div>
@@ -332,7 +332,7 @@
       <div class="row m-0 p-0">
         <div class="col px-1 text-left">
           <span class="input-lable">Duration (min)</span>
-          <input class="form-control" type="text" v-model="fdur" disabled />
+          <input class="form-control" type="text" v-model="fdur" disabled/>
         </div>
       </div>
       <!-- Ilustration (DISABLED)-->
@@ -340,21 +340,21 @@
         <div class="col px-1 text-left">
           <div class="col px-1 text-left">
             <span class="input-lable">Description Ilustration</span>
-            <input class="form-control" type="text" v-model="fDescImage" />
+            <input class="form-control" type="text" v-model="fDescImage"/>
           </div>
         </div>
         <div class="col px-1 text-left" style="display: none">
           <span class="input-lable">Image Ilustration</span>
-          <img v-if="url" :src="url" style="width: 80%; height: 80%" />
+          <img v-if="url" :src="url" style="width: 80%; height: 80%"/>
           <img v-else src="https://mtsn4malang.sch.id/wp-content/uploads/2019/08/placeholder-1.png"
-            style="width: 80%; height: 80%" />
+               style="width: 80%; height: 80%"/>
 
         </div>
       </div>
       <div class="row m-0 p-0">
         <div class="col px-1 text-left">
           <span class="input-lable">Item Temporary Action</span>
-          <input class="form-control" type="text" v-model="temporaryAction" />
+          <input class="form-control" type="text" v-model="temporaryAction"/>
         </div>
       </div>
       <!-- Rootcause Terjadi -->
@@ -372,27 +372,27 @@
           <!-- WHY TERJADI -->
           <div class="row m-0 p-0">
             <table id="table-why-terjadi" class="table table-responsive text-center" style="font-size: 10px"
-              v-if="containerWhyTerjadi.length > 0">
+                   v-if="containerWhyTerjadi.length > 0">
               <thead>
-                <tr>
-                  <th>No</th>
-                  <th style="max-width: 100px">Description</th>
-                  <th colspan="2">actions</th>
-                </tr>
+              <tr>
+                <th>No</th>
+                <th style="max-width: 100px">Description</th>
+                <th colspan="2">actions</th>
+              </tr>
               </thead>
               <tbody>
-                <tr v-for="(whyTerjadi, i) in containerWhyTerjadi" :key="whyTerjadi">
-                  <td class="border" style="min-width: 10px">{{ i + 1 }}</td>
-                  <td class="text-left border" style="min-width: 220px"
+              <tr v-for="(whyTerjadi, i) in containerWhyTerjadi" :key="whyTerjadi">
+                <td class="border" style="min-width: 10px">{{ i + 1 }}</td>
+                <td class="text-left border" style="min-width: 220px"
                     v-if="!isEditWhyTerjadi || idxWhyTerjadiSelected != i">
-                    {{ whyTerjadi }}
-                  </td>
-                  <td class="text-left border" style="min-width: 220px"
+                  {{ whyTerjadi }}
+                </td>
+                <td class="text-left border" style="min-width: 220px"
                     v-else-if="isEditWhyTerjadi && idxWhyTerjadiSelected == i">
-                    <input type="text" v-model="descWhyTerjadi" />
-                  </td>
-                  <td class="border">
-                    <button class="btn btn-primary py-1 input-lable" @click="
+                  <input type="text" v-model="descWhyTerjadi"/>
+                </td>
+                <td class="border">
+                  <button class="btn btn-primary py-1 input-lable" @click="
                       onToogleEdit(
                         'isEditWhyTerjadi',
                         'descWhyTerjadi',
@@ -400,9 +400,9 @@
                         i
                       )
                       " v-if="!isEditWhyTerjadi || idxWhyTerjadiSelected != i">
-                      <i class="fa fa-pencil" style="font-size: 10px" aria-hidden="true"></i>
-                    </button>
-                    <button class="btn btn-primary py-1 input-lable" @click="
+                    <i class="fa fa-pencil" style="font-size: 10px" aria-hidden="true"></i>
+                  </button>
+                  <button class="btn btn-primary py-1 input-lable" @click="
                       editContainerSingle(
                         i,
                         'containerWhyTerjadi',
@@ -410,16 +410,16 @@
                         'isEditWhyTerjadi'
                       )
                       " v-else-if="isEditWhyTerjadi && idxWhyTerjadiSelected == i">
-                      <i class="fa fa-send" style="font-size: 10px" aria-hidden="true"></i>
-                    </button>
-                  </td>
-                  <td class="border">
-                    <button class="btn btn-danger py-1 input-lable">
-                      <i class="fa fa-trash" style="font-size: 10px" aria-hidden="true"
-                        @click="removeContainerSingle(i, 'containerWhyTerjadi')"></i>
-                    </button>
-                  </td>
-                </tr>
+                    <i class="fa fa-send" style="font-size: 10px" aria-hidden="true"></i>
+                  </button>
+                </td>
+                <td class="border">
+                  <button class="btn btn-danger py-1 input-lable">
+                    <i class="fa fa-trash" style="font-size: 10px" aria-hidden="true"
+                       @click="removeContainerSingle(i, 'containerWhyTerjadi')"></i>
+                  </button>
+                </td>
+              </tr>
               </tbody>
             </table>
           </div>
@@ -433,7 +433,7 @@
               align-content-center
             " v-if="isWhyTerjadi">
             <div class="col-7 p-0">
-              <input class="form-control mt-1" type="text" v-model="descWhyTerjadi" />
+              <input class="form-control mt-1" type="text" v-model="descWhyTerjadi"/>
             </div>
             <div class="col-2 p-0">
               <button class="btn btn-info py-1 input-lable" @click="onAddWhyTerjadi()">
@@ -447,7 +447,7 @@
             </div>
           </div>
           <div class="m-0 p-0">
-            <TreeListAnalisys @checkAnalysis="checkAnalysis" :hide="false" whyCategory="TERJADI" :report="false" />
+            <TreeListAnalisys @checkAnalysis="checkAnalysis" :hide="false" whyCategory="TERJADI" :report="false"/>
           </div>
         </div>
       </div>
@@ -463,7 +463,7 @@
             <div class="row m-0 p-0">
               <div class="col-8 p-0">
                 <input class="form-control" name="sampleFile5why" ref="why1_img" type="file"
-                  @change="uploadFile('why1_img')" />
+                       @change="uploadFile('why1_img')"/>
               </div>
               <div class="px-3 m-0">
                 <h class="btn btn-success btn-sm" @click="addToogle('isImgTerjadi')">
@@ -487,11 +487,11 @@
             <div class="row m-0 p-0">
               <div class="col-8 p-0">
                 <input class="form-control" name="sampleFile5why" ref="why12_img" type="file"
-                  @change="uploadFile('why12_img')" />
+                       @change="uploadFile('why12_img')"/>
               </div>
               <div class="col-2 py-0 m-0">
                 <button class="btn btn-danger btn-sm"
-                  @click="onCancel('isImgTerjadi'), deleteImg('deleteWhy12', 'why12_img')">
+                        @click="onCancel('isImgTerjadi'), deleteImg('deleteWhy12', 'why12_img')">
                   <i class="fa fa-trash" style="font-size: 10px"></i>
                 </button>
               </div>
@@ -510,26 +510,26 @@
           <div class="row m-0 p-0">
             <table id="table-step-repair" class="table table-responsive text-center" style="font-size: 10px">
               <thead>
-                <tr>
-                  <th>No</th>
-                  <th style="max-width: 100px">Description</th>
-                  <th colspan="2">actions</th>
-                </tr>
+              <tr>
+                <th>No</th>
+                <th style="max-width: 100px">Description</th>
+                <th colspan="2">actions</th>
+              </tr>
               </thead>
               <tbody>
-                <tr v-for="(stepRepair, i) in containerStepRepair" :key="stepRepair">
-                  <td class="border" style="min-width: 10px">{{ i + 1 }}</td>
-                  <td class="text-left border" style="min-width: 220px"
+              <tr v-for="(stepRepair, i) in containerStepRepair" :key="stepRepair">
+                <td class="border" style="min-width: 10px">{{ i + 1 }}</td>
+                <td class="text-left border" style="min-width: 220px"
                     v-if="!isEditStepRepair || idxStepRepairSelected != i">
-                    {{ stepRepair }}
-                  </td>
-                  <td class="text-left border" style="min-width: 220px"
+                  {{ stepRepair }}
+                </td>
+                <td class="text-left border" style="min-width: 220px"
                     v-else-if="isEditStepRepair || idxStepRepairSelected != i">
-                    <input type="text" v-model="descStepRepair" />
-                  </td>
-                  <td class="border">
-                    <button class="btn btn-primary py-1 input-lable">
-                      <i class="fa fa-pencil" style="font-size: 10px" aria-hidden="true" @click="
+                  <input type="text" v-model="descStepRepair"/>
+                </td>
+                <td class="border">
+                  <button class="btn btn-primary py-1 input-lable">
+                    <i class="fa fa-pencil" style="font-size: 10px" aria-hidden="true" @click="
                         onToogleEdit(
                           'isEditStepRepair',
                           'descStepRepair',
@@ -537,7 +537,7 @@
                           i
                         )
                         " v-if="!isEditStepRepair || idxStepRepairSelected != i"></i>
-                      <i class="fa fa-send" style="font-size: 10px" aria-hidden="true" @click="
+                    <i class="fa fa-send" style="font-size: 10px" aria-hidden="true" @click="
                         editContainerSingle(
                           i,
                           'containerStepRepair',
@@ -546,15 +546,15 @@
                         )
                         " v-else-if="isEditStepRepair || idxStepRepairSelected != i
                         "></i>
-                    </button>
-                  </td>
-                  <td class="border">
-                    <button class="btn btn-danger py-1 input-lable">
-                      <i class="fa fa-trash" style="font-size: 10px" aria-hidden="true"
-                        @click="removeContainerSingle(i, 'containerStepRepair')"></i>
-                    </button>
-                  </td>
-                </tr>
+                  </button>
+                </td>
+                <td class="border">
+                  <button class="btn btn-danger py-1 input-lable">
+                    <i class="fa fa-trash" style="font-size: 10px" aria-hidden="true"
+                       @click="removeContainerSingle(i, 'containerStepRepair')"></i>
+                  </button>
+                </td>
+              </tr>
               </tbody>
             </table>
             <div class="
@@ -566,7 +566,7 @@
               align-content-center
             " v-if="isStepRepair && !isLongBd">
               <div class="col-7 p-0">
-                <input class="form-control mt-1" type="text" v-model="descStepRepair" />
+                <input class="form-control mt-1" type="text" v-model="descStepRepair"/>
               </div>
               <div class="col-2 p-0">
                 <button class="btn btn-info py-1 input-lable" @click="onAddStepRepair()">
@@ -580,62 +580,62 @@
               </div>
             </div>
             <table id="table-step-repair" class="table table-responsive text-center" style="font-size: 10px"
-              v-if="containerStepRepairNew.length > 0">
+                   v-if="containerStepRepairNew.length > 0">
               <thead>
-                <tr>
-                  <th>No</th>
-                  <th style="max-width: 100px">Description</th>
-                  <th style="max-width: 100px">Actual Time (Min)</th>
-                  <th style="max-width: 80px">Ideal Time (Min)</th>
-                  <th style="max-width: 100px">Q6</th>
-                  <th colspan="2">actions</th>
-                </tr>
+              <tr>
+                <th>No</th>
+                <th style="max-width: 100px">Description</th>
+                <th style="max-width: 100px">Actual Time (Min)</th>
+                <th style="max-width: 80px">Ideal Time (Min)</th>
+                <th style="max-width: 100px">Q6</th>
+                <th colspan="2">actions</th>
+              </tr>
               </thead>
               <tbody>
-                <tr v-for="(stepRepair, i) in containerStepRepairNew" :key="stepRepair">
-                  <td class="border" style="min-width: 10px">{{ i + 1 }}</td>
-                  <td class="text-left border" style="min-width: 220px"
+              <tr v-for="(stepRepair, i) in containerStepRepairNew" :key="stepRepair">
+                <td class="border" style="min-width: 10px">{{ i + 1 }}</td>
+                <td class="text-left border" style="min-width: 220px"
                     v-if="!isEditStepRepair || idxStepRepairSelected != i">
-                    {{ stepRepair.stepDesc }}
-                  </td>
-                  <td class="text-left border" style="min-width: 220px"
+                  {{ stepRepair.stepDesc }}
+                </td>
+                <td class="text-left border" style="min-width: 220px"
                     v-else-if="isEditStepRepair || idxStepRepairSelected != i">
-                    <input type="text" v-model="stepRepair.stepDesc" />
-                  </td>
-                  <td class="text-left border" style="min-width: 50px"
+                  <input type="text" v-model="stepRepair.stepDesc"/>
+                </td>
+                <td class="text-left border" style="min-width: 50px"
                     v-if="!isEditStepRepair || idxStepRepairSelected != i">
-                    {{ stepRepair.actualTime }}
-                  </td>
-                  <td class="text-left border" style="min-width: 50px"
+                  {{ stepRepair.actualTime }}
+                </td>
+                <td class="text-left border" style="min-width: 50px"
                     v-else-if="isEditStepRepair || idxStepRepairSelected != i">
-                    <input v-model.number="stepRepair.actualTime" />
-                  </td>
-                  <td class="text-left border" style="min-width: 50px"
+                  <input v-model.number="stepRepair.actualTime"/>
+                </td>
+                <td class="text-left border" style="min-width: 50px"
                     v-if="!isEditStepRepair || idxStepRepairSelected != i">
-                    {{ stepRepair.idealTime }}
-                  </td>
-                  <td class="text-left border" style="min-width: 50px"
+                  {{ stepRepair.idealTime }}
+                </td>
+                <td class="text-left border" style="min-width: 50px"
                     v-else-if="isEditStepRepair || idxStepRepairSelected != i">
-                    <input v-model.number="stepRepair.idealTime" />
-                  </td>
-                  <td class="text-left border" style="min-width: 50px"
+                  <input v-model.number="stepRepair.idealTime"/>
+                </td>
+                <td class="text-left border" style="min-width: 50px"
                     v-if="!isEditStepRepair || idxStepRepairSelected != i">
-                    {{ stepRepair.quick6 }}
-                  </td>
-                  <td class="text-left border" style="min-width: 50px"
+                  {{ stepRepair.quick6 }}
+                </td>
+                <td class="text-left border" style="min-width: 50px"
                     v-else-if="isEditStepRepair || idxStepRepairSelected != i">
-                    <select class="text-center border" style="min-width: 50px" v-model="stepRepair.quick6">
-                      <option disabled value="">Quick 6</option>
-                      <option value="Q1">Q1 (Diagnose/Cause Analysis)</option>
-                      <option value="Q2">Q2 (SparePart)</option>
-                      <option value="Q3">Q3 (Tools)</option>
-                      <option value="Q4">Q4 (Maintenance Ability)</option>
-                      <option value="Q5">Q5 (Machine Setting)</option>
-                      <option value="Q6">Q6 (Machine Backup)</option>
-                    </select>
-                  </td>
-                  <td class="border">
-                    <button class="btn btn-primary py-1 input-lable" @click="
+                  <select class="text-center border" style="min-width: 50px" v-model="stepRepair.quick6">
+                    <option disabled value="">Quick 6</option>
+                    <option value="Q1">Q1 (Diagnose/Cause Analysis)</option>
+                    <option value="Q2">Q2 (SparePart)</option>
+                    <option value="Q3">Q3 (Tools)</option>
+                    <option value="Q4">Q4 (Maintenance Ability)</option>
+                    <option value="Q5">Q5 (Machine Setting)</option>
+                    <option value="Q6">Q6 (Machine Backup)</option>
+                  </select>
+                </td>
+                <td class="border">
+                  <button class="btn btn-primary py-1 input-lable" @click="
                       onToogleEditStep(
                         'isEditStepRepair',
                         'stepField',
@@ -643,9 +643,9 @@
                         i
                       )
                       " v-if="!isEditStepRepair || idxStepRepairSelected != i">
-                      <i class="fa fa-pencil" style="font-size: 10px" aria-hidden="true"></i>
-                    </button>
-                    <button class="btn btn-primary py-1 input-lable" @click="
+                    <i class="fa fa-pencil" style="font-size: 10px" aria-hidden="true"></i>
+                  </button>
+                  <button class="btn btn-primary py-1 input-lable" @click="
                       editContainerObjStep(
                         i,
                         'containerStepRepairNew',
@@ -654,16 +654,16 @@
                         stepRepair
                       )
                       " v-else-if="isEditStepRepair || idxStepRepairSelected != i">
-                      <i class="fa fa-send" style="font-size: 10px" aria-hidden="true"></i>
-                    </button>
-                  </td>
-                  <td class="border">
-                    <button class="btn btn-danger py-1 input-lable">
-                      <i class="fa fa-trash" style="font-size: 10px" aria-hidden="true"
-                        @click="removeContainerSingle(i, 'containerStepRepairNew')"></i>
-                    </button>
-                  </td>
-                </tr>
+                    <i class="fa fa-send" style="font-size: 10px" aria-hidden="true"></i>
+                  </button>
+                </td>
+                <td class="border">
+                  <button class="btn btn-danger py-1 input-lable">
+                    <i class="fa fa-trash" style="font-size: 10px" aria-hidden="true"
+                       @click="removeContainerSingle(i, 'containerStepRepairNew')"></i>
+                  </button>
+                </td>
+              </tr>
               </tbody>
             </table>
           </div>
@@ -677,7 +677,7 @@
                 align-content-center
               ">
               <div class="col-6 p-0">
-                <input class="form-control mt-1" type="text" placeholder="Description" v-model="stepField.stepDesc" />
+                <input class="form-control mt-1" type="text" placeholder="Description" v-model="stepField.stepDesc"/>
               </div>
               <div class="col p-0">
                 <select class="form-control mt-1" v-model="stepField.quick6">
@@ -691,10 +691,10 @@
                 </select>
               </div>
               <div class="col p-0">
-                <input class="form-control mt-1" placeholder="Actual Time" v-model.number="stepField.actualTime" />
+                <input class="form-control mt-1" placeholder="Actual Time" v-model.number="stepField.actualTime"/>
               </div>
               <div class="col p-0">
-                <input class="form-control mt-1" placeholder="Ideal Time" v-model.number="stepField.idealTime" />
+                <input class="form-control mt-1" placeholder="Ideal Time" v-model.number="stepField.idealTime"/>
               </div>
 
             </div>
@@ -717,7 +717,7 @@
       <div class="row m-0 p-0">
         <div class="col px-1 text-left">
           <span class="input-lable">Part Change</span>
-          <input class="form-control" type="text" v-model="fpart_change" />
+          <input class="form-control" type="text" v-model="fpart_change"/>
         </div>
       </div>
       <!-- Countermeasure (terjadi) -->
@@ -729,84 +729,84 @@
           </button>
           <div class="row m-0 p-0">
             <table id="table-cm-terjadi" class="table table-responsive text-center" style="font-size: 10px"
-              v-if="containerCmTerjadi.length > 0">
+                   v-if="containerCmTerjadi.length > 0">
               <thead>
-                <tr>
-                  <th>No</th>
-                  <th style="max-width: 100px">Countermeasure</th>
-                  <th style="max-width: 50px">Plan Date</th>
-                  <th>PIC</th>
-                  <th style="max-width: 60px">C/M Category</th>
-                  <th style="max-width: 50px">Judg</th>
-                  <th style="min-width: 100px">Result Notes</th>
-                  <th colspan="2">actions</th>
-                </tr>
+              <tr>
+                <th>No</th>
+                <th style="max-width: 100px">Countermeasure</th>
+                <th style="max-width: 50px">Plan Date</th>
+                <th>PIC</th>
+                <th style="max-width: 60px">C/M Category</th>
+                <th style="max-width: 50px">Judg</th>
+                <th style="min-width: 100px">Result Notes</th>
+                <th colspan="2">actions</th>
+              </tr>
               </thead>
               <tbody>
-                <tr v-for="(cmTerjadi, i) in containerCmTerjadi" :key="i">
-                  <td class="border" style="min-width: 10px">{{ i + 1 }}</td>
-                  <td class="text-left border" style="min-width: 220px"
+              <tr v-for="(cmTerjadi, i) in containerCmTerjadi" :key="i">
+                <td class="border" style="min-width: 10px">{{ i + 1 }}</td>
+                <td class="text-left border" style="min-width: 220px"
                     v-if="!isEditCmTerjadi || idxCmTerjadiSelected != i">
-                    {{ cmTerjadi.cmDesc }}
-                  </td>
-                  <td class="text-left border" style="min-width: 220px"
+                  {{ cmTerjadi.cmDesc }}
+                </td>
+                <td class="text-left border" style="min-width: 220px"
                     v-else-if="isEditCmTerjadi || idxCmTerjadiSelected == i">
-                    <input type="text" v-model="cmTerjadi.cmDesc" />
-                  </td>
-                  <td class="text-left border" style="min-width: 50px"
+                  <input type="text" v-model="cmTerjadi.cmDesc"/>
+                </td>
+                <td class="text-left border" style="min-width: 50px"
                     v-if="!isEditCmTerjadi || idxCmTerjadiSelected != i">
-                    {{ cmTerjadi.datePlan }}
-                  </td>
-                  <td class="text-left border" style="min-width: 50px"
+                  {{ cmTerjadi.datePlan }}
+                </td>
+                <td class="text-left border" style="min-width: 50px"
                     v-else-if="isEditCmTerjadi || idxCmTerjadiSelected == i">
-                    <input type="date" v-model="cmTerjadi.datePlan" />
-                  </td>
-                  <td class="text-left border" v-if="!isEditCmTerjadi || idxCmTerjadiSelected != i">
-                    {{ cmTerjadi.pic }}
-                  </td>
-                  <td class="text-left border" v-else-if="isEditCmTerjadi || idxCmTerjadiSelected == i">
-                    <multiselect v-model="cmTerjadi.pic" :options="optOperators" :multiple="false"
-                      style="font-size: 10px"></multiselect>
-                  </td>
-                  <td class="text-left border" style="min-width: 50px"
+                  <input type="date" v-model="cmTerjadi.datePlan"/>
+                </td>
+                <td class="text-left border" v-if="!isEditCmTerjadi || idxCmTerjadiSelected != i">
+                  {{ cmTerjadi.pic }}
+                </td>
+                <td class="text-left border" v-else-if="isEditCmTerjadi || idxCmTerjadiSelected == i">
+                  <multiselect v-model="cmTerjadi.pic" :options="optOperators" :multiple="false"
+                               style="font-size: 10px"></multiselect>
+                </td>
+                <td class="text-left border" style="min-width: 50px"
                     v-if="!isEditCmTerjadi || idxCmTerjadiSelected != i">
-                    {{ cmTerjadi.cmCategory }}
-                  </td>
-                  <td class="text-left border" style="min-width: 50px"
+                  {{ cmTerjadi.cmCategory }}
+                </td>
+                <td class="text-left border" style="min-width: 50px"
                     v-else-if="isEditCmTerjadi || idxCmTerjadiSelected == i">
-                    <select class="form-control mt-1" v-model="cmTerjadi.cmCategory">
-                      <option value="">C/M Category</option>
-                      <option value="Improvement">Improvement</option>
-                      <option value="Training">Training</option>
-                      <option value="Revice TPM">Revisi TPM</option>
-                      <option value="Sparepart">Sparepart</option>
-                    </select>
-                  </td>
-                  <td v-if="cmTerjadi.judg == true &&
+                  <select class="form-control mt-1" v-model="cmTerjadi.cmCategory">
+                    <option value="">C/M Category</option>
+                    <option value="Improvement">Improvement</option>
+                    <option value="Training">Training</option>
+                    <option value="Revice TPM">Revisi TPM</option>
+                    <option value="Sparepart">Sparepart</option>
+                  </select>
+                </td>
+                <td v-if="cmTerjadi.judg == true &&
                     (!isEditCmTerjadi || idxCmTerjadiSelected != i)
                   " class="text-center border text-success" style="min-width: 50px">
-                    {{ "Sudah" }}
-                  </td>
-                  <td v-else-if="cmTerjadi.judg == false &&
+                  {{ "Sudah" }}
+                </td>
+                <td v-else-if="cmTerjadi.judg == false &&
                     (!isEditCmTerjadi || idxCmTerjadiSelected != i)
                   " class="text-center border text-danger" style="min-width: 50px">
-                    {{ "Belum" }}
-                  </td>
-                  <td class="text-center border" style="min-width: 50px"
+                  {{ "Belum" }}
+                </td>
+                <td class="text-center border" style="min-width: 50px"
                     v-else-if="isEditCmTerjadi || idxCmTerjadiSelected == i">
-                    <select v-model="cmTerjadi.judg">
-                      <option :value="false">Belum</option>
-                      <option :value="true">Sudah</option>
-                    </select>
-                  </td>
-                  <td class="border">
-                    <input v-if="isEditCmTerjadi || idxCmTerjadiSelected == i" type="text" v-model="cmTerjadi.result" />
-                    <p class="m-0" v-else>
-                      {{ cmTerjadi.result ? cmTerjadi.result : "-" }}
-                    </p>
-                  </td>
-                  <td class="border">
-                    <button class="btn btn-primary py-1 input-lable" @click="
+                  <select v-model="cmTerjadi.judg">
+                    <option :value="false">Belum</option>
+                    <option :value="true">Sudah</option>
+                  </select>
+                </td>
+                <td class="border">
+                  <input v-if="isEditCmTerjadi || idxCmTerjadiSelected == i" type="text" v-model="cmTerjadi.result"/>
+                  <p class="m-0" v-else>
+                    {{ cmTerjadi.result ? cmTerjadi.result : "-" }}
+                  </p>
+                </td>
+                <td class="border">
+                  <button class="btn btn-primary py-1 input-lable" @click="
                       onToogleEditObj(
                         'isEditCmTerjadi',
                         'cmField',
@@ -814,9 +814,9 @@
                         i
                       )
                       " v-if="!isEditCmTerjadi || idxCmTerjadiSelected != i">
-                      <i class="fa fa-pencil" style="font-size: 10px" aria-hidden="true"></i>
-                    </button>
-                    <button class="btn btn-primary py-1 input-lable" @click="
+                    <i class="fa fa-pencil" style="font-size: 10px" aria-hidden="true"></i>
+                  </button>
+                  <button class="btn btn-primary py-1 input-lable" @click="
                       editContainerObj(
                         i,
                         'containerCmTerjadi',
@@ -825,16 +825,16 @@
                         cmTerjadi
                       )
                       " v-else-if="isEditCmTerjadi || idxCmTerjadiSelected == i">
-                      <i class="fa fa-send" style="font-size: 10px" aria-hidden="true"></i>
-                    </button>
-                  </td>
-                  <td class="border">
-                    <button class="btn btn-danger py-1 input-lable">
-                      <i class="fa fa-trash" style="font-size: 10px" aria-hidden="true"
-                        @click="removeContainerSingle(i, 'containerCmTerjadi')"></i>
-                    </button>
-                  </td>
-                </tr>
+                    <i class="fa fa-send" style="font-size: 10px" aria-hidden="true"></i>
+                  </button>
+                </td>
+                <td class="border">
+                  <button class="btn btn-danger py-1 input-lable">
+                    <i class="fa fa-trash" style="font-size: 10px" aria-hidden="true"
+                       @click="removeContainerSingle(i, 'containerCmTerjadi')"></i>
+                  </button>
+                </td>
+              </tr>
               </tbody>
             </table>
           </div>
@@ -853,11 +853,11 @@
                   <div class="input-group-prepend">
                     <div class="input-group-text">
                       Ini Action? -
-                      <input type="checkbox" style="height: 20px" v-model="isActionCm" />
+                      <input type="checkbox" style="height: 20px" v-model="isActionCm"/>
                     </div>
                   </div>
                   <input class="form-control mt-1" type="text" placeholder="countermeasure / action"
-                    v-model="cmField.cmDesc" />
+                         v-model="cmField.cmDesc"/>
                 </div>
               </div>
               <div class="col-12 col-md-2 p-0">
@@ -865,7 +865,7 @@
                   <div class="input-group-prepend">
                     <div class="input-group-text">Plan Date</div>
                   </div>
-                  <input class="form-control mt-1" type="date" placeholder="date" v-model="cmField.datePlan" />
+                  <input class="form-control mt-1" type="date" placeholder="date" v-model="cmField.datePlan"/>
                 </div>
               </div>
               <div class="col-12 col-md-2 p-0">
@@ -888,7 +888,7 @@
                     <div class="input-group-text">Pic</div>
                   </div>
                   <multiselect v-model="cmField.pic" :options="optOperators" :multiple="false" class="w-80"
-                    style="font-size: 10px"></multiselect>
+                               style="font-size: 10px"></multiselect>
                 </div>
               </div>
             </div>
@@ -916,62 +916,62 @@
           </button>
           <div class="row m-0 p-0">
             <table id="table-yokoten" class="table table-responsive text-center" style="font-size: 10px"
-              v-if="containerYokoten.length != 0">
+                   v-if="containerYokoten.length != 0">
               <thead>
-                <tr>
-                  <th>No</th>
-                  <th style="max-width: 100px">Item Yokoten</th>
-                  <th style="max-width: 50px">Plan Date</th>
-                  <th style="max-width: 50px">PIC</th>
-                  <th style="max-width: 50px">Judg</th>
-                  <th colspan="2">actions</th>
-                </tr>
+              <tr>
+                <th>No</th>
+                <th style="max-width: 100px">Item Yokoten</th>
+                <th style="max-width: 50px">Plan Date</th>
+                <th style="max-width: 50px">PIC</th>
+                <th style="max-width: 50px">Judg</th>
+                <th colspan="2">actions</th>
+              </tr>
               </thead>
               <tbody>
-                <tr v-for="(yokoten, i) in containerYokoten" :key="i">
-                  <td class="border" style="min-width: 10px">{{ i + 1 }}</td>
-                  <td class="text-left border" style="min-width: 220px"
+              <tr v-for="(yokoten, i) in containerYokoten" :key="i">
+                <td class="border" style="min-width: 10px">{{ i + 1 }}</td>
+                <td class="text-left border" style="min-width: 220px"
                     v-if="!isEditYokoten || idxYokotenSelected != i">
-                    {{ yokoten.machine }}
-                  </td>
-                  <td class="text-left border" style="min-width: 220px"
+                  {{ yokoten.machine }}
+                </td>
+                <td class="text-left border" style="min-width: 220px"
                     v-else-if="isEditYokoten || idxYokotenSelected != i">
-                    <input type="text" v-model="yokoten.machine" />
-                  </td>
-                  <td class="text-left border" style="min-width: 50px" v-if="!isEditYokoten || idxYokotenSelected != i">
-                    {{ yokoten.datePlan }}
-                  </td>
-                  <td class="text-left border" style="min-width: 220px"
+                  <input type="text" v-model="yokoten.machine"/>
+                </td>
+                <td class="text-left border" style="min-width: 50px" v-if="!isEditYokoten || idxYokotenSelected != i">
+                  {{ yokoten.datePlan }}
+                </td>
+                <td class="text-left border" style="min-width: 220px"
                     v-else-if="isEditYokoten || idxYokotenSelected != i">
-                    <input type="date" v-model="yokoten.datePlan" />
-                  </td>
-                  <td class="text-left border" style="min-width: 50px" v-if="!isEditYokoten || idxYokotenSelected != i">
-                    {{ yokoten.pic }}
-                  </td>
-                  <td class="text-left border" style="min-width: 50px"
+                  <input type="date" v-model="yokoten.datePlan"/>
+                </td>
+                <td class="text-left border" style="min-width: 50px" v-if="!isEditYokoten || idxYokotenSelected != i">
+                  {{ yokoten.pic }}
+                </td>
+                <td class="text-left border" style="min-width: 50px"
                     v-else-if="isEditYokoten || idxYokotenSelected != i">
-                    <input type="text" v-model="yokoten.pic" />
-                  </td>
-                  <td v-if="yokoten.judg == true &&
+                  <input type="text" v-model="yokoten.pic"/>
+                </td>
+                <td v-if="yokoten.judg == true &&
                     (!isEditYokoten || idxYokotenSelected != i)
                   " class="text-center border text-success" style="min-width: 50px">
-                    {{ "Sudah" }}
-                  </td>
-                  <td v-else-if="yokoten.judg == false &&
+                  {{ "Sudah" }}
+                </td>
+                <td v-else-if="yokoten.judg == false &&
                     (!isEditYokoten || idxYokotenSelected != i)
                   " class="text-center border text-danger" style="min-width: 50px">
-                    {{ "Belum" }}
-                  </td>
-                  <td class="text-center border" style="min-width: 50px"
+                  {{ "Belum" }}
+                </td>
+                <td class="text-center border" style="min-width: 50px"
                     v-else-if="isEditYokoten || idxYokotenSelected == i">
-                    <select v-model="yokoten.judg">
-                      <option :value="false">Belum</option>
-                      <option :value="true">Sudah</option>
-                    </select>
-                  </td>
-                  <td class="border">
-                    <button class="btn btn-primary py-1 input-lable" v-if="!isEditYokoten || idxYokotenSelected != i"
-                      @click="
+                  <select v-model="yokoten.judg">
+                    <option :value="false">Belum</option>
+                    <option :value="true">Sudah</option>
+                  </select>
+                </td>
+                <td class="border">
+                  <button class="btn btn-primary py-1 input-lable" v-if="!isEditYokoten || idxYokotenSelected != i"
+                          @click="
                         onToogleEditObj(
                           'isEditYokoten',
                           'yokoField',
@@ -979,9 +979,9 @@
                           i
                         )
                         ">
-                      <i class="fa fa-pencil" style="font-size: 10px" aria-hidden="true"></i>
-                    </button>
-                    <button class="btn btn-primary py-1 input-lable" @click="
+                    <i class="fa fa-pencil" style="font-size: 10px" aria-hidden="true"></i>
+                  </button>
+                  <button class="btn btn-primary py-1 input-lable" @click="
                       editContainerObj(
                         i,
                         'containerYokoten',
@@ -990,16 +990,16 @@
                         yokoten
                       )
                       " v-else-if="isEditYokoten || idxYokotenSelected == i">
-                      <i class="fa fa-send" style="font-size: 10px" aria-hidden="true"></i>
-                    </button>
-                  </td>
-                  <td class="border">
-                    <button class="btn btn-danger py-1 input-lable">
-                      <i class="fa fa-trash" style="font-size: 10px" aria-hidden="true"
-                        @click="removeContainerSingle(i, 'containerYokoten')"></i>
-                    </button>
-                  </td>
-                </tr>
+                    <i class="fa fa-send" style="font-size: 10px" aria-hidden="true"></i>
+                  </button>
+                </td>
+                <td class="border">
+                  <button class="btn btn-danger py-1 input-lable">
+                    <i class="fa fa-trash" style="font-size: 10px" aria-hidden="true"
+                       @click="removeContainerSingle(i, 'containerYokoten')"></i>
+                  </button>
+                </td>
+              </tr>
               </tbody>
             </table>
           </div>
@@ -1013,13 +1013,13 @@
                 align-content-center
               ">
               <div class="col p-0">
-                <input class="form-control mt-1" type="text" placeholder="yokoyen item" v-model="yokoField.machine" />
+                <input class="form-control mt-1" type="text" placeholder="yokoyen item" v-model="yokoField.machine"/>
               </div>
               <div class="col p-0">
-                <input class="form-control mt-1" type="date" placeholder="date" v-model="yokoField.datePlan" />
+                <input class="form-control mt-1" type="date" placeholder="date" v-model="yokoField.datePlan"/>
               </div>
               <div class="col p-0">
-                <input class="form-control mt-1" type="text" placeholder="Pic" v-model="yokoField.pic" />
+                <input class="form-control mt-1" type="text" placeholder="Pic" v-model="yokoField.pic"/>
               </div>
             </div>
             <div class="row m-0 p-0">
@@ -1053,30 +1053,30 @@
           <div class="row m-0 p-0">
             <table id="table-why-lama" class="table table-responsive text-center" style="font-size: 10px">
               <thead>
-                <tr>
-                  <th>No</th>
-                  <th style="max-width: 100px">Description</th>
-                  <th colspan="2">actions</th>
-                </tr>
+              <tr>
+                <th>No</th>
+                <th style="max-width: 100px">Description</th>
+                <th colspan="2">actions</th>
+              </tr>
               </thead>
               <tbody>
-                <tr v-for="(whyLama, i) in containerWhyLama" :key="whyLama">
-                  <td class="border" style="min-width: 10px">{{ i + 1 }}</td>
-                  <td class="text-left border" style="min-width: 220px"
+              <tr v-for="(whyLama, i) in containerWhyLama" :key="whyLama">
+                <td class="border" style="min-width: 10px">{{ i + 1 }}</td>
+                <td class="text-left border" style="min-width: 220px"
                     v-if="!isEditWhyLama || idxWhyLamaSelected != i">
-                    {{ whyLama }}
-                  </td>
-                  <td class="text-left border" style="min-width: 220px"
+                  {{ whyLama }}
+                </td>
+                <td class="text-left border" style="min-width: 220px"
                     v-else-if="isEditWhyLama && idxWhyLamaSelected == i">
-                    <input type="text" v-model="descWhyLama" />
-                  </td>
-                  <td class="border">
-                    <button class="btn btn-primary py-1 input-lable" @click="
+                  <input type="text" v-model="descWhyLama"/>
+                </td>
+                <td class="border">
+                  <button class="btn btn-primary py-1 input-lable" @click="
                       onToogleEdit('isEditWhyLama', 'descWhyLama', whyLama, i)
                       " v-if="!isEditWhyLama || idxWhyLamaSelected != i">
-                      <i class="fa fa-pencil" style="font-size: 10px" aria-hidden="true"></i>
-                    </button>
-                    <button class="btn btn-primary py-1 input-lable" @click="
+                    <i class="fa fa-pencil" style="font-size: 10px" aria-hidden="true"></i>
+                  </button>
+                  <button class="btn btn-primary py-1 input-lable" @click="
                       editContainerSingle(
                         i,
                         'containerWhyLama',
@@ -1084,16 +1084,16 @@
                         'isEditWhyLama'
                       )
                       " v-else-if="isEditWhyLama && idxWhyLamaSelected == i">
-                      <i class="fa fa-send" style="font-size: 10px" aria-hidden="true"></i>
-                    </button>
-                  </td>
-                  <td class="border">
-                    <button class="btn btn-danger py-1 input-lable">
-                      <i class="fa fa-trash" style="font-size: 10px" aria-hidden="true"
-                        @click="removeContainerSingle(i, 'containerWhyLama')"></i>
-                    </button>
-                  </td>
-                </tr>
+                    <i class="fa fa-send" style="font-size: 10px" aria-hidden="true"></i>
+                  </button>
+                </td>
+                <td class="border">
+                  <button class="btn btn-danger py-1 input-lable">
+                    <i class="fa fa-trash" style="font-size: 10px" aria-hidden="true"
+                       @click="removeContainerSingle(i, 'containerWhyLama')"></i>
+                  </button>
+                </td>
+              </tr>
               </tbody>
             </table>
           </div>
@@ -1106,7 +1106,7 @@
               align-content-center
             " v-if="isWhyLama">
             <div class="col-7 p-0">
-              <input class="form-control mt-1" type="text" v-model="descWhyLama" />
+              <input class="form-control mt-1" type="text" v-model="descWhyLama"/>
             </div>
             <div class="col-2 p-0">
               <button class="btn btn-info py-1 input-lable" @click="onAddWhyLama()">
@@ -1120,7 +1120,7 @@
             </div>
           </div>
           <div v-if="isLongBd" class="m-0 p-0">
-            <TreeListAnalisys :hide="false" whyCategory="LAMA" :report="false" />
+            <TreeListAnalisys :hide="false" whyCategory="LAMA" :report="false"/>
           </div>
         </div>
       </div>
@@ -1136,7 +1136,7 @@
             <div class="row m-0 p-0">
               <div class="col-8 p-0">
                 <input class="form-control" name="sampleFile5why" ref="why2_img" type="file"
-                  @change="uploadFile('why2_img')" />
+                       @change="uploadFile('why2_img')"/>
               </div>
               <div class=" px-3 m-0">
                 <h class="btn btn-success btn-sm" @click="addToogle('isImgLama')">
@@ -1160,11 +1160,11 @@
             <div class="row m-0 p-0">
               <div class="col-8 p-0">
                 <input class="form-control" name="sampleFile5why" ref="why22_img" type="file"
-                  @change="uploadFile('why22_img')" />
+                       @change="uploadFile('why22_img')"/>
               </div>
               <div class="col-2 py-0 m-0">
                 <button class="btn btn-danger btn-sm"
-                  @click="onCancel('isImgLama'), deleteImg('deleteWhy22', 'why22_img')">
+                        @click="onCancel('isImgLama'), deleteImg('deleteWhy22', 'why22_img')">
                   <i class="fa fa-trash" style="font-size: 10px"></i>
                 </button>
               </div>
@@ -1182,86 +1182,86 @@
           </button>
           <div class="row m-0 p-0">
             <table id="table-cm-lama" class="table table-responsive text-center" style="font-size: 10px"
-              v-if="containerCmLama.length > 0">
+                   v-if="containerCmLama.length > 0">
               <thead>
-                <tr>
-                  <th>No</th>
-                  <th style="max-width: 100px">Countermeasure</th>
-                  <th style="max-width: 50px">Plan Date</th>
-                  <th style="max-width: 50px">PIC</th>
-                  <th style="max-width: 60px">C/M Category</th>
-                  <th style="max-width: 50px">Judg</th>
-                  <th style="min-width: 100px">Result Notes</th>
-                  <th colspan="2">actions</th>
-                </tr>
+              <tr>
+                <th>No</th>
+                <th style="max-width: 100px">Countermeasure</th>
+                <th style="max-width: 50px">Plan Date</th>
+                <th style="max-width: 50px">PIC</th>
+                <th style="max-width: 60px">C/M Category</th>
+                <th style="max-width: 50px">Judg</th>
+                <th style="min-width: 100px">Result Notes</th>
+                <th colspan="2">actions</th>
+              </tr>
               </thead>
               <tbody>
-                <tr v-for="(cmLama, i) in containerCmLama" :key="i">
-                  <td class="border" style="min-width: 10px">{{ i + 1 }}</td>
-                  <td class="text-left border" style="min-width: 220px" v-if="!isEditCmLama || idxCmLamaSelected != i">
-                    {{ cmLama.cmDesc }}
-                  </td>
-                  <td class="text-left border" style="min-width: 220px"
+              <tr v-for="(cmLama, i) in containerCmLama" :key="i">
+                <td class="border" style="min-width: 10px">{{ i + 1 }}</td>
+                <td class="text-left border" style="min-width: 220px" v-if="!isEditCmLama || idxCmLamaSelected != i">
+                  {{ cmLama.cmDesc }}
+                </td>
+                <td class="text-left border" style="min-width: 220px"
                     v-else-if="isEditCmLama || idxCmLamaSelected == i">
-                    <input type="text" v-model="cmLama.cmDesc" />
-                  </td>
-                  <td class="text-left border" style="min-width: 50px" v-if="!isEditCmLama || idxCmLamaSelected != i">
-                    {{ cmLama.datePlan }}
-                  </td>
-                  <td class="text-left border" style="min-width: 50px"
+                  <input type="text" v-model="cmLama.cmDesc"/>
+                </td>
+                <td class="text-left border" style="min-width: 50px" v-if="!isEditCmLama || idxCmLamaSelected != i">
+                  {{ cmLama.datePlan }}
+                </td>
+                <td class="text-left border" style="min-width: 50px"
                     v-else-if="isEditCmLama || idxCmLamaSelected == i">
-                    <input type="date" v-model="cmLama.datePlan" />
-                  </td>
-                  <td class="text-left border" style="min-width: 50px" v-if="!isEditCmLama || idxCmLamaSelected != i">
-                    {{ cmLama.pic }}
-                  </td>
-                  <td class="text-left border" style="min-width: 50px"
+                  <input type="date" v-model="cmLama.datePlan"/>
+                </td>
+                <td class="text-left border" style="min-width: 50px" v-if="!isEditCmLama || idxCmLamaSelected != i">
+                  {{ cmLama.pic }}
+                </td>
+                <td class="text-left border" style="min-width: 50px"
                     v-else-if="isEditCmLama || idxCmLamaSelected == i">
-                    <input type="text" v-model="cmLama.pic" />
-                  </td>
-                  <td class="text-left border" style="min-width: 50px" v-if="!isEditCmLama || idxCmLamaSelected != i">
-                    {{ cmLama.cmCategory }}
-                  </td>
-                  <td class="text-left border" style="min-width: 50px"
+                  <input type="text" v-model="cmLama.pic"/>
+                </td>
+                <td class="text-left border" style="min-width: 50px" v-if="!isEditCmLama || idxCmLamaSelected != i">
+                  {{ cmLama.cmCategory }}
+                </td>
+                <td class="text-left border" style="min-width: 50px"
                     v-else-if="isEditCmLama || idxCmLamaSelected == i">
-                    <select class="form-control mt-1" v-model="cmLama.cmCategory">
-                      <option value="">C/M Category</option>
-                      <option value="Improvement">Improvement</option>
-                      <option value="Training">Training</option>
-                      <option value="Revice TPM">Revisi TPM</option>
-                      <option value="Sparepart">Sparepart</option>
-                    </select>
-                  </td>
-                  <td v-if="cmLama.judg == true &&
+                  <select class="form-control mt-1" v-model="cmLama.cmCategory">
+                    <option value="">C/M Category</option>
+                    <option value="Improvement">Improvement</option>
+                    <option value="Training">Training</option>
+                    <option value="Revice TPM">Revisi TPM</option>
+                    <option value="Sparepart">Sparepart</option>
+                  </select>
+                </td>
+                <td v-if="cmLama.judg == true &&
                     (!isEditCmLama || idxCmLamaSelected != i)
                   " class="text-center border text-success" style="min-width: 50px">
-                    {{ "Sudah" }}
-                  </td>
-                  <td class="text-center border text-danger" style="min-width: 50px" v-else-if="cmLama.judg == false &&
+                  {{ "Sudah" }}
+                </td>
+                <td class="text-center border text-danger" style="min-width: 50px" v-else-if="cmLama.judg == false &&
                     (!isEditCmLama || idxCmLamaSelected != i)
                   ">
-                    {{ "Belum" }}
-                  </td>
-                  <td class="text-center border" style="min-width: 50px"
+                  {{ "Belum" }}
+                </td>
+                <td class="text-center border" style="min-width: 50px"
                     v-else-if="isEditCmLama || idxCmLamaSelected == i">
-                    <select v-model="cmLama.judg">
-                      <option :value="false">Belum</option>
-                      <option :value="true">Sudah</option>
-                    </select>
-                  </td>
-                  <td class="border">
-                    <input v-if="isEditCmLama || idxCmLamaSelected == i" type="text" v-model="cmLama.result" />
-                    <p class="m-0" v-else>
-                      {{ cmLama.result ? cmLama.result : "-" }}
-                    </p>
-                  </td>
-                  <td class="border">
-                    <button class="btn btn-primary py-1 input-lable" @click="
+                  <select v-model="cmLama.judg">
+                    <option :value="false">Belum</option>
+                    <option :value="true">Sudah</option>
+                  </select>
+                </td>
+                <td class="border">
+                  <input v-if="isEditCmLama || idxCmLamaSelected == i" type="text" v-model="cmLama.result"/>
+                  <p class="m-0" v-else>
+                    {{ cmLama.result ? cmLama.result : "-" }}
+                  </p>
+                </td>
+                <td class="border">
+                  <button class="btn btn-primary py-1 input-lable" @click="
                       onToogleEditObj('isEditCmLama', 'cmField', cmLama, i)
                       " v-if="!isEditCmLama || idxCmLamaSelected != i">
-                      <i class="fa fa-pencil" style="font-size: 10px" aria-hidden="true"></i>
-                    </button>
-                    <button class="btn btn-primary py-1 input-lable" @click="
+                    <i class="fa fa-pencil" style="font-size: 10px" aria-hidden="true"></i>
+                  </button>
+                  <button class="btn btn-primary py-1 input-lable" @click="
                       editContainerObj(
                         i,
                         'containerCmLama',
@@ -1270,16 +1270,16 @@
                         cmLama
                       )
                       " v-else-if="isEditCmLama || idxCmLamaSelected == i">
-                      <i class="fa fa-send" style="font-size: 10px" aria-hidden="true"></i>
-                    </button>
-                  </td>
-                  <td class="border">
-                    <button class="btn btn-danger py-1 input-lable"
-                      @click="removeContainerSingle(i, 'containerCmLama')">
-                      <i class="fa fa-trash" style="font-size: 10px" aria-hidden="true"></i>
-                    </button>
-                  </td>
-                </tr>
+                    <i class="fa fa-send" style="font-size: 10px" aria-hidden="true"></i>
+                  </button>
+                </td>
+                <td class="border">
+                  <button class="btn btn-danger py-1 input-lable"
+                          @click="removeContainerSingle(i, 'containerCmLama')">
+                    <i class="fa fa-trash" style="font-size: 10px" aria-hidden="true"></i>
+                  </button>
+                </td>
+              </tr>
               </tbody>
             </table>
           </div>
@@ -1293,13 +1293,13 @@
                 align-content-center
               ">
               <div class="col p-0">
-                <input class="form-control mt-1" type="text" placeholder="countermeasure" v-model="cmField.cmDesc" />
+                <input class="form-control mt-1" type="text" placeholder="countermeasure" v-model="cmField.cmDesc"/>
               </div>
               <div class="col p-0">
-                <input class="form-control mt-1" type="date" placeholder="date" v-model="cmField.datePlan" />
+                <input class="form-control mt-1" type="date" placeholder="date" v-model="cmField.datePlan"/>
               </div>
               <div class="col p-0">
-                <input class="form-control mt-1" type="text" placeholder="Pic" v-model="cmField.pic" />
+                <input class="form-control mt-1" type="text" placeholder="Pic" v-model="cmField.pic"/>
               </div>
               <div class="col p-0">
                 <select class="form-control mt-1" v-model="cmField.cmCategory">
@@ -1333,11 +1333,11 @@
           <span class="input-lable">Attachment Meeting</span>
           <div class="row m-0 p-0">
             <div class="col-8 p-0">
-              <input class="form-control" name="sampleFile" ref="attachFile" type="file" @change="onSelectAttachment" />
+              <input class="form-control" name="sampleFile" ref="attachFile" type="file" @change="onSelectAttachment"/>
             </div>
             <div class="col-2 p-0">
               <button class="btn btn-secondary btn-sm" type="submit"
-                @click="onSubmitAttach(`${urlUpload}?folder=attachmentMeeting&nameFile=attachment_${selectedAttachFile.name}`)">
+                      @click="onSubmitAttach(`${urlUpload}?folder=attachmentMeeting&nameFile=attachment_${selectedAttachFile.name}`)">
                 Upload
               </button>
             </div>
@@ -1355,7 +1355,7 @@
           </a>
         </div>
       </div>
-      <LegendStatus style="margin-top: 20px" />
+      <LegendStatus style="margin-top: 20px"/>
       <div class="card">
         <div class="row m-0 p-0 mt-1">
           <div class="col text-left">
@@ -1368,7 +1368,7 @@
             setRole != 'DDH'
           ">
             <button class="btn-success btn px-2 py-1 fontSp mr-1" @click="submitEdit('WHY')"
-              :disabled="containerWhyTerjadi.length == 0">
+                    :disabled="containerWhyTerjadi.length == 0">
               Approve
             </button>
             <button class="btn-info btn px-2 py-1 fontSp" @click="
@@ -1392,7 +1392,7 @@
                           <div class="input-group-prepend">
                             <span class="input-group-text">Feedback</span>
                           </div>
-                          <input type="text" v-model="fiveWhyLhFeedback" class="form-control" />
+                          <input type="text" v-model="fiveWhyLhFeedback" class="form-control"/>
                         </div>
                       </div>
                     </div>
@@ -1424,7 +1424,7 @@
                           <div class="input-group-prepend">
                             <span class="input-group-text">Feedback</span>
                           </div>
-                          <input type="text" v-model="fiveWhyShFeedback" class="form-control" />
+                          <input type="text" v-model="fiveWhyShFeedback" class="form-control"/>
                         </div>
                       </div>
                     </div>
@@ -1448,30 +1448,30 @@
           <div class="col">
             <table class="table table-bordered mt-1">
               <thead class="fontSp">
-                <tr>
-                  <th>TL Check</th>
-                  <th>GL Check</th>
-                  <th>SH Check</th>
-                </tr>
+              <tr>
+                <th>TL Check</th>
+                <th>GL Check</th>
+                <th>SH Check</th>
+              </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>
-                    <div :class="`${fiveWhyTlApprove} text-center`">
-                      <span style="font-size: 6px">.</span>
-                    </div>
-                  </td>
-                  <td>
-                    <div :class="`${fiveWhylhCheck} text-center`">
-                      <span style="font-size: 6px">.</span>
-                    </div>
-                  </td>
-                  <td>
-                    <div :class="`${fiveWhyshCheck} text-center`">
-                      <span style="font-size: 6px">.</span>
-                    </div>
-                  </td>
-                </tr>
+              <tr>
+                <td>
+                  <div :class="`${fiveWhyTlApprove} text-center`">
+                    <span style="font-size: 6px">.</span>
+                  </div>
+                </td>
+                <td>
+                  <div :class="`${fiveWhylhCheck} text-center`">
+                    <span style="font-size: 6px">.</span>
+                  </div>
+                </td>
+                <td>
+                  <div :class="`${fiveWhyshCheck} text-center`">
+                    <span style="font-size: 6px">.</span>
+                  </div>
+                </td>
+              </tr>
               </tbody>
             </table>
           </div>
@@ -1489,7 +1489,7 @@
               setRole != 'DDH'
             ">
               <button class="btn-success btn px-2 py-1 fontSp mr-1" @click="submitEdit('CM')"
-                :disabled="containerCmTerjadi.length == 0">
+                      :disabled="containerCmTerjadi.length == 0">
                 Approve
               </button>
               <button class="btn-info btn px-2 py-1 fontSp" @click="
@@ -1513,7 +1513,7 @@
                             <div class="input-group-prepend">
                               <span class="input-group-text">Feedback</span>
                             </div>
-                            <input type="text" v-model="cmLhFeedback" class="form-control" />
+                            <input type="text" v-model="cmLhFeedback" class="form-control"/>
                           </div>
                         </div>
                       </div>
@@ -1545,7 +1545,7 @@
                             <div class="input-group-prepend">
                               <span class="input-group-text">Feedback</span>
                             </div>
-                            <input type="text" v-model="cmShFeedback" class="form-control" />
+                            <input type="text" v-model="cmShFeedback" class="form-control"/>
                           </div>
                         </div>
                       </div>
@@ -1569,30 +1569,30 @@
             <div class="col">
               <table class="table table-bordered mt-1">
                 <thead class="fontSp">
-                  <tr>
-                    <th>TL Check</th>
-                    <th>GL Check</th>
-                    <th>SH Check</th>
-                  </tr>
+                <tr>
+                  <th>TL Check</th>
+                  <th>GL Check</th>
+                  <th>SH Check</th>
+                </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>
-                      <div :class="`${cmTlApprove} text-center`">
-                        <span style="font-size: 6px">.</span>
-                      </div>
-                    </td>
-                    <td>
-                      <div :class="`${cmlhCheck} text-center`">
-                        <span style="font-size: 6px">.</span>
-                      </div>
-                    </td>
-                    <td>
-                      <div :class="`${cmshCheck} text-center`">
-                        <span style="font-size: 6px">.</span>
-                      </div>
-                    </td>
-                  </tr>
+                <tr>
+                  <td>
+                    <div :class="`${cmTlApprove} text-center`">
+                      <span style="font-size: 6px">.</span>
+                    </div>
+                  </td>
+                  <td>
+                    <div :class="`${cmlhCheck} text-center`">
+                      <span style="font-size: 6px">.</span>
+                    </div>
+                  </td>
+                  <td>
+                    <div :class="`${cmshCheck} text-center`">
+                      <span style="font-size: 6px">.</span>
+                    </div>
+                  </td>
+                </tr>
                 </tbody>
               </table>
             </div>
@@ -1606,7 +1606,7 @@
             </div>
             <div class="col justify-content-around" v-if="setRole == 'Dph'">
               <button class="btn-success btn px-2 py-1 fontSp mr-1" @click="submitEdit('CM')"
-                :disabled="containerCmTerjadi.length == 0">
+                      :disabled="containerCmTerjadi.length == 0">
                 Approve
               </button>
               <button class="btn-info btn px-2 py-1 fontSp" @click="isDialogShowDhCm = true">
@@ -1626,7 +1626,7 @@
                             <div class="input-group-prepend">
                               <span class="input-group-text">Feedback</span>
                             </div>
-                            <input type="text" v-model="cmDhFeedback" class="form-control" />
+                            <input type="text" v-model="cmDhFeedback" class="form-control"/>
                           </div>
                         </div>
                       </div>
@@ -1650,18 +1650,18 @@
             <div class="col">
               <table class="table table-bordered mt-1">
                 <thead class="fontSp">
-                  <tr>
-                    <th>Dph Check</th>
-                  </tr>
+                <tr>
+                  <th>Dph Check</th>
+                </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>
-                      <div :class="`${dhCheck} text-center`">
-                        <span style="font-size: 6px">.</span>
-                      </div>
-                    </td>
-                  </tr>
+                <tr>
+                  <td>
+                    <div :class="`${dhCheck} text-center`">
+                      <span style="font-size: 6px">.</span>
+                    </div>
+                  </td>
+                </tr>
                 </tbody>
               </table>
             </div>
@@ -1680,7 +1680,7 @@
           ">
             <div class="col-2 p-1 pr-0">
               <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil" width="30"
-                style="position: absolute" />
+                   style="position: absolute"/>
             </div>
             <div class="col-9 p-1">
               <div class="card rounded-all text-left p-1" style="font-size: 9px">
@@ -1694,7 +1694,7 @@
           ">
             <div class="col-2 p-1 pr-0">
               <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil" width="30"
-                style="position: absolute" />
+                   style="position: absolute"/>
             </div>
             <div class="col-9 p-1">
               <div class="card rounded-all text-left p-1" style="font-size: 9px">
@@ -1722,7 +1722,7 @@
           <div class="row mb-1" v-if="String(cmLhFeedback) != 'null' && String(cmLhFeedback) != ''">
             <div class="col-2 p-1 pr-0">
               <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil" width="30"
-                style="position: absolute" />
+                   style="position: absolute"/>
             </div>
             <div class="col-9 p-1">
               <div class="card rounded-all text-left p-1" style="font-size: 9px">
@@ -1734,7 +1734,7 @@
           <div class="row mb-1" v-if="String(cmShFeedback) != 'null' && String(cmShFeedback) != ''">
             <div class="col-2 p-1 pr-0">
               <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil" width="30"
-                style="position: absolute" />
+                   style="position: absolute"/>
             </div>
             <div class="col-9 p-1">
               <div class="card rounded-all text-left p-1" style="font-size: 9px">
@@ -1746,7 +1746,7 @@
           <div class="row mb-1" v-if="String(cmDhFeedback) != 'null' && String(cmDhFeedback) != ''">
             <div class="col-2 p-1 pr-0">
               <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil" width="30"
-                style="position: absolute" />
+                   style="position: absolute"/>
             </div>
             <div class="col-9 p-1">
               <div class="card rounded-all text-left p-1" style="font-size: 9px">
@@ -1767,7 +1767,7 @@
             <span style="font-size: 12px; font-weight: bold">Image Ilustration</span>
           </div>
           <div class="col-12 col-md-10 col-xl-12 py-0">
-            <img :src="displayImg_problem" :alt="fimage" height="300" width="300" />
+            <img :src="displayImg_problem" :alt="fimage" height="300" width="300"/>
             <a class="btn btn-primary text-light justify-content-center" style="
                 position: absolute;
                 left: 25%;
@@ -1784,30 +1784,30 @@
         <span class="input-lable">Last Report File</span>
         <button v-if="!file_report" class="btn btn-sm btn-warning" disabled>Belum Ada Report di upload</button>
         <a v-else class="btn btn-sm btn-success text-light"
-          :href="`https://mt-system.id/v2/download-report?fid=${id_p_m}`">Download Report</a>
+           :href="reportUri">Download Report</a>
       </div>
       <div class="card mt-2">
         <div class="card-body">
           <span class="input-lable">Upload Report <a class="badge badge-pill badge-primary text-light"
-              :href="`https://mt-system.id/v2/download-report?fid=${id_p_m}`">Download
+                                                     :href="reportUri">Download
               Template</a></span>
-          <input type="file" class="form-control" ref="fileReport" @change="isNotFill = false" />
+          <input type="file" class="form-control" ref="fileReport" @change="isNotFill = false"/>
           <button class="btn btn-sm btn-primary" :disabled="isNotFill" @click="uploadFileReport()">
             Upload
           </button>
         </div>
       </div>
       <!-- SUBMIT EDIT BTN -->
-      <hr class="bg-light m-0" />
+      <hr class="bg-light m-0"/>
       <div class="row m-0 p-0 mt-3">
         <div class="col-6">
           <button v-if="!isDurationInvalid" class="btn btn-outline-success" :id="`${isPleaseFinish ? 'blink' : ''}`"
-            @click="submitEdit()" :disabled="isLoading" style="width: 100%">
+                  @click="submitEdit()" :disabled="isLoading" style="width: 100%">
             <i v-if="isLoading" class="fa fa-refresh fa-spin" style="font-size: 14px"></i>
             <div v-else>Finish</div>
           </button>
           <button class="btn btn-outline-info" v-if="isDurationInvalid && !isProblemClose" @click="updateEdit()"
-            style="width: 100%">
+                  style="width: 100%">
             <i v-if="isLoading" class="fa fa-refresh fa-spin" style="font-size: 14px"></i>
             <div v-else>Update</div>
           </button>
@@ -1825,7 +1825,7 @@
 <script>
 import ScrollableContainer from "vue-scrollable-container";
 import axios from "axios";
-import { mapState } from "vuex";
+import {mapState} from "vuex";
 import LegendStatus from "@/components/LegendStatus";
 // import ExcalamationInfo from "../components/ExclamationInfo";
 // import moment from "moment";
@@ -1833,6 +1833,8 @@ import formatDate from "@/functions/formatDate";
 
 import TreeListAnalisys from "@/components/TreeListAnalisys.vue";
 import Swal from "sweetalert2";
+
+const host = process.env.VUE_APP_HOST;
 
 export default {
   name: "EditProblem",
@@ -2043,15 +2045,15 @@ export default {
           if (item.duration) {
             countOffsetTime += +item.duration;
             item.date_plan = formatDate.YYYYMMDD(
-              new Date(timeInit + +item.duration * 3600 * 1000 * 24)
+                new Date(timeInit + +item.duration * 3600 * 1000 * 24)
             );
           }
         });
         let timeOffset =
-          countOffsetTime == 0 ? 1 : countOffsetTime * 3600 * 1000 * 24;
+            countOffsetTime == 0 ? 1 : countOffsetTime * 3600 * 1000 * 24;
         console.log(new Date(timeInit + timeOffset));
         this.datePlanTheme = formatDate.YYYYMMDD(
-          new Date(timeInit + timeOffset)
+            new Date(timeInit + timeOffset)
         );
       },
       deep: true,
@@ -2209,7 +2211,7 @@ export default {
         this.isDurationInvalid = true;
       } else if (isNaN(dura)) {
         alert(
-          "tolong masukan date start dan date end apabila problem sudah selesai"
+            "tolong masukan date start dan date end apabila problem sudah selesai"
         );
         this.isDurationInvalid = true;
       } else {
@@ -2218,7 +2220,8 @@ export default {
         this.isProblemClose = true;
       }
     },
-    isEditWhyTerjadi: function () { },
+    isEditWhyTerjadi: function () {
+    },
     isEditWhyLama: function () {
       console.log("lama berubah");
     },
@@ -2336,6 +2339,9 @@ export default {
   },
   computed: {
     ...mapState(["storeTheme", "newAnalisys", "newAnalisys2"]),
+    reportUri() {
+      return `${host}/v2/download-report?fid=${this.id_p_m}`;
+    }
   },
   methods: {
     async uploadFileReport() {
@@ -2367,18 +2373,18 @@ export default {
     },
     checkFocusTheme() {
       axios
-        .get(
-          `${process.env.VUE_APP_HOST}/focus-theme/check/${this.$route.query.v_}`
-        )
-        .then((result) => {
-          console.log(result);
-          let memberFT = result.data.data[0].member_name;
-          this.is_ft_selected = true;
-          this.memberFT = memberFT;
-        })
-        .catch(() => {
-          this.is_ft_selected = false;
-        });
+          .get(
+              `${process.env.VUE_APP_HOST}/focus-theme/check/${this.$route.query.v_}`
+          )
+          .then((result) => {
+            console.log(result);
+            let memberFT = result.data.data[0].member_name;
+            this.is_ft_selected = true;
+            this.memberFT = memberFT;
+          })
+          .catch(() => {
+            this.is_ft_selected = false;
+          });
     },
     submitFT() {
       this.loadingBtn = true;
@@ -2388,16 +2394,16 @@ export default {
       };
       console.log(newFT);
       axios
-        .post(`${process.env.VUE_APP_HOST}/focus-theme`, newFT)
-        .then(() => {
-          alert("Berhasil menambah focus theme");
-          this.modalShow = false;
-          this.loadingBtn = false;
-          this.checkFocusTheme();
-        })
-        .catch(() => {
-          alert("Gagal menambah focus theme");
-        });
+          .post(`${process.env.VUE_APP_HOST}/focus-theme`, newFT)
+          .then(() => {
+            alert("Berhasil menambah focus theme");
+            this.modalShow = false;
+            this.loadingBtn = false;
+            this.checkFocusTheme();
+          })
+          .catch(() => {
+            alert("Gagal menambah focus theme");
+          });
     },
     showModalFt() {
       this.modalShow = true;
@@ -2419,18 +2425,18 @@ export default {
     closeThema() {
       this.isLoading = true;
       axios
-        .put(
-          `${process.env.VUE_APP_HOST}/finishedTheme/${this.id_m_problem_member}`
-        )
-        .then(() => {
-          alert("Problem Ini sudah close :) Mantaaaab ...");
-          this.is_status = true;
-          this.isLoading = false;
-        })
-        .catch(() => {
-          alert("Eits Error Bro..");
-          this.isLoading = false;
-        });
+          .put(
+              `${process.env.VUE_APP_HOST}/finishedTheme/${this.id_m_problem_member}`
+          )
+          .then(() => {
+            alert("Problem Ini sudah close :) Mantaaaab ...");
+            this.is_status = true;
+            this.isLoading = false;
+          })
+          .catch(() => {
+            alert("Eits Error Bro..");
+            this.isLoading = false;
+          });
     },
     addMemberTheme() {
       this.isLoading = true;
@@ -2446,44 +2452,44 @@ export default {
         this.sh_comment ? (newThema.sh_comment = this.sh_comment) : null;
         this.dph_comment ? (newThema.dph_comment = this.dph_comment) : null;
         this.containerThemaActivity.length > 0
-          ? (newThema.detail_activity = JSON.stringify(
-            this.containerThemaActivity
-          ))
-          : null;
+            ? (newThema.detail_activity = JSON.stringify(
+                this.containerThemaActivity
+            ))
+            : null;
         console.log(newThema);
         if (this.id_m_problem_member) {
           axios
-            .put(
-              `${process.env.VUE_APP_HOST}/updateFocusTheme/${this.id_m_problem_member}`,
-              newThema
-            )
-            .then((result) => {
-              console.log(result);
-              this.isLoading = false;
-              this.isMemberThema = true;
-              // this.getDetailProblem();
-              alert("Success Edit Member Thema");
-            })
-            .catch((err) => {
-              this.isLoading = false;
-              alert("Gagal Edit Member Thema");
-              console.log(err);
-            });
+              .put(
+                  `${process.env.VUE_APP_HOST}/updateFocusTheme/${this.id_m_problem_member}`,
+                  newThema
+              )
+              .then((result) => {
+                console.log(result);
+                this.isLoading = false;
+                this.isMemberThema = true;
+                // this.getDetailProblem();
+                alert("Success Edit Member Thema");
+              })
+              .catch((err) => {
+                this.isLoading = false;
+                alert("Gagal Edit Member Thema");
+                console.log(err);
+              });
         } else {
           axios
-            .post(`${process.env.VUE_APP_HOST}/addFocusTheme`, newThema)
-            .then((result) => {
-              console.log(result);
-              this.isLoading = false;
-              this.isMemberThema = true;
-              // this.getDetailProblem();
-              alert("Success Menambah Thema");
-            })
-            .catch((err) => {
-              this.isLoading = false;
-              alert("Gagal Menambah Thema");
-              console.log(err);
-            });
+              .post(`${process.env.VUE_APP_HOST}/addFocusTheme`, newThema)
+              .then((result) => {
+                console.log(result);
+                this.isLoading = false;
+                this.isMemberThema = true;
+                // this.getDetailProblem();
+                alert("Success Menambah Thema");
+              })
+              .catch((err) => {
+                this.isLoading = false;
+                alert("Gagal Menambah Thema");
+                console.log(err);
+              });
         }
       } else {
         alert("Di isi dulu nama dan date plan nya bestiee..");
@@ -2499,7 +2505,7 @@ export default {
 
       if (file.size > 1000000) {
         alert(
-          "Size file anda terlalu besar (melebihi 1 MB), mohon di kecilkan"
+            "Size file anda terlalu besar (melebihi 1 MB), mohon di kecilkan"
         );
         this.$refs[ref].files[0].name = "";
       } else {
@@ -2519,24 +2525,24 @@ export default {
         // console.log(this.selectedFile);
         // console.log(formData);
         await axios
-          .post(url, formData)
-          .then((result) => {
-            console.log(result);
-            if (result.status == 201) {
-              this[fimage] = result.data.path;
-              // localStorage.setItem("image", result.data.path);
-              this[displayImg] = `${process.env.VUE_APP_HOST}/image?path=${result.data.path}`;
-              alert(
-                "success to upload, silahkan tekan tombol finished kalau sudah slesai input semua data"
-              );
-            }
-            this.isLoading = false;
-          })
-          .catch((err) => {
-            console.log(err);
-            this.isLoading = false;
-            // alert(JSON.stringify(err));
-          });
+            .post(url, formData)
+            .then((result) => {
+              console.log(result);
+              if (result.status == 201) {
+                this[fimage] = result.data.path;
+                // localStorage.setItem("image", result.data.path);
+                this[displayImg] = `${process.env.VUE_APP_HOST}/image?path=${result.data.path}`;
+                alert(
+                    "success to upload, silahkan tekan tombol finished kalau sudah slesai input semua data"
+                );
+              }
+              this.isLoading = false;
+            })
+            .catch((err) => {
+              console.log(err);
+              this.isLoading = false;
+              // alert(JSON.stringify(err));
+            });
       } else {
         this.isLoading = false;
         alert(`Pastikan File tidak lebih dari 1 MB dan file sudah di pilih`);
@@ -2548,7 +2554,7 @@ export default {
 
       if (file.size > 1000000) {
         alert(
-          "Size file anda terlalu besar (melebihi 1 MB), mohon di kecilkan"
+            "Size file anda terlalu besar (melebihi 1 MB), mohon di kecilkan"
         );
         this.$refs.file.files[0].name = "";
       } else {
@@ -2573,24 +2579,24 @@ export default {
         // console.log(this.selectedFile);
         // console.log(formData);
         await axios
-          .post(url, formData)
-          .then((result) => {
-            console.log(result);
-            if (result.status == 201) {
-              this.fimage = result.data.path;
-              // localStorage.setItem("image", result.data.path);
-              this.displayImg = `${process.env.VUE_APP_HOST}/image?path=${result.data.path}`;
-              alert(
-                "success to upload, silahkan tekan tombol finished kalau sudah slesai input semua data"
-              );
-            }
-            this.isLoading = false;
-          })
-          .catch((err) => {
-            console.log(err);
-            this.isLoading = false;
-            // alert(JSON.stringify(err));
-          });
+            .post(url, formData)
+            .then((result) => {
+              console.log(result);
+              if (result.status == 201) {
+                this.fimage = result.data.path;
+                // localStorage.setItem("image", result.data.path);
+                this.displayImg = `${process.env.VUE_APP_HOST}/image?path=${result.data.path}`;
+                alert(
+                    "success to upload, silahkan tekan tombol finished kalau sudah slesai input semua data"
+                );
+              }
+              this.isLoading = false;
+            })
+            .catch((err) => {
+              console.log(err);
+              this.isLoading = false;
+              // alert(JSON.stringify(err));
+            });
       } else {
         this.isLoading = false;
         alert(`Pastikan File tidak lebih dari 1 MB dan file sudah di pilih`);
@@ -2603,19 +2609,19 @@ export default {
           const formData = new FormData();
           formData.append("file", this.selectedAttachFile);
           await axios
-            .post(url, formData)
-            .then((result) => {
-              console.log(result);
-              if (result.status == 201) {
-                this.fattachment = result.data.path;
-                // localStorage.setItem("image", result.data.path);
-                this.displayAttachment = `${process.env.VUE_APP_HOST}/image?path=${result.data.path}`;
-                alert(
-                  "success to upload, silahkan tekan tombol finished kalau sudah slesai input semua data"
-                );
-              }
-              this.isLoading = false;
-            })
+              .post(url, formData)
+              .then((result) => {
+                console.log(result);
+                if (result.status == 201) {
+                  this.fattachment = result.data.path;
+                  // localStorage.setItem("image", result.data.path);
+                  this.displayAttachment = `${process.env.VUE_APP_HOST}/image?path=${result.data.path}`;
+                  alert(
+                      "success to upload, silahkan tekan tombol finished kalau sudah slesai input semua data"
+                  );
+                }
+                this.isLoading = false;
+              })
         } else {
           Swal.fire({
             title: "File sebelumnya akan hilang! kamu yakin ingin upload file?",
@@ -2628,19 +2634,19 @@ export default {
               const formData = new FormData();
               formData.append("file", this.selectedAttachFile);
               await axios
-                .post(url, formData)
-                .then((result) => {
-                  console.log(result);
-                  if (result.status == 201) {
-                    this.fattachment = result.data.path;
-                    // localStorage.setItem("image", result.data.path);
-                    this.displayAttachment = `${process.env.VUE_APP_HOST}/image?path=${result.data.path}`;
-                    alert(
-                      "success to upload, silahkan tekan tombol finished kalau sudah slesai input semua data"
-                    );
-                  }
-                  this.isLoading = false;
-                })
+                  .post(url, formData)
+                  .then((result) => {
+                    console.log(result);
+                    if (result.status == 201) {
+                      this.fattachment = result.data.path;
+                      // localStorage.setItem("image", result.data.path);
+                      this.displayAttachment = `${process.env.VUE_APP_HOST}/image?path=${result.data.path}`;
+                      alert(
+                          "success to upload, silahkan tekan tombol finished kalau sudah slesai input semua data"
+                      );
+                    }
+                    this.isLoading = false;
+                  })
             }
           });
         }
@@ -2756,10 +2762,10 @@ export default {
       }
     },
     onToogleEditObj(
-      condToogle,
-      editDesc = null,
-      beforeValue = null,
-      idxSelected
+        condToogle,
+        editDesc = null,
+        beforeValue = null,
+        idxSelected
     ) {
       this[`${condToogle}`] = true;
       this.idxCmTerjadiSelected = idxSelected;
@@ -2772,8 +2778,7 @@ export default {
           pic: beforeValue.pic,
           judg: beforeValue.judg,
         };
-      }
-      else {
+      } else {
         this[`${editDesc}`] = {
           machine: beforeValue.machine,
           datePlan: beforeValue.datePlan,
@@ -2799,7 +2804,7 @@ export default {
       this[`${editDesc}`] = afterVal;
       this[`${containerName}`].splice(idx, 1, this[`${editDesc}`]);
       this[`${condToogle}`] = false;
-      this[`${editDesc}`] = { stepDesc: "", quick6: "", idealTime: 0, actualTime: 0 };
+      this[`${editDesc}`] = {stepDesc: "", quick6: "", idealTime: 0, actualTime: 0};
     },
     editContainerObj(idx, containerName, editDesc, condToogle, afterVal) {
       console.log(this[`${containerName}`]);
@@ -2807,7 +2812,7 @@ export default {
       this[`${editDesc}`] = afterVal;
       this[`${containerName}`].splice(idx, 1, this[`${editDesc}`]);
       this[`${condToogle}`] = false;
-      this[`${editDesc}`] = { cmDesc: "", datePlan: "", pic: "", cmCategory: "", judg: false };
+      this[`${editDesc}`] = {cmDesc: "", datePlan: "", pic: "", cmCategory: "", judg: false};
     },
     editCmCategory(idx, containerName, afterVal) {
       this[`${containerName}`].splice(idx, 1, afterVal);
@@ -2818,17 +2823,17 @@ export default {
       try {
         if (this.newAnalisys) {
           await axios
-            .post(
-              `${process.env.VUE_APP_HOST}/why_analisys/add/${this.$route.query.v_}?analisys_category=TERJADI`,
-              this.newAnalisys
-            )
+              .post(
+                  `${process.env.VUE_APP_HOST}/why_analisys/add/${this.$route.query.v_}?analisys_category=TERJADI`,
+                  this.newAnalisys
+              )
         }
         if (this.newAnalisys2) {
           await axios
-            .post(
-              `${process.env.VUE_APP_HOST}/why_analisys/add/${this.$route.query.v_}?analisys_category=LAMA`,
-              this.newAnalisys2
-            )
+              .post(
+                  `${process.env.VUE_APP_HOST}/why_analisys/add/${this.$route.query.v_}?analisys_category=LAMA`,
+                  this.newAnalisys2
+              )
         }
         if (this.picThema) {
           this.addMemberTheme();
@@ -2915,19 +2920,19 @@ export default {
               url += `?isFinished=${this.fmc_id}&line=${this.fline}`;
             }
             await axios
-              .put(url, dataPrev)
-              .then(async (result) => {
-                console.log(result);
-                this.isLoading = false;
-                if (isBack) {
-                  alert("Success to Edit Problem");
-                  this.$router.go(-1);
-                } else {
-                  // alert("Success");
-                  this.getDetailProblem();
-                  // this.$router.go();
-                }
-              })
+                .put(url, dataPrev)
+                .then(async (result) => {
+                  console.log(result);
+                  this.isLoading = false;
+                  if (isBack) {
+                    alert("Success to Edit Problem");
+                    this.$router.go(-1);
+                  } else {
+                    // alert("Success");
+                    this.getDetailProblem();
+                    // this.$router.go();
+                  }
+                })
             if (localStorage.getItem("intervalId")) {
               clearInterval(localStorage.getItem("intervalId"))
               localStorage.removeItem("intervalId")
@@ -2961,23 +2966,23 @@ export default {
         console.log(this.newAnalisys);
         if (this.newAnalisys) {
           await axios
-            .post(
-              `${process.env.VUE_APP_HOST}/why_analisys/add/${this.$route.query.v_}?analisys_category=TERJADI`,
-              this.newAnalisys
-            )
-            .then((result) => {
-              console.log(result);
-            })
+              .post(
+                  `${process.env.VUE_APP_HOST}/why_analisys/add/${this.$route.query.v_}?analisys_category=TERJADI`,
+                  this.newAnalisys
+              )
+              .then((result) => {
+                console.log(result);
+              })
         }
         if (this.newAnalisys2) {
           await axios
-            .post(
-              `${process.env.VUE_APP_HOST}/why_analisys/add/${this.$route.query.v_}?analisys_category=LAMA`,
-              this.newAnalisys2
-            )
-            .then((result) => {
-              console.log(result);
-            })
+              .post(
+                  `${process.env.VUE_APP_HOST}/why_analisys/add/${this.$route.query.v_}?analisys_category=LAMA`,
+                  this.newAnalisys2
+              )
+              .then((result) => {
+                console.log(result);
+              })
         }
         this.isLoading = true;
         let formData = new FormData();
@@ -3042,12 +3047,12 @@ export default {
         }
         let url = `${process.env.VUE_APP_HOST}/editProblem/${this.$route.query.v_}?fline=${this.fline}&fmc_name=${this.fmc_name}`;
         await axios
-          .put(url, dataPrev)
-          .then(() => {
-            alert("Success to update problem");
-            this.isLoading = false;
-            this.$router.go(-1);
-          })
+            .put(url, dataPrev)
+            .then(() => {
+              alert("Success to update problem");
+              this.isLoading = false;
+              this.$router.go(-1);
+            })
 
       } catch (err) {
         console.log(err);
@@ -3070,16 +3075,16 @@ export default {
     getMcId() {
       console.log(this.fmc_name);
       axios
-        .get(`${process.env.VUE_APP_HOST}/searchMc?machine=${this.fmc_name}`)
-        .then((result) => {
-          // console.log("GETTING ID MC");
-          // console.log(result.data.data[0]);
-          this.fmc_id = result.data.data[0].fid;
-        })
-        .catch((err) => {
-          console.log(err);
-          // alert(JSON.stringify(err));
-        });
+          .get(`${process.env.VUE_APP_HOST}/searchMc?machine=${this.fmc_name}`)
+          .then((result) => {
+            // console.log("GETTING ID MC");
+            // console.log(result.data.data[0]);
+            this.fmc_id = result.data.data[0].fid;
+          })
+          .catch((err) => {
+            console.log(err);
+            // alert(JSON.stringify(err));
+          });
     },
     clearDialog() {
       this.isDialogShowLhFiveWhy = false;
@@ -3116,16 +3121,16 @@ export default {
         fstatus: "0",
       };
       axios
-        .post(
-          `${process.env.VUE_APP_HOST}/postHenkaten?keywordTempAction=${this.temporaryAction}`,
-          postData
-        )
-        .then((result) => {
-          console.log(result);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+          .post(
+              `${process.env.VUE_APP_HOST}/postHenkaten?keywordTempAction=${this.temporaryAction}`,
+              postData
+          )
+          .then((result) => {
+            console.log(result);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
     },
     checkNameCategory() {
       console.log(this.ferror_name.includes("[FULLCAP]"));
@@ -3139,348 +3144,348 @@ export default {
     },
     async getDetailProblem() {
       await axios
-        .get(
-          `${process.env.VUE_APP_HOST}/getDetailProblem?v_=${this.$route.query.v_}`
-        )
-        .then((result) => {
-          this.isLoading = false;
-          let item = result.data.data[0];
-          console.log(item.uraian);
-          // AMJAD1
-          if (item.file_report) {
-            this.file_report = item.file_report
-          }
-          if (item.uraian.length > 0) {
-            for (let i = 0; i < item.uraian.length; i++) {
-              const element = item.uraian[i];
-              if (element.type_uraian == 'general') {
-                this.furaian_kejadian = element.desc_nm
-                this.fimage_problem = element.ilustration;
-                this.displayImg_problem = `${process.env.VUE_APP_HOST}/image?path=${this.fimage_problem}`;
-                this.fimage2_problem = element.ilustration2;
-                this.displayImg2_problem = `${process.env.VUE_APP_HOST}/image?path=${this.fimage2_problem}`;
+          .get(
+              `${process.env.VUE_APP_HOST}/getDetailProblem?v_=${this.$route.query.v_}`
+          )
+          .then((result) => {
+            this.isLoading = false;
+            let item = result.data.data[0];
+            console.log(item.uraian);
+            // AMJAD1
+            if (item.file_report) {
+              this.file_report = item.file_report
+            }
+            if (item.uraian.length > 0) {
+              for (let i = 0; i < item.uraian.length; i++) {
+                const element = item.uraian[i];
+                if (element.type_uraian == 'general') {
+                  this.furaian_kejadian = element.desc_nm
+                  this.fimage_problem = element.ilustration;
+                  this.displayImg_problem = `${process.env.VUE_APP_HOST}/image?path=${this.fimage_problem}`;
+                  this.fimage2_problem = element.ilustration2;
+                  this.displayImg2_problem = `${process.env.VUE_APP_HOST}/image?path=${this.fimage2_problem}`;
+                }
+                if (element.type_uraian == 'standard') {
+                  this.filustrasi_standart = element.desc_nm;
+                  this.std_img = element.ilustration;
+                  this.displayStd_img = `${process.env.VUE_APP_HOST}/image?path=${this.std_img}`;
+                  this.std2_img = element.ilustration2;
+                  this.displayStd2_img = `${process.env.VUE_APP_HOST}/image?path=${this.std2_img}`;
+                }
+                if (element.type_uraian == 'actual') {
+                  this.filustrasi_actual = element.desc_nm;
+                  this.act_img = element.ilustration;
+                  this.displayAct_img = `${process.env.VUE_APP_HOST}/image?path=${this.act_img}`;
+                  this.act2_img = element.ilustration2;
+                  this.displayAct2_img = `${process.env.VUE_APP_HOST}/image?path=${this.act2_img}`;
+                }
               }
-              if (element.type_uraian == 'standard') {
-                this.filustrasi_standart = element.desc_nm;
-                this.std_img = element.ilustration;
-                this.displayStd_img = `${process.env.VUE_APP_HOST}/image?path=${this.std_img}`;
-                this.std2_img = element.ilustration2;
-                this.displayStd2_img = `${process.env.VUE_APP_HOST}/image?path=${this.std2_img}`;
+            }
+            if (item.id_m_problem_member) {
+              this.isMemberThema = true;
+              this.id_m_problem_member = item.id_m_problem_member;
+              this.picThema = item.fname_theme_member;
+              this.id_m_member = this.optOperatorsThemaRaw.filter((item) => {
+                return item.fname === this.picThema;
+              })[0].fid;
+              this.target_finish_date = item.target_finish_date.split("T")[0];
+              this.is_status = item.is_status == 0 ? false : true;
+              this.imgPicThema = `${process.env.VUE_APP_HOST}/image?path=${item.fimage_member}`;
+            }
+            if (item.init_date) {
+              this.initDateThema = formatDate.YYYYMMDD(item.init_date);
+            }
+            if (item.target_finish_date) {
+              this.datePlanTheme = formatDate.YYYYMMDD(item.target_finish_date);
+            }
+            if (item.detail_activity) {
+              if (item.detail_activity.includes("[{")) {
+                this.containerThemaActivity = JSON.parse(item.detail_activity);
               }
-              if (element.type_uraian == 'actual') {
-                this.filustrasi_actual = element.desc_nm;
-                this.act_img = element.ilustration;
-                this.displayAct_img = `${process.env.VUE_APP_HOST}/image?path=${this.act_img}`;
-                this.act2_img = element.ilustration2;
-                this.displayAct2_img = `${process.env.VUE_APP_HOST}/image?path=${this.act2_img}`;
+            }
+            if (item.gl_comment) {
+              this.gl_comment = item.gl_comment;
+            }
+            if (item.sh_comment) {
+              this.sh_comment = item.sh_comment;
+            }
+            if (item.dph_comment) {
+              this.dph_comment = item.dph_comment;
+            }
+            this.fmc_name = item.fmc_name;
+            this.getMcId();
+            this.fline = item.fline;
+            this.foperation_no = item.foperation_no;
+            this.fmaker = item.fmaker;
+            this.ferror_name = item.ferror_name;
+            this.gapIlustrasi = item.gapIlustrasi;
+
+            // this.fileName = `ilustration_${Date.now()}`;
+            this.foperator = item.foperator.includes(",")
+                ? item.foperator.split(",")
+                : item.foperator;
+            this.fshift = item.fshift;
+            this.fav_categoty = item.fav_categoty;
+            this.startDate = item.fstart_time.split("T")[0];
+            this.startTime = item.fstart_time.split("T")[1].split(".")[0];
+            if (item.fimage) {
+              this.fimage = item.fimage;
+              this.displayImg = `${process.env.VUE_APP_HOST}/image?path=${item.fimage}`;
+            }
+            if (item.why1_img) {
+              this.why1_img = item.why1_img;
+              this.displayWhy1_img = `${process.env.VUE_APP_HOST}/image?path=${this.why1_img}`;
+            }
+            if (item.why2_img) {
+              this.why2_img = item.why2_img;
+              this.displayWhy2_img = `${process.env.VUE_APP_HOST}/image?path=${item.why2_img}`;
+            }
+            if (item.why12_img) {
+              this.why12_img = item.why12_img;
+              this.displayWhy12_img = `${process.env.VUE_APP_HOST}/image?path=${item.why12_img}`;
+            }
+            if (item.why22_img) {
+              this.why22_img = item.why22_img;
+              this.displayWhy22_img = `${process.env.VUE_APP_HOST}/image?path=${item.why22_img}`;
+            }
+            if (item.fattachment) {
+              this.fattachment = item.fattachment;
+              this.displayAttachment = `${process.env.VUE_APP_HOST}/image?path=${item.fattachment}`;
+            }
+            this.fiveWhyLhApprove = item.fiveWhyLhApprove;
+            this.fiveWhyShApprove = item.fiveWhyShApprove;
+            this.cmLhApprove = item.cmLhApprove;
+            this.cmShApprove = item.cmShApprove;
+            this.cmDhApprove = item.cmDhApprove || 0;
+            // OLD STATUS CHANGES TL
+            if (String(item.fend_time) != null) {
+              if (item.freal_prob.includes("\n")) {
+                this.containerWhyTerjadi = item.freal_prob.split("\n");
+                this.fiveWhyTlApprove = this.checkStatus(1);
+              } else {
+                this.fiveWhyTlApprove = this.checkStatus(2);
               }
             }
-          }
-          if (item.id_m_problem_member) {
-            this.isMemberThema = true;
-            this.id_m_problem_member = item.id_m_problem_member;
-            this.picThema = item.fname_theme_member;
-            this.id_m_member = this.optOperatorsThemaRaw.filter((item) => {
-              return item.fname === this.picThema;
-            })[0].fid;
-            this.target_finish_date = item.target_finish_date.split("T")[0];
-            this.is_status = item.is_status == 0 ? false : true;
-            this.imgPicThema = `${process.env.VUE_APP_HOST}/image?path=${item.fimage_member}`;
-          }
-          if (item.init_date) {
-            this.initDateThema = formatDate.YYYYMMDD(item.init_date);
-          }
-          if (item.target_finish_date) {
-            this.datePlanTheme = formatDate.YYYYMMDD(item.target_finish_date);
-          }
-          if (item.detail_activity) {
-            if (item.detail_activity.includes("[{")) {
-              this.containerThemaActivity = JSON.parse(item.detail_activity);
-            }
-          }
-          if (item.gl_comment) {
-            this.gl_comment = item.gl_comment;
-          }
-          if (item.sh_comment) {
-            this.sh_comment = item.sh_comment;
-          }
-          if (item.dph_comment) {
-            this.dph_comment = item.dph_comment;
-          }
-          this.fmc_name = item.fmc_name;
-          this.getMcId();
-          this.fline = item.fline;
-          this.foperation_no = item.foperation_no;
-          this.fmaker = item.fmaker;
-          this.ferror_name = item.ferror_name;
-          this.gapIlustrasi = item.gapIlustrasi;
-
-          // this.fileName = `ilustration_${Date.now()}`;
-          this.foperator = item.foperator.includes(",")
-            ? item.foperator.split(",")
-            : item.foperator;
-          this.fshift = item.fshift;
-          this.fav_categoty = item.fav_categoty;
-          this.startDate = item.fstart_time.split("T")[0];
-          this.startTime = item.fstart_time.split("T")[1].split(".")[0];
-          if (item.fimage) {
-            this.fimage = item.fimage;
-            this.displayImg = `${process.env.VUE_APP_HOST}/image?path=${item.fimage}`;
-          }
-          if (item.why1_img) {
-            this.why1_img = item.why1_img;
-            this.displayWhy1_img = `${process.env.VUE_APP_HOST}/image?path=${this.why1_img}`;
-          }
-          if (item.why2_img) {
-            this.why2_img = item.why2_img;
-            this.displayWhy2_img = `${process.env.VUE_APP_HOST}/image?path=${item.why2_img}`;
-          }
-          if (item.why12_img) {
-            this.why12_img = item.why12_img;
-            this.displayWhy12_img = `${process.env.VUE_APP_HOST}/image?path=${item.why12_img}`;
-          }
-          if (item.why22_img) {
-            this.why22_img = item.why22_img;
-            this.displayWhy22_img = `${process.env.VUE_APP_HOST}/image?path=${item.why22_img}`;
-          }
-          if (item.fattachment) {
-            this.fattachment = item.fattachment;
-            this.displayAttachment = `${process.env.VUE_APP_HOST}/image?path=${item.fattachment}`;
-          }
-          this.fiveWhyLhApprove = item.fiveWhyLhApprove;
-          this.fiveWhyShApprove = item.fiveWhyShApprove;
-          this.cmLhApprove = item.cmLhApprove;
-          this.cmShApprove = item.cmShApprove;
-          this.cmDhApprove = item.cmDhApprove || 0;
-          // OLD STATUS CHANGES TL
-          if (String(item.fend_time) != null) {
-            if (item.freal_prob.includes("\n")) {
-              this.containerWhyTerjadi = item.freal_prob.split("\n");
-              this.fiveWhyTlApprove = this.checkStatus(1);
-            } else {
-              this.fiveWhyTlApprove = this.checkStatus(2);
-            }
-          }
-          if (item.fiveWhyLhApprove == 0) {
-            let diffInTime =
-              new Date().getTime() - new Date(item.fstart_time).getTime();
-            let diffDay = diffInTime / (1000 * 3600 * 24);
-            if (
-              diffDay >= 1 &&
-              (String(item.fiveWhyLhFeedback) == "null" ||
-                String(item.fiveWhyLhFeedback) == "")
-            ) {
-              this.fiveWhylhCheck = this.checkStatus(2);
-            } else if (String(item.fiveWhyLhFeedback) != "null") {
-              this.fiveWhylhCheck = this.checkStatus(3);
-            } else {
-              this.fiveWhylhCheck = this.checkStatus(4);
-            }
-          } else if (item.fiveWhyLhApprove == 1) {
-            this.fiveWhylhCheck = this.checkStatus(1);
-          }
-
-          if (item.cmLhApprove == 0) {
-            let diffInTime =
-              new Date().getTime() - new Date(item.fstart_time).getTime();
-            let diffDay = diffInTime / (1000 * 3600 * 24);
-            if (
-              diffDay >= 1 &&
-              (String(item.cmLhFeedback) == "null" ||
-                String(item.cmLhFeedback) == "")
-            ) {
-              this.cmlhCheck = this.checkStatus(2);
-            } else if (String(item.cmLhFeedback) != "null") {
-              this.cmlhCheck = this.checkStatus(3);
-            } else {
-              this.cmlhCheck = this.checkStatus(4);
-            }
-          } else if (item.cmLhApprove == 1) {
-            this.cmlhCheck = this.checkStatus(1);
-          }
-          console.log('item.fiveWhyShApprove');
-          console.log(item.fiveWhyShApprove);
-          console.log(item.fiveWhyShFeedback);
-          if (item.fiveWhyShApprove == 0) {
-            let diffInTime =
-              new Date().getTime() - new Date(item.fstart_time).getTime();
-            let diffDay = diffInTime / (1000 * 3600 * 24);
-            if (
-              diffDay >= 2 &&
-              (String(item.fiveWhyShFeedback) == "null" ||
-                item.fiveWhyShFeedback == "")
-            ) {
-              this.fiveWhyshCheck = this.checkStatus(2);
-            } else if (String(item.fiveWhyShFeedback) != "null") {
-              this.fiveWhyshCheck = this.checkStatus(3);
-            } else {
-              this.fiveWhyshCheck = this.checkStatus(4);
-            }
-          } else if (item.fiveWhyShApprove == 1) {
-            this.fiveWhyshCheck = this.checkStatus(1);
-          }
-
-          if (item.cmShApprove == 0) {
-            let diffInTime =
-              new Date().getTime() - new Date(item.fstart_time).getTime();
-            let diffDay = diffInTime / (1000 * 3600 * 24);
-            if (
-              diffDay >= 2 &&
-              (String(item.cmShFeedback) == "null" || item.cmShFeedback == "")
-            ) {
-              this.cmshCheck = this.checkStatus(2);
-            } else if (String(item.cmShFeedback) != "null") {
-              this.cmshCheck = this.checkStatus(3);
-            } else {
-              this.cmshCheck = this.checkStatus(4);
-            }
-          } else if (item.cmShApprove == 1) {
-            this.cmshCheck = this.checkStatus(1);
-          }
-
-          if (item.cmDhApprove == 0) {
-            let diffInTime =
-              new Date().getTime() - new Date(item.fstart_time).getTime();
-            let diffDay = diffInTime / (1000 * 3600 * 24);
-            if (
-              diffDay >= 3 &&
-              (String(item.cmDhFeedback) == "null" ||
-                String(item.cmDhFeedback) == "")
-            ) {
-              this.dhCheck = this.checkStatus(2);
-            } else if (String(item.cmDhFeedback) != "null") {
-              this.dhCheck = this.checkStatus(3);
-            } else {
-              this.dhCheck = this.checkStatus(4);
-            }
-          } else if (item.cmDhApprove == 1) {
-            this.dhCheck = this.checkStatus(1);
-          }
-
-          this.fiveWhyLhFeedback = item.fiveWhyLhFeedback;
-          this.fiveWhyShFeedback = item.fiveWhyShFeedback;
-          this.cmLhFeedback = item.cmLhFeedback;
-          this.cmShFeedback = item.cmShFeedback;
-          if (item.fend_time != null) {
-            this.endDate = item.fend_time.split("T")[0];
-            this.endTime = item.fend_time.split("T")[1].split(".")[0];
-            this.isProblemClose = true;
-          } else {
-            this.isProblemClose = false;
-          }
-          this.fdur = +item.fdur.toFixed(0);
-          this.fDescImage = item.fDescImage;
-          this.cmDhFeedback = item.cmDhFeedback;
-          this.cmDhApprove = item.cmDhApprove;
-          console.log(item);
-          this.temporaryAction = item.temporaryAction;
-          if (item.fstep_repair.includes("\n")) {
-            this.containerStepRepair = item.fstep_repair.split("\n");
-          }
-          console.log(item.fstep_new);
-          if (item.fstep_new) {
-            this.containerStepRepairNew = JSON.parse(item.fstep_new);
-            this.containerStepRepairNew = this.containerStepRepairNew.map((item) => {
-              if (!item.result) {
-                item.result = null;
+            if (item.fiveWhyLhApprove == 0) {
+              let diffInTime =
+                  new Date().getTime() - new Date(item.fstart_time).getTime();
+              let diffDay = diffInTime / (1000 * 3600 * 24);
+              if (
+                  diffDay >= 1 &&
+                  (String(item.fiveWhyLhFeedback) == "null" ||
+                      String(item.fiveWhyLhFeedback) == "")
+              ) {
+                this.fiveWhylhCheck = this.checkStatus(2);
+              } else if (String(item.fiveWhyLhFeedback) != "null") {
+                this.fiveWhylhCheck = this.checkStatus(3);
+              } else {
+                this.fiveWhylhCheck = this.checkStatus(4);
               }
-              return item;
-            });
-          }
-
-          console.log(item.froot_cause);
-          if (item.fend_time != null) {
-            if (item.froot_cause.includes("\n")) {
-              this.containerWhyLama = item.froot_cause.split("\n");
+            } else if (item.fiveWhyLhApprove == 1) {
+              this.fiveWhylhCheck = this.checkStatus(1);
             }
-          }
-          this.fpart_change = item.fpart_change;
-          if (String(item.fpermanet_cm).includes("[{")) {
-            // #REVISICM
-            localStorage.setItem("beforeCm", String(item.fpermanet_cm));
-            this.containerCmTerjadi = JSON.parse(String(item.fpermanet_cm));
-            this.containerCmTerjadi = this.containerCmTerjadi.map((item) => {
-              if (!item.result) {
-                item.result = null;
-              }
-              return item;
-            });
-            this.cmTlApprove = this.checkStatus(1);
-          } else {
-            this.cmTlApprove = this.checkStatus(2);
-          }
-          if (String(item.fyokoten).includes("[{")) {
-            this.containerYokoten = JSON.parse(item.fyokoten);
-          }
-          if (String(item.fpermanet_cm_lama).includes("[{")) {
-            this.containerCmLama = JSON.parse(item.fpermanet_cm_lama);
-            this.containerCmLama = this.containerCmLama.map((item) => {
-              if (!item.result) {
-                item.result = null;
-              }
-              return item;
-            });
-          }
 
-          // APPROVAL STATUS
-          if (this.fiveWhyLhApprove === 0) {
-            this.selectedStatusLhFiveWhy = "Tidak Approve";
-          } else {
-            this.selectedStatusLhFiveWhy = "Approve";
-          }
-          if (this.fiveWhyShApprove === 0) {
-            this.selectedStatusShFiveWhy = "Tidak Approve";
-          } else {
-            this.selectedStatusShFiveWhy = "Approve";
-          }
-          if (this.cmLhApprove === 0) {
-            this.selectedStatusLhCm = "Tidak Approve";
-          } else {
-            this.selectedStatusLhCm = "Approve";
-          }
-          if (this.cmShApprove === 0) {
-            this.selectedStatusShCm = "Tidak Approve";
-          } else {
-            this.selectedStatusShCm = "Approve";
-          }
-          this.checkNameCategory();
-        })
-        .catch((err) => {
-          console.log(err);
-          // alert(JSON.stringify(err));
-        });
+            if (item.cmLhApprove == 0) {
+              let diffInTime =
+                  new Date().getTime() - new Date(item.fstart_time).getTime();
+              let diffDay = diffInTime / (1000 * 3600 * 24);
+              if (
+                  diffDay >= 1 &&
+                  (String(item.cmLhFeedback) == "null" ||
+                      String(item.cmLhFeedback) == "")
+              ) {
+                this.cmlhCheck = this.checkStatus(2);
+              } else if (String(item.cmLhFeedback) != "null") {
+                this.cmlhCheck = this.checkStatus(3);
+              } else {
+                this.cmlhCheck = this.checkStatus(4);
+              }
+            } else if (item.cmLhApprove == 1) {
+              this.cmlhCheck = this.checkStatus(1);
+            }
+            console.log('item.fiveWhyShApprove');
+            console.log(item.fiveWhyShApprove);
+            console.log(item.fiveWhyShFeedback);
+            if (item.fiveWhyShApprove == 0) {
+              let diffInTime =
+                  new Date().getTime() - new Date(item.fstart_time).getTime();
+              let diffDay = diffInTime / (1000 * 3600 * 24);
+              if (
+                  diffDay >= 2 &&
+                  (String(item.fiveWhyShFeedback) == "null" ||
+                      item.fiveWhyShFeedback == "")
+              ) {
+                this.fiveWhyshCheck = this.checkStatus(2);
+              } else if (String(item.fiveWhyShFeedback) != "null") {
+                this.fiveWhyshCheck = this.checkStatus(3);
+              } else {
+                this.fiveWhyshCheck = this.checkStatus(4);
+              }
+            } else if (item.fiveWhyShApprove == 1) {
+              this.fiveWhyshCheck = this.checkStatus(1);
+            }
+
+            if (item.cmShApprove == 0) {
+              let diffInTime =
+                  new Date().getTime() - new Date(item.fstart_time).getTime();
+              let diffDay = diffInTime / (1000 * 3600 * 24);
+              if (
+                  diffDay >= 2 &&
+                  (String(item.cmShFeedback) == "null" || item.cmShFeedback == "")
+              ) {
+                this.cmshCheck = this.checkStatus(2);
+              } else if (String(item.cmShFeedback) != "null") {
+                this.cmshCheck = this.checkStatus(3);
+              } else {
+                this.cmshCheck = this.checkStatus(4);
+              }
+            } else if (item.cmShApprove == 1) {
+              this.cmshCheck = this.checkStatus(1);
+            }
+
+            if (item.cmDhApprove == 0) {
+              let diffInTime =
+                  new Date().getTime() - new Date(item.fstart_time).getTime();
+              let diffDay = diffInTime / (1000 * 3600 * 24);
+              if (
+                  diffDay >= 3 &&
+                  (String(item.cmDhFeedback) == "null" ||
+                      String(item.cmDhFeedback) == "")
+              ) {
+                this.dhCheck = this.checkStatus(2);
+              } else if (String(item.cmDhFeedback) != "null") {
+                this.dhCheck = this.checkStatus(3);
+              } else {
+                this.dhCheck = this.checkStatus(4);
+              }
+            } else if (item.cmDhApprove == 1) {
+              this.dhCheck = this.checkStatus(1);
+            }
+
+            this.fiveWhyLhFeedback = item.fiveWhyLhFeedback;
+            this.fiveWhyShFeedback = item.fiveWhyShFeedback;
+            this.cmLhFeedback = item.cmLhFeedback;
+            this.cmShFeedback = item.cmShFeedback;
+            if (item.fend_time != null) {
+              this.endDate = item.fend_time.split("T")[0];
+              this.endTime = item.fend_time.split("T")[1].split(".")[0];
+              this.isProblemClose = true;
+            } else {
+              this.isProblemClose = false;
+            }
+            this.fdur = +item.fdur.toFixed(0);
+            this.fDescImage = item.fDescImage;
+            this.cmDhFeedback = item.cmDhFeedback;
+            this.cmDhApprove = item.cmDhApprove;
+            console.log(item);
+            this.temporaryAction = item.temporaryAction;
+            if (item.fstep_repair.includes("\n")) {
+              this.containerStepRepair = item.fstep_repair.split("\n");
+            }
+            console.log(item.fstep_new);
+            if (item.fstep_new) {
+              this.containerStepRepairNew = JSON.parse(item.fstep_new);
+              this.containerStepRepairNew = this.containerStepRepairNew.map((item) => {
+                if (!item.result) {
+                  item.result = null;
+                }
+                return item;
+              });
+            }
+
+            console.log(item.froot_cause);
+            if (item.fend_time != null) {
+              if (item.froot_cause.includes("\n")) {
+                this.containerWhyLama = item.froot_cause.split("\n");
+              }
+            }
+            this.fpart_change = item.fpart_change;
+            if (String(item.fpermanet_cm).includes("[{")) {
+              // #REVISICM
+              localStorage.setItem("beforeCm", String(item.fpermanet_cm));
+              this.containerCmTerjadi = JSON.parse(String(item.fpermanet_cm));
+              this.containerCmTerjadi = this.containerCmTerjadi.map((item) => {
+                if (!item.result) {
+                  item.result = null;
+                }
+                return item;
+              });
+              this.cmTlApprove = this.checkStatus(1);
+            } else {
+              this.cmTlApprove = this.checkStatus(2);
+            }
+            if (String(item.fyokoten).includes("[{")) {
+              this.containerYokoten = JSON.parse(item.fyokoten);
+            }
+            if (String(item.fpermanet_cm_lama).includes("[{")) {
+              this.containerCmLama = JSON.parse(item.fpermanet_cm_lama);
+              this.containerCmLama = this.containerCmLama.map((item) => {
+                if (!item.result) {
+                  item.result = null;
+                }
+                return item;
+              });
+            }
+
+            // APPROVAL STATUS
+            if (this.fiveWhyLhApprove === 0) {
+              this.selectedStatusLhFiveWhy = "Tidak Approve";
+            } else {
+              this.selectedStatusLhFiveWhy = "Approve";
+            }
+            if (this.fiveWhyShApprove === 0) {
+              this.selectedStatusShFiveWhy = "Tidak Approve";
+            } else {
+              this.selectedStatusShFiveWhy = "Approve";
+            }
+            if (this.cmLhApprove === 0) {
+              this.selectedStatusLhCm = "Tidak Approve";
+            } else {
+              this.selectedStatusLhCm = "Approve";
+            }
+            if (this.cmShApprove === 0) {
+              this.selectedStatusShCm = "Tidak Approve";
+            } else {
+              this.selectedStatusShCm = "Approve";
+            }
+            this.checkNameCategory();
+          })
+          .catch((err) => {
+            console.log(err);
+            // alert(JSON.stringify(err));
+          });
     },
     async getAllMtMember() {
       console.log("MASUK MT MEMBER");
       await axios
-        .get(`${process.env.VUE_APP_HOST}/getAllMtMember`)
-        .then((result) => {
-          console.log(result);
-          let mapMembers = result.data.data.map((member) => {
-            return member.fname;
+          .get(`${process.env.VUE_APP_HOST}/getAllMtMember`)
+          .then((result) => {
+            console.log(result);
+            let mapMembers = result.data.data.map((member) => {
+              return member.fname;
+            });
+            this.optOperators = mapMembers;
+            this.optOperatorsRaw = result.data.data;
+          })
+          .catch((err) => {
+            console.log(err);
           });
-          this.optOperators = mapMembers;
-          this.optOperatorsRaw = result.data.data;
-        })
-        .catch((err) => {
-          console.log(err);
-        });
     },
     async getAllMtMemberThema() {
       await axios
-        // .get(`${process.env.VUE_APP_HOST}/getAllMtMember?isMember=TRUE`)
-        .get(`${process.env.VUE_APP_HOST}/getAllMtMember`)
-        .then((result) => {
-          console.log(result);
-          let mapMembers = result.data.data.map((member) => {
-            return member.fname;
+          // .get(`${process.env.VUE_APP_HOST}/getAllMtMember?isMember=TRUE`)
+          .get(`${process.env.VUE_APP_HOST}/getAllMtMember`)
+          .then((result) => {
+            console.log(result);
+            let mapMembers = result.data.data.map((member) => {
+              return member.fname;
+            });
+            this.optOperatorsThema = mapMembers;
+            this.optOperatorsThemaRaw = result.data.data;
+          })
+          .catch((err) => {
+            console.log(err);
           });
-          this.optOperatorsThema = mapMembers;
-          this.optOperatorsThemaRaw = result.data.data;
-        })
-        .catch((err) => {
-          console.log(err);
-        });
     },
   },
   components: {
