@@ -175,7 +175,7 @@
     <HeaderParam />
     <ContentLines />
     <!-- <ParameterMenu /> -->
-    <!-- <div class="row p-0" v-for="(data, i) in containerDataChart" :key="i">
+     <div class="row p-0" v-for="(data, i) in containerDataChart" :key="i">
       <div class="col p-0">
         <line-chart v-if="data.length > 0" :propsCharData="data"></line-chart>
       </div>
@@ -191,7 +191,7 @@
           ></v-progress-linear>
         </v-card-text>
       </v-card>
-    </v-dialog> -->
+    </v-dialog>
   </div>
 </template>
 
@@ -281,9 +281,9 @@ export default {
         .then((resMachine) => {
           console.log(resMachine);
           this.rawMachineList = resMachine.data.data;
-          this.machineList = resMachine.data.data.map((mc) => {
+          this.machineList = resMachine?.data?.data?.map((mc) => {
             return mc.mc_name;
-          });
+          }) ?? [];
           if (stateTest) {
             this.isDialogTest = true;
           } else {
@@ -293,6 +293,7 @@ export default {
         })
         .catch((err) => {
           console.log(err);
+          this.isLoading = false;
         });
     },
     getParamListMan(mc) {
@@ -312,6 +313,7 @@ export default {
     },
     async showDialog() {
       this.isLoading = true;
+      //this.isShowDialog = true;
       await this.getMachineParamMan();
     },
     showDialogTest() {

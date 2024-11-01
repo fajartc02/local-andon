@@ -4,7 +4,7 @@
       <template v-for="menu in menus[0]">
         <div :key="menu" v-if="menu.isActive" class="col-3 hover-menu p-1" @click="goTo(menu.link)">
           <center>
-            <img :src="menu.icon" width="30%" />
+            <img :src="menu.icon" width="30%"/>
           </center>
           <center class="card-title">
             <div v-html="menu.html"></div>
@@ -16,7 +16,7 @@
       <template v-for="menu in menus[1]">
         <div :key="menu" v-if="menu.isActive" class="col-3 hover-menu p-1" @click="goTo(menu.link)">
           <center>
-            <img :src="menu.icon" width="30%" />
+            <img :src="menu.icon" width="30%"/>
           </center>
           <center class="card-title">
             <div v-html="menu.html"></div>
@@ -34,6 +34,20 @@ export default {
       test: '',
       menus: [
         [
+          {
+            name: "Symptomp Parameter Monitoring",
+            link: "/parameter/dashboard",
+            icon: "https://cdn0.iconfinder.com/data/icons/work-from-home-153/66/91_work_log_work_record_work_list_listing_work_index-512.png",
+            html: '<center class="card-title">Symptomp Parameter Monitoring</center>',
+            isActive: true
+          },
+          {
+            name: "Symptomp Management",
+            link: "/symptom/parameter/dashboard",
+            icon: "https://cdn-icons-png.flaticon.com/512/16873/16873867.png",
+            html: '<center class="card-title">Symptomp Management</center>',
+            isActive: true
+          },
           {
             name: "LTB Report",
             link: "/ltb-report",

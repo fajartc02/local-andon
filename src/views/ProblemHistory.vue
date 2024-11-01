@@ -965,6 +965,12 @@ export default {
     } else {
       await this.getProblemHistory();
     }
+
+    this.$nextTick(() => {
+      setTimeout(() => {
+        //this.selectedStartDate = ;
+      }, 1000);
+    });
   },
 };
 </script>
