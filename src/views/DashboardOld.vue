@@ -274,10 +274,10 @@ export default {
         //   type: "new",
         //   name: 'Report LTB Generator Excel, Kamu bisa akses pada screen edit problem problem & bisa download template lalu upload setelah report sudah di perbaiki (pastikan report sudah lengkap yaa!, baru kamu bisa download template LTB nya)'
         // },
-        {
-          type: "new",
-          name: 'Saat Input problem, untuk KY machine harus di ceklis terlbih dahulu, baru bisa melanjutkan input problem'
-        },
+        // {
+        //   type: "new",
+        //   name: 'Saat Input problem, untuk KY machine harus di ceklis terlbih dahulu, baru bisa melanjutkan input problem'
+        // },
         // {
         //   type: "enhance",
         //   name: 'KY Machine Data sekarang bisa kamu tambahkan gambarnya!'
@@ -286,18 +286,28 @@ export default {
         //   type: "enhance",
         //   name: 'Input Floating tip dengan notes / comments, dan bisa View mode TABLE / GRAPH'
         // },
-        {
-          type: "bug",
-          name: 'fixing temporary action list, Id is not increment'
-        },
-        {
-          type: "bug",
-          name: 'fixing chart on realtime pareto machine name did not appear'
-        },
+        // {
+        //   type: "bug",
+        //   name: 'fixing temporary action list, Id is not increment'
+        // },
+        // {
+        //   type: "bug",
+        //   name: 'fixing chart on realtime pareto machine name did not appear'
+        // },
         // {
         //   type: "enhance",
         //   name: 'type here...'
         // }
+        //region version 3.8.2
+        {
+          type: "bug",
+          name: 'fixing problem LTB Report did not complete mapping data'
+        },
+        {
+          type: "enhance",
+          name: 'show symptom management and symptom parameter to front menu'
+        },
+        //endregion
       ],
       oldVersion: null,
       isStaff: localStorage.getItem('role') === 'STAFF' ? true : false,
@@ -894,7 +904,7 @@ export default {
     let newVersion = process.env.VUE_APP_VERSION
     // let newVersion = '2.0.2'
     const newVersionAvailable = localStorage.getItem("oldVersion") != newVersion
-        && (!localStorage.getItem("name") || localStorage.getItem("name") == "Guest")
+        && (localStorage.getItem("name") && localStorage.getItem("name") != "Guest")
     if (newVersionAvailable) {
       this.oldVersion = newVersion;
       this.isShowDialogUpdate = true;
