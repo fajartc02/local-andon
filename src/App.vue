@@ -110,7 +110,6 @@ export default {
       this.isShow = false;
     },
     async checkScreen() {
-      
       axios
           .get(`${process.env.VUE_APP_HOST}/checkScreen`)
           .then((result) => {
@@ -160,7 +159,6 @@ export default {
     // },
   },
   mounted() {
-    console.log(process.env.VUE_APP_HOST);
     // this.permissionCheck();
     // this.$nextTick(() => {
     //   window.addEventListener("resize", this.onResize);
@@ -226,7 +224,6 @@ export default {
     //     console.log(e);
     //   });
     // this.swaggerTest();
-    
   },
 };
 </script>
