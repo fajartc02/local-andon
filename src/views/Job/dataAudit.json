@@ -1,0 +1,106 @@
+[{
+        "name": "LPDC",
+        "dataProblem": [
+            [{
+                "fid": 15249,
+                "fline": "LPDC",
+                "farea": "Iksx-006",
+                "fjob_type": "Investigasi Problem",
+                "fdesc": "Analisa pasir bocor ",
+                "fstart_time": "2022-07-28T07:22:00.000Z",
+                "fend_time": "2022-07-28T09:29:00.000Z",
+                "fproblem_id": null,
+                "foperator": "SUPRIYADI",
+                "frole": "TM",
+                "fgroup": "Others",
+                "fcommentLh": null,
+                "fcommentSh": null,
+                "fcommentDph": null,
+                "fimage": "./upload/user/Supriyadi.jpg",
+                "fdur": 127,
+                "startPx": 68,
+                "bgCol": "#c2eae3"
+            }],
+            [{
+                "fid": 15082,
+                "fline": "LPDC",
+                "farea": "Oasis MT",
+                "fjob_type": "Meeting",
+                "fdesc": "Breafing",
+                "fstart_time": "2022-07-28T21:00:00.000Z",
+                "fend_time": "2022-07-28T21:10:00.000Z",
+                "fproblem_id": null,
+                "foperator": "NIRVAN RIFKY",
+                "frole": "TM",
+                "fgroup": "Others",
+                "fcommentLh": null,
+                "fcommentSh": null,
+                "fcommentDph": null,
+                "fimage": "./upload/user/Nirvan R.jpg",
+                "fdur": 10,
+                "startPx": 946,
+                "bgCol": "#c2eae3"
+            }, {
+                "fid": 15089,
+                "fline": "LPDC",
+                "farea": "OASIS MT",
+                "fjob_type": "4S",
+                "fdesc": "4s sesuai zone",
+                "fstart_time": "2022-07-28T21:10:00.000Z",
+                "fend_time": "2022-07-28T21:30:00.000Z",
+                "fproblem_id": null,
+                "foperator": "NIRVAN RIFKY",
+                "frole": "TM",
+                "fgroup": "Others",
+                "fcommentLh": null,
+                "fcommentSh": null,
+                "fcommentDph": null,
+                "fimage": "./upload/user/Nirvan R.jpg",
+                "fdur": 20,
+                "startPx": 956,
+                "bgCol": "#c2eae3"
+            }]
+        ],
+        "member": []
+    }, {
+        "name": "HPDC",
+        "dataProblem": [
+            [],
+            []
+        ],
+        "member": []
+    }, {
+        "name": "CAM SHAFT",
+        "dataProblem": [
+            [],
+            []
+        ]
+    }, {
+        "name": "CRANK SHAFT",
+        "dataProblem": [
+            [],
+            []
+        ]
+    },
+    {
+        "name": "CYLINDER HEAD",
+        "dataProblem": [
+            [],
+            []
+        ]
+    },
+    {
+        "name": "CYLINDER BLOCK",
+        "dataProblem": [
+            [],
+            []
+        ]
+    },
+    {
+        "name": "ASSY LINE",
+        "dataProblem": [
+            [],
+            []
+        ]
+    }
+]
