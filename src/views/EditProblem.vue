@@ -1786,7 +1786,7 @@
         <a v-else class="btn btn-sm btn-success text-light"
            :href="reportUri">Download Report</a>
       </div>
-      <div class="card mt-2">
+      <div class="card mt-2" id="uploadReport">
         <div class="card-body">
           <span class="input-lable">Upload Report <a class="badge badge-pill badge-primary text-light"
                                                      :href="reportUri">Download
@@ -2035,308 +2035,6 @@ export default {
 
     };
   },
-  watch: {
-    containerThemaActivity: {
-      handler: function () {
-        let timeInit = new Date(this.initDateThema).getTime();
-        let countOffsetTime = 0;
-        this.containerThemaActivity.forEach((item) => {
-          console.log(item);
-          if (item.duration) {
-            countOffsetTime += +item.duration;
-            item.date_plan = formatDate.YYYYMMDD(
-                new Date(timeInit + +item.duration * 3600 * 1000 * 24)
-            );
-          }
-        });
-        let timeOffset =
-            countOffsetTime == 0 ? 1 : countOffsetTime * 3600 * 1000 * 24;
-        console.log(new Date(timeInit + timeOffset));
-        this.datePlanTheme = formatDate.YYYYMMDD(
-            new Date(timeInit + timeOffset)
-        );
-      },
-      deep: true,
-    },
-    cmField: {
-      handler: function () {
-        if (this.cmField.cmDesc.includes('"')) {
-          alert('tidak boleh menggunakan petik dua (")');
-        }
-      },
-      deep: true,
-    },
-    yokoField: {
-      handler: function () {
-        if (this.yokoField.machine.includes('"')) {
-          alert('tidak boleh menggunakan petik dua (")');
-        }
-      },
-      deep: true,
-    },
-    isTaskforce: function () {
-      if (this.isTaskforce == true) {
-        alert("Taskforce di pilih");
-        if (!this.ferror_name.includes("[TASKFORCE]")) {
-          this.ferror_name += "[TASKFORCE]";
-        }
-      } else {
-        this.ferror_name = this.ferror_name.split("[")[0];
-        alert("Taskforce tidak di pilih");
-      }
-    },
-    isFullcap: function () {
-      if (this.isFullcap == true) {
-        if (!this.ferror_name.includes("[FULLCAP]")) {
-          this.ferror_name = "[FULLCAP]" + this.ferror_name;
-        }
-      } else {
-        this.ferror_name = this.ferror_name.split("]")[1];
-      }
-    },
-    isDialogShowLhFiveWhy: function () {
-      if (this.isDialogShowLhFiveWhy == true) {
-        this.fiveWhyLhFeedback = this.fiveWhyLhFeedback.split(": ")[1];
-      }
-    },
-    isDialogShowShFiveWhy: function () {
-      if (this.isDialogShowShFiveWhy == true) {
-        this.fiveWhyShFeedback = this.fiveWhyShFeedback.split(": ")[1];
-      }
-    },
-    isDialogShowLhCm: function () {
-      if (this.isDialogShowLhCm == true) {
-        this.cmLhFeedback = this.cmLhFeedback.split(": ")[1];
-      }
-    },
-    isDialogShowShCm: function () {
-      if (this.isDialogShowShCm == true) {
-        this.cmShFeedback = this.cmShFeedback.split(": ")[1];
-      }
-    },
-    isDialogShowDhCm: function () {
-      if (this.isDialogShowDhCm == true) {
-        this.cmDhFeedback = this.cmDhFeedback.split(": ")[1];
-      }
-    },
-    startDate: function () {
-      let strStartDate = `${this.startDate} ${this.startTime}`;
-      let strEndDate = `${this.endDate} ${this.endTime}`;
-      let start = new Date(strStartDate.replace(" ", "T"));
-      let finish = new Date(strEndDate.replace(" ", "T"));
-      let dura = (finish - start) / 1000 / 60;
-      if (dura >= 120) {
-        this.isLongBd = true;
-      } else if (dura >= 15 && this.fline == "ASSY LINE") {
-        this.isLongBd = true;
-      }
-      if (dura.toFixed("1").includes("-")) {
-        // alert(`tidak bisa memasukan durasi minus (${dura})`);
-        this.isDurationInvalid = true;
-      } else if (isNaN(dura)) {
-        // alert(
-        //   "tolong masukan date start dan date end apabila problem sudah selesai"
-        // );
-        this.isDurationInvalid = true;
-      } else {
-        this.fdur = +dura.toFixed(0);
-        this.isDurationInvalid = false;
-      }
-    },
-    startTime: function () {
-      let strStartDate = `${this.startDate} ${this.startTime}`;
-      let strEndDate = `${this.endDate} ${this.endTime}`;
-      let start = new Date(strStartDate.replace(" ", "T"));
-      let finish = new Date(strEndDate.replace(" ", "T"));
-      let dura = (finish - start) / 1000 / 60;
-      if (dura >= 120) {
-        this.isLongBd = true;
-      } else if (dura >= 15 && this.fline == "ASSY LINE") {
-        this.isLongBd = true;
-      }
-      if (dura.toFixed("1").includes("-")) {
-        // alert(`tidak bisa memasukan durasi minus (${dura})`);
-        this.isDurationInvalid = true;
-      } else if (isNaN(dura)) {
-        // alert(
-        //   "tolong masukan date start dan date end apabila problem sudah selesai"
-        // );
-        this.isDurationInvalid = true;
-      } else {
-        this.fdur = +dura.toFixed(0);
-        this.isDurationInvalid = false;
-      }
-    },
-    endDate: function () {
-      let strStartDate = `${this.startDate} ${this.startTime}`;
-      let strEndDate = `${this.endDate} ${this.endTime}`;
-      let start = new Date(strStartDate.replace(" ", "T"));
-      let finish = new Date(strEndDate.replace(" ", "T"));
-      let dura = (finish - start) / 1000 / 60;
-      console.log(dura);
-      console.log(this.whyCategory);
-      if (dura >= 120) {
-        this.isLongBd = true;
-      } else if (dura >= 15 && this.fline == "ASSY LINE") {
-        this.isLongBd = true;
-      }
-      if (dura.toFixed("1").includes("-")) {
-        // alert(`tidak bisa memasukan durasi minus (${dura})`);
-        this.isDurationInvalid = true;
-      } else if (isNaN(dura)) {
-        // alert(
-        //   "tolong masukan date start dan date end apabila problem sudah selesai"
-        // );
-        this.isDurationInvalid = true;
-      } else {
-        this.fdur = +dura.toFixed(0);
-        this.isDurationInvalid = false;
-        this.isProblemClose = true;
-      }
-    },
-    endTime: function () {
-      let strStartDate = `${this.startDate} ${this.startTime}`;
-      let strEndDate = `${this.endDate} ${this.endTime}`;
-      let start = new Date(strStartDate.replace(" ", "T"));
-      let finish = new Date(strEndDate.replace(" ", "T"));
-      console.log((finish.getTime() - start.getTime()) / 1000 / 60);
-      let dura = (finish - start) / 1000 / 60;
-      if (dura >= 120) {
-        this.isLongBd = true;
-      } else if (dura >= 15 && this.fline == "ASSY LINE") {
-        this.isLongBd = true;
-      }
-      if (dura.toFixed("1").includes("-")) {
-        alert(`tidak bisa memasukan durasi minus (${dura})`);
-        this.isDurationInvalid = true;
-      } else if (isNaN(dura)) {
-        alert(
-            "tolong masukan date start dan date end apabila problem sudah selesai"
-        );
-        this.isDurationInvalid = true;
-      } else {
-        this.fdur = +dura.toFixed(0);
-        this.isDurationInvalid = false;
-        this.isProblemClose = true;
-      }
-    },
-    isEditWhyTerjadi: function () {
-    },
-    isEditWhyLama: function () {
-      console.log("lama berubah");
-    },
-    storeTheme: function () {
-      var all = document.getElementsByClassName("form-control");
-      var inputsLabel = document.getElementsByClassName("input-lable");
-      if (this.storeTheme == "light") {
-        for (let i = 0; i < all.length; i++) {
-          all[i].style.color = "black";
-        }
-        for (let i = 0; i < inputsLabel.length; i++) {
-          inputsLabel[i].style.color = "black";
-        }
-        document.getElementById(`table-step-repair`).style.color = "black";
-        document.getElementById(`table-why-lama`).style.color = "black";
-        document.getElementById(`table-why-terjadi`).style.color = "black";
-        document.getElementById(`table-cm-terjadi`).style.color = "black";
-        document.getElementById(`table-cm-lama`).style.color = "black";
-        document.getElementById(`table-yokoten`).style.color = "black";
-      } else {
-        for (let i = 0; i < all.length; i++) {
-          all[i].style.color = "white";
-        }
-        for (let i = 0; i < inputsLabel.length; i++) {
-          inputsLabel[i].style.color = "white";
-        }
-        document.getElementById(`table-step-repair`).style.color = "white";
-        document.getElementById(`table-why-lama`).style.color = "white";
-        document.getElementById(`table-why-terjadi`).style.color = "white";
-        document.getElementById(`table-cm-terjadi`).style.color = "white";
-        document.getElementById(`table-cm-lama`).style.color = "white";
-        document.getElementById(`table-yokoten`).style.color = "white";
-      }
-    },
-    selectedStatusLhFiveWhy: function () {
-      if (this.selectedStatusLhFiveWhy == "Tidak Approve") {
-        this.fiveWhyLhApprove = 0;
-      } else {
-        this.fiveWhyLhApprove = 1;
-      }
-    },
-    selectedStatusShFiveWhy: function () {
-      if (this.selectedStatusShFiveWhy == "Tidak Approve") {
-        this.fiveWhyShApprove = 0;
-      } else {
-        this.fiveWhyShApprove = 1;
-      }
-    },
-    selectedStatusLhCm: function () {
-      if (this.selectedStatusLhCm == "Tidak Approve") {
-        this.cmLhApprove = 0;
-      } else {
-        this.cmLhApprove = 1;
-      }
-    },
-    selectedStatusShCm: function () {
-      if (this.selectedStatusShCm == "Tidak Approve") {
-        this.cmShApprove = 0;
-      } else {
-        this.cmShApprove = 1;
-      }
-    },
-    fiveWhyLhApprove: function () {
-      this.clearDialog();
-      if (this.fiveWhyLhApprove == 1) {
-        this.isPleaseFinish = true;
-        // alert("kalau sudah approve silahkan tekan FINISH");
-      }
-    },
-    fiveWhyShApprove: function () {
-      this.clearDialog();
-      if (this.fiveWhyLhApprove == 1) {
-        this.isPleaseFinish = true;
-        // alert("kalau sudah approve silahkan tekan FINISH");
-      }
-    },
-    cmLhApprove: function () {
-      this.clearDialog();
-      if (this.fiveWhyLhApprove == 1) {
-        this.isPleaseFinish = true;
-        // alert("kalau sudah approve silahkan tekan FINISH");
-      }
-    },
-    cmShApprove: function () {
-      this.clearDialog();
-      if (this.fiveWhyLhApprove == 1) {
-        this.isPleaseFinish = true;
-        // alert("kalau sudah approve silahkan tekan FINISH");
-      }
-    },
-    isActionCm: function () {
-      console.log(this.cmField.cmDesc.includes("ACTION"));
-      console.log(this.cmField.cmDesc.split("[")[0]);
-      if (this.isActionCm == true) {
-        this.cmField.cmDesc = `[ACTION]` + this.cmField.cmDesc;
-      } else {
-        this.cmField.cmDesc = this.cmField.cmDesc.split("]")[1];
-      }
-    },
-    picThema: function () {
-      this.id_m_member = this.optOperatorsThemaRaw.filter((item) => {
-        return item.fname === this.picThema;
-      })[0].fid;
-      if (this.picThema) {
-        this.initDateThema = formatDate.YYYYMMDD(new Date());
-      } else {
-        this.initDateThema = null;
-      }
-    },
-    ft_pic: function () {
-      this.id_m_member = this.optOperatorsThemaRaw.filter((item) => {
-        return item.fname === this.ft_pic;
-      })[0].fid;
-    },
-  },
   computed: {
     ...mapState(["storeTheme", "newAnalisys", "newAnalisys2"]),
     reportUri() {
@@ -2344,6 +2042,16 @@ export default {
     }
   },
   methods: {
+    scrollToUploadReport() {
+      if (this.$route.hash === '#uploadReport') {
+        this.$nextTick(() => {
+          const el = document.getElementById('uploadReport');
+          if (el) {
+            el.scrollIntoView({ behavior: 'smooth' });
+          }
+        });
+      }
+    },
     async uploadFileReport() {
       try {
         this.isLoading = true
@@ -3501,6 +3209,312 @@ export default {
     await this.getAllMtMember();
     await this.getDetailProblem();
     await this.checkFocusTheme();
+    this.scrollToUploadReport();
+  },
+  watch: {
+    containerThemaActivity: {
+      handler: function () {
+        let timeInit = new Date(this.initDateThema).getTime();
+        let countOffsetTime = 0;
+        this.containerThemaActivity.forEach((item) => {
+          console.log(item);
+          if (item.duration) {
+            countOffsetTime += +item.duration;
+            item.date_plan = formatDate.YYYYMMDD(
+                new Date(timeInit + +item.duration * 3600 * 1000 * 24)
+            );
+          }
+        });
+        let timeOffset =
+            countOffsetTime == 0 ? 1 : countOffsetTime * 3600 * 1000 * 24;
+        console.log(new Date(timeInit + timeOffset));
+        this.datePlanTheme = formatDate.YYYYMMDD(
+            new Date(timeInit + timeOffset)
+        );
+      },
+      deep: true,
+    },
+    cmField: {
+      handler: function () {
+        if (this.cmField.cmDesc.includes('"')) {
+          alert('tidak boleh menggunakan petik dua (")');
+        }
+      },
+      deep: true,
+    },
+    yokoField: {
+      handler: function () {
+        if (this.yokoField.machine.includes('"')) {
+          alert('tidak boleh menggunakan petik dua (")');
+        }
+      },
+      deep: true,
+    },
+    isTaskforce: function () {
+      if (this.isTaskforce == true) {
+        alert("Taskforce di pilih");
+        if (!this.ferror_name.includes("[TASKFORCE]")) {
+          this.ferror_name += "[TASKFORCE]";
+        }
+      } else {
+        this.ferror_name = this.ferror_name.split("[")[0];
+        alert("Taskforce tidak di pilih");
+      }
+    },
+    isFullcap: function () {
+      if (this.isFullcap == true) {
+        if (!this.ferror_name.includes("[FULLCAP]")) {
+          this.ferror_name = "[FULLCAP]" + this.ferror_name;
+        }
+      } else {
+        this.ferror_name = this.ferror_name.split("]")[1];
+      }
+    },
+    isDialogShowLhFiveWhy: function () {
+      if (this.isDialogShowLhFiveWhy == true) {
+        this.fiveWhyLhFeedback = this.fiveWhyLhFeedback.split(": ")[1];
+      }
+    },
+    isDialogShowShFiveWhy: function () {
+      if (this.isDialogShowShFiveWhy == true) {
+        this.fiveWhyShFeedback = this.fiveWhyShFeedback.split(": ")[1];
+      }
+    },
+    isDialogShowLhCm: function () {
+      if (this.isDialogShowLhCm == true) {
+        this.cmLhFeedback = this.cmLhFeedback.split(": ")[1];
+      }
+    },
+    isDialogShowShCm: function () {
+      if (this.isDialogShowShCm == true) {
+        this.cmShFeedback = this.cmShFeedback.split(": ")[1];
+      }
+    },
+    isDialogShowDhCm: function () {
+      if (this.isDialogShowDhCm == true) {
+        this.cmDhFeedback = this.cmDhFeedback.split(": ")[1];
+      }
+    },
+    startDate: function () {
+      let strStartDate = `${this.startDate} ${this.startTime}`;
+      let strEndDate = `${this.endDate} ${this.endTime}`;
+      let start = new Date(strStartDate.replace(" ", "T"));
+      let finish = new Date(strEndDate.replace(" ", "T"));
+      let dura = (finish - start) / 1000 / 60;
+      if (dura >= 120) {
+        this.isLongBd = true;
+      } else if (dura >= 15 && this.fline == "ASSY LINE") {
+        this.isLongBd = true;
+      }
+      if (dura.toFixed("1").includes("-")) {
+        // alert(`tidak bisa memasukan durasi minus (${dura})`);
+        this.isDurationInvalid = true;
+      } else if (isNaN(dura)) {
+        // alert(
+        //   "tolong masukan date start dan date end apabila problem sudah selesai"
+        // );
+        this.isDurationInvalid = true;
+      } else {
+        this.fdur = +dura.toFixed(0);
+        this.isDurationInvalid = false;
+      }
+    },
+    startTime: function () {
+      let strStartDate = `${this.startDate} ${this.startTime}`;
+      let strEndDate = `${this.endDate} ${this.endTime}`;
+      let start = new Date(strStartDate.replace(" ", "T"));
+      let finish = new Date(strEndDate.replace(" ", "T"));
+      let dura = (finish - start) / 1000 / 60;
+      if (dura >= 120) {
+        this.isLongBd = true;
+      } else if (dura >= 15 && this.fline == "ASSY LINE") {
+        this.isLongBd = true;
+      }
+      if (dura.toFixed("1").includes("-")) {
+        // alert(`tidak bisa memasukan durasi minus (${dura})`);
+        this.isDurationInvalid = true;
+      } else if (isNaN(dura)) {
+        // alert(
+        //   "tolong masukan date start dan date end apabila problem sudah selesai"
+        // );
+        this.isDurationInvalid = true;
+      } else {
+        this.fdur = +dura.toFixed(0);
+        this.isDurationInvalid = false;
+      }
+    },
+    endDate: function () {
+      let strStartDate = `${this.startDate} ${this.startTime}`;
+      let strEndDate = `${this.endDate} ${this.endTime}`;
+      let start = new Date(strStartDate.replace(" ", "T"));
+      let finish = new Date(strEndDate.replace(" ", "T"));
+      let dura = (finish - start) / 1000 / 60;
+      console.log(dura);
+      console.log(this.whyCategory);
+      if (dura >= 120) {
+        this.isLongBd = true;
+      } else if (dura >= 15 && this.fline == "ASSY LINE") {
+        this.isLongBd = true;
+      }
+      if (dura.toFixed("1").includes("-")) {
+        // alert(`tidak bisa memasukan durasi minus (${dura})`);
+        this.isDurationInvalid = true;
+      } else if (isNaN(dura)) {
+        // alert(
+        //   "tolong masukan date start dan date end apabila problem sudah selesai"
+        // );
+        this.isDurationInvalid = true;
+      } else {
+        this.fdur = +dura.toFixed(0);
+        this.isDurationInvalid = false;
+        this.isProblemClose = true;
+      }
+    },
+    endTime: function () {
+      let strStartDate = `${this.startDate} ${this.startTime}`;
+      let strEndDate = `${this.endDate} ${this.endTime}`;
+      let start = new Date(strStartDate.replace(" ", "T"));
+      let finish = new Date(strEndDate.replace(" ", "T"));
+      console.log((finish.getTime() - start.getTime()) / 1000 / 60);
+      let dura = (finish - start) / 1000 / 60;
+      if (dura >= 120) {
+        this.isLongBd = true;
+      } else if (dura >= 15 && this.fline == "ASSY LINE") {
+        this.isLongBd = true;
+      }
+      if (dura.toFixed("1").includes("-")) {
+        alert(`tidak bisa memasukan durasi minus (${dura})`);
+        this.isDurationInvalid = true;
+      } else if (isNaN(dura)) {
+        alert(
+            "tolong masukan date start dan date end apabila problem sudah selesai"
+        );
+        this.isDurationInvalid = true;
+      } else {
+        this.fdur = +dura.toFixed(0);
+        this.isDurationInvalid = false;
+        this.isProblemClose = true;
+      }
+    },
+    isEditWhyTerjadi: function () {
+    },
+    isEditWhyLama: function () {
+      console.log("lama berubah");
+    },
+    storeTheme: function () {
+      var all = document.getElementsByClassName("form-control");
+      var inputsLabel = document.getElementsByClassName("input-lable");
+      if (this.storeTheme == "light") {
+        for (let i = 0; i < all.length; i++) {
+          all[i].style.color = "black";
+        }
+        for (let i = 0; i < inputsLabel.length; i++) {
+          inputsLabel[i].style.color = "black";
+        }
+        document.getElementById(`table-step-repair`).style.color = "black";
+        document.getElementById(`table-why-lama`).style.color = "black";
+        document.getElementById(`table-why-terjadi`).style.color = "black";
+        document.getElementById(`table-cm-terjadi`).style.color = "black";
+        document.getElementById(`table-cm-lama`).style.color = "black";
+        document.getElementById(`table-yokoten`).style.color = "black";
+      } else {
+        for (let i = 0; i < all.length; i++) {
+          all[i].style.color = "white";
+        }
+        for (let i = 0; i < inputsLabel.length; i++) {
+          inputsLabel[i].style.color = "white";
+        }
+        document.getElementById(`table-step-repair`).style.color = "white";
+        document.getElementById(`table-why-lama`).style.color = "white";
+        document.getElementById(`table-why-terjadi`).style.color = "white";
+        document.getElementById(`table-cm-terjadi`).style.color = "white";
+        document.getElementById(`table-cm-lama`).style.color = "white";
+        document.getElementById(`table-yokoten`).style.color = "white";
+      }
+    },
+    selectedStatusLhFiveWhy: function () {
+      if (this.selectedStatusLhFiveWhy == "Tidak Approve") {
+        this.fiveWhyLhApprove = 0;
+      } else {
+        this.fiveWhyLhApprove = 1;
+      }
+    },
+    selectedStatusShFiveWhy: function () {
+      if (this.selectedStatusShFiveWhy == "Tidak Approve") {
+        this.fiveWhyShApprove = 0;
+      } else {
+        this.fiveWhyShApprove = 1;
+      }
+    },
+    selectedStatusLhCm: function () {
+      if (this.selectedStatusLhCm == "Tidak Approve") {
+        this.cmLhApprove = 0;
+      } else {
+        this.cmLhApprove = 1;
+      }
+    },
+    selectedStatusShCm: function () {
+      if (this.selectedStatusShCm == "Tidak Approve") {
+        this.cmShApprove = 0;
+      } else {
+        this.cmShApprove = 1;
+      }
+    },
+    fiveWhyLhApprove: function () {
+      this.clearDialog();
+      if (this.fiveWhyLhApprove == 1) {
+        this.isPleaseFinish = true;
+        // alert("kalau sudah approve silahkan tekan FINISH");
+      }
+    },
+    fiveWhyShApprove: function () {
+      this.clearDialog();
+      if (this.fiveWhyLhApprove == 1) {
+        this.isPleaseFinish = true;
+        // alert("kalau sudah approve silahkan tekan FINISH");
+      }
+    },
+    cmLhApprove: function () {
+      this.clearDialog();
+      if (this.fiveWhyLhApprove == 1) {
+        this.isPleaseFinish = true;
+        // alert("kalau sudah approve silahkan tekan FINISH");
+      }
+    },
+    cmShApprove: function () {
+      this.clearDialog();
+      if (this.fiveWhyLhApprove == 1) {
+        this.isPleaseFinish = true;
+        // alert("kalau sudah approve silahkan tekan FINISH");
+      }
+    },
+    isActionCm: function () {
+      console.log(this.cmField.cmDesc.includes("ACTION"));
+      console.log(this.cmField.cmDesc.split("[")[0]);
+      if (this.isActionCm == true) {
+        this.cmField.cmDesc = `[ACTION]` + this.cmField.cmDesc;
+      } else {
+        this.cmField.cmDesc = this.cmField.cmDesc.split("]")[1];
+      }
+    },
+    picThema: function () {
+      this.id_m_member = this.optOperatorsThemaRaw.filter((item) => {
+        return item.fname === this.picThema;
+      })[0].fid;
+      if (this.picThema) {
+        this.initDateThema = formatDate.YYYYMMDD(new Date());
+      } else {
+        this.initDateThema = null;
+      }
+    },
+    ft_pic: function () {
+      this.id_m_member = this.optOperatorsThemaRaw.filter((item) => {
+        return item.fname === this.ft_pic;
+      })[0].fid;
+    },
+    $route() {
+      this.scrollToUploadReport();
+    },
   },
 };
 </script>

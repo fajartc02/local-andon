@@ -19,7 +19,7 @@
             style="height: 50px">
             <h1 class="title-text" :style="`color: black; font-size: ${isMobile ? '18px' : '25px'}`">
               <i class="fa fa-bell"></i>
-              MACHINE STOP INPUT NEW SMARTANDON
+              MACHINE STOP INPUT
               <i class="fa fa-bell"></i>
             </h1>
           </div>
