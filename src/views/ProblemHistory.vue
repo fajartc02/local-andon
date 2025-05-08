@@ -135,6 +135,7 @@
                 Duration <i class="fa fa-sort"></i>
               </th>
               <th scope="col" colspan="2">Actions</th>
+              <th scope="col" colspan="3">LTB Reports</th>
             </tr>
           </thead>
           <tbody>
@@ -191,6 +192,18 @@
                     </div>
                   </div>
                 </div>
+              </td>
+              <td style="min-width: 140px">
+                <v-btn
+                  v-if="problem.isLtb && (!problem.file_report || problem.file_report === '')"
+                  color="red"
+                  small
+                  @click="redirectToUploadReport(problem.fid)"
+                  style="color: white; font-weight: bold;"
+                >
+                  Belum Upload Report
+                </v-btn>
+                <span v-else-if="problem.isLtb" style="color: cyan; font-weight: bold;">Sudah Upload</span>
               </td>
             </tr>
           </tbody>
@@ -437,6 +450,7 @@ export default {
       probAssyRed: [],
       probAssyWhite: [],
       btnSeeAllProblem: false,
+      isLtbView: false,
       json_fields: {
         No: "no",
         Date: "date",
@@ -601,6 +615,9 @@ export default {
     sortDate() {
       this.sortOrder = "fstart_time"
     },
+    redirectToUploadReport(vid) {
+      this.$router.push(`/editProblem?v_=${vid}#uploadReport`);
+    },
     sortDur() {
       this.sortOrder = "fdur"
     },
@@ -613,44 +630,47 @@ export default {
         this.isShow = true;
       }
     },
+    async fetchLtbProblemIds() {
+      try {
+        const response = await axios.get(
+          `${process.env.VUE_APP_HOST}/problemLtb?startDate=${this.selectedStartDate}&endDate=${this.selectedEndDate}`
+        );
+        if (response.data && response.data.data) {
+          this.ltbProblemIds = response.data.data.map((item) => item.fid);
+        } else {
+          this.ltbProblemIds = [];
+        }
+      } catch (error) {
+        console.error("Error fetching LTB problem IDs:", error);
+        this.ltbProblemIds = [];
+      }
+    },
     async getProblemHistory() {
       this.isLoading = true;
       this.btnSeeAllProblem = false;
+      this.isLtbView = false;
+      await this.fetchLtbProblemIds();
       await axios
         .get(
           `${process.env.VUE_APP_HOST}/problemHistory?startDate=${this.selectedStartDate}&endDate=${this.selectedEndDate}&sort=${this.sortOrder}`
         )
         .then((result) => {
-          console.log(result.data.data);
-          // this.containerProblems = result.data.data;
           let resData = result.data.data.map((item) => {
+            const isLtb = this.ltbProblemIds.includes(item.fid);
             if (item.fdur >= 30) {
-              // let v_ = item.fid;
-              // let json_analisys = [];
-              // axios
-              //   .get(
-              //     `${process.env.VUE_APP_HOST}/why_analisys/get/${v_}?analisys_category=TERJADI`
-              //   )
-              //   .then((result) => {
-              //     console.log(result);
-              //     if (result.data.data.length > 0) {
-              //       json_analisys = JSON.parse(result.data.data[0].json_string);
-              //     }
-              //   })
-              //   .catch((err) => {
-              //     console.log(err);
-              //   });
               if (!item.isAnalysis) {
                 return {
                   ...item,
                   bgCol: "#ff7f7f",
                   txtCol: "black",
+                  isLtb,
                 };
               } else if (item.fpermanet_cm == "" || item.fpermanet_cm == "[]") {
                 return {
                   ...item,
                   bgCol: "#ffffa0",
                   txtCol: "black",
+                  isLtb,
                 };
               }
             }
@@ -658,19 +678,64 @@ export default {
               ...item,
               bgCol: "#302e2e",
               txtCol: "white",
+              isLtb,
             };
           });
           this.containerProblems = resData;
           this.isLoading = false;
         })
         .catch((err) => {
-          // this.getProblemHistory()
           this.isLoading = false;
+          console.log(err);
+        });
+    },
+    async getLtbProblem() {
+      let url = `${process.env.VUE_APP_HOST}/problemLtb?startDate=${this.selectedStartDate}&endDate=${this.selectedEndDate}`;
+      if (this.machineSelected !== "" && this.machineSelected !== undefined) {
+        url += `&fmc=${this.machineSelected}`;
+      }
+      if (this.lineSelected !== "" || this.lineSelected !== undefined) {
+        url += `&fline=${this.lineSelected}`;
+      }
+      await axios
+        .get(url)
+        .then((result) => {
+          let resData = result.data.data.map((item) => {
+            const isLtb = true;
+            if (item.fdur >= 30) {
+              if (item.isAnalysis == false) {
+                return {
+                  ...item,
+                  bgCol: "#ff7f7f",
+                  txtCol: "black",
+                  isLtb,
+                };
+              } else if (item.fpermanet_cm == "" || item.fpermanet_cm == "[]") {
+                return {
+                  ...item,
+                  bgCol: "#ffffa0",
+                  txtCol: "black",
+                  isLtb,
+                };
+              }
+            }
+            return {
+              ...item,
+              bgCol: "#302e2e",
+              txtCol: "white",
+              isLtb,
+            };
+          });
+          this.containerProblems = resData;
+          this.isLtbView = true;
+        })
+        .catch((err) => {
           console.log(err);
         });
     },
     async onSearch() {
       this.isLoading = true;
+      await this.fetchLtbProblemIds();
       let url = `${process.env.VUE_APP_HOST}/problemHistory?startDate=${this.selectedStartDate}&endDate=${this.selectedEndDate}&isProblem=false&sort=${this.sortOrder}`;
       if (this.machineSelected != "") {
         url += `&machine=${this.machineSelected}`;
@@ -684,20 +749,22 @@ export default {
       await axios
         .get(`${url}`)
         .then((result) => {
-          console.log(result.data.data);
           let resData = result.data.data.map((item) => {
+            const isLtb = this.ltbProblemIds.includes(item.fid);
             if (item.fdur >= 30) {
               if (item.isAnalysis == false) {
                 return {
                   ...item,
                   bgCol: "#ff7f7f",
                   txtCol: "black",
+                  isLtb,
                 };
               } else if (item.fpermanet_cm == "" || item.fpermanet_cm == "[]") {
                 return {
                   ...item,
                   bgCol: "#ffffa0",
                   txtCol: "black",
+                  isLtb,
                 };
               }
             }
@@ -705,13 +772,13 @@ export default {
               ...item,
               bgCol: "#302e2e",
               txtCol: "white",
+              isLtb,
             };
           });
           this.containerProblems = resData;
           this.isLoading = false;
         })
         .catch((err) => {
-          // this.onSearch();
           this.isLoading = false;
           console.log(err);
         });
@@ -772,46 +839,47 @@ export default {
           console.log(err);
         });
     },
-    async getLtbProblem() {
-      let url = `${process.env.VUE_APP_HOST}/problemLtb?startDate=${this.selectedStartDate}&endDate=${this.selectedEndDate}`;
-      if (this.machineSelected !== "" && this.machineSelected !== undefined) {
-        url += `&fmc=${this.machineSelected}`;
-      }
-      if (this.lineSelected !== "" || this.lineSelected !== undefined) {
-        url += `&fline=${this.lineSelected}`;
-      }
-      await axios
-        .get(url)
-        .then((result) => {
-          console.log(result.data.data);
-          let resData = result.data.data.map((item) => {
-            if (item.fdur >= 30) {
-              if (item.isAnalysis == false) {
-                return {
-                  ...item,
-                  bgCol: "#ff7f7f",
-                  txtCol: "black",
-                };
-              } else if (item.fpermanet_cm == "" || item.fpermanet_cm == "[]") {
-                return {
-                  ...item,
-                  bgCol: "#ffffa0",
-                  txtCol: "black",
-                };
-              }
-            }
-            return {
-              ...item,
-              bgCol: "#302e2e",
-              txtCol: "white",
-            };
-          });
-          this.containerProblems = resData;
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
+    // async getLtbProblem() {
+    //   let url = `${process.env.VUE_APP_HOST}/problemLtb?startDate=${this.selectedStartDate}&endDate=${this.selectedEndDate}`;
+    //   if (this.machineSelected !== "" && this.machineSelected !== undefined) {
+    //     url += `&fmc=${this.machineSelected}`;
+    //   }
+    //   if (this.lineSelected !== "" || this.lineSelected !== undefined) {
+    //     url += `&fline=${this.lineSelected}`;
+    //   }
+    //   await axios
+    //     .get(url)
+    //     .then((result) => {
+    //       console.log(result.data.data);
+    //       let resData = result.data.data.map((item) => {
+    //         if (item.fdur >= 30) {
+    //           if (item.isAnalysis == false) {
+    //             return {
+    //               ...item,
+    //               bgCol: "#ff7f7f",
+    //               txtCol: "black",
+    //             };
+    //           } else if (item.fpermanet_cm == "" || item.fpermanet_cm == "[]") {
+    //             return {
+    //               ...item,
+    //               bgCol: "#ffffa0",
+    //               txtCol: "black",
+    //             };
+    //           }
+    //         }
+    //         return {
+    //           ...item,
+    //           bgCol: "#302e2e",
+    //           txtCol: "white",
+    //         };
+    //       });
+    //       this.containerProblems = resData;
+    //       this.isLtbView = true;
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //     });
+    // },
     async getMachines() {
       await axios
         .get(`${process.env.VUE_APP_HOST}/machines?line=${this.lineSelected}`)
