@@ -135,7 +135,7 @@
                 Duration <i class="fa fa-sort"></i>
               </th>
               <th scope="col" colspan="2">Actions</th>
-              <th scope="col" colspan="3">LTB Report</th>
+              <th scope="col" colspan="3">LTB Reports</th>
             </tr>
           </thead>
           <tbody>
