@@ -647,7 +647,7 @@ export default {
     },
     async getProblemHistory() {
       this.isLoading = true;
-      this.btnSeeAllProblem = true;
+      this.btnSeeAllProblem = false;
       this.isLtbView = false;
       await this.fetchLtbProblemIds();
       await axios

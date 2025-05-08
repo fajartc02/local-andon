@@ -58,14 +58,14 @@
                        @change="uploadFile('fimage_problem')" placeholder="masukan ilustrasi problem"/>
               </div>
               <div class="col-1 py-0 m-0">
-                <h class="btn btn-success btn-sm" @click="addToogle('isImgProblem')">
+                <button class="btn btn-success btn-sm" @click="addToogle('isImgProblem')">
                   +
-                </h>
+                </button>
               </div>
               <div class="col-1 py-0 m-0">
-                <h class="btn btn-danger btn-sm" @click="deleteImg('deleteProblem1', 'fimage_problem')">
+                <button class="btn btn-danger btn-sm" @click="deleteImg('deleteProblem1', 'fimage_problem')">
                   <i class="fa fa-trash" style="font-size: 10px"></i>
-                </h>
+                </button>
               </div>
             </div>
           </form>
@@ -114,14 +114,14 @@
                        @change="uploadFile('std_img')"/>
               </div>
               <div class="col-1 py-0 m-0">
-                <h class="btn btn-success btn-sm" @click="addToogle('isImgStd')">
+                <button class="btn btn-success btn-sm" @click="addToogle('isImgStd')">
                   +
-                </h>
+                </button>
               </div>
               <div class="col-1 py-0 m-0">
-                <h class="btn btn-danger btn-sm" @click="deleteImg('deleteStd1', 'std_img')">
+                <button class="btn btn-danger btn-sm" @click="deleteImg('deleteStd1', 'std_img')">
                   <i class="fa fa-trash" style="font-size: 10px"></i>
-                </h>
+                </button>
               </div>
             </div>
           </form>
@@ -167,14 +167,14 @@
                        @change="uploadFile('act_img')"/>
               </div>
               <div class="col-1 py-0 m-0">
-                <h class="btn btn-success btn-sm" @click="addToogle('isImgAct')">
+                <button class="btn btn-success btn-sm" @click="addToogle('isImgAct')">
                   +
-                </h>
+                </button>
               </div>
               <div class="col-1 py-0 m-0">
-                <h class="btn btn-danger btn-sm" @click="deleteImg('deleteAct1', 'act_img')">
+                <button class="btn btn-danger btn-sm" @click="deleteImg('deleteAct1', 'act_img')">
                   <i class="fa fa-trash" style="font-size: 10px"></i>
-                </h>
+                </button>
               </div>
             </div>
           </form>
@@ -466,14 +466,14 @@
                        @change="uploadFile('why1_img')"/>
               </div>
               <div class="px-3 m-0">
-                <h class="btn btn-success btn-sm" @click="addToogle('isImgTerjadi')">
+                <button class="btn btn-success btn-sm" @click="addToogle('isImgTerjadi')">
                   +
-                </h>
+                </button>
               </div>
               <div class="px-2 m-0">
-                <h class="btn btn-danger btn-sm" @click="deleteImg('deleteWhy1', 'why1_img')">
+                <button class="btn btn-danger btn-sm" @click="deleteImg('deleteWhy1', 'why1_img')">
                   <i class="fa fa-trash" style="font-size: 10px"></i>
-                </h>
+                </button>
               </div>
             </div>
           </form>
@@ -1139,14 +1139,14 @@
                        @change="uploadFile('why2_img')"/>
               </div>
               <div class=" px-3 m-0">
-                <h class="btn btn-success btn-sm" @click="addToogle('isImgLama')">
+                <button class="btn btn-success btn-sm" @click="addToogle('isImgLama')">
                   +
-                </h>
+                </button>
               </div>
               <div class=" px-2 m-0">
-                <h class="btn btn-danger btn-sm" @click="deleteImg('deleteWhy2', 'why2_img')">
+                <button class="btn btn-danger btn-sm" @click="deleteImg('deleteWhy2', 'why2_img')">
                   <i class="fa fa-trash" style="font-size: 10px"></i>
-                </h>
+                </button>
               </div>
             </div>
           </form>
@@ -1782,13 +1782,16 @@
       </div>
       <div class="card mt-2">
         <span class="input-lable">Last Report File</span>
-        <button v-if="!file_report" class="btn btn-sm btn-warning" disabled>Belum Ada Report di upload</button>
-        <a v-else class="btn btn-sm btn-success text-light"
-           :href="reportUri">Download Report</a>
+        <button v-if="!file_report" class="btn btn-sm btn-warning" disabled>Belum Ada Report yang di upload</button>
+        <button v-else class="btn btn-sm btn-primary text-light mt-2" @click="downloadReportFromUrl">
+          Download Uploaded Report
+        </button>
+        <a class="btn btn-sm btn-success text-light mt-2"
+           :href="reportUri" target="_blank" rel="noopener noreferrer">Download Template</a>
       </div>
       <div class="card mt-2" id="uploadReport">
         <div class="card-body">
-          <span class="input-lable">Upload Report <a class="badge badge-pill badge-primary text-light"
+          <span class="input-lable">Upload Report<a class="badge badge-pill badge-primary text-light"
                                                      :href="reportUri">Download
               Template</a></span>
           <input type="file" class="form-control" ref="fileReport" @change="isNotFill = false"/>
@@ -1834,7 +1837,7 @@ import formatDate from "@/functions/formatDate";
 import TreeListAnalisys from "@/components/TreeListAnalisys.vue";
 import Swal from "sweetalert2";
 
-const host = process.env.VUE_APP_HOST;
+const host = (process.env.VUE_APP_HOST && process.env.VUE_APP_HOST !== "undefined") ? process.env.VUE_APP_HOST : window.location.origin;
 
 export default {
   name: "EditProblem",
@@ -2013,6 +2016,8 @@ export default {
       displayWhy22_img: null,
       fattachment: null,
       displayAttachment: null,
+      fimage: null,
+      displayImg: null,
       optOperators: ["Loading ..."],
       optOperatorsThema: ["Loading ..."],
       gapIlustrasi: "",
@@ -2056,7 +2061,7 @@ export default {
       try {
         this.isLoading = true
         const formData = new FormData();
-        formData.append('fid', this.$route.query.v_)
+        formData.append('fid', this.id_p_m)
         formData.append('problem', this.ferror_name)
         formData.append("file", this.$refs.fileReport.files[0]);
         await axios.put(`${process.env.VUE_APP_HOST}/v2/upload-report`, formData, {
@@ -2070,6 +2075,37 @@ export default {
         this.isLoading = false
         alert('gagal upload!')
       }
+    },
+    async downloadUploadedReport() {
+      try {
+        this.isLoading = true;
+        const response = await axios.get(`${process.env.VUE_APP_HOST}/v2/download-uploaded-report`, {
+          params: {
+            fid: this.id_p_m,
+            t: Date.now()
+          },
+          responseType: 'blob'
+        });
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        // Set filename for download, you can customize this
+        link.setAttribute('download', `uploaded_report_${this.id_p_m}.pdf`);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        this.isLoading = false;
+      } catch (error) {
+        this.isLoading = false;
+        alert('Failed to download report!');
+        console.error(error);
+      }
+    },
+    downloadReportFromUrl() {
+      // Construct the download URL using the given format
+      const downloadUrl = `${process.env.VUE_APP_HOST}/v2/download-report?fid=${this.id_p_m}`;
+      // Open the URL in a new tab to trigger the download
+      window.open(downloadUrl, '_blank');
     },
     checkAnalysis(state) {
       console.log('CHECK ANALYSIS state');
@@ -2086,12 +2122,18 @@ export default {
           )
           .then((result) => {
             console.log(result);
-            let memberFT = result.data.data[0].member_name;
-            this.is_ft_selected = true;
-            this.memberFT = memberFT;
+            if (result.data.data.length > 0) {
+              let memberFT = result.data.data[0].member_name;
+              this.is_ft_selected = true;
+              this.memberFT = memberFT;
+            } else {
+              this.is_ft_selected = false;
+              this.memberFT = null;
+            }
           })
           .catch(() => {
             this.is_ft_selected = false;
+            this.memberFT = null;
           });
     },
     submitFT() {
