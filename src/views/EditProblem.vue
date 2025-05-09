@@ -58,14 +58,14 @@
                        @change="uploadFile('fimage_problem')" placeholder="masukan ilustrasi problem"/>
               </div>
               <div class="col-1 py-0 m-0">
-                <h class="btn btn-success btn-sm" @click="addToogle('isImgProblem')">
+                <button class="btn btn-success btn-sm" @click="addToogle('isImgProblem')">
                   +
-                </h>
+                </button>
               </div>
               <div class="col-1 py-0 m-0">
-                <h class="btn btn-danger btn-sm" @click="deleteImg('deleteProblem1', 'fimage_problem')">
+                <button class="btn btn-danger btn-sm" @click="deleteImg('deleteProblem1', 'fimage_problem')">
                   <i class="fa fa-trash" style="font-size: 10px"></i>
-                </h>
+                </button>
               </div>
             </div>
           </form>
@@ -114,14 +114,14 @@
                        @change="uploadFile('std_img')"/>
               </div>
               <div class="col-1 py-0 m-0">
-                <h class="btn btn-success btn-sm" @click="addToogle('isImgStd')">
+                <button class="btn btn-success btn-sm" @click="addToogle('isImgStd')">
                   +
-                </h>
+                </button>
               </div>
               <div class="col-1 py-0 m-0">
-                <h class="btn btn-danger btn-sm" @click="deleteImg('deleteStd1', 'std_img')">
+                <button class="btn btn-danger btn-sm" @click="deleteImg('deleteStd1', 'std_img')">
                   <i class="fa fa-trash" style="font-size: 10px"></i>
-                </h>
+                </button>
               </div>
             </div>
           </form>
@@ -167,14 +167,14 @@
                        @change="uploadFile('act_img')"/>
               </div>
               <div class="col-1 py-0 m-0">
-                <h class="btn btn-success btn-sm" @click="addToogle('isImgAct')">
+                <button class="btn btn-success btn-sm" @click="addToogle('isImgAct')">
                   +
-                </h>
+                </button>
               </div>
               <div class="col-1 py-0 m-0">
-                <h class="btn btn-danger btn-sm" @click="deleteImg('deleteAct1', 'act_img')">
+                <button class="btn btn-danger btn-sm" @click="deleteImg('deleteAct1', 'act_img')">
                   <i class="fa fa-trash" style="font-size: 10px"></i>
-                </h>
+                </button>
               </div>
             </div>
           </form>
@@ -466,14 +466,14 @@
                        @change="uploadFile('why1_img')"/>
               </div>
               <div class="px-3 m-0">
-                <h class="btn btn-success btn-sm" @click="addToogle('isImgTerjadi')">
+                <button class="btn btn-success btn-sm" @click="addToogle('isImgTerjadi')">
                   +
-                </h>
+                </button>
               </div>
               <div class="px-2 m-0">
-                <h class="btn btn-danger btn-sm" @click="deleteImg('deleteWhy1', 'why1_img')">
+                <button class="btn btn-danger btn-sm" @click="deleteImg('deleteWhy1', 'why1_img')">
                   <i class="fa fa-trash" style="font-size: 10px"></i>
-                </h>
+                </button>
               </div>
             </div>
           </form>
@@ -1139,14 +1139,14 @@
                        @change="uploadFile('why2_img')"/>
               </div>
               <div class=" px-3 m-0">
-                <h class="btn btn-success btn-sm" @click="addToogle('isImgLama')">
+                <button class="btn btn-success btn-sm" @click="addToogle('isImgLama')">
                   +
-                </h>
+                </button>
               </div>
               <div class=" px-2 m-0">
-                <h class="btn btn-danger btn-sm" @click="deleteImg('deleteWhy2', 'why2_img')">
+                <button class="btn btn-danger btn-sm" @click="deleteImg('deleteWhy2', 'why2_img')">
                   <i class="fa fa-trash" style="font-size: 10px"></i>
-                </h>
+                </button>
               </div>
             </div>
           </form>
@@ -1782,13 +1782,16 @@
       </div>
       <div class="card mt-2">
         <span class="input-lable">Last Report File</span>
-        <button v-if="!file_report" class="btn btn-sm btn-warning" disabled>Belum Ada Report di upload</button>
-        <a v-else class="btn btn-sm btn-success text-light"
-           :href="reportUri">Download Report</a>
+        <button v-if="!file_report" class="btn btn-sm btn-warning" disabled>Belum Ada Report yang di upload</button>
+        <button v-else class="btn btn-sm btn-primary text-light mt-2" @click="downloadReportFromUrl">
+          Download Uploaded Report
+        </button>
+        <a class="btn btn-sm btn-success text-light mt-2"
+           :href="reportUri" target="_blank" rel="noopener noreferrer">Download Template</a>
       </div>
-      <div class="card mt-2">
+      <div class="card mt-2" id="uploadReport">
         <div class="card-body">
-          <span class="input-lable">Upload Report <a class="badge badge-pill badge-primary text-light"
+          <span class="input-lable">Upload Report<a class="badge badge-pill badge-primary text-light"
                                                      :href="reportUri">Download
               Template</a></span>
           <input type="file" class="form-control" ref="fileReport" @change="isNotFill = false"/>
@@ -1834,7 +1837,7 @@ import formatDate from "@/functions/formatDate";
 import TreeListAnalisys from "@/components/TreeListAnalisys.vue";
 import Swal from "sweetalert2";
 
-const host = process.env.VUE_APP_HOST;
+const host = (process.env.VUE_APP_HOST && process.env.VUE_APP_HOST !== "undefined") ? process.env.VUE_APP_HOST : window.location.origin;
 
 export default {
   name: "EditProblem",
@@ -2013,6 +2016,8 @@ export default {
       displayWhy22_img: null,
       fattachment: null,
       displayAttachment: null,
+      fimage: null,
+      displayImg: null,
       optOperators: ["Loading ..."],
       optOperatorsThema: ["Loading ..."],
       gapIlustrasi: "",
@@ -2035,308 +2040,6 @@ export default {
 
     };
   },
-  watch: {
-    containerThemaActivity: {
-      handler: function () {
-        let timeInit = new Date(this.initDateThema).getTime();
-        let countOffsetTime = 0;
-        this.containerThemaActivity.forEach((item) => {
-          console.log(item);
-          if (item.duration) {
-            countOffsetTime += +item.duration;
-            item.date_plan = formatDate.YYYYMMDD(
-                new Date(timeInit + +item.duration * 3600 * 1000 * 24)
-            );
-          }
-        });
-        let timeOffset =
-            countOffsetTime == 0 ? 1 : countOffsetTime * 3600 * 1000 * 24;
-        console.log(new Date(timeInit + timeOffset));
-        this.datePlanTheme = formatDate.YYYYMMDD(
-            new Date(timeInit + timeOffset)
-        );
-      },
-      deep: true,
-    },
-    cmField: {
-      handler: function () {
-        if (this.cmField.cmDesc.includes('"')) {
-          alert('tidak boleh menggunakan petik dua (")');
-        }
-      },
-      deep: true,
-    },
-    yokoField: {
-      handler: function () {
-        if (this.yokoField.machine.includes('"')) {
-          alert('tidak boleh menggunakan petik dua (")');
-        }
-      },
-      deep: true,
-    },
-    isTaskforce: function () {
-      if (this.isTaskforce == true) {
-        alert("Taskforce di pilih");
-        if (!this.ferror_name.includes("[TASKFORCE]")) {
-          this.ferror_name += "[TASKFORCE]";
-        }
-      } else {
-        this.ferror_name = this.ferror_name.split("[")[0];
-        alert("Taskforce tidak di pilih");
-      }
-    },
-    isFullcap: function () {
-      if (this.isFullcap == true) {
-        if (!this.ferror_name.includes("[FULLCAP]")) {
-          this.ferror_name = "[FULLCAP]" + this.ferror_name;
-        }
-      } else {
-        this.ferror_name = this.ferror_name.split("]")[1];
-      }
-    },
-    isDialogShowLhFiveWhy: function () {
-      if (this.isDialogShowLhFiveWhy == true) {
-        this.fiveWhyLhFeedback = this.fiveWhyLhFeedback.split(": ")[1];
-      }
-    },
-    isDialogShowShFiveWhy: function () {
-      if (this.isDialogShowShFiveWhy == true) {
-        this.fiveWhyShFeedback = this.fiveWhyShFeedback.split(": ")[1];
-      }
-    },
-    isDialogShowLhCm: function () {
-      if (this.isDialogShowLhCm == true) {
-        this.cmLhFeedback = this.cmLhFeedback.split(": ")[1];
-      }
-    },
-    isDialogShowShCm: function () {
-      if (this.isDialogShowShCm == true) {
-        this.cmShFeedback = this.cmShFeedback.split(": ")[1];
-      }
-    },
-    isDialogShowDhCm: function () {
-      if (this.isDialogShowDhCm == true) {
-        this.cmDhFeedback = this.cmDhFeedback.split(": ")[1];
-      }
-    },
-    startDate: function () {
-      let strStartDate = `${this.startDate} ${this.startTime}`;
-      let strEndDate = `${this.endDate} ${this.endTime}`;
-      let start = new Date(strStartDate.replace(" ", "T"));
-      let finish = new Date(strEndDate.replace(" ", "T"));
-      let dura = (finish - start) / 1000 / 60;
-      if (dura >= 120) {
-        this.isLongBd = true;
-      } else if (dura >= 15 && this.fline == "ASSY LINE") {
-        this.isLongBd = true;
-      }
-      if (dura.toFixed("1").includes("-")) {
-        // alert(`tidak bisa memasukan durasi minus (${dura})`);
-        this.isDurationInvalid = true;
-      } else if (isNaN(dura)) {
-        // alert(
-        //   "tolong masukan date start dan date end apabila problem sudah selesai"
-        // );
-        this.isDurationInvalid = true;
-      } else {
-        this.fdur = +dura.toFixed(0);
-        this.isDurationInvalid = false;
-      }
-    },
-    startTime: function () {
-      let strStartDate = `${this.startDate} ${this.startTime}`;
-      let strEndDate = `${this.endDate} ${this.endTime}`;
-      let start = new Date(strStartDate.replace(" ", "T"));
-      let finish = new Date(strEndDate.replace(" ", "T"));
-      let dura = (finish - start) / 1000 / 60;
-      if (dura >= 120) {
-        this.isLongBd = true;
-      } else if (dura >= 15 && this.fline == "ASSY LINE") {
-        this.isLongBd = true;
-      }
-      if (dura.toFixed("1").includes("-")) {
-        // alert(`tidak bisa memasukan durasi minus (${dura})`);
-        this.isDurationInvalid = true;
-      } else if (isNaN(dura)) {
-        // alert(
-        //   "tolong masukan date start dan date end apabila problem sudah selesai"
-        // );
-        this.isDurationInvalid = true;
-      } else {
-        this.fdur = +dura.toFixed(0);
-        this.isDurationInvalid = false;
-      }
-    },
-    endDate: function () {
-      let strStartDate = `${this.startDate} ${this.startTime}`;
-      let strEndDate = `${this.endDate} ${this.endTime}`;
-      let start = new Date(strStartDate.replace(" ", "T"));
-      let finish = new Date(strEndDate.replace(" ", "T"));
-      let dura = (finish - start) / 1000 / 60;
-      console.log(dura);
-      console.log(this.whyCategory);
-      if (dura >= 120) {
-        this.isLongBd = true;
-      } else if (dura >= 15 && this.fline == "ASSY LINE") {
-        this.isLongBd = true;
-      }
-      if (dura.toFixed("1").includes("-")) {
-        // alert(`tidak bisa memasukan durasi minus (${dura})`);
-        this.isDurationInvalid = true;
-      } else if (isNaN(dura)) {
-        // alert(
-        //   "tolong masukan date start dan date end apabila problem sudah selesai"
-        // );
-        this.isDurationInvalid = true;
-      } else {
-        this.fdur = +dura.toFixed(0);
-        this.isDurationInvalid = false;
-        this.isProblemClose = true;
-      }
-    },
-    endTime: function () {
-      let strStartDate = `${this.startDate} ${this.startTime}`;
-      let strEndDate = `${this.endDate} ${this.endTime}`;
-      let start = new Date(strStartDate.replace(" ", "T"));
-      let finish = new Date(strEndDate.replace(" ", "T"));
-      console.log((finish.getTime() - start.getTime()) / 1000 / 60);
-      let dura = (finish - start) / 1000 / 60;
-      if (dura >= 120) {
-        this.isLongBd = true;
-      } else if (dura >= 15 && this.fline == "ASSY LINE") {
-        this.isLongBd = true;
-      }
-      if (dura.toFixed("1").includes("-")) {
-        alert(`tidak bisa memasukan durasi minus (${dura})`);
-        this.isDurationInvalid = true;
-      } else if (isNaN(dura)) {
-        alert(
-            "tolong masukan date start dan date end apabila problem sudah selesai"
-        );
-        this.isDurationInvalid = true;
-      } else {
-        this.fdur = +dura.toFixed(0);
-        this.isDurationInvalid = false;
-        this.isProblemClose = true;
-      }
-    },
-    isEditWhyTerjadi: function () {
-    },
-    isEditWhyLama: function () {
-      console.log("lama berubah");
-    },
-    storeTheme: function () {
-      var all = document.getElementsByClassName("form-control");
-      var inputsLabel = document.getElementsByClassName("input-lable");
-      if (this.storeTheme == "light") {
-        for (let i = 0; i < all.length; i++) {
-          all[i].style.color = "black";
-        }
-        for (let i = 0; i < inputsLabel.length; i++) {
-          inputsLabel[i].style.color = "black";
-        }
-        document.getElementById(`table-step-repair`).style.color = "black";
-        document.getElementById(`table-why-lama`).style.color = "black";
-        document.getElementById(`table-why-terjadi`).style.color = "black";
-        document.getElementById(`table-cm-terjadi`).style.color = "black";
-        document.getElementById(`table-cm-lama`).style.color = "black";
-        document.getElementById(`table-yokoten`).style.color = "black";
-      } else {
-        for (let i = 0; i < all.length; i++) {
-          all[i].style.color = "white";
-        }
-        for (let i = 0; i < inputsLabel.length; i++) {
-          inputsLabel[i].style.color = "white";
-        }
-        document.getElementById(`table-step-repair`).style.color = "white";
-        document.getElementById(`table-why-lama`).style.color = "white";
-        document.getElementById(`table-why-terjadi`).style.color = "white";
-        document.getElementById(`table-cm-terjadi`).style.color = "white";
-        document.getElementById(`table-cm-lama`).style.color = "white";
-        document.getElementById(`table-yokoten`).style.color = "white";
-      }
-    },
-    selectedStatusLhFiveWhy: function () {
-      if (this.selectedStatusLhFiveWhy == "Tidak Approve") {
-        this.fiveWhyLhApprove = 0;
-      } else {
-        this.fiveWhyLhApprove = 1;
-      }
-    },
-    selectedStatusShFiveWhy: function () {
-      if (this.selectedStatusShFiveWhy == "Tidak Approve") {
-        this.fiveWhyShApprove = 0;
-      } else {
-        this.fiveWhyShApprove = 1;
-      }
-    },
-    selectedStatusLhCm: function () {
-      if (this.selectedStatusLhCm == "Tidak Approve") {
-        this.cmLhApprove = 0;
-      } else {
-        this.cmLhApprove = 1;
-      }
-    },
-    selectedStatusShCm: function () {
-      if (this.selectedStatusShCm == "Tidak Approve") {
-        this.cmShApprove = 0;
-      } else {
-        this.cmShApprove = 1;
-      }
-    },
-    fiveWhyLhApprove: function () {
-      this.clearDialog();
-      if (this.fiveWhyLhApprove == 1) {
-        this.isPleaseFinish = true;
-        // alert("kalau sudah approve silahkan tekan FINISH");
-      }
-    },
-    fiveWhyShApprove: function () {
-      this.clearDialog();
-      if (this.fiveWhyLhApprove == 1) {
-        this.isPleaseFinish = true;
-        // alert("kalau sudah approve silahkan tekan FINISH");
-      }
-    },
-    cmLhApprove: function () {
-      this.clearDialog();
-      if (this.fiveWhyLhApprove == 1) {
-        this.isPleaseFinish = true;
-        // alert("kalau sudah approve silahkan tekan FINISH");
-      }
-    },
-    cmShApprove: function () {
-      this.clearDialog();
-      if (this.fiveWhyLhApprove == 1) {
-        this.isPleaseFinish = true;
-        // alert("kalau sudah approve silahkan tekan FINISH");
-      }
-    },
-    isActionCm: function () {
-      console.log(this.cmField.cmDesc.includes("ACTION"));
-      console.log(this.cmField.cmDesc.split("[")[0]);
-      if (this.isActionCm == true) {
-        this.cmField.cmDesc = `[ACTION]` + this.cmField.cmDesc;
-      } else {
-        this.cmField.cmDesc = this.cmField.cmDesc.split("]")[1];
-      }
-    },
-    picThema: function () {
-      this.id_m_member = this.optOperatorsThemaRaw.filter((item) => {
-        return item.fname === this.picThema;
-      })[0].fid;
-      if (this.picThema) {
-        this.initDateThema = formatDate.YYYYMMDD(new Date());
-      } else {
-        this.initDateThema = null;
-      }
-    },
-    ft_pic: function () {
-      this.id_m_member = this.optOperatorsThemaRaw.filter((item) => {
-        return item.fname === this.ft_pic;
-      })[0].fid;
-    },
-  },
   computed: {
     ...mapState(["storeTheme", "newAnalisys", "newAnalisys2"]),
     reportUri() {
@@ -2344,11 +2047,21 @@ export default {
     }
   },
   methods: {
+    scrollToUploadReport() {
+      if (this.$route.hash === '#uploadReport') {
+        this.$nextTick(() => {
+          const el = document.getElementById('uploadReport');
+          if (el) {
+            el.scrollIntoView({ behavior: 'smooth' });
+          }
+        });
+      }
+    },
     async uploadFileReport() {
       try {
         this.isLoading = true
         const formData = new FormData();
-        formData.append('fid', this.$route.query.v_)
+        formData.append('fid', this.id_p_m)
         formData.append('problem', this.ferror_name)
         formData.append("file", this.$refs.fileReport.files[0]);
         await axios.put(`${process.env.VUE_APP_HOST}/v2/upload-report`, formData, {
@@ -2362,6 +2075,37 @@ export default {
         this.isLoading = false
         alert('gagal upload!')
       }
+    },
+    async downloadUploadedReport() {
+      try {
+        this.isLoading = true;
+        const response = await axios.get(`${process.env.VUE_APP_HOST}/v2/download-uploaded-report`, {
+          params: {
+            fid: this.id_p_m,
+            t: Date.now()
+          },
+          responseType: 'blob'
+        });
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        // Set filename for download, you can customize this
+        link.setAttribute('download', `uploaded_report_${this.id_p_m}.pdf`);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        this.isLoading = false;
+      } catch (error) {
+        this.isLoading = false;
+        alert('Failed to download report!');
+        console.error(error);
+      }
+    },
+    downloadReportFromUrl() {
+      // Construct the download URL using the given format
+      const downloadUrl = `${process.env.VUE_APP_HOST}/v2/download-report?fid=${this.id_p_m}`;
+      // Open the URL in a new tab to trigger the download
+      window.open(downloadUrl, '_blank');
     },
     checkAnalysis(state) {
       console.log('CHECK ANALYSIS state');
@@ -2378,12 +2122,18 @@ export default {
           )
           .then((result) => {
             console.log(result);
-            let memberFT = result.data.data[0].member_name;
-            this.is_ft_selected = true;
-            this.memberFT = memberFT;
+            if (result.data.data.length > 0) {
+              let memberFT = result.data.data[0].member_name;
+              this.is_ft_selected = true;
+              this.memberFT = memberFT;
+            } else {
+              this.is_ft_selected = false;
+              this.memberFT = null;
+            }
           })
           .catch(() => {
             this.is_ft_selected = false;
+            this.memberFT = null;
           });
     },
     submitFT() {
@@ -3501,6 +3251,312 @@ export default {
     await this.getAllMtMember();
     await this.getDetailProblem();
     await this.checkFocusTheme();
+    this.scrollToUploadReport();
+  },
+  watch: {
+    containerThemaActivity: {
+      handler: function () {
+        let timeInit = new Date(this.initDateThema).getTime();
+        let countOffsetTime = 0;
+        this.containerThemaActivity.forEach((item) => {
+          console.log(item);
+          if (item.duration) {
+            countOffsetTime += +item.duration;
+            item.date_plan = formatDate.YYYYMMDD(
+                new Date(timeInit + +item.duration * 3600 * 1000 * 24)
+            );
+          }
+        });
+        let timeOffset =
+            countOffsetTime == 0 ? 1 : countOffsetTime * 3600 * 1000 * 24;
+        console.log(new Date(timeInit + timeOffset));
+        this.datePlanTheme = formatDate.YYYYMMDD(
+            new Date(timeInit + timeOffset)
+        );
+      },
+      deep: true,
+    },
+    cmField: {
+      handler: function () {
+        if (this.cmField.cmDesc.includes('"')) {
+          alert('tidak boleh menggunakan petik dua (")');
+        }
+      },
+      deep: true,
+    },
+    yokoField: {
+      handler: function () {
+        if (this.yokoField.machine.includes('"')) {
+          alert('tidak boleh menggunakan petik dua (")');
+        }
+      },
+      deep: true,
+    },
+    isTaskforce: function () {
+      if (this.isTaskforce == true) {
+        alert("Taskforce di pilih");
+        if (!this.ferror_name.includes("[TASKFORCE]")) {
+          this.ferror_name += "[TASKFORCE]";
+        }
+      } else {
+        this.ferror_name = this.ferror_name.split("[")[0];
+        alert("Taskforce tidak di pilih");
+      }
+    },
+    isFullcap: function () {
+      if (this.isFullcap == true) {
+        if (!this.ferror_name.includes("[FULLCAP]")) {
+          this.ferror_name = "[FULLCAP]" + this.ferror_name;
+        }
+      } else {
+        this.ferror_name = this.ferror_name.split("]")[1];
+      }
+    },
+    isDialogShowLhFiveWhy: function () {
+      if (this.isDialogShowLhFiveWhy == true) {
+        this.fiveWhyLhFeedback = this.fiveWhyLhFeedback.split(": ")[1];
+      }
+    },
+    isDialogShowShFiveWhy: function () {
+      if (this.isDialogShowShFiveWhy == true) {
+        this.fiveWhyShFeedback = this.fiveWhyShFeedback.split(": ")[1];
+      }
+    },
+    isDialogShowLhCm: function () {
+      if (this.isDialogShowLhCm == true) {
+        this.cmLhFeedback = this.cmLhFeedback.split(": ")[1];
+      }
+    },
+    isDialogShowShCm: function () {
+      if (this.isDialogShowShCm == true) {
+        this.cmShFeedback = this.cmShFeedback.split(": ")[1];
+      }
+    },
+    isDialogShowDhCm: function () {
+      if (this.isDialogShowDhCm == true) {
+        this.cmDhFeedback = this.cmDhFeedback.split(": ")[1];
+      }
+    },
+    startDate: function () {
+      let strStartDate = `${this.startDate} ${this.startTime}`;
+      let strEndDate = `${this.endDate} ${this.endTime}`;
+      let start = new Date(strStartDate.replace(" ", "T"));
+      let finish = new Date(strEndDate.replace(" ", "T"));
+      let dura = (finish - start) / 1000 / 60;
+      if (dura >= 120) {
+        this.isLongBd = true;
+      } else if (dura >= 15 && this.fline == "ASSY LINE") {
+        this.isLongBd = true;
+      }
+      if (dura.toFixed("1").includes("-")) {
+        // alert(`tidak bisa memasukan durasi minus (${dura})`);
+        this.isDurationInvalid = true;
+      } else if (isNaN(dura)) {
+        // alert(
+        //   "tolong masukan date start dan date end apabila problem sudah selesai"
+        // );
+        this.isDurationInvalid = true;
+      } else {
+        this.fdur = +dura.toFixed(0);
+        this.isDurationInvalid = false;
+      }
+    },
+    startTime: function () {
+      let strStartDate = `${this.startDate} ${this.startTime}`;
+      let strEndDate = `${this.endDate} ${this.endTime}`;
+      let start = new Date(strStartDate.replace(" ", "T"));
+      let finish = new Date(strEndDate.replace(" ", "T"));
+      let dura = (finish - start) / 1000 / 60;
+      if (dura >= 120) {
+        this.isLongBd = true;
+      } else if (dura >= 15 && this.fline == "ASSY LINE") {
+        this.isLongBd = true;
+      }
+      if (dura.toFixed("1").includes("-")) {
+        // alert(`tidak bisa memasukan durasi minus (${dura})`);
+        this.isDurationInvalid = true;
+      } else if (isNaN(dura)) {
+        // alert(
+        //   "tolong masukan date start dan date end apabila problem sudah selesai"
+        // );
+        this.isDurationInvalid = true;
+      } else {
+        this.fdur = +dura.toFixed(0);
+        this.isDurationInvalid = false;
+      }
+    },
+    endDate: function () {
+      let strStartDate = `${this.startDate} ${this.startTime}`;
+      let strEndDate = `${this.endDate} ${this.endTime}`;
+      let start = new Date(strStartDate.replace(" ", "T"));
+      let finish = new Date(strEndDate.replace(" ", "T"));
+      let dura = (finish - start) / 1000 / 60;
+      console.log(dura);
+      console.log(this.whyCategory);
+      if (dura >= 120) {
+        this.isLongBd = true;
+      } else if (dura >= 15 && this.fline == "ASSY LINE") {
+        this.isLongBd = true;
+      }
+      if (dura.toFixed("1").includes("-")) {
+        // alert(`tidak bisa memasukan durasi minus (${dura})`);
+        this.isDurationInvalid = true;
+      } else if (isNaN(dura)) {
+        // alert(
+        //   "tolong masukan date start dan date end apabila problem sudah selesai"
+        // );
+        this.isDurationInvalid = true;
+      } else {
+        this.fdur = +dura.toFixed(0);
+        this.isDurationInvalid = false;
+        this.isProblemClose = true;
+      }
+    },
+    endTime: function () {
+      let strStartDate = `${this.startDate} ${this.startTime}`;
+      let strEndDate = `${this.endDate} ${this.endTime}`;
+      let start = new Date(strStartDate.replace(" ", "T"));
+      let finish = new Date(strEndDate.replace(" ", "T"));
+      console.log((finish.getTime() - start.getTime()) / 1000 / 60);
+      let dura = (finish - start) / 1000 / 60;
+      if (dura >= 120) {
+        this.isLongBd = true;
+      } else if (dura >= 15 && this.fline == "ASSY LINE") {
+        this.isLongBd = true;
+      }
+      if (dura.toFixed("1").includes("-")) {
+        alert(`tidak bisa memasukan durasi minus (${dura})`);
+        this.isDurationInvalid = true;
+      } else if (isNaN(dura)) {
+        alert(
+            "tolong masukan date start dan date end apabila problem sudah selesai"
+        );
+        this.isDurationInvalid = true;
+      } else {
+        this.fdur = +dura.toFixed(0);
+        this.isDurationInvalid = false;
+        this.isProblemClose = true;
+      }
+    },
+    isEditWhyTerjadi: function () {
+    },
+    isEditWhyLama: function () {
+      console.log("lama berubah");
+    },
+    storeTheme: function () {
+      var all = document.getElementsByClassName("form-control");
+      var inputsLabel = document.getElementsByClassName("input-lable");
+      if (this.storeTheme == "light") {
+        for (let i = 0; i < all.length; i++) {
+          all[i].style.color = "black";
+        }
+        for (let i = 0; i < inputsLabel.length; i++) {
+          inputsLabel[i].style.color = "black";
+        }
+        document.getElementById(`table-step-repair`).style.color = "black";
+        document.getElementById(`table-why-lama`).style.color = "black";
+        document.getElementById(`table-why-terjadi`).style.color = "black";
+        document.getElementById(`table-cm-terjadi`).style.color = "black";
+        document.getElementById(`table-cm-lama`).style.color = "black";
+        document.getElementById(`table-yokoten`).style.color = "black";
+      } else {
+        for (let i = 0; i < all.length; i++) {
+          all[i].style.color = "white";
+        }
+        for (let i = 0; i < inputsLabel.length; i++) {
+          inputsLabel[i].style.color = "white";
+        }
+        document.getElementById(`table-step-repair`).style.color = "white";
+        document.getElementById(`table-why-lama`).style.color = "white";
+        document.getElementById(`table-why-terjadi`).style.color = "white";
+        document.getElementById(`table-cm-terjadi`).style.color = "white";
+        document.getElementById(`table-cm-lama`).style.color = "white";
+        document.getElementById(`table-yokoten`).style.color = "white";
+      }
+    },
+    selectedStatusLhFiveWhy: function () {
+      if (this.selectedStatusLhFiveWhy == "Tidak Approve") {
+        this.fiveWhyLhApprove = 0;
+      } else {
+        this.fiveWhyLhApprove = 1;
+      }
+    },
+    selectedStatusShFiveWhy: function () {
+      if (this.selectedStatusShFiveWhy == "Tidak Approve") {
+        this.fiveWhyShApprove = 0;
+      } else {
+        this.fiveWhyShApprove = 1;
+      }
+    },
+    selectedStatusLhCm: function () {
+      if (this.selectedStatusLhCm == "Tidak Approve") {
+        this.cmLhApprove = 0;
+      } else {
+        this.cmLhApprove = 1;
+      }
+    },
+    selectedStatusShCm: function () {
+      if (this.selectedStatusShCm == "Tidak Approve") {
+        this.cmShApprove = 0;
+      } else {
+        this.cmShApprove = 1;
+      }
+    },
+    fiveWhyLhApprove: function () {
+      this.clearDialog();
+      if (this.fiveWhyLhApprove == 1) {
+        this.isPleaseFinish = true;
+        // alert("kalau sudah approve silahkan tekan FINISH");
+      }
+    },
+    fiveWhyShApprove: function () {
+      this.clearDialog();
+      if (this.fiveWhyLhApprove == 1) {
+        this.isPleaseFinish = true;
+        // alert("kalau sudah approve silahkan tekan FINISH");
+      }
+    },
+    cmLhApprove: function () {
+      this.clearDialog();
+      if (this.fiveWhyLhApprove == 1) {
+        this.isPleaseFinish = true;
+        // alert("kalau sudah approve silahkan tekan FINISH");
+      }
+    },
+    cmShApprove: function () {
+      this.clearDialog();
+      if (this.fiveWhyLhApprove == 1) {
+        this.isPleaseFinish = true;
+        // alert("kalau sudah approve silahkan tekan FINISH");
+      }
+    },
+    isActionCm: function () {
+      console.log(this.cmField.cmDesc.includes("ACTION"));
+      console.log(this.cmField.cmDesc.split("[")[0]);
+      if (this.isActionCm == true) {
+        this.cmField.cmDesc = `[ACTION]` + this.cmField.cmDesc;
+      } else {
+        this.cmField.cmDesc = this.cmField.cmDesc.split("]")[1];
+      }
+    },
+    picThema: function () {
+      this.id_m_member = this.optOperatorsThemaRaw.filter((item) => {
+        return item.fname === this.picThema;
+      })[0].fid;
+      if (this.picThema) {
+        this.initDateThema = formatDate.YYYYMMDD(new Date());
+      } else {
+        this.initDateThema = null;
+      }
+    },
+    ft_pic: function () {
+      this.id_m_member = this.optOperatorsThemaRaw.filter((item) => {
+        return item.fname === this.ft_pic;
+      })[0].fid;
+    },
+    $route() {
+      this.scrollToUploadReport();
+    },
   },
 };
 </script>
