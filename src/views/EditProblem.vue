@@ -1782,8 +1782,8 @@
       </div>
       <div class="card mt-2">
         <span class="input-lable">Last Report File</span>
-        <button v-if="!file_report" class="btn btn-sm btn-warning" disabled>Belum Ada Report yang di upload</button>
-        <button v-else class="btn btn-sm btn-primary text-light mt-2" @click="downloadReportFromUrl">
+        <button v-if="!file_report" class="btn btn-sm btn-warning" disabled>Belum Ada Report di upload</button>
+        <button v-else class="btn btn-sm btn-primary text-light mt-2" @click="downloadUploadedReport">
           Download Uploaded Report
         </button>
         <a class="btn btn-sm btn-success text-light mt-2"
@@ -1791,7 +1791,7 @@
       </div>
       <div class="card mt-2" id="uploadReport">
         <div class="card-body">
-          <span class="input-lable">Upload Report<a class="badge badge-pill badge-primary text-light"
+          <span class="input-lable">Upload Report <a class="badge badge-pill badge-primary text-light"
                                                      :href="reportUri">Download
               Template</a></span>
           <input type="file" class="form-control" ref="fileReport" @change="isNotFill = false"/>
@@ -2043,7 +2043,7 @@ export default {
   computed: {
     ...mapState(["storeTheme", "newAnalisys", "newAnalisys2"]),
     reportUri() {
-      return `${host}/v2/download-report?fid=${this.id_p_m}`;
+      return `${host}/v2/download-template?fid=${this.id_p_m}`;
     }
   },
   methods: {
@@ -2064,6 +2064,7 @@ export default {
         formData.append('fid', this.id_p_m)
         formData.append('problem', this.ferror_name)
         formData.append("file", this.$refs.fileReport.files[0]);
+        console.log('==============================IYAAAAA=====================================');
         await axios.put(`${process.env.VUE_APP_HOST}/v2/upload-report`, formData, {
           headers: {
             "Content-Type": "multipart/form-data"
@@ -2079,9 +2080,10 @@ export default {
     async downloadUploadedReport() {
       try {
         this.isLoading = true;
-        const response = await axios.get(`${process.env.VUE_APP_HOST}/v2/download-uploaded-report`, {
+        const response = await axios.get(`${process.env.VUE_APP_HOST}/v2/download-report`, {
           params: {
             fid: this.id_p_m,
+            problem: this.ferror_name,
             t: Date.now()
           },
           responseType: 'blob'
@@ -2090,7 +2092,7 @@ export default {
         const link = document.createElement('a');
         link.href = url;
         // Set filename for download, you can customize this
-        link.setAttribute('download', `uploaded_report_${this.id_p_m}.pdf`);
+        link.setAttribute('download', `${this.ferror_name}_report_${this.id_p_m}.xlsx`);
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);

@@ -278,15 +278,27 @@
                   color="red"
                   small
                   @click="redirectToUploadReport(problem.fid)"
-                  style="color: white; font-weight: bold"
+                  style="color: white; font-weight: bold; width: 100%"
                 >
                   Belum Upload Report
                 </v-btn>
-                <span
-                  v-else-if="problem.isLtb"
-                  style="color: cyan; font-weight: bold"
-                  >Sudah Upload</span
+                <v-btn
+                  v-else-if="
+                    problem.isLtb &&
+                    problem.file_report &&
+                    problem.file_report !== ''
+                  "
+                  color="blue"
+                  small
+                  @click="downloadReport(problem)"
+                  style="color: white; font-weight: bold"
                 >
+                  <i
+                    class="fa fa-download"
+                    style="margin-right: 4px; width: 100%"
+                  ></i>
+                  Download Uploaded Report
+                </v-btn>
               </td>
             </tr>
           </tbody>
@@ -908,6 +920,51 @@ export default {
           console.log(err);
         });
     },
+    async downloadUploadedReport(problem) {
+      if (!problem.file_report) {
+        alert("No report file available for download.");
+        return;
+      }
+      try {
+        console.log("Downloading file_report URL:", problem.file_report);
+        let fileUrl = problem.file_report;
+        // Decode first to avoid double encoding
+        fileUrl = decodeURIComponent(fileUrl);
+        // Check if fileUrl is relative (does not start with http or https)
+        if (!/^https?:\/\//i.test(fileUrl)) {
+          // Split the path into segments and encode each segment
+          const segments = fileUrl
+            .split("/")
+            .map((segment) => encodeURIComponent(segment));
+          const encodedPath = segments.join("/");
+          // Ensure base URL ends with no slash and encodedPath starts with slash
+          const baseUrl = process.env.VUE_APP_HOST.endsWith("/")
+            ? process.env.VUE_APP_HOST.slice(0, -1)
+            : process.env.VUE_APP_HOST;
+          fileUrl = `${baseUrl}/${
+            encodedPath.startsWith("/") ? encodedPath.slice(1) : encodedPath
+          }`;
+          console.log("Updated and encoded fileUrl with base URL:", fileUrl);
+        }
+        const response = await axios.get(fileUrl, {
+          responseType: "blob",
+        });
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement("a");
+        link.href = url;
+        const urlParts = fileUrl.split("/");
+        const filename =
+          decodeURIComponent(urlParts[urlParts.length - 1]) || "report.pdf";
+        link.setAttribute("download", filename);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+      } catch (error) {
+        alert("Failed to download the report file.");
+        console.error(error);
+      }
+    },
     async getLtbProblem() {
       let url = `${process.env.VUE_APP_HOST}/problemLtb?startDate=${this.selectedStartDate}&endDate=${this.selectedEndDate}`;
       if (this.machineSelected !== "" && this.machineSelected !== undefined) {
@@ -1122,6 +1179,28 @@ export default {
           // this.getMachines();
           console.log(err);
         });
+    },
+    async downloadReport(problem) {
+      try {
+        const response = await axios.get(
+          `${process.env.VUE_APP_HOST}/v2/download-report?fid=${
+            problem.fid
+          }&problem=${encodeURIComponent(problem.ferror_name)}`,
+          { responseType: "blob" }
+        );
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement("a");
+        link.href = url;
+        const filename = `${problem.ferror_name}_report_${problem.id_p_m}.xlsx`;
+        link.setAttribute("download", filename);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+      } catch (error) {
+        alert("Failed to download the report.");
+        console.error(error);
+      }
     },
     formatDate(date) {
       var d = new Date(date),
