@@ -868,51 +868,33 @@ export default {
           `${process.env.VUE_APP_HOST}/problemHistory?startDate=${this.selectedStartDate}&endDate=${this.selectedEndDate}&sort=${this.sortOrder}`
         )
         .then((result) => {
-          console.log(result.data.data);
-          // this.containerProblems = result.data.data;
-          if (result.data.data) {
-            let resData = result.data.data.map((item) => {
-              if (item.fdur >= 30) {
-                // let v_ = item.fid;
-                // let json_analisys = [];
-                // axios
-                //   .get(
-                //     `${process.env.VUE_APP_HOST}/why_analisys/get/${v_}?analisys_category=TERJADI`
-                //   )
-                //   .then((result) => {
-                //     console.log(result);
-                //     if (result.data.data.length > 0) {
-                //       json_analisys = JSON.parse(result.data.data[0].json_string);
-                //     }
-                //   })
-                //   .catch((err) => {
-                //     console.log(err);
-                //   });
-                if (!item.isAnalysis) {
-                  return {
-                    ...item,
-                    bgCol: "#ff7f7f",
-                    txtCol: "black",
-                  };
-                } else if (
-                  item.fpermanet_cm == "" ||
-                  item.fpermanet_cm == "[]"
-                ) {
-                  return {
-                    ...item,
-                    bgCol: "#ffffa0",
-                    txtCol: "black",
-                  };
-                }
+          let resData = result.data.data.map((item) => {
+            const isLtb = this.ltbProblemIds.includes(item.fid);
+            if (item.fdur >= 30) {
+              if (!item.isAnalysis) {
+                return {
+                  ...item,
+                  bgCol: "#ff7f7f",
+                  txtCol: "black",
+                  isLtb,
+                };
+              } else if (item.fpermanet_cm == "" || item.fpermanet_cm == "[]") {
+                return {
+                  ...item,
+                  bgCol: "#ffffa0",
+                  txtCol: "black",
+                  isLtb,
+                };
               }
-              return {
-                ...item,
-                bgCol: "#302e2e",
-                txtCol: "white",
-              };
-            });
-            this.containerProblems = resData;
-          }
+            }
+            return {
+              ...item,
+              bgCol: "#302e2e",
+              txtCol: "white",
+              isLtb,
+            };
+          });
+          this.containerProblems = resData;
           this.isLoading = false;
         })
         .catch((err) => {
@@ -920,6 +902,50 @@ export default {
           console.log(err);
         });
     },
+    // async getProblemHistory() {
+    //   this.isLoading = true;
+    //   this.btnSeeAllProblem = false;
+    //   this.isLtbView = false;
+    //   await this.fetchLtbProblemIds();
+    //   await axios
+    //     .get(
+    //       `${process.env.VUE_APP_HOST}/problemHistory?startDate=${this.selectedStartDate}&endDate=${this.selectedEndDate}&sort=${this.sortOrder}`
+    //     )
+    //     .then((result) => {
+    //       let resData = result.data.data.map((item) => {
+    //         const isLtb = this.ltbProblemIds.includes(item.fid);
+    //         if (item.fdur >= 30) {
+    //           if (!item.isAnalysis) {
+    //             return {
+    //               ...item,
+    //               bgCol: "#ff7f7f",
+    //               txtCol: "black",
+    //               isLtb,
+    //             };
+    //           } else if (item.fpermanet_cm == "" || item.fpermanet_cm == "[]") {
+    //             return {
+    //               ...item,
+    //               bgCol: "#ffffa0",
+    //               txtCol: "black",
+    //               isLtb,
+    //             };
+    //           }
+    //         }
+    //         return {
+    //           ...item,
+    //           bgCol: "#302e2e",
+    //           txtCol: "white",
+    //           isLtb,
+    //         };
+    //       });
+    //       this.containerProblems = resData;
+    //       this.isLoading = false;
+    //     })
+    //     .catch((err) => {
+    //       this.isLoading = false;
+    //       console.log(err);
+    //     });
+    // },
     async downloadUploadedReport(problem) {
       if (!problem.file_report) {
         alert("No report file available for download.");
@@ -979,12 +1005,14 @@ export default {
           console.log(result.data.data);
           if (result.data.data) {
             let resData = result?.data?.data?.map((item) => {
+              const isLtb = true;
               if (item.fdur >= 30) {
                 if (item.isAnalysis == false) {
                   return {
                     ...item,
                     bgCol: "#ff7f7f",
                     txtCol: "black",
+                    isLtb,
                   };
                 } else if (
                   item.fpermanet_cm == "" ||
@@ -994,6 +1022,7 @@ export default {
                     ...item,
                     bgCol: "#ffffa0",
                     txtCol: "black",
+                    isLtb,
                   };
                 }
               }
@@ -1001,9 +1030,11 @@ export default {
                 ...item,
                 bgCol: "#302e2e",
                 txtCol: "white",
+                isLtb,
               };
             });
             this.containerProblems = resData;
+            this.isLtbView = true;
           }
           this.isLoading = false;
         })
@@ -1030,12 +1061,14 @@ export default {
           console.log(result.data.data);
           if (result.data.data) {
             let resData = result.data.data.map((item) => {
+              const isLtb = this.ltbProblemIds.includes(item.fid);
               if (item.fdur >= 30) {
                 if (item.isAnalysis == false) {
                   return {
                     ...item,
                     bgCol: "#ff7f7f",
                     txtCol: "black",
+                    isLtb,
                   };
                 } else if (
                   item.fpermanet_cm == "" ||
@@ -1045,6 +1078,7 @@ export default {
                     ...item,
                     bgCol: "#ffffa0",
                     txtCol: "black",
+                    isLtb,
                   };
                 }
               }
@@ -1052,6 +1086,7 @@ export default {
                 ...item,
                 bgCol: "#302e2e",
                 txtCol: "white",
+                isLtb,
               };
             });
             this.containerProblems = resData;
@@ -1134,6 +1169,50 @@ export default {
     //   await axios
     //     .get(url)
     //     .then((result) => {
+    //       let resData = result.data.data.map((item) => {
+    //         const isLtb = true;
+    //         if (item.fdur >= 30) {
+    //           if (item.isAnalysis == false) {
+    //             return {
+    //               ...item,
+    //               bgCol: "#ff7f7f",
+    //               txtCol: "black",
+    //               isLtb,
+    //             };
+    //           } else if (item.fpermanet_cm == "" || item.fpermanet_cm == "[]") {
+    //             return {
+    //               ...item,
+    //               bgCol: "#ffffa0",
+    //               txtCol: "black",
+    //               isLtb,
+    //             };
+    //           }
+    //         }
+    //         return {
+    //           ...item,
+    //           bgCol: "#302e2e",
+    //           txtCol: "white",
+    //           isLtb,
+    //         };
+    //       });
+    //       this.containerProblems = resData;
+    //       this.isLtbView = true;
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //     });
+    // },
+    // async getLtbProblem() {
+    //   let url = `${process.env.VUE_APP_HOST}/problemLtb?startDate=${this.selectedStartDate}&endDate=${this.selectedEndDate}`;
+    //   if (this.machineSelected !== "" && this.machineSelected !== undefined) {
+    //     url += `&fmc=${this.machineSelected}`;
+    //   }
+    //   if (this.lineSelected !== "" || this.lineSelected !== undefined) {
+    //     url += `&fline=${this.lineSelected}`;
+    //   }
+    //   await axios
+    //     .get(url)
+    //     .then((result) => {
     //       console.log(result.data.data);
     //       let resData = result.data.data.map((item) => {
     //         if (item.fdur >= 30) {
@@ -1161,6 +1240,22 @@ export default {
     //       this.isLtbView = true;
     //     })
     //     .catch((err) => {
+    //       console.log(err);
+    //     });
+    // },
+    // async getMachines() {
+    //   await axios
+    //     .get(`${process.env.VUE_APP_HOST}/machines?line=${this.lineSelected}`)
+    //     .then((result) => {
+    //       console.log(result);
+    //       let mapMcs = result.data.data.map((mc) => {
+    //         return { value: mc.fmc_name, text: mc.fmc_name };
+    //       });
+    //       console.log(mapMcs);
+    //       this.optionsMcs = mapMcs;
+    //     })
+    //     .catch((err) => {
+    //       // this.getMachines();
     //       console.log(err);
     //     });
     // },
