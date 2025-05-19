@@ -739,8 +739,8 @@ export default {
           //     `${process.env.VUE_APP_HOST}/why_analisys/get/${item.fid}?analisys_category=TERJADI`
           //   )
           //   .then(async (result) => {
-          //     if (result.data.data.length > 0) {
-          //       let json_analisys = JSON.parse(result.data.data[0].json_string);
+          //     if (result?.data?.data.length > 0) {
+          //       let json_analisys = JSON.parse(result?.data?.data[0].json_string);
           //       if(json_analisys) {
           //         let mapData = await json_analisys.map(async analysis => {
           //           return `${analysis.name} \n ${analysis.children ? await analysis.children.map(child => {
@@ -757,8 +757,8 @@ export default {
           //     `${process.env.VUE_APP_HOST}/why_analisys/get/${item.fid}?analisys_category=LAMA`
           //   )
           //   .then(async (result) => {
-          //     if (result.data.data.length > 0) {
-          //       let json_analisys = JSON.parse(result.data.data[0].json_string);
+          //     if (result?.data?.data.length > 0) {
+          //       let json_analisys = JSON.parse(result?.data?.data[0].json_string);
           //       if(json_analisys) {
           //         let mapData = await json_analisys.map(async analysis => {
           //           return `${analysis.name} \n ${analysis.children ? await analysis.children.map(child => {
@@ -848,8 +848,8 @@ export default {
         const response = await axios.get(
           `${process.env.VUE_APP_HOST}/problemLtb?startDate=${this.selectedStartDate}&endDate=${this.selectedEndDate}`
         );
-        if (response.data && response.data.data) {
-          this.ltbProblemIds = response.data.data.map((item) => item.fid);
+        if (response?.data && response?.data?.data) {
+          this.ltbProblemIds = response?.data?.data.map((item) => item.fid);
         } else {
           this.ltbProblemIds = [];
         }
@@ -868,7 +868,7 @@ export default {
           `${process.env.VUE_APP_HOST}/problemHistory?startDate=${this.selectedStartDate}&endDate=${this.selectedEndDate}&sort=${this.sortOrder}`
         )
         .then((result) => {
-          let resData = result.data.data.map((item) => {
+          let resData = result?.data?.data.map((item) => {
             const isLtb = this.ltbProblemIds.includes(item.fid);
             if (item.fdur >= 30) {
               if (!item.isAnalysis) {
@@ -912,7 +912,7 @@ export default {
     //       `${process.env.VUE_APP_HOST}/problemHistory?startDate=${this.selectedStartDate}&endDate=${this.selectedEndDate}&sort=${this.sortOrder}`
     //     )
     //     .then((result) => {
-    //       let resData = result.data.data.map((item) => {
+    //       let resData = result?.data?.data.map((item) => {
     //         const isLtb = this.ltbProblemIds.includes(item.fid);
     //         if (item.fdur >= 30) {
     //           if (!item.isAnalysis) {
@@ -975,7 +975,7 @@ export default {
         const response = await axios.get(fileUrl, {
           responseType: "blob",
         });
-        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const url = window.URL.createObjectURL(new Blob([response?.data]));
         const link = document.createElement("a");
         link.href = url;
         const urlParts = fileUrl.split("/");
@@ -1002,8 +1002,8 @@ export default {
       await axios
         .get(url)
         .then((result) => {
-          console.log(result.data.data);
-          if (result.data.data) {
+          console.log(result?.data?.data);
+          if (result?.data?.data) {
             let resData = result?.data?.data?.map((item) => {
               const isLtb = true;
               if (item.fdur >= 30) {
@@ -1058,9 +1058,9 @@ export default {
       await axios
         .get(`${url}`)
         .then((result) => {
-          console.log(result.data.data);
-          if (result.data.data) {
-            let resData = result.data.data.map((item) => {
+          console.log(result?.data?.data);
+          if (result?.data?.data) {
+            let resData = result?.data?.data.map((item) => {
               const isLtb = this.ltbProblemIds.includes(item.fid);
               if (item.fdur >= 30) {
                 if (item.isAnalysis == false) {
@@ -1101,8 +1101,8 @@ export default {
       await axios
         .get(`${process.env.VUE_APP_HOST}/lines`)
         .then((result) => {
-          console.log(result.data.data);
-          let mapLines = result.data.data.map((line) => {
+          console.log(result?.data?.data);
+          let mapLines = result?.data?.data.map((line) => {
             return { value: line.fline, text: line.fline };
           });
           //   console.log(mapLines);
@@ -1124,9 +1124,9 @@ export default {
       await axios
         .get(url)
         .then((result) => {
-          console.log(result.data.data);
+          console.log(result?.data?.data);
           if (result?.data?.data) {
-            let resData = result.data.data.map((item) => {
+            let resData = result?.data?.data.map((item) => {
               if (item.fdur >= 30) {
                 if (item.isAnalysis == false) {
                   return {
@@ -1169,7 +1169,7 @@ export default {
     //   await axios
     //     .get(url)
     //     .then((result) => {
-    //       let resData = result.data.data.map((item) => {
+    //       let resData = result?.data?.data.map((item) => {
     //         const isLtb = true;
     //         if (item.fdur >= 30) {
     //           if (item.isAnalysis == false) {
@@ -1213,8 +1213,8 @@ export default {
     //   await axios
     //     .get(url)
     //     .then((result) => {
-    //       console.log(result.data.data);
-    //       let resData = result.data.data.map((item) => {
+    //       console.log(result?.data?.data);
+    //       let resData = result?.data?.data.map((item) => {
     //         if (item.fdur >= 30) {
     //           if (item.isAnalysis == false) {
     //             return {
@@ -1248,7 +1248,7 @@ export default {
     //     .get(`${process.env.VUE_APP_HOST}/machines?line=${this.lineSelected}`)
     //     .then((result) => {
     //       console.log(result);
-    //       let mapMcs = result.data.data.map((mc) => {
+    //       let mapMcs = result?.data?.data.map((mc) => {
     //         return { value: mc.fmc_name, text: mc.fmc_name };
     //       });
     //       console.log(mapMcs);
@@ -1264,7 +1264,7 @@ export default {
         .get(`${process.env.VUE_APP_HOST}/machines?line=${this.lineSelected}`)
         .then((result) => {
           console.log(result);
-          let mapMcs = result.data.data.map((mc) => {
+          let mapMcs = result?.data?.data.map((mc) => {
             return { value: mc.fmc_name, text: mc.fmc_name };
           });
           console.log(mapMcs);
@@ -1283,7 +1283,7 @@ export default {
           }&problem=${encodeURIComponent(problem.ferror_name)}`,
           { responseType: "blob" }
         );
-        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const url = window.URL.createObjectURL(new Blob([response?.data]));
         const link = document.createElement("a");
         link.href = url;
         const filename = `${problem.ferror_name}_report_${problem.id_p_m}.xlsx`;
@@ -1348,35 +1348,37 @@ export default {
           // 0: white | 1: red
           let probWhite = [1, 3, 5, 7, 9, 11, 13];
           let probRed = [0, 2, 4, 6, 8, 10, 12];
-          if (result.data.data) {
+          if (result?.data?.data) {
             for (let i = 0; i < probWhite.length; i++) {
               this[`${containerStateProb[i]}`].push(
-                result.data.data[probWhite[i]],
-                result.data.data[probRed[i]]
+                result?.data?.data[probWhite[i]],
+                result?.data?.data[probRed[i]]
               );
             }
-            let arrConcatMachRed = result.data.data[4];
+            let arrConcatMachRed = result?.data?.data[4];
             this.probMachRed = arrConcatMachRed
-              .concat(result.data.data[6])
-              .concat(result.data.data[8])
-              .concat(result.data.data[10]);
+              .concat(result?.data?.data[6])
+              .concat(result?.data?.data[8])
+              .concat(result?.data?.data[10]);
 
-            let arrConcatCastRed = result.data.data[0];
-            this.probCastRed = arrConcatCastRed.concat(result.data.data[2]);
+            let arrConcatCastRed = result?.data?.data[0];
+            this.probCastRed = arrConcatCastRed.concat(result?.data?.data[2]);
 
-            let arrConcatAssyRed = result.data.data[13];
+            let arrConcatAssyRed = result?.data?.data[13];
             this.probAssyRed = arrConcatAssyRed;
 
-            let arrConcatMachWhite = result.data.data[5];
+            let arrConcatMachWhite = result?.data?.data[5];
             this.probMachWhite = arrConcatMachWhite
-              .concat(result.data.data[7])
-              .concat(result.data.data[9])
-              .concat(result.data.data[11]);
+              .concat(result?.data?.data[7])
+              .concat(result?.data?.data[9])
+              .concat(result?.data?.data[11]);
 
-            let arrConcatCastWhite = result.data.data[1];
-            this.probCastWhite = arrConcatCastWhite.concat(result.data.data[3]);
+            let arrConcatCastWhite = result?.data?.data[1];
+            this.probCastWhite = arrConcatCastWhite.concat(
+              result?.data?.data[3]
+            );
 
-            let arrConcatAssyWhite = result.data.data[12];
+            let arrConcatAssyWhite = result?.data?.data[12];
             this.probAssyWhite = arrConcatAssyWhite;
           }
         })
