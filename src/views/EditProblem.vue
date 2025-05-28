@@ -1126,7 +1126,7 @@
       </div>
       <div class="col px-1 text-left" style="margin-top: 25px; margin-bottom: 25px;">
         <div style="font-weight: bold;">Pilih Q6:</div>
-        <select v-model="qCategory" style="border: 0.1px solid black; padding-left: 5px;">
+        <select v-model="qCategory" style="border: 10px solid black; padding-left: 5px;">
           <option disabled value="">Pilih Q6</option>
           <option :value="1">Q1: Diagnose</option>
           <option :value="2">Q2: Sparepart</option>
