@@ -1124,6 +1124,18 @@
           </div>
         </div>
       </div>
+      <div class="col px-1 text-left" style="margin-top: 25px; margin-bottom: 25px;">
+        <div style="font-weight: bold;">Pilih Q6:</div>
+        <select v-model="qCategory" style="border: 0.1px solid black; padding-left: 5px;">
+          <option disabled value="">Pilih Q6</option>
+          <option :value="1">Q1: Diagnose</option>
+          <option :value="2">Q2: Sparepart</option>
+          <option :value="3">Q3: Tool</option>
+          <option :value="4">Q4: Maint. Ability</option>
+          <option :value="5">Q5: Setting Ability</option>
+          <option :value="6">Q6: Back-Up</option>
+        </select>
+      </div>
       <div class="row m-0 p-0" v-if="isLongBd">
         <div class="col px-1 text-left">
           <span class="input-lable">5 Why (Kenapa Lama) Image</span>
@@ -2037,14 +2049,15 @@ export default {
       deleteWhy12: false,
       deleteWhy2: false,
       deleteWhy22: false,
-
+      oCategory: "",
+      qCategory: "",
     };
   },
   computed: {
     ...mapState(["storeTheme", "newAnalisys", "newAnalisys2"]),
-    reportUri() {
-      return `${host}/v2/download-template?fid=${this.id_p_m}`;
-    }
+reportUri() {
+  return `${host}/v2/download-template?fid=${this.id_p_m}`;
+}
   },
   methods: {
     scrollToUploadReport() {
@@ -2653,6 +2666,8 @@ export default {
           deleteWhy12: this.deleteWhy12,
           deleteWhy2: this.deleteWhy2,
           deleteWhy22: this.deleteWhy22,
+          oCategory: this.oCategory,
+          qCategory: this.qCategory
         };
 
         for (const key in dataPrev) {
@@ -2786,6 +2801,8 @@ export default {
           deleteWhy12: this.deleteWhy12,
           deleteWhy2: this.deleteWhy2,
           deleteWhy22: this.deleteWhy22,
+          oCategory: this.oCategory,
+          qCategory: this.qCategory
         };
         for (const key in dataPrev) {
           let value = dataPrev[key]
@@ -2971,6 +2988,9 @@ export default {
             this.fmaker = item.fmaker;
             this.ferror_name = item.ferror_name;
             this.gapIlustrasi = item.gapIlustrasi;
+
+            this.oCategory = item.oCategory !== undefined && item.oCategory !== null ? item.oCategory : "";
+            this.qCategory = item.qCategory !== undefined && item.qCategory !== null ? item.qCategory : "";
 
             // this.fileName = `ilustration_${Date.now()}`;
             this.foperator = item.foperator.includes(",")
