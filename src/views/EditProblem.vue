@@ -500,6 +500,19 @@
           <img :src="displayWhy12_img" width="50" v-if="isImgTerjadi || (why12_img && why12_img != 'null')">
         </div>
       </div>
+      <div class="col px-1 text-left" style="margin-top: 10px; margin-bottom: 25px;">
+        <!-- O6 -->
+        <div style="font-weight: bold;">Pilih O6:</div>
+        <select v-model="oCategory" style="border: 0.1px solid black; padding-left: 5px;">
+          <option disabled value="">Pilih O6</option>
+          <option :value="1">O1: Design, Installation</option>
+          <option :value="2">O2: Henkaten Issue</option>
+          <option :value="3">O3: PM Issue</option>
+          <option :value="4">O4: PM Skill</option>
+          <option :value="5">O5: Environment</option>
+          <option :value="6">O6: Lifetime</option>
+        </select>
+      </div>
       <!-- Step Repair -->
       <div class="row m-0 p-0">
         <div class="col px-1 text-left">
@@ -1125,8 +1138,9 @@
         </div>
       </div>
       <div class="col px-1 text-left" style="margin-top: 25px; margin-bottom: 25px;">
+        <!-- Q6 -->
         <div style="font-weight: bold;">Pilih Q6:</div>
-        <select v-model="qCategory" style="border: 10px solid black; padding-left: 5px;">
+        <select v-model="qCategory" style="border: 0.1px solid black; padding-left: 5px;">
           <option disabled value="">Pilih Q6</option>
           <option :value="1">Q1: Diagnose</option>
           <option :value="2">Q2: Sparepart</option>
