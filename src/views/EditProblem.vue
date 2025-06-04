@@ -513,15 +513,15 @@
       </div>
       <div class="col px-1 text-left" style="margin-top: 10px; margin-bottom: 25px;">
         <!-- O6 -->
-        <div style="font-weight: bold;">Pilih O6:</div>
+        <div style="font-weight: bold;">Pilih O6 (Occurence - Kenapa Terjadi):</div>
         <select v-model="oCategory" style="border: 0.1px solid black; padding-left: 5px;">
           <option disabled value="">Pilih O6</option>
-          <option :value="1">O1: Design, Installation</option>
-          <option :value="2">O2: Henkaten Issue</option>
-          <option :value="3">O3: PM Issue</option>
-          <option :value="4">O4: PM Skill</option>
-          <option :value="5">O5: Environment</option>
-          <option :value="6">O6: Lifetime</option>
+          <option :value="1">O1: Design & Installation (Design / Installation Not Good (Refers to Function Check / Eng. Memo))</option>
+          <option :value="2">O2: Henkaten Issue(No Enough Trial, No Confirm (others team))</option>
+          <option :value="3">O3: PM Issue (No Have/Unclear, Unclear Methode, Confine/Invisible, Out of Periode, No Have Time, Lack of Skill)</option>
+          <option :value="4">O4: Symptom (No Have Symptom, Have Symptom but Unfollow Activity)</option>
+          <option :value="5">O5: Environment & 3rd Factor (Dirty, Confine Space, Invisible Area, Unpredictable (water leak / crush))</option>
+          <option :value="6">O6: Lifetime Issue (Out of Standard Running, Over Capacity)</option>
         </select>
       </div>
       
@@ -1151,15 +1151,15 @@
       </div>
       <div class="col px-1 text-left" style="margin-top: 25px; margin-bottom: 25px;">
         <!-- Q6 -->
-        <div style="font-weight: bold;">Pilih Q6:</div>
+        <div style="font-weight: bold;">Pilih Q6 (Quick - Kenapa Lama):</div>
         <select v-model="qCategory" style="border: 0.1px solid black; padding-left: 5px;">
           <option disabled value="">Pilih Q6</option>
-          <option :value="1">Q1: Diagnose</option>
-          <option :value="2">Q2: Sparepart</option>
-          <option :value="3">Q3: Tool</option>
-          <option :value="4">Q4: Maint. Ability</option>
-          <option :value="5">Q5: Setting Ability</option>
-          <option :value="6">Q6: Back-Up</option>
+          <option :value="1">Q1: Diagnose (Meeting, accuracy check (run-out, backlash, etc))</option>
+          <option :value="2">Q2: Sparepart (Part preparation, fabrication of part, repair of damage part due to unavailability at SPW)</option>
+          <option :value="3">Q3: Tool (Special tools preparation, change of tools, personal tool, change dresser, safety tool)</option>
+          <option :value="4">Q4: Maint. Ability (Repair, overhaul, part replace, tomoken, 5S)</option>
+          <option :value="5">Q5: Setting Ability (Quality checking, program adjustment, program zeroing, position memory set, autosizer setting & amp, PSW set, backlash adjustment (slide gib / kamisori, parameter set, centering, etc))</option>
+          <option :value="6">Q6: Back-Up (Back-Up MC's Preparation, Back-Up MC's dandori)</option>
         </select>
       </div>
       <div class="row m-0 p-0" v-if="isLongBd">
