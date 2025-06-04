@@ -335,6 +335,17 @@
           <input class="form-control" type="text" v-model="fdur" disabled/>
         </div>
       </div>
+
+      <!-- Problem Category -->
+      <div class="col px-1 text-left" style="margin-top: 15px; margin-bottom: 15px;">
+        <div style="font-weight: bold;">Problem Category:</div>
+        <select v-model="problemCategory" style="border: 0.1px solid black; padding-left: 5px;">
+          <option :value="1">Small</option>
+          <option :value="2">Chokotei</option>
+          <option :value="3">LTB</option>
+        </select>
+      </div>
+
       <!-- Ilustration (DISABLED)-->
       <div class="row m-0 p-0" style="display: none">
         <div class="col px-1 text-left">
@@ -513,6 +524,7 @@
           <option :value="6">O6: Lifetime</option>
         </select>
       </div>
+      
       <!-- Step Repair -->
       <div class="row m-0 p-0">
         <div class="col px-1 text-left">
@@ -2065,13 +2077,15 @@ export default {
       deleteWhy22: false,
       oCategory: "",
       qCategory: "",
+      problemCategory: ""
     };
   },
   computed: {
     ...mapState(["storeTheme", "newAnalisys", "newAnalisys2"]),
-reportUri() {
-  return `${host}/v2/download-template?fid=${this.id_p_m}`;
-}
+    reportUri() {
+      // Allow download even if problemCategory is empty or null
+      return `${host}/v2/download-template?fid=${this.id_p_m}`;
+    }
   },
   methods: {
     scrollToUploadReport() {
@@ -2681,7 +2695,8 @@ reportUri() {
           deleteWhy2: this.deleteWhy2,
           deleteWhy22: this.deleteWhy22,
           oCategory: this.oCategory,
-          qCategory: this.qCategory
+          qCategory: this.qCategory,
+          problemCategory: this.problemCategory
         };
 
         for (const key in dataPrev) {
@@ -2816,7 +2831,8 @@ reportUri() {
           deleteWhy2: this.deleteWhy2,
           deleteWhy22: this.deleteWhy22,
           oCategory: this.oCategory,
-          qCategory: this.qCategory
+          qCategory: this.qCategory,
+          problemCategory: this.problemCategory
         };
         for (const key in dataPrev) {
           let value = dataPrev[key]
@@ -3005,6 +3021,7 @@ reportUri() {
 
             this.oCategory = item.oCategory !== undefined && item.oCategory !== null ? item.oCategory : "";
             this.qCategory = item.qCategory !== undefined && item.qCategory !== null ? item.qCategory : "";
+            this.problemCategory = item.problemCategory !== undefined && item.problemCategory !== null ? item.problemCategory : "";
 
             // this.fileName = `ilustration_${Date.now()}`;
             this.foperator = item.foperator.includes(",")

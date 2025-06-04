@@ -136,12 +136,25 @@
           Freq. Problem
         </div>
       </div>
+
+      <div class="col p-0 px-2">
+        <div class="btn btn-outline-dark w-100" @click="getSmallProblem()">
+          Small
+        </div>
+      </div>
+      <div class="col p-0 px-2">
+        <div class="btn btn-outline-dark w-100" @click="getChokoteiProblem()">
+          Chokotei
+        </div>
+      </div>
+
       <div class="col p-0 px-2">
         <div class="btn btn-outline-dark w-100" @click="getLtbProblem()">
           LTB
         </div>
       </div>
     </div>
+
     <div class="row m-0 mt-1 mx-4 mb-2">
       <div class="col p-0" style="background-color: #ff7f7f">
         5 Why Belum di isi
@@ -824,7 +837,7 @@ export default {
     ...mapState(["newAnalisys", "newAnalisys2"]),
   },
 
-  methods: {
+methods: {
     sortDate() {
       this.sortOrder = "fstart_time";
     },
@@ -867,6 +880,58 @@ export default {
         .get(
           `${process.env.VUE_APP_HOST}/problemHistory?startDate=${this.selectedStartDate}&endDate=${this.selectedEndDate}&sort=${this.sortOrder}`
         )
+        .then((result) => {
+          let resData = result?.data?.data.map((item) => {
+            const isLtb = this.ltbProblemIds.includes(item.fid);
+            if (item.fdur >= 30) {
+              if (!item.isAnalysis) {
+                return {
+                  ...item,
+                  bgCol: "#ff7f7f",
+                  txtCol: "black",
+                  isLtb,
+                };
+              } else if (item.fpermanet_cm == "" || item.fpermanet_cm == "[]") {
+                return {
+                  ...item,
+                  bgCol: "#ffffa0",
+                  txtCol: "black",
+                  isLtb,
+                };
+              }
+            }
+            return {
+              ...item,
+              bgCol: "#302e2e",
+              txtCol: "white",
+              isLtb,
+            };
+          });
+          this.containerProblems = resData;
+          this.isLoading = false;
+        })
+        .catch((err) => {
+          this.isLoading = false;
+          console.log(err);
+        });
+    },
+    async filterByProblemCategory(category) {
+      console.log('category: ' + category + '===================================================================');
+      this.isLoading = true;
+      this.btnSeeAllProblem = false;
+      this.isLtbView = false;
+      let url = `${process.env.VUE_APP_HOST}/problemHistory?startDate=${this.selectedStartDate}&endDate=${this.selectedEndDate}&problemCategory=${category}&sort=${this.sortOrder}`;
+      if (this.machineSelected !== "" && this.machineSelected !== undefined) {
+        url += `&machine=${this.machineSelected}`;
+      }
+      if (this.lineSelected !== "" || this.lineSelected !== undefined) {
+        url += `&line=${this.lineSelected}`;
+      }
+      if (this.problemSelected !== "" && this.problemSelected !== undefined) {
+        url += `&problem=${this.problemSelected}`;
+      }
+      await axios
+        .get(url)
         .then((result) => {
           let resData = result?.data?.data.map((item) => {
             const isLtb = this.ltbProblemIds.includes(item.fid);
@@ -993,6 +1058,110 @@ export default {
     },
     async getLtbProblem() {
       let url = `${process.env.VUE_APP_HOST}/problemLtb?startDate=${this.selectedStartDate}&endDate=${this.selectedEndDate}`;
+      console.log(url);
+      if (this.machineSelected !== "" && this.machineSelected !== undefined) {
+        url += `&fmc=${this.machineSelected}`;
+      }
+      if (this.lineSelected !== "" || this.lineSelected !== undefined) {
+        url += `&fline=${this.lineSelected}`;
+      }
+      await axios
+        .get(url)
+        .then((result) => {
+          console.log(result?.data?.data);
+          if (result?.data?.data) {
+            let resData = result?.data?.data?.map((item) => {
+              const isLtb = true;
+              if (item.fdur >= 30) {
+                if (item.isAnalysis == false) {
+                  return {
+                    ...item,
+                    bgCol: "#ff7f7f",
+                    txtCol: "black",
+                    isLtb,
+                  };
+                } else if (
+                  item.fpermanet_cm == "" ||
+                  item.fpermanet_cm == "[]"
+                ) {
+                  return {
+                    ...item,
+                    bgCol: "#ffffa0",
+                    txtCol: "black",
+                    isLtb,
+                  };
+                }
+              }
+              return {
+                ...item,
+                bgCol: "#302e2e",
+                txtCol: "white",
+                isLtb,
+              };
+            });
+            this.containerProblems = resData;
+            this.isLtbView = true;
+          }
+          this.isLoading = false;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    async getChokoteiProblem() {
+      let url = `${process.env.VUE_APP_HOST}/problemChokotei?startDate=${this.selectedStartDate}&endDate=${this.selectedEndDate}`;
+      if (this.machineSelected !== "" && this.machineSelected !== undefined) {
+        url += `&fmc=${this.machineSelected}`;
+      }
+      if (this.lineSelected !== "" || this.lineSelected !== undefined) {
+        url += `&fline=${this.lineSelected}`;
+      }
+      console.log(url);
+      await axios
+        .get(url)
+        .then((result) => {
+          console.log(result?.data?.data);
+          if (result?.data?.data) {
+            let resData = result?.data?.data?.map((item) => {
+              const isLtb = true;
+              if (item.fdur >= 30) {
+                if (item.isAnalysis == false) {
+                  return {
+                    ...item,
+                    bgCol: "#ff7f7f",
+                    txtCol: "black",
+                    isLtb,
+                  };
+                } else if (
+                  item.fpermanet_cm == "" ||
+                  item.fpermanet_cm == "[]"
+                ) {
+                  return {
+                    ...item,
+                    bgCol: "#ffffa0",
+                    txtCol: "black",
+                    isLtb,
+                  };
+                }
+              }
+              return {
+                ...item,
+                bgCol: "#302e2e",
+                txtCol: "white",
+                isLtb,
+              };
+            });
+            this.containerProblems = resData;
+            this.isLtbView = true;
+          }
+          this.isLoading = false;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    async getSmallProblem() {
+      let url = `${process.env.VUE_APP_HOST}/problemSmall?startDate=${this.selectedStartDate}&endDate=${this.selectedEndDate}`;
       if (this.machineSelected !== "" && this.machineSelected !== undefined) {
         url += `&fmc=${this.machineSelected}`;
       }
