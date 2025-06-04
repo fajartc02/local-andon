@@ -1123,14 +1123,12 @@ methods: {
           console.log(result?.data?.data);
           if (result?.data?.data) {
             let resData = result?.data?.data?.map((item) => {
-              const isLtb = true;
               if (item.fdur >= 30) {
                 if (item.isAnalysis == false) {
                   return {
                     ...item,
                     bgCol: "#ff7f7f",
                     txtCol: "black",
-                    isLtb,
                   };
                 } else if (
                   item.fpermanet_cm == "" ||
@@ -1140,7 +1138,6 @@ methods: {
                     ...item,
                     bgCol: "#ffffa0",
                     txtCol: "black",
-                    isLtb,
                   };
                 }
               }
@@ -1148,7 +1145,6 @@ methods: {
                 ...item,
                 bgCol: "#302e2e",
                 txtCol: "white",
-                isLtb,
               };
             });
             this.containerProblems = resData;
@@ -1174,14 +1170,12 @@ methods: {
           console.log(result?.data?.data);
           if (result?.data?.data) {
             let resData = result?.data?.data?.map((item) => {
-              const isLtb = true;
               if (item.fdur >= 30) {
                 if (item.isAnalysis == false) {
                   return {
                     ...item,
                     bgCol: "#ff7f7f",
                     txtCol: "black",
-                    isLtb,
                   };
                 } else if (
                   item.fpermanet_cm == "" ||
@@ -1191,7 +1185,6 @@ methods: {
                     ...item,
                     bgCol: "#ffffa0",
                     txtCol: "black",
-                    isLtb,
                   };
                 }
               }
@@ -1199,7 +1192,6 @@ methods: {
                 ...item,
                 bgCol: "#302e2e",
                 txtCol: "white",
-                isLtb,
               };
             });
             this.containerProblems = resData;
