@@ -143,8 +143,8 @@
         </div>
       </div>
       <div class="col p-0 px-2">
-        <div class="btn btn-outline-dark w-100" @click="getChokoteiProblem()">
-          Chokotei
+        <div class="btn btn-outline-dark w-100" @click="getRepeatProblem()">
+          Repeat
         </div>
       </div>
 
@@ -1108,8 +1108,8 @@ methods: {
           console.log(err);
         });
     },
-    async getChokoteiProblem() {
-      let url = `${process.env.VUE_APP_HOST}/problemChokotei?startDate=${this.selectedStartDate}&endDate=${this.selectedEndDate}`;
+    async getRepeatProblem() {
+      let url = `${process.env.VUE_APP_HOST}/problemRepeat?startDate=${this.selectedStartDate}&endDate=${this.selectedEndDate}`;
       if (this.machineSelected !== "" && this.machineSelected !== undefined) {
         url += `&fmc=${this.machineSelected}`;
       }

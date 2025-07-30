@@ -340,9 +340,11 @@
       <div class="col px-1 text-left" style="margin-top: 15px; margin-bottom: 15px;">
         <div style="font-weight: bold;">Problem Category:</div>
         <select v-model="problemCategory" style="border: 0.1px solid black; padding-left: 5px;">
+
           <option :value="1">Small</option>
-          <option :value="2">Chokotei</option>
+          <option :value="2">Repeat</option>
           <option :value="3">LTB</option>
+
         </select>
       </div>
 
