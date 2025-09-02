@@ -3,9 +3,15 @@
     <div class="row m-0 p-0 mt-2 bordered">
       <p class="text-left">
         Hallo, <b>{{ name }}</b>
-        <br>
-        This web can visit
-        link:<code><a href="https://smartandonsys.web.app" target="_blank" style="text-decoration: none;">https://smartandonsys.web.app</a></code>
+        <br />
+        This web can visit link:<code
+          ><a
+            href="https://smartandonsys.web.app"
+            target="_blank"
+            style="text-decoration: none"
+            >https://smartandonsys.web.app</a
+          ></code
+        >
       </p>
       <div class="col-12 p-0">
         <features-menu :isStaff="isStaff"></features-menu>
@@ -15,9 +21,17 @@
       <div :class="`${isProd ? 'col-12 p-0' : 'col-12 p-0'}`">
         <div style="width: 100%; display: none" id="reader"></div>
         <div class="card">
-          <div class="btn btn-info" data-toggle="modal" data-target="#exampleModal" @click="getMachines()"
-            style="height: 50px">
-            <h1 class="title-text" :style="`color: black; font-size: ${isMobile ? '18px' : '25px'}`">
+          <div
+            class="btn btn-info"
+            data-toggle="modal"
+            data-target="#exampleModal"
+            @click="getMachines()"
+            style="height: 50px"
+          >
+            <h1
+              class="title-text"
+              :style="`color: black; font-size: ${isMobile ? '18px' : '25px'}`"
+            >
               <i class="fa fa-bell"></i>
               MACHINE STOP INPUT
               <i class="fa fa-bell"></i>
@@ -27,46 +41,124 @@
         <v-dialog v-model="isKyDialog" persistent width="500">
           <v-card class="p-1">
             <v-card-title class="d-flex headline grey lighten-2">
-              <b>E - S</b><small class="align-items-end pt-2" style="font-size: 15px;">hort</small> <b
-                class="ml-2">KY</b>
+              <b>E - S</b
+              ><small class="align-items-end pt-2" style="font-size: 15px"
+                >hort</small
+              >
+              <b class="ml-2">KY</b>
             </v-card-title>
             <v-card-text class="p-1">
-              <h6 class="text-left mt-2 pl-0">Machine: {{ machineSelected }}</h6>
-              <router-link class="text-decoration-none text-left text-success text-weight-bold"
-                :to="`/ky-machines?fline=${selectedLine.toUpperCase()}&fid=${fmc_id}`">
+              <h6 class="text-left mt-2 pl-0">
+                Machine: {{ machineSelected }}
+              </h6>
+              <router-link
+                class="text-decoration-none text-left text-success text-weight-bold"
+                :to="`/ky-machines?fline=${selectedLine.toUpperCase()}&fid=${fmc_id}`"
+              >
                 Tambah KY (klik disini!)
               </router-link>
-              <hr class="m-0 p-1">
-              <div class="badge badge-danger badge-pill text-center font-weight-bold">Terjepit</div>
-              <div class="badge badge-warning badge-pill text-center font-weight-bold">Tertimpa</div>
-              <div class="badge badge-info badge-pill text-center font-weight-bold">Tertabrak</div>
-              <div class="badge badge-primary badge-pill text-center font-weight-bold">Terjatuh</div>
-              <div class="badge badge-secondary badge-pill text-center font-weight-bold">Tersetrum</div>
-              <div class="badge badge-dark badge-pill text-center font-weight-bold">Terbakar</div>
-              <div class="badge badge-light badge-pill text-center font-weight-bold">Other</div>
-              <hr class="m-0 p-1">
+              <hr class="m-0 p-1" />
+              <div
+                class="badge badge-danger badge-pill text-center font-weight-bold"
+              >
+                Terjepit
+              </div>
+              <div
+                class="badge badge-warning badge-pill text-center font-weight-bold"
+              >
+                Tertimpa
+              </div>
+              <div
+                class="badge badge-info badge-pill text-center font-weight-bold"
+              >
+                Tertabrak
+              </div>
+              <div
+                class="badge badge-primary badge-pill text-center font-weight-bold"
+              >
+                Terjatuh
+              </div>
+              <div
+                class="badge badge-secondary badge-pill text-center font-weight-bold"
+              >
+                Tersetrum
+              </div>
+              <div
+                class="badge badge-dark badge-pill text-center font-weight-bold"
+              >
+                Terbakar
+              </div>
+              <div
+                class="badge badge-light badge-pill text-center font-weight-bold"
+              >
+                Other
+              </div>
+              <hr class="m-0 p-1" />
               <template v-if="kyData.length > 0">
-                <div v-for="(item, index) in kyData" :key="index" class="row text-left">
+                <div
+                  v-for="(item, index) in kyData"
+                  :key="index"
+                  class="row text-left"
+                >
                   <div class="col-12 d-flex align-items-center">
                     <div class="m-0 align-items-center">
-                      <div v-if="item.stop6_category == 'A'"
-                        class="badge badge-danger badge-pill text-center font-weight-bold">Terjepit</div>
-                      <div v-if="item.stop6_category == 'B'"
-                        class="badge badge-warning badge-pill text-center font-weight-bold">Tertimpa</div>
-                      <div v-if="item.stop6_category == 'C'"
-                        class="badge badge-info badge-pill text-center font-weight-bold">Tertabrak</div>
-                      <div v-if="item.stop6_category == 'D'"
-                        class="badge badge-primary badge-pill text-center font-weight-bold">Terjatuh</div>
-                      <div v-if="item.stop6_category == 'E'"
-                        class="badge badge-secondary badge-pill text-center font-weight-bold">Tersetrum</div>
-                      <div v-if="item.stop6_category == 'F'"
-                        class="badge badge-dark badge-pill text-center font-weight-bold">Terbakar</div>
-                      <br>
-                      <div v-if="item.stop6_category == 'Other'"
-                        class="badge badge-light badge-pill text-center font-weight-bold">Other</div>
+                      <div
+                        v-if="item.stop6_category == 'A'"
+                        class="badge badge-danger badge-pill text-center font-weight-bold"
+                      >
+                        Terjepit
+                      </div>
+                      <div
+                        v-if="item.stop6_category == 'B'"
+                        class="badge badge-warning badge-pill text-center font-weight-bold"
+                      >
+                        Tertimpa
+                      </div>
+                      <div
+                        v-if="item.stop6_category == 'C'"
+                        class="badge badge-info badge-pill text-center font-weight-bold"
+                      >
+                        Tertabrak
+                      </div>
+                      <div
+                        v-if="item.stop6_category == 'D'"
+                        class="badge badge-primary badge-pill text-center font-weight-bold"
+                      >
+                        Terjatuh
+                      </div>
+                      <div
+                        v-if="item.stop6_category == 'E'"
+                        class="badge badge-secondary badge-pill text-center font-weight-bold"
+                      >
+                        Tersetrum
+                      </div>
+                      <div
+                        v-if="item.stop6_category == 'F'"
+                        class="badge badge-dark badge-pill text-center font-weight-bold"
+                      >
+                        Terbakar
+                      </div>
+                      <br />
+                      <div
+                        v-if="item.stop6_category == 'Other'"
+                        class="badge badge-light badge-pill text-center font-weight-bold"
+                      >
+                        Other
+                      </div>
 
-                      <p>{{ item.details }}<input class="ml-2" type="checkbox" v-model="item.is_checked"></p>
-                      <img v-if="item.ilustration" :src="item.ilustration" style="width: 100%" />
+                      <p>
+                        {{ item.details
+                        }}<input
+                          class="ml-2"
+                          type="checkbox"
+                          v-model="item.is_checked"
+                        />
+                      </p>
+                      <img
+                        v-if="item.ilustration"
+                        :src="item.ilustration"
+                        style="width: 100%"
+                      />
                     </div>
                   </div>
                 </div>
@@ -76,21 +168,43 @@
               </template>
               <div class="card p-3">
                 <div class="d-flex justify-content-start align-items-center">
-                  <input class="mr-2" type="checkbox"
-                    :checked="kyData.filter(x => x.is_checked == true).length == counter_total_ky" disabled>
-                  <h6 class="text-left">Saya "Telah membaca dan memahami terkait bahaya di Atas!"</h6>
+                  <input
+                    class="mr-2"
+                    type="checkbox"
+                    :checked="
+                      kyData.filter((x) => x.is_checked == true).length ==
+                      counter_total_ky
+                    "
+                    disabled
+                  />
+                  <h6 class="text-left">
+                    Saya "Telah membaca dan memahami terkait bahaya di Atas!"
+                  </h6>
                 </div>
               </div>
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
               <button
-                :class="`btn ${kyData.filter(x => x.is_checked == true).length != counter_total_ky ? 'btn-danger' : 'btn-success'} btn-sm`"
+                :class="`btn ${
+                  kyData.filter((x) => x.is_checked == true).length !=
+                  counter_total_ky
+                    ? 'btn-danger'
+                    : 'btn-success'
+                } btn-sm`"
                 @click="isKyDialog = false"
-                :disabled="kyData.filter(x => x.is_checked == true).length != counter_total_ky">{{
-                  kyData.filter(x =>
-                    x.is_checked ==
-                    true).length != counter_total_ky ? 'Baca Dahulu!' : 'Saya Paham!' }}</button>
+                :disabled="
+                  kyData.filter((x) => x.is_checked == true).length !=
+                  counter_total_ky
+                "
+              >
+                {{
+                  kyData.filter((x) => x.is_checked == true).length !=
+                  counter_total_ky
+                    ? "Baca Dahulu!"
+                    : "Saya Paham!"
+                }}
+              </button>
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -109,8 +223,12 @@
                         <span class="input-group-text">Machine</span>
                       </div>
                       <!-- <v-select :options="machines" style="width: 75%"></v-select> -->
-                      <model-select :options="machines" v-model="machineSelected" placeholder="select machine"
-                        style="width: 75%">
+                      <model-select
+                        :options="machines"
+                        v-model="machineSelected"
+                        placeholder="select machine"
+                        style="width: 75%"
+                      >
                       </model-select>
                     </div>
                   </div>
@@ -119,10 +237,18 @@
                   <div class="col p-0">
                     <div class="input-group mb-3">
                       <div class="input-group-prepend">
-                        <span class="input-group-text" style="min-width: 63px">Line</span>
+                        <span class="input-group-text" style="min-width: 63px"
+                          >Line</span
+                        >
                       </div>
-                      <input type="text" id="line" v-model="selectedLine" class="form-control pl-2" disabled
-                        aria-label="Amount (to the nearest dollar)" />
+                      <input
+                        type="text"
+                        id="line"
+                        v-model="selectedLine"
+                        class="form-control pl-2"
+                        disabled
+                        aria-label="Amount (to the nearest dollar)"
+                      />
                     </div>
                   </div>
                 </div>
@@ -132,8 +258,13 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text">Operator</span>
                       </div>
-                      <input type="text" id="operator" v-model="operator" class="form-control"
-                        aria-label="Amount (to the nearest dollar)" />
+                      <input
+                        type="text"
+                        id="operator"
+                        v-model="operator"
+                        class="form-control"
+                        aria-label="Amount (to the nearest dollar)"
+                      />
                     </div>
                   </div>
                 </div>
@@ -143,7 +274,12 @@
                       <div class="input-group-prepend">
                         <span>Operator MT</span>
                       </div>
-                      <multiselect v-model="mtMember" :options="optOperators" :multiple="true" style="font-size: 10px">
+                      <multiselect
+                        v-model="mtMember"
+                        :options="optOperators"
+                        :multiple="true"
+                        style="font-size: 10px"
+                      >
                       </multiselect>
                     </div>
                   </div>
@@ -155,14 +291,32 @@
                         <span class="input-group-text">Problem</span>
                       </div>
 
-                      <multiselect v-if="!is_new_problem" v-model="problem" :options="optProblems"
-                        style="font-size: 10px;width: 75%;" :disabled="!selectedLine">
+                      <multiselect
+                        v-if="!is_new_problem"
+                        v-model="problem"
+                        :options="optProblems"
+                        style="font-size: 10px; width: 75%"
+                        :disabled="!selectedLine"
+                      >
                       </multiselect>
-                      <input v-else type="text" id="problem" v-model="problem" class="form-control"
-                        aria-label="Amount (to the nearest dollar)" />
+                      <input
+                        v-else
+                        type="text"
+                        id="problem"
+                        v-model="problem"
+                        class="form-control"
+                        aria-label="Amount (to the nearest dollar)"
+                      />
                     </div>
-                    <span v-if="selectedLine">*jika tidak menemukan problem, klik </span><button v-if="selectedLine"
-                      class="btn btn-primary rounded-all" @click="is_new_problem = true">Add Problem !</button>
+                    <span v-if="selectedLine"
+                      >*jika tidak menemukan problem, klik </span
+                    ><button
+                      v-if="selectedLine"
+                      class="btn btn-primary rounded-all"
+                      @click="is_new_problem = true"
+                    >
+                      Add Problem !
+                    </button>
                   </div>
                 </div>
               </div>
@@ -172,10 +326,19 @@
 
             <v-card-actions>
               <v-spacer></v-spacer>
-              <button type="button" @click="problemInput()" class="btn btn-success">
+              <button
+                type="button"
+                @click="problemInput()"
+                class="btn btn-success"
+              >
                 Submit
               </button>
-              <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="clearSubmit()">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+                @click="clearSubmit()"
+              >
                 Close
               </button>
             </v-card-actions>
@@ -188,7 +351,11 @@
       <v-card color="primary" dark>
         <v-card-text>
           Loading...
-          <v-progress-linear indeterminate color="white" class="mb-0"></v-progress-linear>
+          <v-progress-linear
+            indeterminate
+            color="white"
+            class="mb-0"
+          ></v-progress-linear>
         </v-card-text>
       </v-card>
     </v-dialog>
@@ -199,9 +366,18 @@
     </div>
     <!-- Card PRod -->
     <div class="row m-0 p-0">
-      <CardProd v-for="line in lineAchivements" :key="line.name" :propsLine="line" :propsLoading="skeletonLoading" />
+      <CardProd
+        v-for="line in lineAchivements"
+        :key="line.name"
+        :propsLine="line"
+        :propsLoading="skeletonLoading"
+      />
       <div class="col-6 col-lg-3 mt-2 px-1 py-0">
-        <div id="cardProd" class="`card shadow bg-dark w-100" style="height: 100%">
+        <div
+          id="cardProd"
+          class="`card shadow bg-dark w-100"
+          style="height: 100%"
+        >
           <div class="row m-0">
             <div class="col text-left text-light title-text px-1 py-1">
               <h6>Legend</h6>
@@ -212,21 +388,30 @@
               <table>
                 <thead>
                   <tr class="w-100">
-                    <td class="bg-success bordered" style="height: 10px; width: 10px"></td>
+                    <td
+                      class="bg-success bordered"
+                      style="height: 10px; width: 10px"
+                    ></td>
                     <td></td>
                     <td>
                       <h6 class="m-0">RUNNING</h6>
                     </td>
                   </tr>
                   <tr>
-                    <td class="bg-warning bordered" style="height: 10px; width: 10px"></td>
+                    <td
+                      class="bg-warning bordered"
+                      style="height: 10px; width: 10px"
+                    ></td>
                     <td style="width: 10px"></td>
                     <td>
                       <h6 class="m-0">STOP ( Under 30 Min)</h6>
                     </td>
                   </tr>
                   <tr>
-                    <td class="bg-danger bordered" style="height: 10px; width: 10px"></td>
+                    <td
+                      class="bg-danger bordered"
+                      style="height: 10px; width: 10px"
+                    ></td>
                     <td style="width: 10px"></td>
                     <td>
                       <h6 class="m-0">STOP (Over 30 Min)</h6>
@@ -239,8 +424,12 @@
         </div>
       </div>
     </div>
-    <UpdateDialog :dialog="isShowDialogUpdate" :list="listUpdate" :oldVersion="oldVersion"
-      @dialog-close="isShowDialogUpdate = false" />
+    <UpdateDialog
+      :dialog="isShowDialogUpdate"
+      :list="listUpdate"
+      :oldVersion="oldVersion"
+      @dialog-close="isShowDialogUpdate = false"
+    />
   </div>
 </template>
 
@@ -255,7 +444,7 @@ import UpdateDialog from "@/components/UpdateDialog/UpdateDialog.vue";
 import { ModelSelect } from "vue-search-select";
 
 import formatDate from "@/functions/formatDate";
-import FeaturesMenu from '../components/FeaturesMenu.vue';
+import FeaturesMenu from "../components/FeaturesMenu.vue";
 
 export default {
   name: "DashboardOld",
@@ -300,17 +489,21 @@ export default {
         // }
         //region version 3.8.2
         {
-          type: "bug",
-          name: 'fixing problem LTB Report did not complete mapping data'
+          type: "new",
+          name: "Temporary disabled KY Machine Data (Pak Triyanto)",
         },
         {
-          type: "enhance",
-          name: 'show symptom management and symptom parameter to front menu'
+          type: "bug",
+          name: "Step repair tidak terlihat saat download excel",
         },
+        // {
+        //   type: "enhance",
+        //   name: "show symptom management and symptom parameter to front menu",
+        // },
         //endregion
       ],
       oldVersion: null,
-      isStaff: localStorage.getItem('role') === 'STAFF' ? true : false,
+      isStaff: localStorage.getItem("role") === "STAFF" ? true : false,
       is_new_problem: false,
       lineAchivements: [
         {
@@ -417,7 +610,7 @@ export default {
       isProd: false,
       mtMember: false,
       intervalId: null,
-      notificationId: null
+      notificationId: null,
     };
   },
   computed: {
@@ -478,7 +671,6 @@ export default {
       // console.log(this.machineSelected);
       // let machine = "-1"
       if (this.machineSelected != "") {
-        this.isKyDialog = true
         let mcSelected = await this.containerRawMachine.map((mc) => {
           if (mc.fmc_name == this.machineSelected) {
             this.fmc_id = mc.fid;
@@ -489,7 +681,9 @@ export default {
         });
         // console.log(mcSelected.sort());
         this.selectedLine = mcSelected.sort()[0];
-        await this.getKy({ fline: this.selectedLine, fid: this.fmc_id })
+        // Temporary
+        this.isKyDialog = true;
+        await this.getKy({ fline: this.selectedLine, fid: this.fmc_id });
       }
     },
     categoryProblem: function () {
@@ -515,20 +709,24 @@ export default {
       this.isBulk = true;
     },
     selectedLine: function () {
-      this.getProblems()
-    }
+      this.getProblems();
+    },
   },
   methods: {
     async getKy(filter) {
       try {
-        this.isLoading = true
-        const rawKy = await axios.get(`${process.env.VUE_APP_HOST}/v2/ky/get`, { params: filter });
+        this.isLoading = true;
+        const rawKy = await axios.get(`${process.env.VUE_APP_HOST}/v2/ky/get`, {
+          params: filter,
+        });
         console.log(rawKy.data.data[0]);
-        this.kyData = rawKy.data.data[0][0].ky_data.sort((ky) => ky.stop6_category)
-        this.counter_total_ky = rawKy.data.data[0][0].ky_data.length
-        this.isLoading = false
+        this.kyData = rawKy.data.data[0][0].ky_data.sort(
+          (ky) => ky.stop6_category
+        );
+        this.counter_total_ky = rawKy.data.data[0][0].ky_data.length;
+        this.isLoading = false;
       } catch (error) {
-        this.isLoading = false
+        this.isLoading = false;
         alert(JSON.stringify(error));
       }
     },
@@ -539,12 +737,12 @@ export default {
       "storeGetMachines",
     ]),
     showPersistentNotification() {
-      if ('Notification' in window && 'serviceWorker' in navigator) {
-        if (Notification.permission === 'granted') {
+      if ("Notification" in window && "serviceWorker" in navigator) {
+        if (Notification.permission === "granted") {
           this.showNotification();
-        } else if (Notification.permission !== 'denied') {
-          Notification.requestPermission().then(permission => {
-            if (permission === 'granted') {
+        } else if (Notification.permission !== "denied") {
+          Notification.requestPermission().then((permission) => {
+            if (permission === "granted") {
               this.showNotification();
             }
           });
@@ -559,7 +757,7 @@ export default {
         remainingSeconds++;
         this.updateNotificationContent(remainingSeconds);
       }, 1000);
-      localStorage.setItem('intervalId', this.intervalId)
+      localStorage.setItem("intervalId", this.intervalId);
       this.updateNotificationContent(remainingSeconds);
     },
     updateNotificationContent(remainingSeconds) {
@@ -567,50 +765,57 @@ export default {
       const notificationOptions = {
         body: `Tolong jangan closed notifikasi ini sampai Problem closed: ${remainingSeconds} seconds.`,
         requireInteraction: true, // Make the notification persistent
-        tag: "Alert"
+        tag: "Alert",
       };
-      navigator.serviceWorker.ready.then(async registration => {
-        console.log('registration');
+      navigator.serviceWorker.ready.then(async (registration) => {
+        console.log("registration");
         console.log(registration);
-        if (!localStorage.getItem('notificationId')) {
+        if (!localStorage.getItem("notificationId")) {
           // Create a new notification if one doesn't exist
-          await registration.showNotification(notificationTitle, notificationOptions)
-            .then(notification => {
-              console.log('notification showNotification THEN');
+          await registration
+            .showNotification(notificationTitle, notificationOptions)
+            .then((notification) => {
+              console.log("notification showNotification THEN");
               console.log(notification);
-              localStorage.setItem('notificationId', notification.notificationId)
+              localStorage.setItem(
+                "notificationId",
+                notification.notificationId
+              );
               this.notificationId = notification.notificationId;
             })
-            .catch(error => {
-              console.error('Error showing notification:', error);
+            .catch((error) => {
+              console.error("Error showing notification:", error);
             });
         } else {
           // Update the existing notification
-          await registration.getNotification(localStorage.getItem('notificationId'))
-            .then(existingNotification => {
+          await registration
+            .getNotification(localStorage.getItem("notificationId"))
+            .then((existingNotification) => {
               existingNotification.close(); // Close the existing notification
-              registration.showNotification(notificationTitle, notificationOptions)
-                .then(notification => {
-                  console.log('notification GET NOTIF THEN');
+              registration
+                .showNotification(notificationTitle, notificationOptions)
+                .then((notification) => {
+                  console.log("notification GET NOTIF THEN");
                   console.log(notification);
                   this.notificationId = notification.notificationId;
-                  localStorage.setItem('notificationId', this.notificationId)
+                  localStorage.setItem("notificationId", this.notificationId);
                 })
-                .catch(error => {
-                  console.error('Error showing notification:', error);
+                .catch((error) => {
+                  console.error("Error showing notification:", error);
                 });
             })
             .catch(() => {
               // If the existing notification is not found, create a new one
-              registration.showNotification(notificationTitle, notificationOptions)
-                .then(notification => {
-                  console.log('notification GET NOTIF CATCH');
+              registration
+                .showNotification(notificationTitle, notificationOptions)
+                .then((notification) => {
+                  console.log("notification GET NOTIF CATCH");
                   console.log(notification);
                   this.notificationId = notification.notificationId;
-                  localStorage.setItem('notificationId', this.notificationId)
+                  localStorage.setItem("notificationId", this.notificationId);
                 })
-                .catch(error => {
-                  console.error('Error showing notification:', error);
+                .catch((error) => {
+                  console.error("Error showing notification:", error);
                 });
             });
         }
@@ -618,8 +823,10 @@ export default {
     },
     async getProblems() {
       try {
-        let problems = await axios.get(`${process.env.VUE_APP_HOST}/v2/master/problem?f_line=${this.selectedLine}`)
-        this.optProblems = problems.data.data
+        let problems = await axios.get(
+          `${process.env.VUE_APP_HOST}/v2/master/problem?f_line=${this.selectedLine}`
+        );
+        this.optProblems = problems.data.data;
       } catch (error) {
         console.error(error);
       }
@@ -629,13 +836,16 @@ export default {
         let form = {
           line_nm: this.selectedLine,
           prob_nm: this.problem,
-          created_by: this.mtMember
-        }
-        let resp = await axios.post(`${process.env.VUE_APP_HOST}/v2/master/problem`, form)
+          created_by: this.mtMember,
+        };
+        let resp = await axios.post(
+          `${process.env.VUE_APP_HOST}/v2/master/problem`,
+          form
+        );
 
         console.log(resp);
       } catch (error) {
-        console.error(error)
+        console.error(error);
       }
     },
     goTo(link) {
@@ -651,10 +861,9 @@ export default {
       }
     },
     async problemInput() {
-
       let { problem, operator, fmc_id } = this;
       if (this.is_new_problem) {
-        this.addNewProblem()
+        this.addNewProblem();
       }
       if (this.isProd && !this.mtMember) {
         alert("masukan nama maintenance terlebih dahulu");
@@ -702,7 +911,7 @@ export default {
               console.log(err);
               this.isLoading = false;
             });
-          this.showPersistentNotification()
+          this.showPersistentNotification();
         }
       }
     },
@@ -742,10 +951,12 @@ export default {
       this.isLoading = false;
     },
     intervalTime() {
-      let dateConvert = `${moment().format("L").split("/")[1]}/${moment().format("L").split("/")[0]
-        }/${moment().format("L").split("/")[2]}`;
-      this.timeNow = `${dateConvert} ${moment().format("MMMM Do YYYY, h:mm:ss a").split(", ")[1]
-        }`;
+      let dateConvert = `${moment().format("L").split("/")[1]}/${
+        moment().format("L").split("/")[0]
+      }/${moment().format("L").split("/")[2]}`;
+      this.timeNow = `${dateConvert} ${
+        moment().format("MMMM Do YYYY, h:mm:ss a").split(", ")[1]
+      }`;
     },
     permissionCheck() {
       if (localStorage.getItem("area") == "null") {
@@ -898,13 +1109,15 @@ export default {
     CardProd,
     ModelSelect,
     UpdateDialog,
-    FeaturesMenu
+    FeaturesMenu,
   },
   async mounted() {
-    let newVersion = process.env.VUE_APP_VERSION
+    let newVersion = "v3.8.10";
     // let newVersion = '2.0.2'
-    const newVersionAvailable = localStorage.getItem("oldVersion") != newVersion
-        && (localStorage.getItem("name") && localStorage.getItem("name") != "Guest")
+    const newVersionAvailable =
+      localStorage.getItem("oldVersion") != newVersion &&
+      localStorage.getItem("name") &&
+      localStorage.getItem("name") != "Guest";
     if (newVersionAvailable) {
       this.oldVersion = newVersion;
       this.isShowDialogUpdate = true;
@@ -921,10 +1134,12 @@ export default {
     // console.log(intervalColDash);
     await this.getMachines(false);
     await this.getAllMtMember();
-    let dateConvert = `${moment().format("L").split("/")[1]}/${moment().format("L").split("/")[0]
-      }/${moment().format("L").split("/")[2]}`;
-    this.timeNow = `${dateConvert} ${moment().format("MMMM Do YYYY, h:mm:ss a").split(", ")[1]
-      }`;
+    let dateConvert = `${moment().format("L").split("/")[1]}/${
+      moment().format("L").split("/")[0]
+    }/${moment().format("L").split("/")[2]}`;
+    this.timeNow = `${dateConvert} ${
+      moment().format("MMMM Do YYYY, h:mm:ss a").split(", ")[1]
+    }`;
     let intervalStart = setInterval(this.intervalTime, 1000);
     console.log(intervalStart);
   },

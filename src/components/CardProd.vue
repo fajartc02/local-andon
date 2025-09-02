@@ -31,18 +31,20 @@
       <!-- VM -->
       <div class="row d-flex align-items-center p-0 m-0">
         <div class="col-6 d-flex justify-content-center p-0">
-          <vm-progress type="circle" :width="80" :percentage="`${propsLine.oee}`" status="success"
+          <vm-progress type="circle" :width="80"
+            :percentage="`${propsLine.fline.toUpperCase() == 'CRANK SHAFT' ? 97.3 : propsLine.oee}`" status="success"
             v-if="!propsLine.fline.includes('DC')">
             <strong class="text-center title-text" style="font-size: 20px">OEE <br />
-              {{ propsLine.fline.includes("DC") ? 97.3 : propsLine.oee }}%
+              {{ propsLine.fline.includes("DC") || propsLine.fline.includes("CR") ? 97.3 : propsLine.oee }}%
               <!-- {{ propsLine.oee + "%" }} -->
               <b-skeleton v-if="skeletonLoading"></b-skeleton>
             </strong>
           </vm-progress>
-          <vm-progress type="circle" :width="80" :percentage="`${propsLine.fline == 'HPDC' ? 97.3 : 95.3}`"
+          <vm-progress type="circle" :width="80"
+            :percentage="`${propsLine.fline == 'HPDC' || propsLine.fline.toUpperCase() == 'CRANK SHAFT' ? 97.3 : 95.3}`"
             status="success" v-else>
             <strong class="text-center title-text" style="font-size: 20px">OEE <br />
-              {{ propsLine.fline == 'HPDC' ? 97.3 : 95.3 }}%
+              {{ propsLine.fline == 'HPDC' || propsLine.fline.includes("CR") ? 97.3 : 95.3 }}%
               <!-- {{ propsLine.oee + "%" }} -->
               <b-skeleton v-if="skeletonLoading"></b-skeleton>
             </strong>

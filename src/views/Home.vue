@@ -76,7 +76,7 @@ export default {
       isHomeBtn: false,
       ex11: false,
       isShow: false,
-      versionApp: process.env.VUE_APP_VERSION,
+      versionApp: "v3.8.10",
     };
   },
   components: {

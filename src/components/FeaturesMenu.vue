@@ -4,7 +4,7 @@
       <template v-for="menu in menus[0]">
         <div :key="menu" v-if="menu.isActive" class="col-3 hover-menu p-1" @click="goTo(menu.link)">
           <center>
-            <img :src="menu.icon" width="30%"/>
+            <img :src="menu.icon" width="30%" />
           </center>
           <center class="card-title">
             <div v-html="menu.html"></div>
@@ -16,7 +16,7 @@
       <template v-for="menu in menus[1]">
         <div :key="menu" v-if="menu.isActive" class="col-3 hover-menu p-1" @click="goTo(menu.link)">
           <center>
-            <img :src="menu.icon" width="30%"/>
+            <img :src="menu.icon" width="30%" />
           </center>
           <center class="card-title">
             <div v-html="menu.html"></div>
@@ -102,7 +102,7 @@ export default {
           {
             name: "KY Machines",
             link: "/ky-machines",
-            icon: "https://play-lh.googleusercontent.com/p3Jxgbqc67Hd7pABvgAmGIkdQET57r4i3uXXxeelPHVHwBhrjQFNrbQIOvOiZ-Htf2s",
+            icon: "https://static.vecteezy.com/system/resources/thumbnails/016/770/597/small_2x/safety-first-yellow-sign-on-transparent-background-free-png.png",
             html: '<center class="card-title">KY <br /> Machines</center>',
             isActive: true
           },
