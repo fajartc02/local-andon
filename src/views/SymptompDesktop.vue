@@ -1,40 +1,26 @@
 <template>
   <div class="container-fluid" style="margin-top: 30px; height: 100vh">
-    <router-link
-      to="/symptompMgmt"
-      class="text-left btn btn-outline-info"
-      style="text-decoration: none; color: black"
-      >Detail Parameter</router-link
-    >
-    <router-link
-      to="/parameter"
-      class="text-left btn btn-outline-warning"
-      style="text-decoration: none; color: black"
-      >TPM Manual Check</router-link
-    >
+    <router-link to="/symptompMgmt" class="text-left btn btn-outline-info"
+      style="text-decoration: none; color: black">Detail Parameter</router-link>
+    <router-link to="/parameter" class="text-left btn btn-outline-warning"
+      style="text-decoration: none; color: black">TPM Manual Check</router-link>
     <div class="row mt-4 justify-content-around">
       <div class="col-lg-4 p-0">
         <div class="justify-content-around row">
           <div class="col-lg-6 col-xs-12 mt-2">
             <div class="card p-3 shadow-all bg-light text-dark shadow-lg p-0">
               <div class="row text-center">
-                <div
-                  class="col-8 text-left title-text p-0 p-2 pb-0 text-primary"
-                  style="font-size: 32px"
-                >
+                <div class="col-8 text-left title-text p-0 p-2 pb-0 text-primary" style="font-size: 32px">
                   {{ totalParams }}
                 </div>
-                <div
-                  class="
+                <div class="
                     col
                     text-left
                     title-text
                     p-0 p-2
                     pb-0
                     text-primary text-center
-                  "
-                  style="font-size: 32px"
-                >
+                  " style="font-size: 32px">
                   <i class="fa fa-tachometer" aria-hidden="true"></i>
                 </div>
               </div>
@@ -48,23 +34,17 @@
           <div class="col-lg-6 col-xs-12 mt-2">
             <div class="card p-3 shadow-all bg-light text-dark shadow-lg p-0">
               <div class="row">
-                <div
-                  class="col-8 text-left title-text p-0 p-2 pb-0 text-danger"
-                  style="font-size: 32px"
-                >
+                <div class="col-8 text-left title-text p-0 p-2 pb-0 text-danger" style="font-size: 32px">
                   {{ totalMc }}
                 </div>
-                <div
-                  class="
+                <div class="
                     col
                     text-left
                     title-text
                     p-0 p-2
                     pb-0
                     text-danger text-center
-                  "
-                  style="font-size: 32px"
-                >
+                  " style="font-size: 32px">
                   <i class="fa fa-cogs" aria-hidden="true"></i>
                 </div>
               </div>
@@ -78,8 +58,7 @@
         </div>
         <div class="justify-content-around row">
           <div class="col-lg-6 col-xs-12 mt-2">
-            <div
-              class="
+            <div class="
                 card
                 p-3
                 shadow-all
@@ -88,26 +67,19 @@
                 shadow-lg
                 p-0
                 clicked-card
-              "
-            >
+              ">
               <div class="row">
-                <div
-                  class="col-8 text-left title-text p-0 p-2 pb-0 text-success"
-                  style="font-size: 32px"
-                >
+                <div class="col-8 text-left title-text p-0 p-2 pb-0 text-success" style="font-size: 32px">
                   {{ containerAlarms.length }}
                 </div>
-                <div
-                  class="
+                <div class="
                     col
                     text-left
                     title-text
                     p-0 p-2
                     pb-0
                     text-success text-center
-                  "
-                  style="font-size: 32px"
-                >
+                  " style="font-size: 32px">
                   <i class="fa fa-history" aria-hidden="true"></i>
                 </div>
               </div>
@@ -121,23 +93,17 @@
           <div class="col-lg-6 col-xs-12 mt-2">
             <div class="card p-3 shadow-all bg-light text-dark shadow-lg p-0">
               <div class="row">
-                <div
-                  class="col-8 text-left title-text p-0 p-2 pb-0 text-warning"
-                  style="font-size: 32px"
-                >
+                <div class="col-8 text-left title-text p-0 p-2 pb-0 text-warning" style="font-size: 32px">
                   0
                 </div>
-                <div
-                  class="
+                <div class="
                     col
                     text-left
                     title-text
                     p-0 p-2
                     pb-0
                     text-warning text-center
-                  "
-                  style="font-size: 32px"
-                >
+                  " style="font-size: 32px">
                   <i class="fa fa-desktop" aria-hidden="true"></i>
                 </div>
               </div>
@@ -154,18 +120,12 @@
       <div class="col-lg-7 p-0">
         <div class="row justify-content-between my-auto">
           <div class="col-lg-6 col-xs-12 mt-2 p-1">
-            <div
-              class="card shadow-all bg-light text-dark shadow-lg p-0"
-              style="width: 100%"
-            >
+            <div class="card shadow-all bg-light text-dark shadow-lg p-0" style="width: 100%">
               <Doughnut :propsData="doughnutData" />
             </div>
           </div>
           <div class="col-lg-6 col-xs-12 mt-2 p-1">
-            <div
-              class="card shadow-all bg-light text-dark shadow-lg p-0"
-              style="width: 100%"
-            >
+            <div class="card shadow-all bg-light text-dark shadow-lg p-0" style="width: 100%">
               <Bar :propsData="barData" v-if="barData.title" />
               <div v-if="isLoading" class="row m-0">
                 <div class="col">
@@ -181,15 +141,9 @@
       <div class="col-lg-4 card">
         <h3 class="text-left pl-2 title text-primary">Lines</h3>
         <div class="justify-content-around row">
-          <div
-            v-for="(line, i) in containerLines"
-            :key="line.name"
-            class="col-5 card m-2 border-dark clicked-card"
-            @click="changeLine(i)"
-            :style="`height: 90px;${
-              line.isActive ? 'border: 4px solid black!important' : ''
-            };background-color: ${line.bg}`"
-          >
+          <div v-for="(line, i) in containerLines" :key="line.name" class="col-5 card m-2 border-dark clicked-card"
+            @click="changeLine(i)" :style="`height: 90px;${line.isActive ? 'border: 4px solid black!important' : ''
+              };background-color: ${line.bg}`">
             <h6 class="title text-center my-auto">{{ line.name }}</h6>
           </div>
         </div>
@@ -400,7 +354,7 @@ export default {
       // })
     },
     formatDate(date) {
-      var d = new Date(date),
+      let d = new Date(date),
         month = "" + (d.getMonth() + 1),
         day = "" + d.getDate(),
         year = d.getFullYear();
@@ -440,9 +394,11 @@ export default {
 .card {
   border-radius: 10px;
 }
+
 .clicked-card:active {
   background-color: #81e3f4;
 }
+
 .clicked-card {
   cursor: pointer;
 }

@@ -9,31 +9,17 @@
               <div class="col-6 p-0">
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1"
-                      >Start</span
-                    >
+                    <span class="input-group-text" id="basic-addon1">Start</span>
                   </div>
-                  <input
-                    type="date"
-                    v-model="selectedStartDate"
-                    class="form-control"
-                    placeholder="Start Date"
-                  />
+                  <input type="date" v-model="selectedStartDate" class="form-control" placeholder="Start Date" />
                 </div>
               </div>
               <div class="col-6 p-0 pl-1">
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1"
-                      >Finish</span
-                    >
+                    <span class="input-group-text" id="basic-addon1">Finish</span>
                   </div>
-                  <input
-                    type="date"
-                    class="form-control"
-                    v-model="selectedEndDate"
-                    placeholder="End Date"
-                  />
+                  <input type="date" class="form-control" v-model="selectedEndDate" placeholder="End Date" />
                 </div>
               </div>
             </div>
@@ -43,28 +29,18 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">Line</span>
                   </div>
-                  <model-select
-                    :options="optionsLines"
-                    v-model="lineSelected"
-                    placeholder="select line"
-                    style="width: 60%; font-size: 10px; color: black"
-                  >
+                  <model-select :options="optionsLines" v-model="lineSelected" placeholder="select line"
+                    style="width: 60%; font-size: 10px; color: black">
                   </model-select>
                 </div>
               </div>
               <div class="col-6 p-0 pl-1">
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1"
-                      >Machine</span
-                    >
+                    <span class="input-group-text" id="basic-addon1">Machine</span>
                   </div>
-                  <model-select
-                    :options="optionsMcs"
-                    v-model="machineSelected"
-                    placeholder="select line"
-                    style="width: 50%; font-size: 10px; color: black"
-                  >
+                  <model-select :options="optionsMcs" v-model="machineSelected" placeholder="select line"
+                    style="width: 50%; font-size: 10px; color: black">
                   </model-select>
                 </div>
               </div>
@@ -73,16 +49,9 @@
               <div class="col-10 p-0">
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1"
-                      >Problem</span
-                    >
+                    <span class="input-group-text" id="basic-addon1">Problem</span>
                   </div>
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Problem"
-                    v-model="problemSelected"
-                  />
+                  <input type="text" class="form-control" placeholder="Problem" v-model="problemSelected" />
                 </div>
               </div>
               <div class="col-2 p-0">
@@ -93,31 +62,14 @@
             </div>
             <div class="row m-0">
               <div class="col p-0">
-                <b-dropdown
-                  text="Category"
-                  class="m-md-2 text-light"
-                  style="font-size: 5px !important"
-                  variant="primary"
-                >
+                <b-dropdown text="Category" class="m-md-2 text-light" style="font-size: 5px !important"
+                  variant="primary">
                   <b-dd-form>
-                    <b-form-radio
-                      v-model="selectCategory"
-                      name="some-radios"
-                      :value="null"
-                      >All</b-form-radio
-                    >
-                    <b-form-radio
-                      v-model="selectCategory"
-                      name="some-radios"
-                      value="[TASKFORCE]"
-                      >TASKFORCE</b-form-radio
-                    >
-                    <b-form-radio
-                      v-model="selectCategory"
-                      name="some-radios"
-                      value="FT"
-                      >Focus Thema Member</b-form-radio
-                    >
+                    <b-form-radio v-model="selectCategory" name="some-radios" :value="null">All</b-form-radio>
+                    <b-form-radio v-model="selectCategory" name="some-radios"
+                      value="[TASKFORCE]">TASKFORCE</b-form-radio>
+                    <b-form-radio v-model="selectCategory" name="some-radios" value="FT">Focus Thema
+                      Member</b-form-radio>
                     <!-- <b-form-radio
                       v-model="selectCategory"
                       name="some-radios"
@@ -129,31 +81,12 @@
                 </b-dropdown>
               </div>
               <div class="col p-0">
-                <b-dropdown
-                  text="Pilih Shift"
-                  style="font-size: 5px !important"
-                  variant="primary"
-                  class="m-md-2 text-light"
-                >
+                <b-dropdown text="Pilih Shift" style="font-size: 5px !important" variant="primary"
+                  class="m-md-2 text-light">
                   <b-form-group label="Shift">
-                    <b-form-radio
-                      v-model="selectShift"
-                      name="some-radios"
-                      value=""
-                      >All</b-form-radio
-                    >
-                    <b-form-radio
-                      v-model="selectShift"
-                      name="some-radios"
-                      value="r"
-                      >Red Shift</b-form-radio
-                    >
-                    <b-form-radio
-                      v-model="selectShift"
-                      name="some-radios"
-                      value="w"
-                      >White Shift</b-form-radio
-                    >
+                    <b-form-radio v-model="selectShift" name="some-radios" value="">All</b-form-radio>
+                    <b-form-radio v-model="selectShift" name="some-radios" value="r">Red Shift</b-form-radio>
+                    <b-form-radio v-model="selectShift" name="some-radios" value="w">White Shift</b-form-radio>
                   </b-form-group>
                 </b-dropdown>
               </div>
@@ -172,10 +105,7 @@
     <div class="row">
       <div class="col-6">
         <div class="card border-danger text-danger" style="height: 10vh">
-          <div
-            class="card-header p-1"
-            style="font-size: 7px; font-weight: bold"
-          >
+          <div class="card-header p-1" style="font-size: 7px; font-weight: bold">
             Belum Di Countermeasure
           </div>
           <div class="card-body p-2" style="font-size: 18px; font-weight: bold">
@@ -185,10 +115,7 @@
       </div>
       <div class="col-6">
         <div class="card border-success text-success" style="height: 10vh">
-          <div
-            class="card-header p-1"
-            style="font-size: 7px; font-weight: bold"
-          >
+          <div class="card-header p-1" style="font-size: 7px; font-weight: bold">
             Sudah Di Countermeasure
           </div>
           <div class="card-body p-2" style="font-size: 18px; font-weight: bold">
@@ -204,13 +131,8 @@
     </div>
     <div class="row">
       <div class="col-6 p-0">
-        <download-excel
-          class="btn btn-primary w-80"
-          :data="json_data"
-          :fields="json_fields"
-          worksheet="My Worksheet"
-          :name="fileNameDownload"
-        >
+        <download-excel class="btn btn-primary w-80" :data="json_data" :fields="json_fields" worksheet="My Worksheet"
+          :name="fileNameDownload">
           Download Countermeasure
         </download-excel>
       </div>
@@ -221,10 +143,7 @@
       </div>
     </div>
     <div class="row">
-      <div
-        class="col-12 p-0"
-        style="overflow-x: auto; overflow-y: auto; height: 700px"
-      >
+      <div class="col-12 p-0" style="overflow-x: auto; overflow-y: auto; height: 700px">
         <table class="table table-sm table-bordered table-striped tableFixHead">
           <thead>
             <tr class="table-info text-center" style="font-size: 10px">
@@ -266,11 +185,8 @@
             </tr>
           </thead>
           <tbody style="font-size: 8px" id="bodyData">
-            <tr
-              v-for="(cmItem, i) in containerCm"
-              :key="cmItem.fid + cmItem.cmDesc + i"
-              :style="`background-color: ${containerColorStatus[i]}`"
-            >
+            <tr v-for="(cmItem, i) in containerCm" :key="cmItem.fid + cmItem.cmDesc + i"
+              :style="`background-color: ${containerColorStatus[i]}`">
               <td class="text-center">{{ i + 1 }}</td>
               <td class="text-center">{{ cmItem.fline }}</td>
               <td class="text-center">{{ cmItem.fmc_name }}</td>
@@ -279,8 +195,7 @@
               </td>
               <td style="min-width: 100px">
                 <router-link :to="`/editProblem?v_=${cmItem.fid}`">
-                  {{ cmItem.ferror_name }}</router-link
-                >
+                  {{ cmItem.ferror_name }}</router-link>
               </td>
               <td class="text-center">{{ cmItem.fdur }}</td>
               <td class="text-left" style="min-width: 100px">
@@ -296,44 +211,23 @@
               <td class="text-center">{{ cmItem.judg ? "OK" : "NOT YET" }}</td>
               <td class="text-center">{{ cmItem.cmTerjadi ? "V" : "" }}</td>
               <td class="text-center">{{ cmItem.cmLama ? "V" : "" }}</td>
-              <td
-                v-for="(item, i) in cmItem.fMonitor"
-                :key="item + i"
-                class="text-center"
-                :style="`font-size: 16px;color: ${
-                  cmItem.isYokoten ? 'blue' : 'black'
-                }`"
-              >
+              <td v-for="(item, i) in cmItem.fMonitor" :key="item + i" class="text-center" :style="`font-size: 16px;color: ${cmItem.isYokoten ? 'blue' : 'black'
+                }`">
                 {{ item }}
               </td>
               <td>
-                <button
-                  v-if="cmItem.judg"
-                  class="btn btn-success"
-                  style="font-size: 10px"
-                  disabled
-                >
+                <button v-if="cmItem.judg" class="btn btn-success" style="font-size: 10px" disabled>
                   OK
                 </button>
-                <button
-                  v-else
-                  class="btn btn-info"
-                  style="font-size: 10px"
-                  :disabled="!isSectionHead"
-                  @click="onShowConf(cmItem)"
-                >
+                <button v-else class="btn btn-info" style="font-size: 10px" :disabled="!isSectionHead"
+                  @click="onShowConf(cmItem)">
                   Konfirmasi
                 </button>
               </td>
             </tr>
           </tbody>
         </table>
-        <v-dialog
-          class="bg-danger"
-          v-model="showAlarmDialog"
-          v-if="selectedCmConf"
-          width="500"
-        >
+        <v-dialog class="bg-danger" v-model="showAlarmDialog" v-if="selectedCmConf" width="500">
           <v-card>
             <v-card-title class="headline lighten-2"> Konfirmasi </v-card-title>
             <v-card-text class="p-0">
@@ -360,11 +254,7 @@
             <v-divider></v-divider>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <button
-                type="button"
-                @click="confCmComplete(selectedCmConf.fid)"
-                class="btn btn-success text-light"
-              >
+              <button type="button" @click="confCmComplete(selectedCmConf.fid)" class="btn btn-success text-light">
                 Konfirmasi Sudah
               </button>
             </v-card-actions>
@@ -775,7 +665,7 @@ export default {
         });
     },
     formatDate(date) {
-      var d = new Date(date),
+      let d = new Date(date),
         month = "" + (d.getMonth() + 1),
         day = "" + d.getDate(),
         year = d.getFullYear();
@@ -829,8 +719,7 @@ export default {
         });
         axios
           .post(
-            `${
-              process.env.VUE_APP_HOST
+            `${process.env.VUE_APP_HOST
             }/updateCmFinished?fpermanet_cm=${`"cmDesc":"${mapPermanetCm[0].cmDesc}","datePlan":"${mapPermanetCm[0].datePlan}"`}`,
             {
               fpermamnet_cm: JSON.stringify(mapPermanetCm),
@@ -861,8 +750,7 @@ export default {
         });
         axios
           .post(
-            `${
-              process.env.VUE_APP_HOST
+            `${process.env.VUE_APP_HOST
             }/updateCmFinished?fpermanet_cm_lama=${`"cmDesc":"${mapPermanetCmLama[0].cmDesc}","datePlan":"${mapPermanetCmLama[0].datePlan}"`}`,
             {
               fpermamnet_cm_lama: JSON.stringify(mapPermanetCmLama),
@@ -908,10 +796,12 @@ thead tr:nth-child(1) th {
   position: sticky;
   top: 0;
 }
+
 thead tr:nth-child(2) th {
   position: sticky;
   top: 23px;
 }
+
 thead tr:nth-child(3) th {
   position: sticky;
   top: 46px;

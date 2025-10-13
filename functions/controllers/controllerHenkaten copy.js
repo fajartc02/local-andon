@@ -5,8 +5,8 @@ module.exports = {
         let qNewHenkaten = `INSERT INTO tb_henkaten (fdate, fline, fmc, fproblem, fchanges_item, fpart_type, fpic, fwork_no, fnote) VALUES `
         let idx = 0;
         qNewHenkaten += `(`
-        Object.size = function(obj) {
-            var size = 0,
+        Object.size = function (obj) {
+            let size = 0,
                 key;
             for (key in obj) {
                 if (obj.hasOwnProperty(key)) size++;
@@ -23,20 +23,20 @@ module.exports = {
                 qNewHenkaten += `'${req.body[key]}'`
             }
             qNewHenkaten += ``
-            if (idx == size) {} else {
+            if (idx == size) { } else {
                 qNewHenkaten += ','
             }
         }
         qNewHenkaten += `)`
         console.log(qNewHenkaten);
-        pool.getConnection(async function(err, conn) {
+        pool.getConnection(async function (err, conn) {
             if (err) {
                 res.status(203).json({
                     message: 'Failed to post henkaten',
                     err: err.message
                 })
             }
-            conn.query(qNewHenkaten, function(err, results) {
+            conn.query(qNewHenkaten, function (err, results) {
                 if (err) {
                     res.status(203).json({
                         message: 'Failed to post henkaten',
@@ -67,14 +67,14 @@ module.exports = {
                 qGetHenkaten += ` fmc = '${req.query.fmc}'`
             }
         }
-        pool.getConnection(async function(err, conn) {
+        pool.getConnection(async function (err, conn) {
             if (err) {
                 res.status(203).json({
                     message: 'Failed to get henkaten',
                     err: err.message
                 })
             }
-            conn.query(qGetHenkaten, function(err, results) {
+            conn.query(qGetHenkaten, function (err, results) {
                 if (err) {
                     res.status(203).json({
                         message: 'Failed to get henkaten',

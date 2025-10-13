@@ -8,18 +8,8 @@
       :series="series"
     ></apexchart> -->
     <h6 class="my-2">Pareto Problems</h6>
-    <apexchart
-      type="bar"
-      height="190"
-      :options="chartOptionsProblem"
-      :series="seriesProblem"
-    ></apexchart>
-    <b-button
-      variant="secondary"
-      v-if="visibleColapse"
-      @click="visibleColapse = false"
-      >Close Detail</b-button
-    >
+    <apexchart type="bar" height="190" :options="chartOptionsProblem" :series="seriesProblem"></apexchart>
+    <b-button variant="secondary" v-if="visibleColapse" @click="visibleColapse = false">Close Detail</b-button>
     <b-collapse class="mt-2">
       <div class="card"></div>
     </b-collapse>
@@ -61,8 +51,8 @@ export default {
     //   this.propsIsOrderFreq = this.propsIsOrderFreq;
     // },
     propsData: function () {
-      var durProblemData = [0];
-      var mcProblemData = ["tidak ada problem"];
+      let durProblemData = [0];
+      let mcProblemData = ["tidak ada problem"];
       if (this.propsData.length > 0) {
         durProblemData = this.propsData.map((item) => {
           if (item.fdur) {
@@ -194,7 +184,7 @@ export default {
           mapNameProblem = result.data.data.map((item) => {
             return item.ferror_name;
           });
-          var themaMemberName;
+          let themaMemberName;
           themaMemberName = result.data.data.map((item) => {
             return axios
               .get(`${process.env.VUE_APP_HOST}/focus-theme/check/${item.fid}`)
@@ -218,11 +208,10 @@ export default {
                       style: {
                         color: "#000000",
                       },
-                      text: `${
-                        data.problem_name.includes("[TASKFORCE]")
+                      text: `${data.problem_name.includes("[TASKFORCE]")
                           ? `${data.member_name} [${data.member_shift}] [TASKFORCE]`
                           : `${data.member_name} [${data.member_shift}]`
-                      }`,
+                        }`,
                       // item.fname_theme_member
                     },
                   };
@@ -389,11 +378,11 @@ export default {
     apexchart: VueApexCharts,
   },
   mounted() {
-    var durProblemData = [0];
+    let durProblemData = [0];
     this.selectedStartDate = this.propsStartDate;
     this.selectedEndDate = this.propsEndDate;
 
-    var mcProblemData = ["tidak ada problem"];
+    let mcProblemData = ["tidak ada problem"];
     if (this.propsData.length > 0) {
       durProblemData = this.propsData.map((item) => {
         if (item.fdur) {
@@ -402,7 +391,7 @@ export default {
           return 0;
         }
       });
-      var idProbMember;
+      let idProbMember;
       idProbMember = this.propsData.map((item) => {
         if (item.id_m_problem_member) {
           return {

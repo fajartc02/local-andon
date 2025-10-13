@@ -33,33 +33,33 @@
 export default {
   name: "Clock",
   mounted() {
-    var hoursContainer = document.querySelector(".hours");
-    var minutesContainer = document.querySelector(".minutes");
-    var secondsContainer = document.querySelector(".seconds");
-    var tickElements = Array.from(document.querySelectorAll(".tick"));
+    let hoursContainer = document.querySelector(".hours");
+    let minutesContainer = document.querySelector(".minutes");
+    let secondsContainer = document.querySelector(".seconds");
+    let tickElements = Array.from(document.querySelectorAll(".tick"));
 
-    var last = new Date(0);
+    let last = new Date(0);
     last.setUTCHours(-1);
 
-    // var tickState = true;
+    // let tickState = true;
 
     function updateTime() {
-      var now = new Date();
+      let now = new Date();
 
-      var lastHours = last.getHours().toString();
-      var nowHours = now.getHours().toString();
+      let lastHours = last.getHours().toString();
+      let nowHours = now.getHours().toString();
       if (lastHours !== nowHours) {
         updateContainer(hoursContainer, nowHours);
       }
 
-      var lastMinutes = last.getMinutes().toString();
-      var nowMinutes = now.getMinutes().toString();
+      let lastMinutes = last.getMinutes().toString();
+      let nowMinutes = now.getMinutes().toString();
       if (lastMinutes !== nowMinutes) {
         updateContainer(minutesContainer, nowMinutes);
       }
 
-      var lastSeconds = last.getSeconds().toString();
-      var nowSeconds = now.getSeconds().toString();
+      let lastSeconds = last.getSeconds().toString();
+      let nowSeconds = now.getSeconds().toString();
       if (lastSeconds !== nowSeconds) {
         //tick()
         updateContainer(secondsContainer, nowSeconds);
@@ -73,18 +73,18 @@ export default {
     }
     tick();
     function updateContainer(container, newTime) {
-      var time = newTime.split("");
+      let time = newTime.split("");
 
       if (time.length === 1) {
         time.unshift("0");
       }
 
-      var first = container.firstElementChild;
+      let first = container.firstElementChild;
       if (first.lastElementChild.textContent !== time[0]) {
         updateNumber(first, time[0]);
       }
 
-      var last = container.lastElementChild;
+      let last = container.lastElementChild;
       if (last.lastElementChild.textContent !== time[1]) {
         updateNumber(last, time[1]);
       }
@@ -92,7 +92,7 @@ export default {
 
     function updateNumber(element, number) {
       //element.lastElementChild.textContent = number
-      var second = element.lastElementChild.cloneNode(true);
+      let second = element.lastElementChild.cloneNode(true);
       second.textContent = number;
 
       element.appendChild(second);
@@ -139,7 +139,7 @@ export default {
   background: linear-gradient(to bottom, transparent, black);
 }
 
-.clock > div {
+.clock>div {
   display: flex;
 }
 
@@ -159,6 +159,7 @@ export default {
   from {
     transform: translateY(0vh);
   }
+
   to {
     transform: translateY(-20vh);
   }

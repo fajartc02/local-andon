@@ -2,18 +2,11 @@
   <div>
     <div v-if="!report">
       <button class="btn btn-primary" @click="addNode">
-        Tambah Analisis {{whyCategory}}
+        Tambah Analisis {{ whyCategory }}
       </button>
-      <vue-tree-list
-        @click="onClick"
-        @change-name="onChangeName"
-        @delete-node="onDel"
-        @add-node="onAddNode"
-        :model="data"
-        default-tree-node-name="Analisa bercabang baru"
-        default-leaf-node-name="Masukan analisa kamu"
-        v-bind:default-expanded="true"
-      >
+      <vue-tree-list @click="onClick" @change-name="onChangeName" @delete-node="onDel" @add-node="onAddNode"
+        :model="data" default-tree-node-name="Analisa bercabang baru" default-leaf-node-name="Masukan analisa kamu"
+        v-bind:default-expanded="true">
         <!-- <template v-slot:leafNameDisplay="slotProps">
           <span>
             {{ slotProps.model.name }}
@@ -48,15 +41,16 @@
           {{ errName }}
         </div>
       </div> -->
-      <div class="row" >
-          <table class="border">
-            <template v-for="(child) in newTree.children">
-              <tr :key="child.id">
-                <td style="max-width: 80px;">
-                  <p class="m-0 p-0" :style="`text-decoration: ${child.children ? '' : 'line-through'}`">{{ child.name }}</p>
-                </td>
-                <td>
-                  <!-- <ul v-if="child.children" class="list-group p-0 m-0" style="font-size: 9px!important;text-align: left;">
+      <div class="row">
+        <table class="border">
+          <template v-for="(child) in newTree.children">
+            <tr :key="child.id">
+              <td style="max-width: 80px;">
+                <p class="m-0 p-0" :style="`text-decoration: ${child.children ? '' : 'line-through'}`">{{ child.name }}
+                </p>
+              </td>
+              <td>
+                <!-- <ul v-if="child.children" class="list-group p-0 m-0" style="font-size: 9px!important;text-align: left;">
                       <li v-for="(itm, noP) in child.children" :key="itm.id" class="list-group-item p-1">
                         <p class="m-0 p-0">{{noP + 1}}.{{ itm.name.length > 30 && child.children > 1 ? itm.name.slice(0,31) + '...' : itm.name }}</p>
                         <ul v-if="itm.children" class="list-group p-1">
@@ -66,24 +60,27 @@
                         </ul>
                       </li>
                   </ul> -->
-                  <table v-if="child.children">
-                    <tr v-for="(itm, noP) in child.children" :key="itm.id" >
-                      <td style="max-width: 100px;">
-                        <p class="m-0 p-0">{{noP + 1}}.{{ itm.name.length > 40 && child.children > 1 ? itm.name.slice(0,41) + '...' : itm.name }}</p>
-                      </td>
-                      <td style="max-width: 100%;" v-for="(chld, noC) in itm.children" :key="chld.id" :class="`${noC == itm.children.length - 1 ? 'list-group-item p-0 text-danger' : 'list-group-item p-1'}`" >
-                        <p class="m-0 p-0" >{{ chld.name.length > 40 && itm.children.length > 3 ? chld.name.slice(0,41) + '...' : chld.name }}</p>
-                      </td>
-                    </tr>
-                  </table>
-                </td>
-              </tr>
-            </template>
-          </table>
+                <table v-if="child.children">
+                  <tr v-for="(itm, noP) in child.children" :key="itm.id">
+                    <td style="max-width: 100px;">
+                      <p class="m-0 p-0">{{ noP + 1 }}.{{ itm.name.length > 40 && child.children > 1 ?
+                        itm.name.slice(0, 41) + '...' : itm.name }}</p>
+                    </td>
+                    <td style="max-width: 100%;" v-for="(chld, noC) in itm.children" :key="chld.id"
+                      :class="`${noC == itm.children.length - 1 ? 'list-group-item p-0 text-danger' : 'list-group-item p-1'}`">
+                      <p class="m-0 p-0">{{ chld.name.length > 40 && itm.children.length > 3 ? chld.name.slice(0, 41) +
+                        '...' : chld.name }}</p>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </template>
+        </table>
       </div>
     </div>
   </div>
-  
+
 </template>
 
 <script>
@@ -100,11 +97,11 @@ export default {
     return {
       data: new Tree([]),
       newTree: null,
-      
+
     };
   },
   computed: {
-    ...mapState(["newAnalisys","newAnalisys2"]),
+    ...mapState(["newAnalisys", "newAnalisys2"]),
   },
   props: {
     hide: Boolean,
@@ -119,17 +116,17 @@ export default {
         console.log(this.data.children);
         console.log(JSON.parse(this.data));
         this.getNewTree();
-        if(this.whyCategory == "TERJADI"){
+        if (this.whyCategory == "TERJADI") {
           this.actionUpdateAnalisys(this.newTree.children);
         }
-        if(this.whyCategory == "LAMA"){
+        if (this.whyCategory == "LAMA") {
           this.actionUpdateAnalisys2(this.newTree.children);
         }
       },
       deep: true,
     },
-    newTree: function() {
-      if(this.newTree) {
+    newTree: function () {
+      if (this.newTree) {
         console.log(this.newTree);
         // this.newTree.children.forEach(itm => {
         //   console.log(itm);
@@ -142,7 +139,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["actionUpdateAnalisys","actionUpdateAnalisys2"]),
+    ...mapActions(["actionUpdateAnalisys", "actionUpdateAnalisys2"]),
     onDel(node) {
       console.log(node);
       node.remove();
@@ -161,31 +158,31 @@ export default {
     },
 
     async addNode() {
-      var nodeRealProblem = new TreeNode({ name: "Masukan Real Problem", isLeaf: false });
-      // var nodeMc = new TreeNode({ name: "MACHINE", isLeaf: false });
-      // var nodeMat = new TreeNode({ name: "MATERIAL", isLeaf: false });
-      // var nodeMet = new TreeNode({ name: "METHODE", isLeaf: false });
-      // var nodeEnv = new TreeNode({ name: "ENVIRONTMENT", isLeaf: false });
+      let nodeRealProblem = new TreeNode({ name: "Masukan Real Problem", isLeaf: false });
+      // let nodeMc = new TreeNode({ name: "MACHINE", isLeaf: false });
+      // let nodeMat = new TreeNode({ name: "MATERIAL", isLeaf: false });
+      // let nodeMet = new TreeNode({ name: "METHODE", isLeaf: false });
+      // let nodeEnv = new TreeNode({ name: "ENVIRONTMENT", isLeaf: false });
       if (!this.data.children) this.data.children = [];
       this.data.addChildren(nodeRealProblem);
       // this.data.addChildren(nodeMc);
       // this.data.addChildren(nodeMat);
       // this.data.addChildren(nodeMet);
       // this.data.addChildren(nodeEnv);
-      if(this.whyCategory == "TERJADI"){
-       await this.actionUpdateAnalisys(this.newTree);
+      if (this.whyCategory == "TERJADI") {
+        await this.actionUpdateAnalisys(this.newTree);
       }
-      if(this.whyCategory == "LAMA"){
-       await this.actionUpdateAnalisys2(this.newTree);
+      if (this.whyCategory == "LAMA") {
+        await this.actionUpdateAnalisys2(this.newTree);
       }
     },
 
     getNewTree() {
-      var vm = this;
+      let vm = this;
       function _dfs(oldNode) {
-        var newNode = {};
+        let newNode = {};
 
-        for (var k in oldNode) {
+        for (let k in oldNode) {
           if (k !== "children" && k !== "parent") {
             newNode[k] = oldNode[k];
           }
@@ -193,7 +190,7 @@ export default {
 
         if (oldNode.children && oldNode.children.length > 0) {
           newNode.children = [];
-          for (var i = 0, len = oldNode.children.length; i < len; i++) {
+          for (let i = 0, len = oldNode.children.length; i < len; i++) {
             newNode.children.push(_dfs(oldNode.children[i]));
           }
         }

@@ -1,6 +1,6 @@
 const mysql = require('mysql')
 
-var pool = mysql.createPool({
+let pool = mysql.createPool({
     // connectionLimit: 100, // default = 10
     connectTimeout: 60 * 60 * 1000,
     acquireTimeout: 60 * 60 * 1000,
@@ -18,12 +18,12 @@ var pool = mysql.createPool({
 
 function cmdQuery(sql) {
     return new Promise((resolve, reject) => {
-        pool.getConnection(function(err, connection) {
+        pool.getConnection(function (err, connection) {
             if (err) {
                 reject(err);
             }
             console.log(err);
-            connection.query(sql, function(err, result) {
+            connection.query(sql, function (err, result) {
                 connection.release();
                 if (err) {
                     console.log(err);

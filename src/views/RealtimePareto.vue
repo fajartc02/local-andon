@@ -3,10 +3,7 @@
     <div class="container-fluid" style="padding-bottom: 80px" v-if="isMobile">
       <!-- SESARCH -->
       <div class="row m-0 p-0">
-        <div
-          class="col-12 d-flex justify-content-center px-0"
-          style="z-index: 1"
-        >
+        <div class="col-12 d-flex justify-content-center px-0" style="z-index: 1">
           <div id="content-search" class="card shadow">
             <div class="card-header title-text p-0 px-2 text-left">Search</div>
             <div class="card-body px-1 py-1">
@@ -14,31 +11,17 @@
                 <div class="col-6 p-0">
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                      <span class="input-group-text"
-                        >Start</span
-                      >
+                      <span class="input-group-text">Start</span>
                     </div>
-                    <input
-                      type="date"
-                      v-model="selectedStartDate"
-                      class="form-control"
-                      placeholder="Start Date"
-                    />
+                    <input type="date" v-model="selectedStartDate" class="form-control" placeholder="Start Date" />
                   </div>
                 </div>
                 <div class="col-6 p-0 pl-1">
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                      <span class="input-group-text"
-                        >Finish</span
-                      >
+                      <span class="input-group-text">Finish</span>
                     </div>
-                    <input
-                      type="date"
-                      class="form-control"
-                      v-model="selectedEndDate"
-                      placeholder="End Date"
-                    />
+                    <input type="date" class="form-control" v-model="selectedEndDate" placeholder="End Date" />
                   </div>
                 </div>
               </div>
@@ -46,82 +29,41 @@
                 <div class="col-8 p-0">
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                      <span class="input-group-text"
-                        >AV Category</span
-                      >
+                      <span class="input-group-text">AV Category</span>
                     </div>
-                    <model-select
-                      :options="avCategories"
-                      v-model="selectedCategory"
-                      placeholder="select Category"
-                      style="width: 60%; font-size: 10px; color: black"
-                    >
+                    <model-select :options="avCategories" v-model="selectedCategory" placeholder="select Category"
+                      style="width: 60%; font-size: 10px; color: black">
                     </model-select>
                   </div>
                 </div>
                 <div class="col-4 p-0">
-                  <button
-                    class="btn btn-primary p-0 px-3 title-text"
-                    @click="getRealtimePareto()"
-                  >
+                  <button class="btn btn-primary p-0 px-3 title-text" @click="getRealtimePareto()">
                     Search <i class="fa fa-search"></i>
                   </button>
                 </div>
               </div>
               <div class="row m-0 p-0">
                 <div class="col-12 p-0 table-responsive">
-                  <div
-                    class="btn-group btn-group-sm bordered"
-                    role="group"
-                    aria-label="..."
-                  >
-                    <button
-                      type="button"
-                      class="btn btn-outline-success"
-                      @click="switchDate('today')"
-                    >
+                  <div class="btn-group btn-group-sm bordered" role="group" aria-label="...">
+                    <button type="button" class="btn btn-outline-success" @click="switchDate('today')">
                       Today
                     </button>
-                    <button
-                      type="button"
-                      class="btn btn-outline-success"
-                      @click="switchDate('yesterday')"
-                    >
+                    <button type="button" class="btn btn-outline-success" @click="switchDate('yesterday')">
                       Yesterday
                     </button>
-                    <button
-                      type="button"
-                      class="btn btn-outline-success"
-                      @click="switchDate('yesterdayDay')"
-                    >
+                    <button type="button" class="btn btn-outline-success" @click="switchDate('yesterdayDay')">
                       Yesterday Day
                     </button>
-                    <button
-                      type="button"
-                      class="btn btn-outline-success"
-                      @click="switchDate('yesterdayNight')"
-                    >
+                    <button type="button" class="btn btn-outline-success" @click="switchDate('yesterdayNight')">
                       Yesterday Night
                     </button>
-                    <button
-                      type="button"
-                      class="btn btn-outline-success"
-                      @click="switchDate('lastmonth')"
-                    >
+                    <button type="button" class="btn btn-outline-success" @click="switchDate('lastmonth')">
                       Last Month
                     </button>
-                    <button
-                      type="button"
-                      class="btn btn-outline-success"
-                      @click="switchDate('thismonth')"
-                    >
+                    <button type="button" class="btn btn-outline-success" @click="switchDate('thismonth')">
                       This Month
                     </button>
-                    <button
-                      type="button"
-                      class="btn btn-outline-success"
-                      @click="switchDate('lastWeek')"
-                    >
+                    <button type="button" class="btn btn-outline-success" @click="switchDate('lastWeek')">
                       Last Week
                     </button>
                   </div>
@@ -155,81 +97,33 @@
       <!-- FIlter prob & MC -->
       <div class="row p-0 m-0">
         <div class="col-6 p-0">
-          <div
-            class="btn-group btn-group-sm bordered"
-            role="group"
-            aria-label="..."
-          >
-            <button
-              type="button"
-              class="btn btn-primary"
-              @click="switchFilter('mc')"
-              v-if="isFilterMc"
-            >
+          <div class="btn-group btn-group-sm bordered" role="group" aria-label="...">
+            <button type="button" class="btn btn-primary" @click="switchFilter('mc')" v-if="isFilterMc">
               Machines
             </button>
-            <button
-              type="button"
-              class="btn btn-outline-primary"
-              @click="switchFilter('mc')"
-              v-else
-            >
+            <button type="button" class="btn btn-outline-primary" @click="switchFilter('mc')" v-else>
               Machines
             </button>
-            <button
-              type="button"
-              class="btn btn-outline-primary"
-              @click="switchFilter('prob')"
-              v-if="!isFilterProblem"
-            >
+            <button type="button" class="btn btn-outline-primary" @click="switchFilter('prob')" v-if="!isFilterProblem">
               Problems
             </button>
-            <button
-              type="button"
-              class="btn btn-primary"
-              @click="switchFilter('prob')"
-              v-else
-            >
+            <button type="button" class="btn btn-primary" @click="switchFilter('prob')" v-else>
               Problems
             </button>
           </div>
         </div>
         <div class="col-6 p-0">
-          <div
-            class="btn-group btn-group-sm bordered"
-            role="group"
-            aria-label="..."
-          >
-            <button
-              v-if="!isOrderFreq"
-              type="button"
-              class="btn btn-warning"
-              @click="isOrderFreq = false"
-            >
+          <div class="btn-group btn-group-sm bordered" role="group" aria-label="...">
+            <button v-if="!isOrderFreq" type="button" class="btn btn-warning" @click="isOrderFreq = false">
               Duration
             </button>
-            <button
-              v-else
-              type="button"
-              class="btn btn-outline-warning"
-              @click="isOrderFreq = false"
-            >
+            <button v-else type="button" class="btn btn-outline-warning" @click="isOrderFreq = false">
               Duration
             </button>
-            <button
-              v-if="!isOrderFreq"
-              type="button"
-              class="btn btn-outline-warning"
-              @click="isOrderFreq = true"
-            >
+            <button v-if="!isOrderFreq" type="button" class="btn btn-outline-warning" @click="isOrderFreq = true">
               Frequency
             </button>
-            <button
-              v-else
-              type="button"
-              class="btn btn-warning"
-              @click="isOrderFreq = true"
-            >
+            <button v-else type="button" class="btn btn-warning" @click="isOrderFreq = true">
               Frequency
             </button>
           </div>
@@ -238,31 +132,18 @@
       <div>
         <div class="row m-0">
           <div class="col-12 p-0">
-            <i
-              v-if="isLoading"
-              class="fa fa-refresh fa-spin"
-              style="font-size: 30px"
-            ></i>
+            <i v-if="isLoading" class="fa fa-refresh fa-spin" style="font-size: 30px"></i>
           </div>
         </div>
-        <div
-          v-for="line in tempResult"
-          :key="line.fline"
-          class="row p-0 m-0 mt-1"
-        >
+        <div v-for="line in tempResult" :key="line.fline" class="row p-0 m-0 mt-1">
           <div class="col-12 p-0">
             <div class="card">
               <div class="card-header px-1 py-1 text-left">
                 {{ line.fline }} Line
               </div>
               <div class="card-body p-0">
-                <ChartPareto
-                  :problemData="line.data"
-                  :propsStartDate="selectedStartDateFetch"
-                  :propsEndDate="selectedEndDateFetch"
-                  :propsIsOrderFreq="isOrderFreq"
-                  :propsPanel="line.panel"
-                />
+                <ChartPareto :problemData="line.data" :propsStartDate="selectedStartDateFetch"
+                  :propsEndDate="selectedEndDateFetch" :propsIsOrderFreq="isOrderFreq" :propsPanel="line.panel" />
               </div>
             </div>
           </div>
@@ -272,10 +153,7 @@
     <div class="container-fluid" style="padding-bottom: 80px" v-else>
       <!-- SESARCH -->
       <div class="row m-0 p-0">
-        <div
-          class="col-12 d-flex justify-content-center px-0"
-          style="z-index: 1"
-        >
+        <div class="col-12 d-flex justify-content-center px-0" style="z-index: 1">
           <div id="content-search" class="card shadow">
             <div class="card-header title-text p-0 px-2 text-left">Search</div>
             <div class="card-body px-1 py-1">
@@ -283,31 +161,17 @@
                 <div class="col-6 p-0">
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                      <span class="input-group-text"
-                        >Start</span
-                      >
+                      <span class="input-group-text">Start</span>
                     </div>
-                    <input
-                      type="date"
-                      v-model="selectedStartDate"
-                      class="form-control"
-                      placeholder="Start Date"
-                    />
+                    <input type="date" v-model="selectedStartDate" class="form-control" placeholder="Start Date" />
                   </div>
                 </div>
                 <div class="col-6 p-0 pl-1">
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                      <span class="input-group-text"
-                        >Finish</span
-                      >
+                      <span class="input-group-text">Finish</span>
                     </div>
-                    <input
-                      type="date"
-                      class="form-control"
-                      v-model="selectedEndDate"
-                      placeholder="End Date"
-                    />
+                    <input type="date" class="form-control" v-model="selectedEndDate" placeholder="End Date" />
                   </div>
                 </div>
               </div>
@@ -315,82 +179,41 @@
                 <div class="col-8 p-0">
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                      <span class="input-group-text"
-                        >AV Category</span
-                      >
+                      <span class="input-group-text">AV Category</span>
                     </div>
-                    <model-select
-                      :options="avCategories"
-                      v-model="selectedCategory"
-                      placeholder="select Category"
-                      style="width: 60%; font-size: 10px; color: black"
-                    >
+                    <model-select :options="avCategories" v-model="selectedCategory" placeholder="select Category"
+                      style="width: 60%; font-size: 10px; color: black">
                     </model-select>
                   </div>
                 </div>
                 <div class="col-4 p-0">
-                  <button
-                    class="btn btn-primary p-0 px-3 title-text"
-                    @click="getRealtimePareto()"
-                  >
+                  <button class="btn btn-primary p-0 px-3 title-text" @click="getRealtimePareto()">
                     Search <i class="fa fa-search"></i>
                   </button>
                 </div>
               </div>
               <div class="row m-0 p-0">
                 <div class="col-12 p-0">
-                  <div
-                    class="btn-group btn-group-sm bordered"
-                    role="group"
-                    aria-label="..."
-                  >
-                    <button
-                      type="button"
-                      class="btn btn-outline-success"
-                      @click="switchDate('today')"
-                    >
+                  <div class="btn-group btn-group-sm bordered" role="group" aria-label="...">
+                    <button type="button" class="btn btn-outline-success" @click="switchDate('today')">
                       Today
                     </button>
-                    <button
-                      type="button"
-                      class="btn btn-outline-success"
-                      @click="switchDate('yesterday')"
-                    >
+                    <button type="button" class="btn btn-outline-success" @click="switchDate('yesterday')">
                       Yesterday All
                     </button>
-                    <button
-                      type="button"
-                      class="btn btn-outline-success"
-                      @click="switchDate('yesterdayDay')"
-                    >
+                    <button type="button" class="btn btn-outline-success" @click="switchDate('yesterdayDay')">
                       Yesterday Day
                     </button>
-                    <button
-                      type="button"
-                      class="btn btn-outline-success"
-                      @click="switchDate('yesterdayNight')"
-                    >
+                    <button type="button" class="btn btn-outline-success" @click="switchDate('yesterdayNight')">
                       Yesterday Night
                     </button>
-                    <button
-                      type="button"
-                      class="btn btn-outline-success"
-                      @click="switchDate('lastmonth')"
-                    >
+                    <button type="button" class="btn btn-outline-success" @click="switchDate('lastmonth')">
                       Last Month
                     </button>
-                    <button
-                      type="button"
-                      class="btn btn-outline-success"
-                      @click="switchDate('thismonth')"
-                    >
+                    <button type="button" class="btn btn-outline-success" @click="switchDate('thismonth')">
                       This Month
                     </button>
-                    <button
-                      type="button"
-                      class="btn btn-outline-success"
-                      @click="switchDate('lastWeek')"
-                    >
+                    <button type="button" class="btn btn-outline-success" @click="switchDate('lastWeek')">
                       Last Week
                     </button>
                   </div>
@@ -424,81 +247,33 @@
       <!-- FIlter prob & MC -->
       <div class="row p-0 m-0">
         <div class="col-6 p-0">
-          <div
-            class="btn-group btn-group-sm bordered"
-            role="group"
-            aria-label="..."
-          >
-            <button
-              type="button"
-              class="btn btn-primary"
-              @click="switchFilter('mc')"
-              v-if="isFilterMc"
-            >
+          <div class="btn-group btn-group-sm bordered" role="group" aria-label="...">
+            <button type="button" class="btn btn-primary" @click="switchFilter('mc')" v-if="isFilterMc">
               Machines
             </button>
-            <button
-              type="button"
-              class="btn btn-outline-primary"
-              @click="switchFilter('mc')"
-              v-else
-            >
+            <button type="button" class="btn btn-outline-primary" @click="switchFilter('mc')" v-else>
               Machines
             </button>
-            <button
-              type="button"
-              class="btn btn-outline-primary"
-              @click="switchFilter('prob')"
-              v-if="!isFilterProblem"
-            >
+            <button type="button" class="btn btn-outline-primary" @click="switchFilter('prob')" v-if="!isFilterProblem">
               Problems
             </button>
-            <button
-              type="button"
-              class="btn btn-primary"
-              @click="switchFilter('prob')"
-              v-else
-            >
+            <button type="button" class="btn btn-primary" @click="switchFilter('prob')" v-else>
               Problems
             </button>
           </div>
         </div>
         <div class="col-6 p-0">
-          <div
-            class="btn-group btn-group-sm bordered"
-            role="group"
-            aria-label="..."
-          >
-            <button
-              v-if="!isOrderFreq"
-              type="button"
-              class="btn btn-warning"
-              @click="isOrderFreq = false"
-            >
+          <div class="btn-group btn-group-sm bordered" role="group" aria-label="...">
+            <button v-if="!isOrderFreq" type="button" class="btn btn-warning" @click="isOrderFreq = false">
               Duration
             </button>
-            <button
-              v-else
-              type="button"
-              class="btn btn-outline-warning"
-              @click="isOrderFreq = false"
-            >
+            <button v-else type="button" class="btn btn-outline-warning" @click="isOrderFreq = false">
               Duration
             </button>
-            <button
-              v-if="!isOrderFreq"
-              type="button"
-              class="btn btn-outline-warning"
-              @click="isOrderFreq = true"
-            >
+            <button v-if="!isOrderFreq" type="button" class="btn btn-outline-warning" @click="isOrderFreq = true">
               Frequency
             </button>
-            <button
-              v-else
-              type="button"
-              class="btn btn-warning"
-              @click="isOrderFreq = true"
-            >
+            <button v-else type="button" class="btn btn-warning" @click="isOrderFreq = true">
               Frequency
             </button>
           </div>
@@ -507,11 +282,7 @@
       <div>
         <div class="row m-0">
           <div class="col-12 p-0">
-            <i
-              v-if="isLoading"
-              class="fa fa-refresh fa-spin"
-              style="font-size: 30px"
-            ></i>
+            <i v-if="isLoading" class="fa fa-refresh fa-spin" style="font-size: 30px"></i>
           </div>
         </div>
         <div class="row p-0 m-0 mt-1">
@@ -520,42 +291,24 @@
               <div class="card-header px-1 py-1 text-left" v-if="isMobile">
                 {{ line.fline }} Line
               </div>
-              <div
-                class="card-header px-1 py-1 text-left"
-                style="font-size: 20px"
-                v-else
-              >
+              <div class="card-header px-1 py-1 text-left" style="font-size: 20px" v-else>
                 {{ line.fline }} Line
               </div>
               <div class="card-body p-0">
-                <ChartPareto
-                  :problemData="line.data"
-                  :propsStartDate="selectedStartDateFetch"
-                  :propsEndDate="selectedEndDateFetch"
-                  :propsIsOrderFreq="isOrderFreq"
-                  :propsPanel="line.panel"
-                />
+                <ChartPareto :problemData="line.data" :propsStartDate="selectedStartDateFetch"
+                  :propsEndDate="selectedEndDateFetch" :propsIsOrderFreq="isOrderFreq" :propsPanel="line.panel" />
               </div>
             </div>
             <div class="card" v-else-if="selectedLine == line.fline">
               <div class="card-header px-1 py-1 text-left" v-if="isMobile">
                 {{ line.fline }} Line
               </div>
-              <div
-                class="card-header px-1 py-1 text-left"
-                style="font-size: 20px"
-                v-else
-              >
+              <div class="card-header px-1 py-1 text-left" style="font-size: 20px" v-else>
                 {{ line.fline }} Line
               </div>
               <div class="card-body p-0">
-                <ChartPareto
-                  :problemData="line.data"
-                  :propsStartDate="selectedStartDateFetch"
-                  :propsEndDate="selectedEndDateFetch"
-                  :propsIsOrderFreq="isOrderFreq"
-                  :propsPanel="line.panel"
-                />
+                <ChartPareto :problemData="line.data" :propsStartDate="selectedStartDateFetch"
+                  :propsEndDate="selectedEndDateFetch" :propsIsOrderFreq="isOrderFreq" :propsPanel="line.panel" />
               </div>
             </div>
           </div>
@@ -645,7 +398,7 @@ export default {
       }
     },
     formatDate(date) {
-      var d = new Date(date),
+      let d = new Date(date),
         month = "" + (d.getMonth() + 1),
         day = "" + d.getDate(),
         year = d.getFullYear();
@@ -890,12 +643,10 @@ export default {
       }
     },
     intervalTime() {
-      let dateConvert = `${moment().format("L").split("/")[1]}/${
-        moment().format("L").split("/")[0]
-      }/${moment().format("L").split("/")[2]}`;
-      this.timeNow = `${dateConvert} ${
-        moment().format("MMMM Do YYYY, h:mm:ss a").split(", ")[1]
-      }`;
+      let dateConvert = `${moment().format("L").split("/")[1]}/${moment().format("L").split("/")[0]
+        }/${moment().format("L").split("/")[2]}`;
+      this.timeNow = `${dateConvert} ${moment().format("MMMM Do YYYY, h:mm:ss a").split(", ")[1]
+        }`;
     },
     handleResize() {
       console.log(window.innerWidth);
@@ -929,12 +680,10 @@ export default {
       this.getRealtimePareto(this.$route.query.dateState);
     }
 
-    let dateConvert = `${moment().format("L").split("/")[1]}/${
-      moment().format("L").split("/")[0]
-    }/${moment().format("L").split("/")[2]}`;
-    this.timeNow = `${dateConvert} ${
-      moment().format("MMMM Do YYYY, h:mm:ss a").split(", ")[1]
-    }`;
+    let dateConvert = `${moment().format("L").split("/")[1]}/${moment().format("L").split("/")[0]
+      }/${moment().format("L").split("/")[2]}`;
+    this.timeNow = `${dateConvert} ${moment().format("MMMM Do YYYY, h:mm:ss a").split(", ")[1]
+      }`;
     let intervalStart = setInterval(this.intervalTime, 1000);
     console.log(intervalStart);
   },
@@ -953,15 +702,18 @@ export default {
   from {
     color: white;
   }
+
   to {
     color: black;
   }
 }
+
 #btn-search-toggle {
   animation-name: colorChanges;
   animation-duration: 1s;
   animation-iteration-count: infinite;
 }
+
 #content-search {
   transition: all 0.5s;
 }

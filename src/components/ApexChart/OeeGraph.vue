@@ -1,10 +1,5 @@
 <template>
-  <apexchart
-    type="line"
-    height="300"
-    :options="chartOptions"
-    :series="series"
-  ></apexchart>
+  <apexchart type="line" height="300" :options="chartOptions" :series="series"></apexchart>
 </template>
 
 <script>
@@ -27,13 +22,13 @@ export default {
   },
   methods: {
     generateDateThisMonth() {
-      var today = new Date();
+      let today = new Date();
       let lastDateIdx = new Date(
         today.getFullYear(),
         today.getMonth() + 1,
         0
       ).getDate();
-      var firstDayOfMonth =
+      let firstDayOfMonth =
         new Date(today.getFullYear(), today.getMonth(), 0).getTime() +
         24 * 60 * 60 * 1000;
 
@@ -110,9 +105,9 @@ export default {
               //
               console.log(config);
               let date =
-                  config.dataPointIndex + 1 < 10
-                    ? `0${config.dataPointIndex + 1}`
-                    : config.dataPointIndex + 1,
+                config.dataPointIndex + 1 < 10
+                  ? `0${config.dataPointIndex + 1}`
+                  : config.dataPointIndex + 1,
                 // endDate =
                 //   config.dataPointIndex + 2 < 10
                 //     ? `0${config.dataPointIndex + 2}`

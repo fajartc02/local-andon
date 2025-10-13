@@ -67,7 +67,7 @@
                           <td class="text-left pl-2">
                             <router-link :to="`/editProblem?v_=${item.fid}`">{{
                               isMobile ? item.fmc_name : item.ferror_name
-                            }}</router-link>
+                              }}</router-link>
                           </td>
                           <td v-if="!isMobile">
                             {{ item.fdur }}
@@ -419,12 +419,12 @@ export default {
       this.configWa(message, receiverNo);
     },
     configWa(msg, receiverNo) {
-      var data = qs.stringify({
+      let data = qs.stringify({
         token: process.env.VUE_APP_TKNWA,
         number: receiverNo,
         message: msg,
       });
-      var config = {
+      let config = {
         method: "post",
         url: "https://app.ruangwa.id/api/send_express",
         headers: {},

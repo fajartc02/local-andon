@@ -8,10 +8,7 @@
         }}</v-expansion-panel-header> -->
         <v-expansion-panel-content>
           <!-- MOBILE -->
-          <table
-            class="table table-striped table-dark table-responsive text-left"
-            v-if="isMobile"
-          >
+          <table class="table table-striped table-dark table-responsive text-left" v-if="isMobile">
             <thead class="title-text" style="font-size: 10px">
               <tr>
                 <th scope="col">No</th>
@@ -36,12 +33,7 @@
                 <td style="min-width: 50px">{{ problem.foperator }}</td>
                 <td style="min-width: 50px">{{ problem.fdur }}</td>
                 <td style="min-width: 70px">
-                  <v-btn
-                    class="btn-light"
-                    small
-                    color="primary"
-                    @click="exportPdf(problem.fid, problem.fdur)"
-                  >
+                  <v-btn class="btn-light" small color="primary" @click="exportPdf(problem.fid, problem.fdur)">
                     <i class="fa fa-book"></i> Report
                   </v-btn>
                 </td>
@@ -51,31 +43,14 @@
                   </v-btn>
                 </td>
                 <td style="min-width: 70px">
-                  <v-btn
-                    elevation="2"
-                    data-toggle="modal"
-                    :data-target="`#modal${problem.fid}`"
-                    small
-                    color="error"
-                    ><i class="fa fa-trash"></i> Delete</v-btn
-                  >
-                  <div
-                    class="modal fade"
-                    :id="`modal${problem.fid}`"
-                    tabindex="1"
-                    role="dialog"
-                    aria-hidden="true"
-                  >
+                  <v-btn elevation="2" data-toggle="modal" :data-target="`#modal${problem.fid}`" small color="error"><i
+                      class="fa fa-trash"></i> Delete</v-btn>
+                  <div class="modal fade" :id="`modal${problem.fid}`" tabindex="1" role="dialog" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                       <div class="modal-content">
                         <div class="modal-header">
                           <h5 class="modal-title text-dark">Delete Problem</h5>
-                          <button
-                            type="button"
-                            class="close"
-                            data-dismiss="modal"
-                            aria-label="Close"
-                          >
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                           </button>
                         </div>
@@ -83,24 +58,15 @@
                           <p>
                             apakah kamu yakin ingin menghapus problem
                             <b>{{ problem.ferror_name }}</b> ID:
-                            <b>{{ problem.fid }}</b
-                            >?
+                            <b>{{ problem.fid }}</b>?
                           </p>
                         </div>
                         <div class="modal-footer">
-                          <button
-                            type="button"
-                            class="btn btn-danger"
-                            data-dismiss="modal"
-                            @click="deleteProblem(problem.fid)"
-                          >
+                          <button type="button" class="btn btn-danger" data-dismiss="modal"
+                            @click="deleteProblem(problem.fid)">
                             Ya, hapus!
                           </button>
-                          <button
-                            type="button"
-                            class="btn btn-secondary"
-                            data-dismiss="modal"
-                          >
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">
                             Engga jadi deh
                           </button>
                         </div>
@@ -119,11 +85,7 @@
             <tbody v-else-if="isLoading">
               <tr>
                 <td colspan="10">
-                  <i
-                    v-if="isLoading"
-                    class="fa fa-refresh fa-spin"
-                    style="font-size: 30px"
-                  ></i>
+                  <i v-if="isLoading" class="fa fa-refresh fa-spin" style="font-size: 30px"></i>
                 </td>
               </tr>
             </tbody>
@@ -194,7 +156,7 @@ export default {
     labels: function () {
       this.fillData();
     },
-    dataDur: function () {},
+    dataDur: function () { },
     machineSelected: function () {
       this.getDetailsProblem(this.machineSelected);
     },
@@ -328,9 +290,8 @@ export default {
                 if (this.showDialog == false) {
                   this.showDialog = true;
                 }
-                return `${this.propsIsOrderFreq ? "Freq" : "Duration"}: ${
-                  tooltipItem.value
-                } ${this.propsIsOrderFreq ? "x" : "Min"}`;
+                return `${this.propsIsOrderFreq ? "Freq" : "Duration"}: ${tooltipItem.value
+                  } ${this.propsIsOrderFreq ? "x" : "Min"}`;
               },
             },
           },
@@ -487,7 +448,7 @@ export default {
       this.actionsGetProblemHistory(obj);
     },
     formatDate(date) {
-      var d = new Date(date),
+      let d = new Date(date),
         month = "" + (d.getMonth() + 1),
         day = "" + d.getDate(),
         year = d.getFullYear();
@@ -537,9 +498,11 @@ export default {
 .v-dialog .v-dialog--active {
   margin: 0px !important;
 }
+
 td {
   font-size: 10px;
 }
+
 .v-expansion-panel-content__wrap {
   padding: 0px !important;
 }

@@ -56,7 +56,7 @@ export default {
     labels: function () {
       this.fillData();
     },
-    dataDur: function () {},
+    dataDur: function () { },
     machineSelected: function () {
       this.getDetailsProblem(this.machineSelected);
     },
@@ -211,7 +211,7 @@ export default {
       };
     },
     formatDate(date) {
-      var d = new Date(date),
+      let d = new Date(date),
         month = "" + (d.getMonth() + 1),
         day = "" + d.getDate(),
         year = d.getFullYear();
@@ -245,9 +245,11 @@ export default {
 .v-dialog .v-dialog--active {
   margin: 0px !important;
 }
+
 td {
   font-size: 10px;
 }
+
 .v-expansion-panel-content__wrap {
   padding: 0px !important;
 }

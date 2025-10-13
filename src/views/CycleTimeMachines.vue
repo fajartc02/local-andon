@@ -9,46 +9,24 @@
               <div class="col-6 p-0">
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1"
-                      >Start</span
-                    >
+                    <span class="input-group-text" id="basic-addon1">Start</span>
                   </div>
-                  <input
-                    type="date"
-                    v-model="selectedStartDate"
-                    class="form-control"
-                    placeholder="Start Date"
-                  />
+                  <input type="date" v-model="selectedStartDate" class="form-control" placeholder="Start Date" />
                 </div>
               </div>
               <div class="col-6 p-0 pl-1">
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1"
-                      >Finish</span
-                    >
+                    <span class="input-group-text" id="basic-addon1">Finish</span>
                   </div>
-                  <input
-                    type="date"
-                    class="form-control"
-                    v-model="selectedEndDate"
-                    placeholder="End Date"
-                  />
+                  <input type="date" class="form-control" v-model="selectedEndDate" placeholder="End Date" />
                 </div>
               </div>
             </div>
             <div class="row m-0">
               <div class="col-12 p-0 pr-1">
-                <v-select
-                  v-model="selectedMachines"
-                  :items="optionsMcs"
-                  label="Select Machine"
-                  multiple
-                >
-                  <template
-                    v-slot:selection="{ item, index }"
-                    style="font-size: 0.6rem !important"
-                  >
+                <v-select v-model="selectedMachines" :items="optionsMcs" label="Select Machine" multiple>
+                  <template v-slot:selection="{ item, index }" style="font-size: 0.6rem !important">
                     <v-chip v-if="index === 0">
                       <span>{{ item.value }}</span>
                     </v-chip>
@@ -61,11 +39,7 @@
             </div>
             <div class="row m-0">
               <div class="col-12 d-flex justify-content-end p-0">
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  @click="searchCtMachine()"
-                >
+                <button type="button" class="btn btn-primary" @click="searchCtMachine()">
                   <b class="text-light">Search<i class="fa fa-search"></i></b>
                 </button>
               </div>
@@ -98,12 +72,7 @@
       <div v-for="(data, i) in chartData" :key="i" class="col-12 p-0">
       </div>
     </div> -->
-    <v-dialog
-      v-if="detailCtData.length > 0"
-      persistent
-      v-model="dialog"
-      width="500"
-    >
+    <v-dialog v-if="detailCtData.length > 0" persistent v-model="dialog" width="500">
       <template v-slot:activator="{ on, attrs }">
         <v-btn color="red lighten-2" dark v-bind="attrs" v-on="on">
           {{ detailCtData[0].fMachine }}
@@ -142,11 +111,7 @@
         <v-card color="warning" dark>
           <v-card-text>
             Please stand by
-            <v-progress-linear
-              indeterminate
-              color="white"
-              class="mb-0"
-            ></v-progress-linear>
+            <v-progress-linear indeterminate color="white" class="mb-0"></v-progress-linear>
           </v-card-text>
         </v-card>
       </v-dialog>
@@ -225,13 +190,12 @@ export default {
       this.isLoading = true;
       this.chartData = [];
       axios(
-        `${process.env.VUE_APP_HOST}/ctMachines?startDate=${
-          this.selectedStartDate
+        `${process.env.VUE_APP_HOST}/ctMachines?startDate=${this.selectedStartDate
         }&endDate=${this.selectedEndDate}&searchMc=${arrMc.join(",")}`
       )
         .then((result) => {
           if (result.data.data.length > 0) {
-            var groupBy = function (xs, key) {
+            let groupBy = function (xs, key) {
               return xs.reduce(function (rv, x) {
                 (rv[x[key]] = rv[x[key]] || []).push(x);
                 return rv;
@@ -273,7 +237,7 @@ export default {
         });
     },
     formatDate(date) {
-      var d = new Date(date),
+      let d = new Date(date),
         month = "" + (d.getMonth() + 1),
         day = "" + d.getDate(),
         year = d.getFullYear();

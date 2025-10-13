@@ -134,11 +134,9 @@
           <tr>
             <td style="background-color: #c8ffdb">Preventive</td>
             <td class="text-left pl-3">
-              <b
-                >1.SE Activity, 2.Critical Machine C/M, 3.Yokoten,
+              <b>1.SE Activity, 2.Critical Machine C/M, 3.Yokoten,
                 4.Improvement, 5.C/M Potencial Breakdown, 6.Trainer OM,
-                7.Investigasi Problem</b
-              >
+                7.Investigasi Problem</b>
             </td>
           </tr>
           <tr>
@@ -282,7 +280,7 @@ export default {
       await this.processYamaWhite();
     },
     initArrayZero(length, value) {
-      var arr = [],
+      let arr = [],
         i = 0;
       arr.length = length;
       while (i < length) {

@@ -16,12 +16,8 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text">Date Time</span>
                   </div>
-                  <input
-                    type="datetime-local"
-                    v-model="fdate"
-                    class="form-control"
-                    aria-label="Amount (to the nearest dollar)"
-                  />
+                  <input type="datetime-local" v-model="fdate" class="form-control"
+                    aria-label="Amount (to the nearest dollar)" />
                 </div>
               </div>
               <div class="col p-0">
@@ -29,11 +25,7 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text">Waktu</span>
                   </div>
-                  <select
-                    class="form-control text-dark"
-                    v-model="isDay"
-                    disabled
-                  >
+                  <select class="form-control text-dark" v-model="isDay" disabled>
                     <option value="true">Siang</option>
                     <option value="false">Malam</option>
                   </select>
@@ -46,12 +38,8 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text">Machine</span>
                   </div>
-                  <model-select
-                    :options="machines"
-                    v-model="machineSelected"
-                    placeholder="select machine"
-                    style="width: 75%"
-                  >
+                  <model-select :options="machines" v-model="machineSelected" placeholder="select machine"
+                    style="width: 75%">
                   </model-select>
                 </div>
               </div>
@@ -60,13 +48,7 @@
                   <!-- <div class="input-group-prepend">
                     <span class="input-group-text">Line</span>
                   </div> -->
-                  <input
-                    type="text"
-                    id="line"
-                    v-model="selectedLine"
-                    class="form-control pl-2"
-                    disabled
-                  />
+                  <input type="text" id="line" v-model="selectedLine" class="form-control pl-2" disabled />
                 </div>
               </div>
             </div>
@@ -76,13 +58,8 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text">Operator</span>
                   </div>
-                  <input
-                    type="text"
-                    id="operator"
-                    v-model="operator"
-                    class="form-control"
-                    aria-label="Amount (to the nearest dollar)"
-                  />
+                  <input type="text" id="operator" v-model="operator" class="form-control"
+                    aria-label="Amount (to the nearest dollar)" />
                 </div>
               </div>
               <div class="col p-0">
@@ -104,13 +81,7 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text">Defect</span>
                   </div>
-                  <input
-                    type="text"
-                    id="problem"
-                    v-model="problem"
-                    class="form-control"
-                    autocomplete="on"
-                  />
+                  <input type="text" id="problem" v-model="problem" class="form-control" autocomplete="on" />
                 </div>
               </div>
             </div>
@@ -120,12 +91,7 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text">Total Defect</span>
                   </div>
-                  <input
-                    type="number"
-                    min="1"
-                    v-model="totalDefect"
-                    class="form-control"
-                  />
+                  <input type="number" min="1" v-model="totalDefect" class="form-control" />
                 </div>
               </div>
               <div class="col p-0">
@@ -133,12 +99,7 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text">Work No.</span>
                   </div>
-                  <input
-                    type="text"
-                    v-model="work_no"
-                    class="form-control"
-                    style="text-transform: uppercase"
-                  />
+                  <input type="text" v-model="work_no" class="form-control" style="text-transform: uppercase" />
                 </div>
               </div>
             </div>
@@ -148,23 +109,14 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text">Ilustration</span>
                   </div>
-                  <form
-                    method="post"
-                    @submit.prevent="
-                      onSubmitUpload(
-                        `${urlUpload}?folder=quality&nameFile=${fileName}`
-                      )
-                    "
-                  >
+                  <form method="post" @submit.prevent="
+                    onSubmitUpload(
+                      `${urlUpload}?folder=quality&nameFile=${fileName}`
+                    )
+                    ">
                     <div class="row m-0 p-0">
                       <div class="col-10 p-0">
-                        <input
-                          class="form-control"
-                          name="sampleFile"
-                          ref="file"
-                          type="file"
-                          @change="onSelect"
-                        />
+                        <input class="form-control" name="sampleFile" ref="file" type="file" @change="onSelect" />
                       </div>
                       <div class="col-2 p-0">
                         <button class="btn btn-secondary btn-sm" type="submit">
@@ -178,13 +130,7 @@
             </div>
             <div class="row p-0 m-0">
               <div class="col p-0">
-                <img
-                  v-if="displayImg"
-                  :src="displayImg"
-                  :alt="displayImg"
-                  height="100%"
-                  width="100%"
-                />
+                <img v-if="displayImg" :src="displayImg" :alt="displayImg" height="100%" width="100%" />
               </div>
             </div>
           </div>
@@ -194,12 +140,7 @@
           <button type="button" @click="problemInput()" class="btn btn-success">
             Submit
           </button>
-          <button
-            type="button"
-            class="btn btn-secondary"
-            data-dismiss="modal"
-            @click="dialog = false"
-          >
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="dialog = false">
             Close
           </button>
         </v-card-actions>
@@ -253,7 +194,7 @@ export default {
       this.isLoading = true;
       const formData = new FormData();
       formData.append("file", this.selectedFile);
-      for (var key of formData.entries()) {
+      for (let key of formData.entries()) {
         console.log(key[1]);
       }
       await axios

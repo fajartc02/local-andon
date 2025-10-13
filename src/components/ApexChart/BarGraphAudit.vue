@@ -1,11 +1,6 @@
 <template>
   <div id="chart">
-    <apexchart
-      type="bar"
-      height="700"
-      :options="chartOptions"
-      :series="series"
-    ></apexchart>
+    <apexchart type="bar" height="700" :options="chartOptions" :series="series"></apexchart>
     <v-dialog v-model="isShowDialog" persistent>
       <v-toolbar dark color="primary">
         <v-btn icon dark @click="closeModal()">
@@ -56,11 +51,7 @@
       <v-card color="primary" dark>
         <v-card-text>
           Loading...
-          <v-progress-linear
-            indeterminate
-            color="white"
-            class="mb-0"
-          ></v-progress-linear>
+          <v-progress-linear indeterminate color="white" class="mb-0"></v-progress-linear>
         </v-card-text>
       </v-card>
     </v-dialog>
@@ -127,17 +118,15 @@ export default {
           events: {
             dataPointSelection: (event, chartContext, config) => {
               console.log(event, chartContext, config);
-              
+
               this.isLoading = true;
               let labelSelected = this.series[config.seriesIndex].name;
               console.log(labelSelected);
               console.log(config.seriesIndex);
               axios
                 .get(
-                  `${
-                    process.env.VUE_APP_HOST
-                  }/getJobData?filterQuery=WHERE~(fgroup~=~'${labelSelected}'~OR~fjob_type~=~'${labelSelected}')~AND~fend_time~IS~NOT~NULL~AND~MONTH(fstart_time)~=~${
-                    config.dataPointIndex - 2
+                  `${process.env.VUE_APP_HOST
+                  }/getJobData?filterQuery=WHERE~(fgroup~=~'${labelSelected}'~OR~fjob_type~=~'${labelSelected}')~AND~fend_time~IS~NOT~NULL~AND~MONTH(fstart_time)~=~${config.dataPointIndex - 2
                   }`
                 )
                 .then((result) => {
@@ -162,9 +151,9 @@ export default {
                   });
                   function shuffleArray(array) {
                     let container = [];
-                    for (var i = array.length - 1; i > 0; i--) {
-                      var j = Math.floor(Math.random() * (i + 1));
-                      var temp = array[i];
+                    for (let i = array.length - 1; i > 0; i--) {
+                      let j = Math.floor(Math.random() * (i + 1));
+                      let temp = array[i];
                       array[i] = array[j];
                       array[j] = temp;
                       container.push(temp);
@@ -223,9 +212,8 @@ export default {
               console.log(ctx);
               let arr = STATE_JOB.thn22.arrMh;
               console.log(arr[ctx.seriesIndex][ctx.dataPointIndex]);
-              return `${value}% (${
-                arr[ctx.seriesIndex][ctx.dataPointIndex]
-              } MH)`;
+              return `${value}% (${arr[ctx.seriesIndex][ctx.dataPointIndex]
+                } MH)`;
             },
             // title: {
             //   formatter: function (
@@ -353,6 +341,6 @@ export default {
       this.isShowDialog = false;
     },
   },
-  mounted() {},
+  mounted() { },
 };
 </script>

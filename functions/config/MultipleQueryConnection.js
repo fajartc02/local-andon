@@ -1,6 +1,6 @@
 const mysql = require('mysql2')
 
-var pool = mysql.createPool({
+let pool = mysql.createPool({
     // connectionLimit: 100, // default = 10
     host: process.env.HOST_DB_NEW,
     user: process.env.USER_DB_NEW,
@@ -15,11 +15,11 @@ var pool = mysql.createPool({
 
 function cmdMultipleQuery(sql) {
     return new Promise((resolve, reject) => {
-        pool.getConnection(function(err, connection) {
+        pool.getConnection(function (err, connection) {
             if (err) {
                 reject(err);
             }
-            connection.query(sql, function(err, result) {
+            connection.query(sql, function (err, result) {
                 if (err) {
                     console.log(err);
                     reject(err);

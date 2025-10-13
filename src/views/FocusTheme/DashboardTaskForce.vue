@@ -11,31 +11,17 @@
               <div class="col-6 p-0">
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1"
-                      >Start</span
-                    >
+                    <span class="input-group-text" id="basic-addon1">Start</span>
                   </div>
-                  <input
-                    type="date"
-                    v-model="selectedStartDate"
-                    class="form-control"
-                    placeholder="Start Date"
-                  />
+                  <input type="date" v-model="selectedStartDate" class="form-control" placeholder="Start Date" />
                 </div>
               </div>
               <div class="col-6 p-0 pl-1">
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1"
-                      >Finish</span
-                    >
+                    <span class="input-group-text" id="basic-addon1">Finish</span>
                   </div>
-                  <input
-                    type="date"
-                    class="form-control"
-                    v-model="selectedEndDate"
-                    placeholder="End Date"
-                  />
+                  <input type="date" class="form-control" v-model="selectedEndDate" placeholder="End Date" />
                 </div>
               </div>
             </div>
@@ -57,10 +43,7 @@
                 </div>
               </div> -->
               <div class="col-12 p-0">
-                <button
-                  class="btn btn-primary p-0 px-3 title-text w-100"
-                  @click="searchPareto()"
-                >
+                <button class="btn btn-primary p-0 px-3 title-text w-100" @click="searchPareto()">
                   Search <i class="fa fa-search"></i>
                 </button>
               </div>
@@ -174,22 +157,12 @@
       </div>
     </div>
     <div class="row m-0 p-0" v-if="containerParetoData.length == 7">
-      <div
-        v-for="(data, i) in containerParetoData"
-        :key="i"
-        class="col-md-12 col-xs-12 p-0 mt-2 pl-1"
-      >
+      <div v-for="(data, i) in containerParetoData" :key="i" class="col-md-12 col-xs-12 p-0 mt-2 pl-1">
         <div class="card">
           <div class="card-header p-0 m-0">{{ lineLabel[i] }}</div>
           <!-- {{ data }} -->
-          <BarGraphPareto
-            :propsData="data"
-            v-if="data.length > 0"
-            :propsLine="lineLabel[i]"
-            :propsStartDate="selectedStartDate"
-            :propsEndDate="selectedEndDate"
-            :propsIsOrderFreq="isOrderFreq"
-          />
+          <BarGraphPareto :propsData="data" v-if="data.length > 0" :propsLine="lineLabel[i]"
+            :propsStartDate="selectedStartDate" :propsEndDate="selectedEndDate" :propsIsOrderFreq="isOrderFreq" />
           <div v-else>Tidak Ada Problem</div>
         </div>
         <!-- <div class="card" v-else>
@@ -225,10 +198,7 @@
                   <td>{{ item.fmc_name }}</td>
                   <td>{{ item.ferror_name }}</td>
                   <td>
-                    <router-link
-                      :to="`/editProblem?v_=${item.fid}`"
-                      class="btn btn-sm btn-primary text-light"
-                    >
+                    <router-link :to="`/editProblem?v_=${item.fid}`" class="btn btn-sm btn-primary text-light">
                       <i class="fa fa-eye"></i>
                     </router-link>
                   </td>
@@ -237,13 +207,7 @@
             </tbody>
           </table>
         </v-card-body>
-        <b-button
-          class="mx-2 mt-3"
-          size="sm"
-          variant="danger"
-          @click="modalShow = false"
-          >Close</b-button
-        >
+        <b-button class="mx-2 mt-3" size="sm" variant="danger" @click="modalShow = false">Close</b-button>
       </v-card>
     </v-dialog>
   </div>
@@ -379,7 +343,7 @@ export default {
       this.graphCountCm();
     },
     formatDate(date) {
-      var d = new Date(date),
+      let d = new Date(date),
         month = "" + (d.getMonth() + 1),
         day = "" + d.getDate(),
         year = d.getFullYear();

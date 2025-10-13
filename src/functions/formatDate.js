@@ -1,6 +1,6 @@
 const formatDate = {
     YYYYMMDD: (date) => {
-        var d = new Date(date),
+        let d = new Date(date),
             month = "" + (d.getMonth() + 1),
             day = "" + d.getDate(),
             year = d.getFullYear();
@@ -27,7 +27,7 @@ const formatDate = {
         return monday
     },
     YYYYMMDD_HHMM: (date) => {
-        var d = new Date(date),
+        let d = new Date(date),
             month = "" + (d.getMonth() + 1),
             day = "" + d.getDate(),
             year = d.getFullYear();
@@ -45,7 +45,7 @@ const formatDate = {
         return `${[year, month, day].join("-")} ${hhmm}`;
     },
     YYYYMMDD_HHMMSS: (date) => {
-        var d = new Date(date),
+        let d = new Date(date),
             month = "" + (d.getMonth() + 1),
             day = "" + d.getDate(),
             year = d.getFullYear();
@@ -63,7 +63,7 @@ const formatDate = {
         return `${[year, month, day].join("-")} ${hhmm}`;
     },
     DDMMYY: (date) => {
-        var d = new Date(date),
+        let d = new Date(date),
             month = "" + (d.getMonth() + 1),
             day = "" + d.getDate(),
             year = d.getFullYear();
@@ -81,7 +81,7 @@ const formatDate = {
         return `${[day, month, `${year}`.slice(2, 4)].join("-")}`;
     },
     YYYYMM: (date) => {
-        var d = new Date(date),
+        let d = new Date(date),
             month = "" + (d.getMonth() + 1),
             day = "" + d.getDate(),
             year = d.getFullYear();

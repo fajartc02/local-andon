@@ -1,5 +1,5 @@
-var express = require('express');
-var router = express.Router();
+let express = require('express');
+let router = express.Router();
 const {
     getColorDash,
     getLines,
@@ -76,7 +76,7 @@ const {
 
 // SUMMARY
 router.get('/delayProblemCm', getSummaryWeekly)
-    // CYCLE TIME MACHINE
+// CYCLE TIME MACHINE
 router.get('/ctMachines', getAllCtMachines)
 router.get('/ctMachinesDashboard', getCtMcDashboard)
 router.get('/ctOneMachine', getOneCtMachine)

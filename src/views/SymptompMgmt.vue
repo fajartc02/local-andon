@@ -8,19 +8,10 @@
           <div class="col-lg-2 card bg-light h-100">
             <span class="text-left">Select Machine:</span>
             <span class="text-left">{{ selectedMachines.text }}</span>
-            <model-select
-              :options="optionsMcs"
-              v-model="selectedMachines"
-              placeholder="select machine"
-            >
+            <model-select :options="optionsMcs" v-model="selectedMachines" placeholder="select machine">
             </model-select>
-            <b-form-checkbox
-              v-for="(param, i) in paramListCasting"
-              :key="i"
-              class="text-left"
-              :style="`${i == 0 ? 'margin-top: 50px' : ''}`"
-              v-model="param.selected"
-            >
+            <b-form-checkbox v-for="(param, i) in paramListCasting" :key="i" class="text-left"
+              :style="`${i == 0 ? 'margin-top: 50px' : ''}`" v-model="param.selected">
               {{ param.ftemp_name }}
             </b-form-checkbox>
           </div>
@@ -29,14 +20,8 @@
             <h3 class="text-left title">Parameter Graph</h3>
 
             <div class="row m-0 p-0">
-              <div
-                class="col-12 d-flex justify-content-center"
-                style="z-index: 1"
-              >
-                <div
-                  id="content-search"
-                  class="card disable-active-card shadow w-100"
-                >
+              <div class="col-12 d-flex justify-content-center" style="z-index: 1">
+                <div id="content-search" class="card disable-active-card shadow w-100">
                   <div class="card-header title-text p-0 px-2 text-left">
                     Search
                   </div>
@@ -45,31 +30,18 @@
                       <div class="col-6 p-0">
                         <div class="input-group mb-3">
                           <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1"
-                              >Start</span
-                            >
+                            <span class="input-group-text" id="basic-addon1">Start</span>
                           </div>
-                          <input
-                            type="date"
-                            v-model="selectedStartDate"
-                            class="form-control"
-                            placeholder="Start Date"
-                          />
+                          <input type="date" v-model="selectedStartDate" class="form-control"
+                            placeholder="Start Date" />
                         </div>
                       </div>
                       <div class="col-6 p-0 pl-1">
                         <div class="input-group mb-3">
                           <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1"
-                              >Finish</span
-                            >
+                            <span class="input-group-text" id="basic-addon1">Finish</span>
                           </div>
-                          <input
-                            type="date"
-                            class="form-control"
-                            v-model="selectedEndDate"
-                            placeholder="End Date"
-                          />
+                          <input type="date" class="form-control" v-model="selectedEndDate" placeholder="End Date" />
                         </div>
                       </div>
                     </div>
@@ -100,18 +72,10 @@
                           <div class="col-12 text-left">
                             <div class="input-group mb-3">
                               <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1"
-                                  >Setting LL (Pressure CH)</span
-                                >
+                                <span class="input-group-text" id="basic-addon1">Setting LL (Pressure CH)</span>
                               </div>
-                              <input
-                                type="number"
-                                v-model="lowerSetPressCh"
-                                class="form-control"
-                                placeholder="Username"
-                                aria-label="Username"
-                                aria-describedby="basic-addon1"
-                              />
+                              <input type="number" v-model="lowerSetPressCh" class="form-control" placeholder="Username"
+                                aria-label="Username" aria-describedby="basic-addon1" />
                             </div>
                           </div>
                         </div>
@@ -122,19 +86,10 @@
 
                     <v-card-actions>
                       <v-spacer></v-spacer>
-                      <button
-                        type="button"
-                        @click="submitSetting()"
-                        class="btn btn-success"
-                      >
+                      <button type="button" @click="submitSetting()" class="btn btn-success">
                         Submit
                       </button>
-                      <button
-                        type="button"
-                        class="btn btn-secondary"
-                        data-dismiss="modal"
-                        @click="clearSubmit()"
-                      >
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="clearSubmit()">
                         Close
                       </button>
                     </v-card-actions>
@@ -148,23 +103,14 @@
               </div>
             </div>
             <div class="row m-0 mt-2">
-              <div
-                v-for="(data, i) in chartData"
-                :key="i"
-                class="col-12 col-md-6 col-xl-6 p-0"
-              >
+              <div v-for="(data, i) in chartData" :key="i" class="col-12 col-md-6 col-xl-6 p-0">
                 <div class="card mt-2 disable-active-card">
                   <apexChartParameter :propsChartData="data" />
                   <!-- <ChartParameter :propsChartData="data" /> -->
                 </div>
               </div>
             </div>
-            <v-dialog
-              class="bg-danger"
-              v-model="showAlarmDialog"
-              persistent
-              width="500"
-            >
+            <v-dialog class="bg-danger" v-model="showAlarmDialog" persistent width="500">
               <v-card>
                 <v-card-title class="headline yellow lighten-2">
                   Warning
@@ -175,11 +121,7 @@
                 <v-divider></v-divider>
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <button
-                    type="button"
-                    @click="showAlarmDialog = false"
-                    class="btn btn-success"
-                  >
+                  <button type="button" @click="showAlarmDialog = false" class="btn btn-success">
                     OK
                   </button>
                 </v-card-actions>
@@ -197,20 +139,10 @@
         <div class="row justify-content-between">
           <div class="col-lg-2 card bg-light">
             <span class="text-left">Select Machine:</span>
-            <b-form-select
-              v-model="selectedMachinesFanuc"
-              :options="optionsMcsFanuc"
-            ></b-form-select>
+            <b-form-select v-model="selectedMachinesFanuc" :options="optionsMcsFanuc"></b-form-select>
             <!-- <b-form-input v-model="findParameter" placeholder="Find Parameter"></b-form-input> -->
-            <b-form-checkbox
-              v-for="(param, i) in paramListMachining"
-              :key="i"
-              class="text-left"
-              :style="`${
-                i == 0 ? 'margin-top: 50px' : ''
-              };width: 20px!important`"
-              v-model="param.selected"
-            >
+            <b-form-checkbox v-for="(param, i) in paramListMachining" :key="i" class="text-left" :style="`${i == 0 ? 'margin-top: 50px' : ''
+              };width: 20px!important`" v-model="param.selected">
               {{ param.ftemp_name }}
             </b-form-checkbox>
           </div>
@@ -219,14 +151,8 @@
             <h3 class="text-left title">Parameter Graph</h3>
 
             <div class="row m-0 p-0">
-              <div
-                class="col-12 d-flex justify-content-center"
-                style="z-index: 1"
-              >
-                <div
-                  id="content-search"
-                  class="card disable-active-card shadow w-100"
-                >
+              <div class="col-12 d-flex justify-content-center" style="z-index: 1">
+                <div id="content-search" class="card disable-active-card shadow w-100">
                   <div class="card-header title-text p-0 px-2 text-left">
                     Search
                   </div>
@@ -235,31 +161,18 @@
                       <div class="col-6 p-0">
                         <div class="input-group mb-3">
                           <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1"
-                              >Start</span
-                            >
+                            <span class="input-group-text" id="basic-addon1">Start</span>
                           </div>
-                          <input
-                            type="date"
-                            v-model="selectedStartDate"
-                            class="form-control"
-                            placeholder="Start Date"
-                          />
+                          <input type="date" v-model="selectedStartDate" class="form-control"
+                            placeholder="Start Date" />
                         </div>
                       </div>
                       <div class="col-6 p-0 pl-1">
                         <div class="input-group mb-3">
                           <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1"
-                              >Finish</span
-                            >
+                            <span class="input-group-text" id="basic-addon1">Finish</span>
                           </div>
-                          <input
-                            type="date"
-                            class="form-control"
-                            v-model="selectedEndDate"
-                            placeholder="End Date"
-                          />
+                          <input type="date" class="form-control" v-model="selectedEndDate" placeholder="End Date" />
                         </div>
                       </div>
                     </div>
@@ -290,18 +203,10 @@
                           <div class="col-12 text-left">
                             <div class="input-group mb-3">
                               <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1"
-                                  >Setting LL (Pressure CH)</span
-                                >
+                                <span class="input-group-text" id="basic-addon1">Setting LL (Pressure CH)</span>
                               </div>
-                              <input
-                                type="number"
-                                v-model="lowerSetPressCh"
-                                class="form-control"
-                                placeholder="Username"
-                                aria-label="Username"
-                                aria-describedby="basic-addon1"
-                              />
+                              <input type="number" v-model="lowerSetPressCh" class="form-control" placeholder="Username"
+                                aria-label="Username" aria-describedby="basic-addon1" />
                             </div>
                           </div>
                         </div>
@@ -312,19 +217,10 @@
 
                     <v-card-actions>
                       <v-spacer></v-spacer>
-                      <button
-                        type="button"
-                        @click="submitSetting()"
-                        class="btn btn-success"
-                      >
+                      <button type="button" @click="submitSetting()" class="btn btn-success">
                         Submit
                       </button>
-                      <button
-                        type="button"
-                        class="btn btn-secondary"
-                        data-dismiss="modal"
-                        @click="clearSubmit()"
-                      >
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="clearSubmit()">
                         Close
                       </button>
                     </v-card-actions>
@@ -338,11 +234,7 @@
               </div>
             </div>
             <div class="row m-0 mt-2" v-if="chartDataFanuc.length > 0">
-              <div
-                v-for="(data, i) in chartDataFanuc"
-                :key="i"
-                class="col-12 p-0"
-              >
+              <div v-for="(data, i) in chartDataFanuc" :key="i" class="col-12 p-0">
                 <div class="card mt-2 disable-active-card">
                   <apexChartParameterFanuc :propsChartData="data" />
                 </div>
@@ -353,12 +245,7 @@
                 <h1>Please Select One or More Parameters</h1>
               </div>
             </div>
-            <v-dialog
-              class="bg-danger"
-              v-model="showAlarmDialog"
-              persistent
-              width="500"
-            >
+            <v-dialog class="bg-danger" v-model="showAlarmDialog" persistent width="500">
               <v-card>
                 <v-card-title class="headline yellow lighten-2">
                   Warning
@@ -369,11 +256,7 @@
                 <v-divider></v-divider>
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <button
-                    type="button"
-                    @click="showAlarmDialog = false"
-                    class="btn btn-success"
-                  >
+                  <button type="button" @click="showAlarmDialog = false" class="btn btn-success">
                     OK
                   </button>
                 </v-card-actions>
@@ -511,12 +394,12 @@ export default {
     submitSetting() {
       this.searchParams();
     },
-    showSearch() {},
+    showSearch() { },
     sendNotif(noReceiver, messsage) {
-      // var axios = require("axios");
-      // var FormData = require("form-data");
+      // let axios = require("axios");
+      // let FormData = require("form-data");
 
-      var data = new FormData();
+      let data = new FormData();
       data.append(
         "token",
         "BfsLoRiDyDU4MJfzCZEZDNbubWob7OIjvo2un9TDwCbF4Lt5OP"
@@ -524,7 +407,7 @@ export default {
       data.append("phone", noReceiver);
       data.append("message", messsage);
 
-      var config = {
+      let config = {
         method: "post",
         url: "https://ruangwa.com/v2/api/send-message.php",
         // headers: {
@@ -542,7 +425,7 @@ export default {
         });
     },
     formatDate(date) {
-      var d = new Date(date),
+      let d = new Date(date),
         month = "" + (d.getMonth() + 1),
         day = "" + d.getDate(),
         year = d.getFullYear();
@@ -695,7 +578,7 @@ export default {
       let containerQuery = "";
       let arrQuery = [];
       for (let i = 0; i < mc.length; i++) {
-        var machine = mc[i];
+        let machine = mc[i];
         for (let j = 0; j < param.length; j++) {
           // AND DATE(fupdate) >= DATE('${this.selectedEndDate}') AND DATE(fupdate) <= DATE('${this.selectedEndDate}')
           containerQuery += `SELECT fvalue_01 AS fval, fmc_name, fupdate, ftemp_name, WUL, WLL, fdiv, funit FROM tb_temperature_log where fmc_name = '${machine}'`;
@@ -708,8 +591,7 @@ export default {
       }
       axios
         .get(
-          `${
-            process.env.VUE_APP_HOST
+          `${process.env.VUE_APP_HOST
           }/temperature?containerQuery=${arrQuery.join(";")}`
         )
         .then((result) => {
@@ -777,7 +659,7 @@ export default {
         let arrQuery = [];
         this.chartData = [];
         // for (let i = 0; i < this.selectedMachines.length; i++) {
-        var machine = this.selectedMachines;
+        let machine = this.selectedMachines;
         for (let j = 0; j < this.selectedParameters.length; j++) {
           containerQuery += `SELECT fvalue_01 AS fval, fmc_name, fupdate, ftemp_name, WUL, WLL, fdiv, funit FROM tb_temperature_log where fmc_name = '${machine.value}' AND DATE(fupdate) >= DATE('${this.selectedStartDate}') AND DATE(fupdate) <= DATE('${this.selectedEndDate}')`;
           let subQUery = ` AND ftemp_name = '${this.selectedParameters[j]}' ORDER BY fupdate DESC LIMIT 100`;
@@ -882,14 +764,12 @@ export default {
       if (this.selectedParametersFanuc.length > 0) {
         axios
           .get(
-            `http://192.168.1.41:4000/fanuc/data?mc=${
-              [this.selectedMachinesFanuc].length > 1
-                ? [this.selectedMachinesFanuc].join(",")
-                : [this.selectedMachinesFanuc][0]
-            }&param=${
-              this.selectedParametersFanuc.length > 1
-                ? this.selectedParametersFanuc.join(",")
-                : this.selectedParametersFanuc[0]
+            `http://192.168.1.41:4000/fanuc/data?mc=${[this.selectedMachinesFanuc].length > 1
+              ? [this.selectedMachinesFanuc].join(",")
+              : [this.selectedMachinesFanuc][0]
+            }&param=${this.selectedParametersFanuc.length > 1
+              ? this.selectedParametersFanuc.join(",")
+              : this.selectedParametersFanuc[0]
             }&start=${this.selectedStartDate}&end=${this.selectedEndDate}`
           )
           .then((result) => {
@@ -970,17 +850,15 @@ export default {
     },
     getMonday(d) {
       d = new Date(d);
-      var day = d.getDay(),
+      let day = d.getDay(),
         diff = d.getDate() - day + (day == 0 ? -6 : 1); // adjust when day is sunday
       return new Date(d.setDate(diff));
     },
     intervalTime() {
-      let dateConvert = `${moment().format("L").split("/")[1]}/${
-        moment().format("L").split("/")[0]
-      }/${moment().format("L").split("/")[2]}`;
-      this.timeNow = `${dateConvert} ${
-        moment().format("MMMM Do YYYY, h:mm:ss a").split(", ")[1]
-      }`;
+      let dateConvert = `${moment().format("L").split("/")[1]}/${moment().format("L").split("/")[0]
+        }/${moment().format("L").split("/")[2]}`;
+      this.timeNow = `${dateConvert} ${moment().format("MMMM Do YYYY, h:mm:ss a").split(", ")[1]
+        }`;
     },
   },
   components: {
@@ -1002,12 +880,10 @@ export default {
     await this.getParamName();
     // await this.getParams();
     // await this.getDistinctParams();
-    let dateConvert = `${moment().format("L").split("/")[1]}/${
-      moment().format("L").split("/")[0]
-    }/${moment().format("L").split("/")[2]}`;
-    this.timeNow = `${dateConvert} ${
-      moment().format("MMMM Do YYYY, h:mm:ss a").split(", ")[1]
-    }`;
+    let dateConvert = `${moment().format("L").split("/")[1]}/${moment().format("L").split("/")[0]
+      }/${moment().format("L").split("/")[2]}`;
+    this.timeNow = `${dateConvert} ${moment().format("MMMM Do YYYY, h:mm:ss a").split(", ")[1]
+      }`;
     let intervalStart = setInterval(this.intervalTime, 100);
     console.log(intervalStart);
   },
@@ -1023,10 +899,12 @@ span {
 .v-select__selections {
   font-size: 0.8rem;
 }
+
 .v-text-field {
   padding: 0px;
   margin: 0px;
 }
+
 .disable-active-card:active {
   background-color: transparent !important;
 }

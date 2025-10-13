@@ -36,11 +36,7 @@
     <div class="row d-flex align-items-center mt-1">
       <div class="col-md-2 col-xs-6">Select Machine</div>
       <div class="col-md-9 col-xs-12">
-        <multiselect
-          v-model="selectedMachine"
-          :options="machineList"
-          placeholder="Klik Di sini untuk memilih mesin"
-        >
+        <multiselect v-model="selectedMachine" :options="machineList" placeholder="Klik Di sini untuk memilih mesin">
         </multiselect>
       </div>
     </div>
@@ -48,16 +44,11 @@
       <div class="col-md-2 col-xs-6">Select Parameter</div>
       <div class="col-md-9 col-xs-12">
         <!-- :disabled="selectedMachine && paramList.length != 0 ? false : true" -->
-        <multiselect
-          v-model="selectedParam"
-          :options="paramList"
-          :disabled="selectedMachine && paramList.length != 0 ? false : true"
-          :placeholder="
-            selectedMachine
+        <multiselect v-model="selectedParam" :options="paramList"
+          :disabled="selectedMachine && paramList.length != 0 ? false : true" :placeholder="selectedMachine
               ? 'Klik Di sini untuk memilih parameter'
               : 'Pilih Machine Terlebih dulu'
-          "
-        >
+            ">
         </multiselect>
       </div>
     </div>
@@ -171,7 +162,7 @@ export default {
             this.periodic = resultParam.data.data[0].periodic;
             let helper = {};
             let resArr = await resultParam.data.data.reduce((r, o) => {
-              var key = o.fmc_name + "-" + o.param_name;
+              let key = o.fmc_name + "-" + o.param_name;
 
               if (!helper[key]) {
                 helper[key] = Object.assign({}, o); // create a copy of o

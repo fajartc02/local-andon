@@ -5,7 +5,7 @@ const cmdMultipleQuery = require('../config/MultipleQueryConnection');
 
 
 function formatDate(date) {
-    var d = new Date(date),
+    let d = new Date(date),
         month = '' + (d.getMonth() + 1),
         day = '' + d.getDate(),
         year = d.getFullYear();
@@ -18,7 +18,7 @@ function formatDate(date) {
     return [year, month, day].join('-');
 }
 module.exports = {
-    getColorDash: async(req, res) => {
+    getColorDash: async (req, res) => {
         console.log("MASUK FN GETCOLORDASH")
         let arrLines = ['LPDC', 'HPDC', 'CAM SHAFT', 'CRANK SHAFT', 'CYLINDER HEAD', 'CYLINDER BLOCK', 'ASSY LINE']
 
@@ -210,7 +210,7 @@ module.exports = {
             })
     },
     getLines: (req, res) => {
-        var q = `select * from tb_line`;
+        let q = `select * from tb_line`;
         dbSingleQuery(q)
             .then((results) => {
                 res.status(200).json({
@@ -225,7 +225,7 @@ module.exports = {
             });
     },
     getMachines: (req, res) => {
-        var q = `select * from tb_mc`;
+        let q = `select * from tb_mc`;
         if (req.query.line) {
             q += ` where fline = '${req.query.line}'`
         }
@@ -362,7 +362,7 @@ module.exports = {
                 fdur > 3 ${fline} 
             GROUP BY fmc_name 
             ORDER BY fdur desc LIMIT 5`
-            // console.log(qProblem);
+        // console.log(qProblem);
         dbSingleQuery(qProblem)
             .then((results) => {
                 res.status(200).json({
@@ -473,13 +473,13 @@ module.exports = {
                 })
             });
     },
-    editProblem: async(req, res) => {
+    editProblem: async (req, res) => {
         let containerQuery = []
         let qEditProb = `UPDATE tb_error_log_2 set`
         let idx = 0
 
-        Object.size = function(obj) {
-            var size = 0,
+        Object.size = function (obj) {
+            let size = 0,
                 key;
             for (key in obj) {
                 if (obj.hasOwnProperty(key)) size++;
@@ -487,7 +487,7 @@ module.exports = {
             return size;
         };
         let size = Object.size(req.body)
-            // console.log(size);
+        // console.log(size);
         for (key in req.body) {
             console.log(idx);
             idx++
@@ -498,18 +498,18 @@ module.exports = {
             } else {
                 qEditProb += ` ${key}='${req.body[key]}'`
             }
-            if (idx == size) {} else {
+            if (idx == size) { } else {
                 qEditProb += ','
             }
         }
         qEditProb += ` where fid = ${req.params.v_}`
-            // console.log(qEditProb);
+        // console.log(qEditProb);
         containerQuery.push(qEditProb)
         if (req.query.isFinished) {
-            var qUpdateColDash = `update tb_status set fstatus = 0, ferror_start = NULL, ferror_end = NULL where fid = ${req.query.isFinished}`
+            let qUpdateColDash = `update tb_status set fstatus = 0, ferror_start = NULL, ferror_end = NULL where fid = ${req.query.isFinished}`
             containerQuery.push(qUpdateColDash)
             if (req.query.line) {
-                var qCloseNotif = `UPDATE tb_notif SET isSentLh = false, isSentSh = false, isSentAm = false, isSentDiv = false WHERE line LIKE '%${req.query.line}%'`
+                let qCloseNotif = `UPDATE tb_notif SET isSentLh = false, isSentSh = false, isSentAm = false, isSentDiv = false WHERE line LIKE '%${req.query.line}%'`
                 containerQuery.push(qCloseNotif)
             }
         }
@@ -547,8 +547,8 @@ module.exports = {
         let containerQuery = []
         let qEditProb = `UPDATE tb_error_log_2 set`
         let idx = 0
-        Object.size = function(obj) {
-            var size = 0,
+        Object.size = function (obj) {
+            let size = 0,
                 key;
             for (key in obj) {
                 if (obj.hasOwnProperty(key)) size++;
@@ -556,7 +556,7 @@ module.exports = {
             return size;
         };
         let size = Object.size(req.body)
-            // console.log(size);
+        // console.log(size);
         for (key in req.body) {
             console.log(idx);
             idx++
@@ -567,7 +567,7 @@ module.exports = {
             } else {
                 qEditProb += ` ${key}='${req.body[key]}'`
             }
-            if (idx == size) {} else {
+            if (idx == size) { } else {
                 qEditProb += ','
             }
         }

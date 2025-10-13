@@ -5,7 +5,7 @@
       <v-expansion-panel>
         <v-expansion-panel-header @click="resetTable()">{{
           propsPanel.toUpperCase()
-        }}</v-expansion-panel-header>
+          }}</v-expansion-panel-header>
         <v-expansion-panel-content>
           <!-- MOBILE -->
           <table class="table table-striped table-dark table-responsive text-left" v-if="isMobile">
@@ -561,7 +561,7 @@ export default {
       this.actionsGetProblemHistory(obj);
     },
     formatDate(date) {
-      var d = new Date(date),
+      let d = new Date(date),
         month = "" + (d.getMonth() + 1),
         day = "" + d.getDate(),
         year = d.getFullYear();

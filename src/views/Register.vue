@@ -6,14 +6,8 @@
           <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1">Name</span>
           </div>
-          <input
-            type="text"
-            class="form-control"
-            placeholder="nama kamu"
-            aria-label="nama kamu"
-            aria-describedby="basic-addon1"
-            v-model="fname"
-          />
+          <input type="text" class="form-control" placeholder="nama kamu" aria-label="nama kamu"
+            aria-describedby="basic-addon1" v-model="fname" />
         </div>
       </div>
     </div>
@@ -23,14 +17,8 @@
           <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1">Noreg</span>
           </div>
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Noreg kamu"
-            aria-label="Noreg kamu"
-            aria-describedby="basic-addon1"
-            v-model="fnoreg"
-          />
+          <input type="text" class="form-control" placeholder="Noreg kamu" aria-label="Noreg kamu"
+            aria-describedby="basic-addon1" v-model="fnoreg" />
         </div>
       </div>
     </div>
@@ -55,26 +43,14 @@
           <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1">Whatsapp No.</span>
           </div>
-          <input
-            type="text"
-            class="form-control"
-            placeholder="08xxxxx"
-            aria-label="password"
-            aria-describedby="basic-addon1"
-            v-model="fpassword"
-          />
+          <input type="text" class="form-control" placeholder="08xxxxx" aria-label="password"
+            aria-describedby="basic-addon1" v-model="fpassword" />
         </div>
       </div>
     </div>
     <div class="row p-0 m-0 align-items-center">
       <div class="col">
-        <v-btn
-          class="ma-2"
-          :loading="loading1"
-          :disabled="loading1"
-          color="success"
-          @click="register()"
-        >
+        <v-btn class="ma-2" :loading="loading1" :disabled="loading1" color="success" @click="register()">
           Register
           <template v-slot:loader>
             <span class="custom-loader">
@@ -148,12 +124,12 @@ password: ${this.fpassword}
       }
     },
     configWa(msg, receiverNo) {
-      var data = qs.stringify({
+      let data = qs.stringify({
         token: "nRRMT4Jomzf5vyn4DU1p4ywDuZ7pdYwDnULfGTlrAsVAMWcpeT",
         number: receiverNo,
         message: msg,
       });
-      var config = {
+      let config = {
         method: "post",
         url: "https://app.ruangwa.id/api/send_express",
         headers: {},
